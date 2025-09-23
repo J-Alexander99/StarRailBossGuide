@@ -1,0 +1,1 @@
+This folder is for static assets (images, fonts) used by the BossGuide app.\nPlace images like boss portraits here and reference them from code using require('./assets/your-image.png') or the asset system provided by Expo.

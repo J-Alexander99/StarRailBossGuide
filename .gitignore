@@ -1,0 +1,13 @@
+node_modules/
+.expo/
+.expo-shared/
+dist/
+web-build/
+.env
+.env.*
+*.log
+.vscode/
+.DS_Store
+android/
+ios/
+**/*.keystore

@@ -1,0 +1,375 @@
+
+
+
+
+
+
+
+Some info:
+
+https://honkai-star-rail.fandom.com/wiki/Category:Boss_Enemies
+
+
+
+Weekly Bosses
+Enemy	Weaknesses
+Honkai Star Rail Doomsday Beast IconDoomsday Beast	
+Star Rail - Physical Physical
+Star Rail - Fire Fire
+Star Rail - Ice Ice
+Star Rail - Wind Wind
+
+
+
+Honkai Star Rail Cocolia, Mother of Deception IconCocolia, Mother of Deception	
+Star Rail - Fire Fire
+Star Rail - Lightning Lightning
+Star Rail - Quantum Quantum
+
+
+
+Honkai Star Rail Phantylia the Undying IconPhantylia the Undying	
+Star Rail - Lightning Lightning
+Star Rail - Wind Wind
+Star Rail - Imaginary Imaginary
+
+
+
+Honkai Star Rail Starcrusher Swarm King - Skaracabaz (Synthetic) IconStarcrusher Swarm King - Skaracabaz (Synthetic)	
+Star Rail - Physical Physical
+Star Rail - Ice Ice
+Star Rail - Imaginary Imaginary
+
+
+
+Honkai Star Rail Harmonious Choir - The Great Septimus IconHarmonious Choir - The Great Septimus
+Star Rail - Fire Fire
+Star Rail - Lightning Lightning
+Star Rail - Imaginary Imaginary
+
+
+
+Honkai Star Rail Shadow of Feixiao and Ecliptic Inner Beast IconShadow of Feixiao and Ecliptic Inner Beast	
+Star Rail - Physical Physical
+Star Rail - Fire Fire
+Star Rail - Quantum Quantum
+
+
+
+Honkai Star Rail Sublime, Radiant, Avatar of the Sky IconSublime, Radiant, Avatar of the Sky	
+Star Rail - Physical Physical
+Star Rail - Ice Ice
+Star Rail - Quantum Quantum
+
+
+
+
+
+Field Bosses
+Shadow	Drop	Weakness
+Honkai Star Rail - Abundance Sprite - Malefic Ape IconAbundance Sprite - Malefic Ape	
+Star Rail - Fire Fire
+Star Rail - Ice Ice
+Star Rail - Wind Wind
+
+
+
+Honkai Star Rail - Aurumaton Gatekeeper IconAurumaton Gatekeeper	
+Star Rail - Lightning Lightning
+Star Rail - Wind Wind
+Star Rail - Quantum Quantum
+
+
+
+Honkai Star Rail - Aurumaton Spectral Envoy IconAurumaton Spectral Envoy		
+Star Rail - Physical Physical
+Star Rail - Lightning Lightning
+Star Rail - Imaginary Imaginary
+
+
+
+Honkai Star Rail - Automaton Direwolf IconAutomaton Direwolf	
+Star Rail - Ice Ice
+Star Rail - Lightning Lightning
+Star Rail - Imaginary Imaginary
+
+
+
+Honkai Star Rail - Black TideBlack Tide's Corroded Daemon		
+Star Rail - Physical Physical
+Star Rail - Wind Wind
+Star Rail - Quantum Quantum
+
+
+
+Honkai Star Rail - Blaze Out of Space IconBlaze Out of Space		
+Star Rail - Physical Physical
+Star Rail - Ice Ice
+Star Rail - Quantum Quantum
+
+
+
+Honkai Star Rail - Dark Sun Gryphon IconDark Sun Gryphon	
+Star Rail - Physical Physical
+Star Rail - Fire Fire
+Star Rail - Quantum Quantum
+
+
+
+Honkai Star Rail - Decaying Shadow IconDecaying Shadow	
+Star Rail - Fire Fire
+Star Rail - Lightning Lightning
+Star Rail - Wind Wind
+
+
+
+Honkai Star Rail - Disciples of Sanctus Medicus - Shape Shifter IconDisciples of Sanctus Medicus - Shape Shifter		
+Star Rail - Ice Ice
+Star Rail - Wind Wind
+Star Rail - Imaginary Imaginary
+
+
+
+Honkai Star Rail - Dreamjolt TroupeDreamjolt Troupe's Beyond Overcooked		
+Star Rail - Fire Fire
+Star Rail - Lightning Lightning
+Star Rail - Wind Wind
+
+
+
+Honkai Star Rail - Dreamjolt TroupeDreamjolt Troupe's Sweet Gorilla		
+Star Rail - Physical Physical
+Star Rail - Fire Fire
+Star Rail - Imaginary Imaginary
+
+
+
+Honkai Star Rail - Frigid Prowler IconFrigid Prowler		
+Star Rail - Fire Fire
+Star Rail - Lightning Lightning
+Star Rail - Quantum Quantum
+
+
+
+Honkai Star Rail - Furiae Praetor IconFuriae Praetor	
+Star Rail - Ice Ice
+Star Rail - Lightning Lightning
+Star Rail - Quantum Quantum
+
+
+
+Honkai Star Rail - Guardian Shadow IconGuardian Shadow	
+Star Rail - Physical Physical
+Star Rail - Wind Wind
+Star Rail - Quantum Quantum
+
+
+
+Honkai Star Rail - Howling Casket IconHowling Casket		
+Star Rail - Lightning Lightning
+Star Rail - Wind Wind
+Star Rail - Imaginary Imaginary
+
+
+
+Honkai Star Rail - Ice Out of Space IconIce Out of Space		
+Star Rail - Fire Fire
+Star Rail - Wind Wind
+Star Rail - Quantum Quantum
+
+
+
+Honkai Star Rail - Memory Zone Meme - Shell of Faded Rage IconMemory Zone Meme - Shell of Faded Rage
+Star Rail - Lightning Lightning
+Star Rail - Quantum Quantum
+Star Rail - Imaginary Imaginary
+
+
+
+Honkai Star Rail - Moonlit Pegasus IconMoonlit Pegasus		
+Star Rail - Fire Fire
+Star Rail - Quantum Quantum
+Star Rail - Imaginary Imaginary
+
+
+
+Honkai Star Rail - Present Inebriated in Revelry IconPresent Inebriated in Revelry	
+Star Rail - Fire Fire
+Star Rail - Imaginary Imaginary
+Star Rail - Physical Physical
+
+
+
+Honkai Star Rail - Searing Prowler IconSearing Prowler	
+Star Rail - Ice Ice
+Star Rail - Lightning Lightning
+Star Rail - Imaginary Imaginary
+
+
+
+Honkai Star Rail - Senior Staff - Team Leader IconSenior Staff - Team Leader	
+Star Rail - Fire Fire
+Star Rail - Ice Ice
+Star Rail - Imaginary Imaginary
+
+
+
+Honkai Star Rail - Stormbringer IconStormbringer		
+Star Rail - Fire Fire
+Star Rail - Ice Ice
+Star Rail - Imaginary Imaginary
+
+
+
+Honkai Star Rail - The Ascended IconThe Ascended		
+Star Rail - Physical Physical
+Star Rail - Ice Ice
+Star Rail - Lightning Lightning
+
+
+
+Honkai Star Rail - Tomorrow in Harmonious Chords IconTomorrow in Harmonious Chords		
+Star Rail - Fire Fire
+Star Rail - Lightning Lightning
+Star Rail - Physical Physical
+
+
+
+Honkai Star Rail - Voidranger - Trampler IconVoidranger - Trampler	
+Star Rail - Physical Physical
+Star Rail - Wind Wind
+Star Rail - Imaginary Imaginary
+
+
+
+
+----CHARACTER DATA:----
+
+13 Characters match the category selection:
+
+Character	                    Rarity	    Path	        Element         Roll        Meta    
+ Argenti	                    5 Star	    Erudition	    Physical        DPS         Crit   
+ Boothill	                    5 Star	    The Hunt	    Physical        DPS         Break
+ Clara	                        5 Star	    Destruction	    Physical        DPS         Follow-Up
+ Dan Heng • Permansor Terrae	5 Star	    Preservation	Physical        Sustain     Kevin/General
+ Hanya	                        4 Star	    Harmony	        Physical        Support     Crit
+ Hysilens	                    5 Star	    Nihility	    Physical        DPS         DOT
+ Luka	                        4 Star	    Nihility	    Physical        DPS         DOT
+ Natasha	                    4 Star	    Abundance	    Physical        Sustain     General
+ Kevin	                        5 Star	    Destruction	    Physical        DPS         Kevin
+ Robin	                        5 Star	    Harmony	        Physical        Support     Follow-Up
+ Sushang	                    4 Star	    The Hunt	    Physical        DPS         DOT
+ Trailblazer-Physical	        5 Star	    Destruction	    Physical        DPS         Crit
+ Yunli	                        5 Star	    Destruction	    Physical        DPS         Ultimate
+
+
+
+Fire
+11 Characters match the category selection:
+
+Character	                    Rarity	    Path	        Element         Roll        Meta
+ Asta	                        4 Star	    Harmony	        Fire            Support     General
+ Firefly	                    5 Star	    Destruction	    Fire            DPS         Break
+ Fugue	                        5 Star	    Nihility	    Fire            Support     Break
+ Gallagher	                    4 Star	    Abundance	    Fire            Sustain     General
+ Guinaifen	                    4 Star	    Nihility	    Fire            DPS         DOT
+ Himeko	                        5 Star	    Erudition	    Fire            Sub-DPS     Follow-Up
+ Hook	                        4 Star	    Destruction	    Fire            DPS         Crit
+ Jiaoqiu	                    5 Star	    Nihility	    Fire            Support     Raiden
+ Lingsha	                    5 Star	    Abundance	    Fire            Sustain     Break
+ Topaz & Numby	                5 Star	    The Hunt	    Fire            DPS         Follow-Up
+ Trailblazer-Fire	            5 Star	    Preservation	Fire            Sustain     General
+
+
+
+Ice
+12 Characters match the category selection:
+
+Character	                    Rarity	    Path	        Element         Roll        Meta
+ Elysia	                        5 Star	    Remembrance	    Ice             Support     Summon
+ Evernight	                    5 Star	    Remembrance	    Ice             Support     Summon
+ Gepard	                        5 Star	    Preservation	Ice             Sustain     General
+ Herta	                        4 Star	    Erudition	    Ice             Sub-DPS     Follow-Up
+ Jingliu	                    5 Star	    Destruction	    Ice             DPS         Crit
+ March 7th	                    4 Star	    Preservation	Ice             Sustain     General
+ Misha	                        4 Star	    Destruction	    Ice             DPS         Crit            
+ Pela	                        4 Star	    Nihility	    Ice             Support     General
+ Ruan Mei	                    5 Star	    Harmony	        Ice             Support     Break
+ The Herta	                    5 Star	    Erudition	    Ice             DPS         Crit
+ Trailblazer-Ice	            5 Star	    Remembrance	    Ice             Support     Summon
+ Yanqing	                    5 Star	    The Hunt	    Ice             DPS         Crit
+
+
+
+
+Lightning
+9 Characters match the category selection:
+
+Character	                    Rarity	    Path	        Element     Role    Meta
+ Raiden	                        5 Star	    Nihility	    Lightning   DPS     Raiden
+ Aglaea	                        5 Star	    Remembrance	    Lightning   DPS     Summon
+ Arlan	                        4 Star	    Destruction	    Lightning   DPS     Crit
+ Bailu	                        5 Star	    Abundance	    Lightning   Sustain General
+ Jing Yuan	                    5 Star	    Erudition	    Lightning   DPS     Follow-Up
+ Kafka	                        5 Star	    Nihility	    Lightning   Support DOT
+ Moze	                        4 Star	    The Hunt	    Lightning   Sub-DPS Follow-Up
+ Serval	                        4 Star	    Erudition	    Lightning   Sub-DPS DOT
+ Tingyun	                    4 Star	    Harmony	        Lightning   General General/Ultimate
+
+
+
+
+Wind
+11 Characters match the category selection:
+
+Character	                    Rarity	    Path	        Element     Role    Meta
+ Anaxa	                        5 Star	    Erudition	    Wind        DPS     Crit
+ Black Swan	                    5 Star	    Nihility	    Wind        DPS     DOT
+ Blade	                        5 Star	    Destruction	    Wind        DPS     Crit
+ Bronya	                        5 Star	    Harmony	        Wind        Support General
+ Cerydra	                    5 Star	    Harmony	        Wind        Support Kevin
+ Dan Heng	                    4 Star	    The Hunt	    Wind        DPS     Crit
+ Feixiao	                    5 Star	    The Hunt	    Wind        DPS     Follow-Up
+ Huohuo	                        5 Star	    Abundance	    Wind        Sustain DOT/General
+ Hyacine	                    5 Star	    Remembrance	    Wind        Sustain Summon/General
+ Saber	                        5 Star	    Destruction	    Wind        DPS     Ultimate
+ Sampo	                        4 Star	    Nihility	    Wind        DPS     DOT
+
+
+
+
+Quantum
+12 Characters match the category selection:
+
+Character	                    Rarity	    Path	        Element     Role    Meta
+ Archer	                        5 Star	    The Hunt	    Quantum     DPS     Crit
+ Castorice	                    5 Star	    Remembrance	    Quantum     DPS     Crit
+ Cipher	                        5 Star	    Nihility	    Quantum     Support General
+ Fu Xuan	                    5 Star	    Preservation	Quantum     Sustain General
+ Jade	                        5 Star	    Erudition	    Quantum     Sub-DPS Follow-Up
+ Lynx	                        4 Star	    Abundance	    Quantum     Sustain General
+ Qingque	                    4 Star	    Erudition	    Quantum     DPS     Crit
+ Seele	                        5 Star	    The Hunt	    Quantum     DPS     Crit
+ Silver Wolf	                5 Star	    Nihility	    Quantum     Support Raiden/General
+ Sparkle	                    5 Star	    Harmony	        Quantum     Support General
+ Tribbie	                    5 Star	    Harmony	        Quantum     Support General
+ Xueyi	                        4 Star	    Destruction	    Quantum     DPS     Crit
+
+
+
+
+Imaginary
+11 Characters match the category selection:
+
+Character	                    Rarity	    Path	        element     Role    Meta
+ Aventurine	                    5 Star	    Preservation	Imaginary   Sustain Follow-Up
+ Dan Heng • Imbibitor Lunae	    5 Star	    Destruction	    Imaginary   Sustain Summon
+ Dr. Ratio	                    5 Star	    The Hunt	    Imaginary   DPS     Follow-Up
+ Luocha	                        5 Star	    Abundance	    Imaginary   Sustain General
+ March 7th	                    4 Star	    The Hunt	    Imaginary   Sustain General
+ Mydei	                        5 Star	    Destruction	    Imaginary   DPS     Crit
+ Rappa	                        5 Star	    Erudition	    Imaginary   DPS     Break
+ Sunday	                        5 Star	    Harmony	        Imaginary   Support General
+ Trailblazer-Imaginary	        5 Star	    Harmony	        Imaginary   Support Break
+ Welt	                        5 Star	    Nihility	    Imaginary   Support General
+ Yukong	                        4 Star	    Harmony	        Imaginary   Support Crit
