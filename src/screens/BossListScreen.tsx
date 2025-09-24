@@ -1,18 +1,13 @@
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import { BOSSES, Boss } from '../data/bosses';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { BOSSES, Boss } from "../data/bosses";
 
-type RootStackParamList = {
-  BossList: undefined;
-  BossDetail: { bossId: string };
-};
-
-type Props = NativeStackScreenProps<RootStackParamList, 'BossList'> & { navigation: any };
-
-export function BossListScreen({ navigation }: Props) {
+export function BossListScreen({ navigation }: { navigation: any }) {
   const renderItem = ({ item }: { item: Boss }) => (
-    <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('BossDetail', { bossId: item.id })}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => navigation.navigate("BossDetail", { bossId: item.id })}
+    >
       <Text style={styles.itemTitle}>{item.name}</Text>
       <Text style={styles.itemSubtitle}>{item.location}</Text>
     </TouchableOpacity>
@@ -20,7 +15,11 @@ export function BossListScreen({ navigation }: Props) {
 
   return (
     <View style={styles.container}>
-      <FlatList data={BOSSES} keyExtractor={(i) => i.id} renderItem={renderItem} />
+      <FlatList
+        data={BOSSES}
+        keyExtractor={(i) => i.id}
+        renderItem={renderItem}
+      />
     </View>
   );
 }
