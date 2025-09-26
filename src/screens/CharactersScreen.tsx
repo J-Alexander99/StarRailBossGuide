@@ -1,6 +1,14 @@
 import React from "react";
-import { View, Text, FlatList, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Image,
+  ImageSourcePropType,
+} from "react-native";
 import { CHARACTERS } from "../data/characters";
+import { getElementIcon, getPathIcon } from "../constants/iconMappings";
 
 const ELEMENT_COLORS: Record<string, string> = {
   Physical: "#ec4899",
@@ -46,11 +54,25 @@ export function CharactersScreen() {
     return "★".repeat(rating) + "☆".repeat(10 - rating);
   };
 
-  const renderBadge = (label: string, color: string) => (
-    <View style={[styles.badge, { backgroundColor: color }]}>
-      <Text style={styles.badgeText}>{label}</Text>
-    </View>
-  );
+  const renderBadge = (
+    label: string,
+    color: string,
+    icon?: ImageSourcePropType
+  ) => {
+    if (icon) {
+      return (
+        <View style={styles.badgeIconWrapper}>
+          <Image source={icon} style={styles.badgeIcon} resizeMode="contain" />
+        </View>
+      );
+    }
+
+    return (
+      <View style={[styles.badge, { backgroundColor: color }]}>
+        <Text style={styles.badgeText}>{label}</Text>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -103,12 +125,14 @@ export function CharactersScreen() {
                   <View style={styles.badgeRow}>
                     {renderBadge(
                       item.element,
-                      ELEMENT_COLORS[item.element] ?? "#475569"
+                      ELEMENT_COLORS[item.element] ?? "#475569",
+                      getElementIcon(item.element)
                     )}
                     {item.path &&
                       renderBadge(
                         item.path,
-                        PATH_COLORS[item.path] ?? "#334155"
+                        PATH_COLORS[item.path] ?? "#334155",
+                        getPathIcon(item.path)
                       )}
                     {item.role &&
                       renderBadge(
@@ -260,11 +284,25 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     borderWidth: 1,
     borderColor: "rgba(0, 0, 0, 0.08)",
+    alignItems: "center",
+    justifyContent: "center",
   },
   badgeText: {
     fontSize: 12,
     fontWeight: "600",
     color: "#160b1e",
+  },
+  badgeIconWrapper: {
+    paddingHorizontal: 0,
+    paddingVertical: 0,
+    borderRadius: 999,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "transparent",
+  },
+  badgeIcon: {
+    width: 24,
+    height: 24,
   },
   ratingSection: {
     gap: 6,

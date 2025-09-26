@@ -4,6 +4,8 @@ export type Path = 'Destruction' | 'Hunt' | 'Erudition' | 'Harmony' | 'Nihility'
 
 export type Role = 'Sub-DPS' | 'DPS' | 'Support' | 'Sustain';
 
+export type Target = "Single" | "Blast" | "AoE" | "Team";
+
 export type Meta =
   | "DOT"
   | "Crit"
@@ -22,6 +24,7 @@ export type Character = {
   path?: Path;
   role?: Role;
   meta?: Meta;
+  target?: Target;
   rating?: number; // 1 to 10 stars
 };
 
@@ -34,6 +37,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "DPS",
     meta: "Crit",
+    target: "AoE",
     rating: 4,
   },
   {
@@ -43,6 +47,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Break",
+    target: "Single",
     rating: 6,
   },
   {
@@ -52,6 +57,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Follow-Up",
+    target: "Blast",
     rating: 5,
   },
   {
@@ -70,6 +76,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "Crit",
+    target: "Single",
     rating: 3,
   },
   {
@@ -79,6 +86,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "DPS",
     meta: "DOT",
+    target: "AoE",
     rating: 10,
   },
   {
@@ -88,6 +96,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "DPS",
     meta: "DOT",
+    target: "Single",
     rating: 3,
   },
   {
@@ -97,6 +106,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "General",
+    target: "Single",
     rating: 2,
   },
   {
@@ -106,7 +116,8 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Kevin",
-    rating: 5,
+    target: "AoE",
+    rating: 10,
   },
   {
     id: "robin",
@@ -115,6 +126,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "Follow-Up",
+    target: "Single",
     rating: 9,
   },
   {
@@ -124,6 +136,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "DOT",
+    target: "Single",
     rating: 3,
   },
   {
@@ -133,6 +146,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    target: "Blast",
     rating: 3,
   },
   {
@@ -142,6 +156,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Ultimate",
+    target: "Single",
     rating: 8,
   },
 
@@ -153,6 +168,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "General",
+    target: "AoE",
     rating: 3,
   },
   {
@@ -162,6 +178,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Break",
+    target: "Blast",
     rating: 7,
   },
   {
@@ -171,6 +188,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "Break",
+    target: "Blast",
     rating: 7,
   },
   {
@@ -180,6 +198,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "General",
+    target: "AoE",
     rating: 9,
   },
   {
@@ -189,6 +208,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "DPS",
     meta: "DOT",
+    target: "Blast",
     rating: 2,
   },
   {
@@ -198,6 +218,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "Sub-DPS",
     meta: "Follow-Up",
+    target: "Blast",
     rating: 5,
   },
   {
@@ -207,6 +228,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    target: "Single",
     rating: 2,
   },
   {
@@ -216,6 +238,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "Raiden",
+    target: "AoE",
     rating: 8,
   },
   {
@@ -225,6 +248,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "Break",
+    target: "AoE",
     rating: 9,
   },
   {
@@ -234,6 +258,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Follow-Up",
+    target: "Single",
     rating: 8,
   },
   {
@@ -243,6 +268,7 @@ export const CHARACTERS: Character[] = [
     path: "Preservation",
     role: "Sustain",
     meta: "General",
+    target: "Single",
     rating: 3,
   },
 
@@ -263,6 +289,7 @@ export const CHARACTERS: Character[] = [
     path: "Remembrance",
     role: "Support",
     meta: "Summon",
+    target: "AoE",
     rating: 10,
   },
   {
@@ -272,6 +299,7 @@ export const CHARACTERS: Character[] = [
     path: "Preservation",
     role: "Sustain",
     meta: "General",
+    target: "Single",
     rating: 3,
   },
   {
@@ -281,6 +309,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "Sub-DPS",
     meta: "Follow-Up",
+    target: "AoE",
     rating: 7,
   },
   {
@@ -290,6 +319,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    target: "Blast",
     rating: 8,
   },
   {
@@ -299,6 +329,7 @@ export const CHARACTERS: Character[] = [
     path: "Preservation",
     role: "Sustain",
     meta: "General",
+    target: "Single",
     rating: 2,
   },
   {
@@ -308,6 +339,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    target: "Blast",
     rating: 3,
   },
   {
@@ -317,6 +349,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "General",
+    target: "AoE",
     rating: 6,
   },
   {
@@ -326,6 +359,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "Break",
+    target: "Single",
     rating: 9,
   },
   {
@@ -335,6 +369,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "DPS",
     meta: "Crit",
+    target: "AoE",
     rating: 9,
   },
   {
@@ -344,6 +379,7 @@ export const CHARACTERS: Character[] = [
     path: "Remembrance",
     role: "Support",
     meta: "Summon",
+    target: "Single",
     rating: 10,
   },
   {
@@ -353,6 +389,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Crit",
+    target: "Single",
     rating: 3,
   },
 
@@ -364,6 +401,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "DPS",
     meta: "Raiden",
+    target: "AoE",
     rating: 8,
   },
   {
@@ -373,6 +411,7 @@ export const CHARACTERS: Character[] = [
     path: "Remembrance",
     role: "DPS",
     meta: "Summon",
+    target: "Blast",
     rating: 9,
   },
   {
@@ -382,6 +421,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    target: "Single",
     rating: 2,
   },
   {
@@ -391,6 +431,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "General",
+    target: "Single",
     rating: 5,
   },
   {
@@ -400,6 +441,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "DPS",
     meta: "Follow-Up",
+    target: "AoE",
     rating: 6,
   },
   {
@@ -409,6 +451,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "DOT",
+    target: "AoE",
     rating: 10,
   },
   {
@@ -418,6 +461,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "Sub-DPS",
     meta: "Follow-Up",
+    target: "Single",
     rating: 6,
   },
   {
@@ -427,6 +471,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "Sub-DPS",
     meta: "DOT",
+    target: "Blast",
     rating: 6,
   },
   {
@@ -436,6 +481,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "General",
+    target: "Single",
     rating: 8,
   },
 
@@ -447,6 +493,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "DPS",
     meta: "Crit",
+    target: "AoE",
     rating: 10,
   },
   {
@@ -456,6 +503,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "DPS",
     meta: "DOT",
+    target: "AoE",
     rating: 9,
   },
   {
@@ -465,6 +513,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    target: "Single",
     rating: 8,
   },
   {
@@ -474,6 +523,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "General",
+    target: "Single",
     rating: 9,
   },
   {
@@ -483,6 +533,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "Kevin",
+    target: "Single",
     rating: 10,
   },
   {
@@ -492,6 +543,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Crit",
+    target: "Single",
     rating: 3,
   },
   {
@@ -501,6 +553,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Follow-Up",
+    target: "Single",
     rating: 8,
   },
   {
@@ -510,6 +563,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "DOT",
+    target: "Single",
     rating: 9,
   },
   {
@@ -519,6 +573,7 @@ export const CHARACTERS: Character[] = [
     path: "Remembrance",
     role: "Sustain",
     meta: "Summon",
+    target: "AoE",
     rating: 10,
   },
   {
@@ -528,6 +583,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Ultimate",
+    target: "AoE",
     rating: 9,
   },
   {
@@ -537,6 +593,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "DPS",
     meta: "DOT",
+    target: "Blast",
     rating: 2,
   },
 
@@ -548,6 +605,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Crit",
+    target: "Single",
     rating: 10,
   },
   {
@@ -557,6 +615,7 @@ export const CHARACTERS: Character[] = [
     path: "Remembrance",
     role: "DPS",
     meta: "Crit",
+    target: "AoE",
     rating: 10,
   },
   {
@@ -566,6 +625,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "General",
+    target: "Blast",
     rating: 9,
   },
   {
@@ -575,6 +635,7 @@ export const CHARACTERS: Character[] = [
     path: "Preservation",
     role: "Sustain",
     meta: "General",
+    target: "Single",
     rating: 7,
   },
   {
@@ -584,6 +645,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "Sub-DPS",
     meta: "Follow-Up",
+    target: "AoE",
     rating: 8,
   },
   {
@@ -593,6 +655,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "General",
+    target: "Single",
     rating: 5,
   },
   {
@@ -602,6 +665,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "DPS",
     meta: "Crit",
+    target: "Blast",
     rating: 3,
   },
   {
@@ -611,6 +675,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Crit",
+    target: "Single",
     rating: 4,
   },
   {
@@ -620,6 +685,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "Raiden",
+    target: "Single",
     rating: 8,
   },
   {
@@ -629,6 +695,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "General",
+    target: "Single",
     rating: 9,
   },
   {
@@ -638,6 +705,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "General",
+    target: "AoE",
     rating: 10,
   },
   {
@@ -647,6 +715,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    target: "Blast",
     rating: 3,
   },
 
@@ -658,6 +727,7 @@ export const CHARACTERS: Character[] = [
     path: "Preservation",
     role: "Sustain",
     meta: "Follow-Up",
+    target: "Single",
     rating: 9,
   },
   {
@@ -667,6 +737,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "Sustain",
     meta: "Summon",
+    target: "Blast",
     rating: 4,
   },
   {
@@ -676,6 +747,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Follow-Up",
+    target: "Single",
     rating: 4,
   },
   {
@@ -685,6 +757,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "General",
+    target: "AoE",
     rating: 8,
   },
   {
@@ -694,6 +767,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "Sustain",
     meta: "General",
+    target: "Single",
     rating: 7,
   },
   {
@@ -703,6 +777,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    target: "Blast",
     rating: 9,
   },
   {
@@ -712,6 +787,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "DPS",
     meta: "Break",
+    target: "AoE",
     rating: 7,
   },
   {
@@ -721,6 +797,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "General",
+    target: "Team",
     rating: 10,
   },
   {
@@ -730,6 +807,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "Break",
+    target: "Blast",
     rating: 6,
   },
   {
@@ -739,6 +817,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "General",
+    target: "AoE",
     rating: 3,
   },
   {
@@ -748,6 +827,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "Crit",
+    target: "Blast",
     rating: 2,
   },
 ];

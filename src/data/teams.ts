@@ -2936,6 +2936,61 @@ export const TEAMS: Team[] = [
     members: ["yunli", "robin", "tingyun", "fuxuan"],
     notes: "Imported from teamslist.txt",
   },
+  {
+    id: "t-589",
+    name: "evernight team 489",
+    members: ["evernight", "castorice", "tribbie", "hyacine"],
+  },
+  {
+    id: "t-590",
+    name: "evernight team 490",
+    members: ["evernight", "castorice", "trail_ice", "hyacine"],
+  },
+  {
+    id: "t-591",
+    name: "evernight team 491",
+    members: ["evernight", "trail_ice", "tribbie", "hyacine"],
+  },
+  {
+    id: "t-592",
+    name: "evernight team 492",
+    members: ["evernight", "trail_ice", "ruanmei", "hyacine"],
+  },
+  {
+    id: "t-593",
+    name: "evernight team 493",
+    members: ["evernight", "trail_ice", "cipher", "hyacine"],
+  },
+  {
+    id: "t-594",
+    name: "evernight team 494",
+    members: ["evernight", "trail_ice", "tribbie", "gallagher"],
+  },
+  {
+    id: "t-595",
+    name: "evernight team 495",
+    members: ["evernight", "trail_ice", "cipher", "gallagher"],
+  },
+  {
+    id: "t-596",
+    name: "evernight team 496",
+    members: ["evernight", "trail_ice", "ruanmei", "gallagher"],
+  },
+  {
+    id: "t-597",
+    name: "evernight team 497",
+    members: ["evernight", "trail_ice", "tribbie", "huohuo"],
+  },
+  {
+    id: "t-598",
+    name: "evernight team 498",
+    members: ["evernight", "trail_ice", "cipher", "huohuo"],
+  },
+  {
+    id: "t-599",
+    name: "evernight team 499",
+    members: ["evernight", "trail_ice", "ruanmei", "huohuo"],
+  },
 ];
 
 
