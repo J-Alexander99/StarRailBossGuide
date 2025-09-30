@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { BOSSES, Boss, getBossAttributes } from "../data/bosses";
 import { getElementIcon } from "../constants/iconMappings";
+import { getBossImage } from "../constants/bossImageMappings";
 
 const palette = {
   background: "#130914",
@@ -61,15 +62,6 @@ const ensureArray = (values: string[]): string[] => {
       seen.add(value);
       return true;
     });
-};
-
-const getBossImage = (imageKey?: string) => {
-  if (!imageKey) return null;
-  try {
-    return require(`../../images/bosses/${imageKey}.webp`);
-  } catch (error) {
-    return null;
-  }
 };
 
 export function BossListScreen({ navigation }: { navigation: any }) {

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { CHARACTERS } from "../data/characters";
 import { getElementIcon, getPathIcon } from "../constants/iconMappings";
+import { getCharacterImage } from "../constants/characterImageMappings";
 
 const ELEMENT_COLORS: Record<string, string> = {
   Physical: "#ec4899",
@@ -40,15 +41,6 @@ const ROLE_COLORS: Record<string, string> = {
 };
 
 export function CharactersScreen() {
-  const getCharacterImage = (characterId: string) => {
-    try {
-      return require(`../../images/${characterId}.webp`);
-    } catch (error) {
-      // Fallback to a placeholder or return null if image doesn't exist
-      return null;
-    }
-  };
-
   const renderStars = (rating?: number) => {
     if (!rating) return "";
     return "★".repeat(rating) + "☆".repeat(10 - rating);
@@ -100,7 +92,7 @@ export function CharactersScreen() {
                 <View style={styles.avatarWrapper}>
                   {getCharacterImage(item.id) ? (
                     <Image
-                      source={getCharacterImage(item.id)}
+                      source={getCharacterImage(item.id)!}
                       style={styles.characterImage}
                     />
                   ) : (

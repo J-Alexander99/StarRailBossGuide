@@ -12,6 +12,8 @@ import { BOSSES, getBossAttributes } from "../data/bosses";
 import { teamsMatchingWeakness, resolveTeamMembers } from "../data/teams";
 import { useCharacterOwnership } from "../context/CharacterOwnershipContext";
 import { getElementIcon } from "../constants/iconMappings";
+import { getBossImage } from "../constants/bossImageMappings";
+import { getCharacterImage } from "../constants/characterImageMappings";
 
 const palette = {
   background: "#130914",
@@ -67,23 +69,6 @@ const ensureArray = (values: string[]): string[] => {
     });
 };
 
-const getCharacterImage = (characterId: string) => {
-  try {
-    return require(`../../images/${characterId}.webp`);
-  } catch (error) {
-    return null;
-  }
-};
-
-const getBossImage = (imageKey?: string) => {
-  if (!imageKey) return null;
-  try {
-    return require(`../../images/bosses/${imageKey}.webp`);
-  } catch (error) {
-    return null;
-  }
-};
-
 export function BossDetailScreen({ route }: any) {
   const { bossId } = route.params;
   const boss = BOSSES.find((b) => b.id === bossId);
@@ -119,13 +104,14 @@ export function BossDetailScreen({ route }: any) {
   const descriptionText = boss.description?.trim();
   const locationText = boss.location?.trim();
   const bossImageSource = getBossImage(boss.image);
-  const heroImageStyles = [styles.heroImage];
-  const heroPlaceholderStyles = [styles.heroImagePlaceholder];
-
-  if (width >= 900) {
-    heroImageStyles.push(styles.heroImageDesktop);
-    heroPlaceholderStyles.push(styles.heroImagePlaceholderDesktop);
-  }
+  const heroImageStyles = [
+    styles.heroImage,
+    ...(width >= 900 ? [styles.heroImageDesktop] : []),
+  ];
+  const heroPlaceholderStyles = [
+    styles.heroImagePlaceholder,
+    ...(width >= 900 ? [styles.heroImagePlaceholderDesktop] : []),
+  ];
 
   const renderChipGroup = (
     title: string,

@@ -10,6 +10,7 @@ import {
 import { useWindowDimensions } from "react-native";
 import { CHARACTERS } from "../data/characters";
 import { useCharacterOwnership } from "../context/CharacterOwnershipContext";
+import { getCharacterImage } from "../constants/characterImageMappings";
 
 const palette = {
   background: "#130914",
@@ -29,14 +30,6 @@ const MIN_TILE_SIZE = 60;
 const MAX_TILE_SIZE = 88;
 const MIN_COLUMNS = 4;
 const MAX_COLUMNS = 7;
-
-const getCharacterImage = (characterId: string) => {
-  try {
-    return require(`../../images/${characterId}.webp`);
-  } catch (error) {
-    return null;
-  }
-};
 
 export function SettingsScreen() {
   const { isCharacterOwned, toggleCharacterOwnership, disabledCharacterList } =
