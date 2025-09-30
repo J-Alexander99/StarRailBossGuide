@@ -280,7 +280,7 @@ export const CHARACTERS: Character[] = [
     path: "Remembrance",
     role: "Support",
     meta: "Summon",
-    rating: 4,
+    rating: 10,
   },
   {
     id: "evernight",
@@ -614,7 +614,7 @@ export const CHARACTERS: Character[] = [
     element: "Quantum",
     path: "Remembrance",
     role: "DPS",
-    meta: "Crit",
+    meta: "Summon",
     target: "AoE",
     rating: 10,
   },

@@ -19,7 +19,10 @@ export const BOSSES: Boss[] = [
     weakness: "{Physical, Fire, Imaginary}",
     metaWeakness: "",
     metaResistance: "",
-    description: "",
+    description:
+      "-Suppressive Fire: is single Target and deals Wind DMG (500%) ATK and delays their action (50%).\n\n" +
+      "-Windrider Bullet: deals Wind DMG (300% ATK) to a single target.\n\n" +
+      "-Combat Redeployment: is a support that dispels all debuffs on a friendly unit except Bronya, and causes them to take action immediately.",
     image: "Big_Enemy_Bronya",
   },
   {
@@ -29,7 +32,13 @@ export const BOSSES: Boss[] = [
     resistance: "{Physical, Ice, Wind}",
     metaWeakness: "",
     metaResistance: "",
-    description: "",
+    description:
+      "-Punishment of Endless Winter: Deals massive Ice DMG (500% ATK) to all targets.\n\n" +
+      "-Chill of Bone-Piercing Coagulation: Deals Ice DMG (300% ATK) to a single target.\n\n" +
+      "-Omen of Everlasting Freeze: Summons Ice Edges.\n\n" +
+      "-Hoarfrost of Eternal Isolation: Deals minor Ice DMG (150% ATK) to a single target, with a high chance (100% Base Chance) to Freeze the target (150% ATK Delayed DMG).\n\n" +
+      "-Wrath of Winterland Saints: Enters the Charging state (DMG +25%, 1 Turn). The next action casts (Punishment of Endless Winter) on all targets.\n\n" +
+      "-Icy Wind: Deals minor Ice DMG (200% ATK) to all targets.",
     image: "Big_Enemy_Cocolia",
   },
   {
@@ -39,7 +48,14 @@ export const BOSSES: Boss[] = [
     resistance: "Ice",
     metaWeakness: "",
     metaResistance: "",
-    description: "",
+    description:
+      "-Frigid Waterfall: Deals Ice DMG (380% ATK) to all targets and slightly increases the DMG dealt (12%). This DMG boosting effect is stackable.\n\n" +
+      "-Fist of Conviction: Deals minor Ice DMG (300% ATK) to a single target.\n\n" +
+      "-Smite of Frost: Deals Ice DMG (350% ATK) to a single target.\n\n" +
+      "-Garrison Aura Field: Unleashes the Collective Shield which absorbs DMG taken by all friendly units, as well as preventing all friendly units from receiving damage to their Toughness.\n\n" +
+      "-Besiege: Gepard Locks On a single target, causing all friendly units to immediately launch coordinated attacks on the target.\n\n" +
+      "-Tit for Tat: Goes into the Counter state for 1 turn. If attacked by a target while in this state, immediately use (Smite of Frost) on the attacker. This effect can only be triggered 1 time.\n\n" +
+      "-Support: When the phase starts, immediately summons two Silvermane Lieutenant's.",
     image: "Big_Enemy_Gepard",
   },
   {
@@ -48,7 +64,14 @@ export const BOSSES: Boss[] = [
     weakness: "{Fire, Lightning, Wind}",
     metaWeakness: "DOT",
     metaResistance: "",
-    description: "",
+    description:
+      "-Oversaturated Bombardment: Deals massive Physical DMG (15% ATK × 12) to all targets, with a high chance (100% Base Chance) to reduce their DEF (20%, 3 Turns). This debuff can stack.\n\n" +
+      "-Banishing Punch: Deals Physical DMG (300% ATK) to a single target.\n\n" +
+      "-Burning Beam: Deals Physical DMG (300% ATK) to a single target and delays their action (50%).\n\n" +
+      "-Boost Deployment: Summons Auxiliary Robot Arm Unit.\n\n" +
+      "-Controlled Blasting: The Auxiliary Robot Arm explodes, dealing massive Physical DMG (1500% ATK) to a single target.\n\n" +
+      "-Oppressive Embrace: Restrains a single target, and deals Physical DMG (50% Target Max HP) 1 time. When this unit has their Weakness Broken, dispels the Restrain status from the target.\n\n" +
+      "-Overload Warning: Auxiliary Robot Arm Unit enters Overload mode and immediately removes Restrain status from friendly units. When entering this mode, Auxiliary Robot Arm Unit will cast Controlled Blasting in its next action.",
     image: "Big_Enemy_Svarog",
   },
   {

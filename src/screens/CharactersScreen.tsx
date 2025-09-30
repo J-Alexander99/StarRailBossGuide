@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import {
   View,
   Text,
@@ -6,8 +6,12 @@ import {
   StyleSheet,
   Image,
   ImageSourcePropType,
+  TouchableOpacity,
+  Modal,
+  ScrollView,
 } from "react-native";
-import { CHARACTERS } from "../data/characters";
+import { useNavigation } from "@react-navigation/native";
+import { CHARACTERS, Character } from "../data/characters";
 import { getElementIcon, getPathIcon } from "../constants/iconMappings";
 import { getCharacterImage } from "../constants/characterImageMappings";
 
@@ -40,7 +44,81 @@ const ROLE_COLORS: Record<string, string> = {
   Sustain: "#14b8a6",
 };
 
+type FilterState = {
+  element: string | null;
+  path: string | null;
+  role: string | null;
+  meta: string | null;
+  sortBy: "name" | "rating" | "element" | "path" | "role";
+  sortOrder: "asc" | "desc";
+};
+
 export function CharactersScreen() {
+  const navigation = useNavigation();
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [filters, setFilters] = useState<FilterState>({
+    element: null,
+    path: null,
+    role: null,
+    meta: null,
+    sortBy: "name",
+    sortOrder: "asc",
+  });
+
+  const filteredAndSortedCharacters = useMemo(() => {
+    let result = [...CHARACTERS];
+
+    // Apply filters
+    if (filters.element) {
+      result = result.filter((char) => char.element === filters.element);
+    }
+    if (filters.path) {
+      result = result.filter((char) => char.path === filters.path);
+    }
+    if (filters.role) {
+      result = result.filter((char) => char.role === filters.role);
+    }
+    if (filters.meta) {
+      result = result.filter((char) => char.meta === filters.meta);
+    }
+
+    // Apply sorting
+    result.sort((a, b) => {
+      let aVal, bVal;
+
+      switch (filters.sortBy) {
+        case "rating":
+          aVal = a.rating || 0;
+          bVal = b.rating || 0;
+          break;
+        case "element":
+          aVal = a.element;
+          bVal = b.element;
+          break;
+        case "path":
+          aVal = a.path || "";
+          bVal = b.path || "";
+          break;
+        case "role":
+          aVal = a.role || "";
+          bVal = b.role || "";
+          break;
+        default:
+          aVal = a.name;
+          bVal = b.name;
+      }
+
+      if (typeof aVal === "number" && typeof bVal === "number") {
+        return filters.sortOrder === "asc" ? aVal - bVal : bVal - aVal;
+      }
+
+      const comparison = String(aVal).localeCompare(String(bVal));
+      return filters.sortOrder === "asc" ? comparison : -comparison;
+    });
+
+    return result;
+  }, [filters]);
+
   const renderStars = (rating?: number) => {
     if (!rating) return "";
     return "★".repeat(rating) + "☆".repeat(10 - rating);
@@ -69,7 +147,7 @@ export function CharactersScreen() {
   return (
     <View style={styles.container}>
       <FlatList
-        data={CHARACTERS}
+        data={filteredAndSortedCharacters}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
@@ -80,6 +158,25 @@ export function CharactersScreen() {
               Browse every playable character, their speciality, and how they
               rank in the current meta.
             </Text>
+            <View style={styles.iconButtonRow}>
+              <TouchableOpacity
+                style={styles.iconButton}
+                onPress={() => setShowFilterModal(true)}
+              >
+                <Text style={styles.iconButtonEmoji}>🔍</Text>
+                <Text style={styles.iconButtonLabel}>Filter</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.iconButton}
+                onPress={() => navigation.navigate("Teams" as never)}
+              >
+                <Image
+                  source={require("../../images/icons/Team - Transparent.png")}
+                  style={styles.iconButtonImage}
+                />
+                <Text style={styles.iconButtonLabel}>Teams</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         }
         renderItem={({ item }) => {
@@ -157,6 +254,268 @@ export function CharactersScreen() {
           );
         }}
       />
+
+      <Modal
+        visible={showFilterModal}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowFilterModal(false)}
+      >
+        <View style={styles.modalBackdrop}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Filter & Sort Characters</Text>
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={() => setShowFilterModal(false)}
+              >
+                <Text style={styles.closeButtonText}>✕</Text>
+              </TouchableOpacity>
+            </View>
+
+            <ScrollView style={styles.modalContent}>
+              {/* Clear Filters */}
+              <TouchableOpacity
+                style={styles.clearButton}
+                onPress={() =>
+                  setFilters({
+                    element: null,
+                    path: null,
+                    role: null,
+                    meta: null,
+                    sortBy: "name",
+                    sortOrder: "asc",
+                  })
+                }
+              >
+                <Text style={styles.clearButtonText}>Clear All Filters</Text>
+              </TouchableOpacity>
+
+              {/* Sort Options */}
+              <View style={styles.filterSection}>
+                <Text style={styles.filterSectionTitle}>Sort By</Text>
+                <View style={styles.filterRow}>
+                  {["name", "rating", "element", "path", "role"].map((sort) => (
+                    <TouchableOpacity
+                      key={sort}
+                      style={[
+                        styles.filterChip,
+                        filters.sortBy === sort && styles.filterChipActive,
+                      ]}
+                      onPress={() =>
+                        setFilters((prev) => ({ ...prev, sortBy: sort as any }))
+                      }
+                    >
+                      <Text
+                        style={[
+                          styles.filterChipText,
+                          filters.sortBy === sort &&
+                            styles.filterChipTextActive,
+                        ]}
+                      >
+                        {sort.charAt(0).toUpperCase() + sort.slice(1)}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+
+                <View style={styles.filterRow}>
+                  <TouchableOpacity
+                    style={[
+                      styles.filterChip,
+                      filters.sortOrder === "asc" && styles.filterChipActive,
+                    ]}
+                    onPress={() =>
+                      setFilters((prev) => ({ ...prev, sortOrder: "asc" }))
+                    }
+                  >
+                    <Text
+                      style={[
+                        styles.filterChipText,
+                        filters.sortOrder === "asc" &&
+                          styles.filterChipTextActive,
+                      ]}
+                    >
+                      Ascending
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[
+                      styles.filterChip,
+                      filters.sortOrder === "desc" && styles.filterChipActive,
+                    ]}
+                    onPress={() =>
+                      setFilters((prev) => ({ ...prev, sortOrder: "desc" }))
+                    }
+                  >
+                    <Text
+                      style={[
+                        styles.filterChipText,
+                        filters.sortOrder === "desc" &&
+                          styles.filterChipTextActive,
+                      ]}
+                    >
+                      Descending
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              {/* Element Filter */}
+              <View style={styles.filterSection}>
+                <Text style={styles.filterSectionTitle}>Element</Text>
+                <View style={styles.filterRow}>
+                  {[
+                    "Fire",
+                    "Ice",
+                    "Lightning",
+                    "Physical",
+                    "Quantum",
+                    "Wind",
+                    "Imaginary",
+                  ].map((element) => (
+                    <TouchableOpacity
+                      key={element}
+                      style={[
+                        styles.filterChip,
+                        filters.element === element && styles.filterChipActive,
+                      ]}
+                      onPress={() =>
+                        setFilters((prev) => ({
+                          ...prev,
+                          element: prev.element === element ? null : element,
+                        }))
+                      }
+                    >
+                      <Text
+                        style={[
+                          styles.filterChipText,
+                          filters.element === element &&
+                            styles.filterChipTextActive,
+                        ]}
+                      >
+                        {element}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </View>
+
+              {/* Path Filter */}
+              <View style={styles.filterSection}>
+                <Text style={styles.filterSectionTitle}>Path</Text>
+                <View style={styles.filterRow}>
+                  {[
+                    "Destruction",
+                    "Hunt",
+                    "Erudition",
+                    "Harmony",
+                    "Nihility",
+                    "Preservation",
+                    "Abundance",
+                    "Remembrance",
+                  ].map((path) => (
+                    <TouchableOpacity
+                      key={path}
+                      style={[
+                        styles.filterChip,
+                        filters.path === path && styles.filterChipActive,
+                      ]}
+                      onPress={() =>
+                        setFilters((prev) => ({
+                          ...prev,
+                          path: prev.path === path ? null : path,
+                        }))
+                      }
+                    >
+                      <Text
+                        style={[
+                          styles.filterChipText,
+                          filters.path === path && styles.filterChipTextActive,
+                        ]}
+                      >
+                        {path}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </View>
+
+              {/* Role Filter */}
+              <View style={styles.filterSection}>
+                <Text style={styles.filterSectionTitle}>Role</Text>
+                <View style={styles.filterRow}>
+                  {["DPS", "Sub-DPS", "Support", "Sustain"].map((role) => (
+                    <TouchableOpacity
+                      key={role}
+                      style={[
+                        styles.filterChip,
+                        filters.role === role && styles.filterChipActive,
+                      ]}
+                      onPress={() =>
+                        setFilters((prev) => ({
+                          ...prev,
+                          role: prev.role === role ? null : role,
+                        }))
+                      }
+                    >
+                      <Text
+                        style={[
+                          styles.filterChipText,
+                          filters.role === role && styles.filterChipTextActive,
+                        ]}
+                      >
+                        {role}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </View>
+
+              {/* Meta Filter */}
+              <View style={styles.filterSection}>
+                <Text style={styles.filterSectionTitle}>Meta Archetype</Text>
+                <View style={styles.filterRow}>
+                  {[
+                    "DOT",
+                    "Crit",
+                    "Break",
+                    "Follow-Up",
+                    "Summon",
+                    "General",
+                    "Kevin",
+                    "Raiden",
+                    "Ultimate",
+                  ].map((meta) => (
+                    <TouchableOpacity
+                      key={meta}
+                      style={[
+                        styles.filterChip,
+                        filters.meta === meta && styles.filterChipActive,
+                      ]}
+                      onPress={() =>
+                        setFilters((prev) => ({
+                          ...prev,
+                          meta: prev.meta === meta ? null : meta,
+                        }))
+                      }
+                    >
+                      <Text
+                        style={[
+                          styles.filterChipText,
+                          filters.meta === meta && styles.filterChipTextActive,
+                        ]}
+                      >
+                        {meta}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </View>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -193,7 +552,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#c7b9d6",
     lineHeight: 22,
+    marginBottom: 16,
   },
+
   card: {
     backgroundColor: "#191222",
     borderRadius: 18,
@@ -331,5 +692,147 @@ const styles = StyleSheet.create({
     fontSize: 14,
     letterSpacing: 2,
     color: "#facc15",
+  },
+  filterButton: {
+    backgroundColor: "#ff6ce0",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 8,
+    marginBottom: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 16,
+  },
+  filterButtonText: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "600",
+    marginLeft: 8,
+  },
+  modalBackdrop: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "flex-end",
+  },
+  modalContainer: {
+    backgroundColor: "rgba(19, 9, 20, 0.95)",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    maxHeight: "80%",
+    minHeight: "60%",
+  },
+  modalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#2a2a3a",
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#ffffff",
+  },
+  closeButton: {
+    padding: 8,
+    backgroundColor: "#2a2a3a",
+    borderRadius: 20,
+    width: 36,
+    height: 36,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  closeButtonText: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  modalContent: {
+    flex: 1,
+    padding: 16,
+  },
+  clearButton: {
+    backgroundColor: "#444455",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 8,
+    marginBottom: 24,
+    alignItems: "center",
+  },
+  clearButtonText: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  filterSection: {
+    marginBottom: 24,
+  },
+  filterSectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#ffffff",
+    marginBottom: 12,
+  },
+  filterRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+    marginBottom: 8,
+  },
+  filterChip: {
+    backgroundColor: "#2a2a3a",
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 16,
+    marginRight: 8,
+    marginBottom: 8,
+  },
+  filterChipActive: {
+    backgroundColor: "#ff6ce0",
+  },
+  filterChipText: {
+    color: "#ffffff",
+    fontSize: 14,
+    fontWeight: "500",
+  },
+  filterChipTextActive: {
+    color: "#ffffff",
+    fontWeight: "bold",
+  },
+  iconButtonRow: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginBottom: 16,
+    marginHorizontal: 16,
+  },
+  iconButton: {
+    backgroundColor: "rgba(255, 108, 224, 0.1)",
+    borderWidth: 1,
+    borderColor: "rgba(255, 108, 224, 0.3)",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    alignItems: "center",
+    minWidth: 80,
+    flex: 1,
+    marginHorizontal: 8,
+  },
+  iconButtonEmoji: {
+    fontSize: 24,
+    marginBottom: 4,
+  },
+  iconButtonImage: {
+    width: 24,
+    height: 24,
+    marginBottom: 4,
+    tintColor: "#ff6ce0",
+  },
+  iconButtonLabel: {
+    color: "#ff6ce0",
+    fontSize: 12,
+    fontWeight: "600",
+    textAlign: "center",
   },
 });

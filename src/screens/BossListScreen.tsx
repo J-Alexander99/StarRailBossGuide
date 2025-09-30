@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -65,6 +65,22 @@ const ensureArray = (values: string[]): string[] => {
 };
 
 export function BossListScreen({ navigation }: { navigation: any }) {
+  const [expandedDescriptions, setExpandedDescriptions] = useState<Set<string>>(
+    new Set()
+  );
+
+  const toggleDescription = (bossId: string) => {
+    setExpandedDescriptions((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(bossId)) {
+        newSet.delete(bossId);
+      } else {
+        newSet.add(bossId);
+      }
+      return newSet;
+    });
+  };
+
   const renderChips = (
     title: string,
     values: string[],
@@ -164,7 +180,32 @@ export function BossListScreen({ navigation }: { navigation: any }) {
         </View>
 
         {descriptionText?.length ? (
-          <Text style={styles.description}>{descriptionText}</Text>
+          <View style={styles.descriptionContainer}>
+            {!expandedDescriptions.has(item.id) ? (
+              <TouchableOpacity
+                style={styles.expandButton}
+                onPress={() => toggleDescription(item.id)}
+                activeOpacity={0.7}
+              >
+                <Text style={styles.expandButtonText}>Show Description</Text>
+                <Text style={styles.expandIcon}>+</Text>
+              </TouchableOpacity>
+            ) : (
+              <View>
+                <Text style={styles.description}>{descriptionText}</Text>
+                <TouchableOpacity
+                  style={styles.collapseButton}
+                  onPress={() => toggleDescription(item.id)}
+                  activeOpacity={0.7}
+                >
+                  <Text style={styles.collapseIcon}>−</Text>
+                  <Text style={styles.collapseButtonText}>
+                    Hide Description
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
         ) : null}
 
         <View style={styles.divider} />
@@ -331,7 +372,54 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: palette.textMuted,
     lineHeight: 20,
+    marginBottom: 12,
+  },
+  descriptionContainer: {
     marginBottom: 14,
+  },
+  expandButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    backgroundColor: "rgba(255, 108, 224, 0.1)",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "rgba(255, 108, 224, 0.2)",
+  },
+  expandButtonText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: palette.accent,
+  },
+  expandIcon: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: palette.accent,
+  },
+  collapseButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    marginTop: 8,
+    backgroundColor: "rgba(255, 108, 224, 0.05)",
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: "rgba(255, 108, 224, 0.1)",
+  },
+  collapseButtonText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: palette.textMuted,
+    marginLeft: 6,
+  },
+  collapseIcon: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: palette.textMuted,
   },
   divider: {
     height: 1,

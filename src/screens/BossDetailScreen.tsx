@@ -9,11 +9,23 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { BOSSES, getBossAttributes } from "../data/bosses";
-import { teamsMatchingWeakness, resolveTeamMembers } from "../data/teams";
+import { CHARACTERS } from "../data/characters";
+import {
+  teamsMatchingWeakness,
+  resolveTeamMembers,
+  getRecommendedTeamsSorted,
+} from "../data/teams";
 import { useCharacterOwnership } from "../context/CharacterOwnershipContext";
 import { getElementIcon } from "../constants/iconMappings";
 import { getBossImage } from "../constants/bossImageMappings";
 import { getCharacterImage } from "../constants/characterImageMappings";
+
+type RecommendedTeam = {
+  team: any;
+  members: any[];
+  score: number;
+  isAvailable: boolean;
+};
 
 const palette = {
   background: "#130914",
@@ -85,21 +97,33 @@ export function BossDetailScreen({ route }: any) {
 
   const { weaknesses, resistances, metaWeaknesses, metaResistances } =
     getBossAttributes(boss);
-  const { filteredTeams, excludedTeamsCount } = useMemo(() => {
-    const baseTeams = teamsMatchingWeakness(weaknesses);
-    const enrichedTeams = baseTeams.map((team) => ({
-      team,
-      members: resolveTeamMembers(team),
-    }));
-    const availableTeams = enrichedTeams.filter(({ members }) =>
-      members.every((member) => isCharacterOwned(member.id))
+  const { filteredTeams, excludedTeamsCount, totalTeamsCount } = useMemo(() => {
+    const recommendedTeams: RecommendedTeam[] = getRecommendedTeamsSorted(
+      weaknesses,
+      resistances,
+      metaWeaknesses,
+      metaResistances,
+      false, // Don't filter by availability yet
+      isCharacterOwned
     );
+
+    const availableTeams = recommendedTeams.filter(
+      (t: RecommendedTeam) => t.isAvailable
+    );
+    const excludedCount = recommendedTeams.length - availableTeams.length;
 
     return {
       filteredTeams: availableTeams,
-      excludedTeamsCount: enrichedTeams.length - availableTeams.length,
+      excludedTeamsCount: excludedCount,
+      totalTeamsCount: recommendedTeams.length,
     };
-  }, [weaknesses, isCharacterOwned]);
+  }, [
+    weaknesses,
+    resistances,
+    metaWeaknesses,
+    metaResistances,
+    isCharacterOwned,
+  ]);
 
   const descriptionText = boss.description?.trim();
   const locationText = boss.location?.trim();
@@ -223,27 +247,172 @@ export function BossDetailScreen({ route }: any) {
 
       <View style={styles.sectionCard}>
         <Text style={styles.sectionHeader}>Recommended Strike Teams</Text>
-        {excludedTeamsCount > 0 ? (
-          <Text style={styles.filterHint}>
-            {excludedTeamsCount} team
-            {excludedTeamsCount === 1 ? "" : "s"} hidden based on your roster
-            settings.
-          </Text>
-        ) : null}
-        {filteredTeams.length ? (
-          filteredTeams.map(({ team, members }) => (
-            <View key={team.id} style={styles.teamCard}>
-              <View style={styles.teamHeader}>
-                <Text style={styles.teamName}>
-                  {team.name ?? `Team ${team.id.toUpperCase()}`}
-                </Text>
-                <View style={styles.teamIdBadge}>
-                  <Text style={styles.teamIdText}>{team.id}</Text>
+
+        {/* Team Statistics Summary */}
+        {filteredTeams.length > 0 &&
+          (() => {
+            const allCharacters = CHARACTERS;
+            const totalTeams = totalTeamsCount;
+
+            // Calculate statistics
+            const averageRating =
+              filteredTeams.reduce(
+                (sum, { team }) => sum + (team.teamRating || 0),
+                0
+              ) / filteredTeams.length;
+            const averagePower =
+              filteredTeams.reduce((sum, { score }) => sum + score, 0) /
+              filteredTeams.length;
+
+            // Get all unique characters used in recommended teams
+            const usedCharacterIds = new Set<string>();
+            filteredTeams.forEach(({ members }) => {
+              members.forEach((member) => usedCharacterIds.add(member.id));
+            });
+
+            // Count most common attributes
+            const elementCounts: Record<string, number> = {};
+            const metaCounts: Record<string, number> = {};
+            const pathCounts: Record<string, number> = {};
+
+            filteredTeams.forEach(({ members }) => {
+              members.forEach((member) => {
+                elementCounts[member.element] =
+                  (elementCounts[member.element] || 0) + 1;
+                if (member.meta)
+                  metaCounts[member.meta] = (metaCounts[member.meta] || 0) + 1;
+                if (member.path)
+                  pathCounts[member.path] = (pathCounts[member.path] || 0) + 1;
+              });
+            });
+
+            const mostCommonElement = Object.entries(elementCounts).reduce(
+              (a, b) => (elementCounts[a[0]] > elementCounts[b[0]] ? a : b)
+            )[0];
+            const mostCommonMeta =
+              Object.keys(metaCounts).length > 0
+                ? Object.entries(metaCounts).reduce((a, b) =>
+                    metaCounts[a[0]] > metaCounts[b[0]] ? a : b
+                  )[0]
+                : "None";
+            const mostCommonPath =
+              Object.keys(pathCounts).length > 0
+                ? Object.entries(pathCounts).reduce((a, b) =>
+                    pathCounts[a[0]] > pathCounts[b[0]] ? a : b
+                  )[0]
+                : "None";
+
+            return (
+              <View style={styles.statsSummary}>
+                <Text style={styles.statsSummaryTitle}>Team Analysis</Text>
+
+                <View style={styles.statsGrid}>
+                  <View style={styles.statsRow}>
+                    <View style={styles.statItem}>
+                      <Text style={styles.statValue}>
+                        {filteredTeams.length}/{totalTeams}
+                      </Text>
+                      <Text style={styles.statLabel}>Teams Recommended</Text>
+                    </View>
+
+                    <View style={styles.statItem}>
+                      <Text style={styles.statValue}>
+                        {averageRating.toFixed(1)}
+                      </Text>
+                      <Text style={styles.statLabel}>Avg Rating</Text>
+                    </View>
+
+                    <View style={styles.statItem}>
+                      <Text style={styles.statValue}>
+                        {Math.round(averagePower)}
+                      </Text>
+                      <Text style={styles.statLabel}>Avg Power</Text>
+                    </View>
+                  </View>
+
+                  <View style={styles.statsRow}>
+                    <View style={styles.statItem}>
+                      <Text style={styles.statValue}>
+                        {usedCharacterIds.size}/{allCharacters.length}
+                      </Text>
+                      <Text style={styles.statLabel}>Characters Used</Text>
+                    </View>
+
+                    <View style={styles.statItem}>
+                      <Text style={styles.statValue}>{mostCommonElement}</Text>
+                      <Text style={styles.statLabel}>Top Element</Text>
+                    </View>
+
+                    <View style={styles.statItem}>
+                      <Text style={styles.statValue}>{mostCommonMeta}</Text>
+                      <Text style={styles.statLabel}>Top Meta</Text>
+                    </View>
+                  </View>
+
+                  <View style={styles.statsRowSingle}>
+                    <View style={styles.statItem}>
+                      <Text style={styles.statValue}>{mostCommonPath}</Text>
+                      <Text style={styles.statLabel}>Most Common Path</Text>
+                    </View>
+                  </View>
                 </View>
               </View>
-              {team.notes ? (
-                <Text style={styles.teamNotes}>{team.notes}</Text>
-              ) : null}
+            );
+          })()}
+        {filteredTeams.length ? (
+          filteredTeams.map(({ team, members, score }: RecommendedTeam) => (
+            <View
+              key={team.id}
+              style={[
+                styles.teamCard,
+                score >= 150
+                  ? styles.teamCardExcellent
+                  : score >= 100
+                  ? styles.teamCardGood
+                  : styles.teamCardFair,
+              ]}
+            >
+              {/* Header with recommendation score prominence */}
+              <View style={styles.teamHeader}>
+                <View style={styles.teamTitleSection}>
+                  <Text style={styles.teamName}>
+                    {team.name ?? `Team ${team.id.toUpperCase()}`}
+                  </Text>
+                  <View style={styles.teamSubInfo}>
+                    <Text style={styles.teamIdText}>ID: {team.id}</Text>
+                    <View style={styles.teamSubDivider} />
+                    <Text style={styles.teamPowerText}>
+                      Power: {team.teamRating || 0}/40
+                    </Text>
+                  </View>
+                </View>
+
+                <View style={styles.recommendationSection}>
+                  <View
+                    style={[
+                      styles.recommendationBadgeLarge,
+                      score >= 150
+                        ? styles.recommendationBadgeHighLarge
+                        : score >= 100
+                        ? styles.recommendationBadgeMediumLarge
+                        : styles.recommendationBadgeLowLarge,
+                    ]}
+                  >
+                    <Text style={styles.recommendationScoreText}>
+                      {Math.round(score)}
+                    </Text>
+                    <Text style={styles.recommendationLabelText}>
+                      {score >= 150
+                        ? "EXCELLENT"
+                        : score >= 100
+                        ? "GOOD"
+                        : "FAIR"}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+
+              {team.notes && <Text style={styles.teamNotes}>{team.notes}</Text>}
               <View style={styles.memberGrid}>
                 {members.map((member) => {
                   const memberImage = getCharacterImage(member.id);
@@ -552,6 +721,25 @@ const styles = StyleSheet.create({
     color: palette.textMuted,
     letterSpacing: 0.5,
   },
+  teamRightSection: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  teamRatingBadge: {
+    backgroundColor: palette.accentSoft,
+    borderColor: palette.accentBorder,
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+  },
+  teamRatingText: {
+    fontSize: 11,
+    fontWeight: "600",
+    color: palette.accent,
+    letterSpacing: 0.5,
+  },
   teamNotes: {
     fontSize: 12,
     color: palette.textSecondary,
@@ -631,5 +819,379 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: "600",
     color: palette.textSecondary,
+  },
+  recommendationBadge: {
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    minWidth: 32,
+    alignItems: "center",
+  },
+  recommendationBadgeHigh: {
+    backgroundColor: "rgba(34, 197, 94, 0.15)",
+    borderColor: "rgba(34, 197, 94, 0.4)",
+  },
+  recommendationBadgeMedium: {
+    backgroundColor: "rgba(245, 158, 11, 0.15)",
+    borderColor: "rgba(245, 158, 11, 0.4)",
+  },
+  recommendationBadgeLow: {
+    backgroundColor: "rgba(239, 68, 68, 0.15)",
+    borderColor: "rgba(239, 68, 68, 0.4)",
+  },
+  recommendationText: {
+    fontSize: 10,
+    fontWeight: "700",
+    color: "#ffffff",
+    letterSpacing: 0.5,
+  },
+  // Recommendation Summary Styles
+  recommendationSummary: {
+    backgroundColor: "rgba(30, 41, 59, 0.95)",
+    padding: 16,
+    marginBottom: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "rgba(59, 130, 246, 0.3)",
+  },
+  summaryTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#ffffff",
+    marginBottom: 8,
+    textAlign: "center",
+  },
+  summaryRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  summaryItem: {
+    flexDirection: "column",
+    alignItems: "center",
+    flex: 1,
+  },
+  summaryValue: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#60a5fa",
+    marginBottom: 2,
+  },
+  summaryLabel: {
+    fontSize: 11,
+    color: "rgba(255, 255, 255, 0.7)",
+    textAlign: "center",
+  },
+  summaryDivider: {
+    width: 1,
+    height: 32,
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    marginHorizontal: 12,
+  },
+  bestMatchContainer: {
+    alignItems: "center",
+    marginTop: 8,
+  },
+  bestMatchLabel: {
+    fontSize: 11,
+    color: "rgba(255, 255, 255, 0.7)",
+    marginBottom: 4,
+  },
+  bestMatchValue: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#10b981",
+  },
+  qualityDistribution: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 12,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: "rgba(255, 255, 255, 0.1)",
+  },
+  qualityGroup: {
+    alignItems: "center",
+    flex: 1,
+  },
+  qualityCount: {
+    fontSize: 16,
+    fontWeight: "700",
+    marginBottom: 2,
+  },
+  qualityGroupLabel: {
+    fontSize: 10,
+    color: "rgba(255, 255, 255, 0.6)",
+    textAlign: "center",
+  },
+  // Enhanced Team Card Styles
+  teamCardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  teamNameContainer: {
+    flex: 1,
+  },
+  teamPowerDisplay: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  teamPowerText: {
+    fontSize: 12,
+    color: "rgba(255, 255, 255, 0.8)",
+    marginRight: 4,
+  },
+  scoreDisplay: {
+    alignItems: "center",
+    backgroundColor: "rgba(59, 130, 246, 0.15)",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "rgba(59, 130, 246, 0.4)",
+  },
+  scoreValue: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#60a5fa",
+    marginBottom: 1,
+  },
+  scoreLabel: {
+    fontSize: 9,
+    color: "rgba(255, 255, 255, 0.6)",
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
+  },
+
+  matchTitle: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "rgba(255, 255, 255, 0.9)",
+    marginBottom: 6,
+  },
+  matchDetails: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 6,
+  },
+  matchBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    borderWidth: 1,
+  },
+  matchBadgeAdvantage: {
+    backgroundColor: "rgba(16, 185, 129, 0.15)",
+    borderColor: "rgba(16, 185, 129, 0.4)",
+  },
+  matchBadgeDisadvantage: {
+    backgroundColor: "rgba(239, 68, 68, 0.15)",
+    borderColor: "rgba(239, 68, 68, 0.4)",
+  },
+  matchBadgeNeutral: {
+    backgroundColor: "rgba(156, 163, 175, 0.15)",
+    borderColor: "rgba(156, 163, 175, 0.4)",
+  },
+  matchIcon: {
+    width: 12,
+    height: 12,
+    marginRight: 4,
+  },
+  matchText: {
+    fontSize: 10,
+    fontWeight: "500",
+  },
+  matchTextAdvantage: {
+    color: "#10b981",
+  },
+  matchTextDisadvantage: {
+    color: "#ef4444",
+  },
+  matchTextNeutral: {
+    color: "#9ca3af",
+  },
+  // Summary Badge Styles
+  summaryBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 16,
+    borderWidth: 1,
+  },
+  summaryBadgeHigh: {
+    backgroundColor: "rgba(16, 185, 129, 0.15)",
+    borderColor: "rgba(16, 185, 129, 0.4)",
+  },
+  summaryBadgeMedium: {
+    backgroundColor: "rgba(245, 158, 11, 0.15)",
+    borderColor: "rgba(245, 158, 11, 0.4)",
+  },
+  summaryBadgeLow: {
+    backgroundColor: "rgba(239, 68, 68, 0.15)",
+    borderColor: "rgba(239, 68, 68, 0.4)",
+  },
+  summaryBadgeText: {
+    fontSize: 11,
+    fontWeight: "600",
+    color: "#ffffff",
+    marginLeft: 4,
+  },
+  summaryValueMuted: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "rgba(255, 255, 255, 0.5)",
+    marginBottom: 2,
+  },
+  // Quality Distribution Styles
+  qualityRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  qualityLabel: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "rgba(255, 255, 255, 0.9)",
+    marginBottom: 4,
+  },
+  qualityItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginRight: 16,
+  },
+  qualityDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginRight: 6,
+  },
+  qualityDotHigh: {
+    backgroundColor: "#10b981",
+  },
+  qualityDotMedium: {
+    backgroundColor: "#f59e0b",
+  },
+  qualityDotLow: {
+    backgroundColor: "#ef4444",
+  },
+  qualityText: {
+    fontSize: 11,
+    color: "rgba(255, 255, 255, 0.8)",
+  },
+  // Enhanced Team Card Quality Styles
+  teamCardExcellent: {
+    borderLeftWidth: 3,
+    borderLeftColor: "#10b981",
+  },
+  teamCardGood: {
+    borderLeftWidth: 3,
+    borderLeftColor: "#f59e0b",
+  },
+  teamCardFair: {
+    borderLeftWidth: 3,
+    borderLeftColor: "#ef4444",
+  },
+  teamTitleSection: {
+    flex: 1,
+    marginRight: 12,
+  },
+  teamSubInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 2,
+  },
+  teamSubDivider: {
+    width: 2,
+    height: 2,
+    borderRadius: 1,
+    backgroundColor: "rgba(255, 255, 255, 0.4)",
+    marginHorizontal: 6,
+  },
+  recommendationSection: {
+    alignItems: "center",
+  },
+  recommendationBadgeLarge: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderWidth: 2,
+    alignItems: "center",
+  },
+  recommendationBadgeHighLarge: {
+    backgroundColor: "rgba(16, 185, 129, 0.2)",
+    borderColor: "#10b981",
+  },
+  recommendationBadgeMediumLarge: {
+    backgroundColor: "rgba(245, 158, 11, 0.2)",
+    borderColor: "#f59e0b",
+  },
+  recommendationBadgeLowLarge: {
+    backgroundColor: "rgba(239, 68, 68, 0.2)",
+    borderColor: "#ef4444",
+  },
+  recommendationScoreText: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#ffffff",
+    marginBottom: 1,
+  },
+  recommendationLabelText: {
+    fontSize: 10,
+    color: "rgba(255, 255, 255, 0.8)",
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
+  },
+
+  // Statistics Summary Styles
+  statsSummary: {
+    backgroundColor: "rgba(30, 41, 59, 0.95)",
+    padding: 16,
+    marginBottom: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "rgba(59, 130, 246, 0.3)",
+  },
+  statsSummaryTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#ffffff",
+    marginBottom: 12,
+    textAlign: "center",
+  },
+  statsGrid: {
+    gap: 12,
+  },
+  statsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  statsRowSingle: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  statItem: {
+    alignItems: "center",
+    flex: 1,
+  },
+  statValue: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#60a5fa",
+    marginBottom: 2,
+  },
+  statLabel: {
+    fontSize: 11,
+    color: "rgba(255, 255, 255, 0.7)",
+    textAlign: "center",
   },
 });
