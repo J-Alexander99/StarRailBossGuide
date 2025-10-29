@@ -382,7 +382,7 @@ export function BossDetailScreen({ route }: any) {
                     <Text style={styles.teamIdText}>ID: {team.id}</Text>
                     <View style={styles.teamSubDivider} />
                     <Text style={styles.teamPowerText}>
-                      Power: {team.teamRating || 0}/40
+                      Power: {team.teamRating || 0}/120
                     </Text>
                   </View>
                 </View>

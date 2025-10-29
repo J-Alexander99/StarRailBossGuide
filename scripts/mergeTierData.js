@@ -84,44 +84,51 @@ function findCharacterId(tierName, charactersList) {
 
 function parseCharactersFromTS(content) {
   const characters = [];
-  const lines = content.split('\n');
+  const lines = content.split("\n");
   let currentChar = null;
   let inCharacter = false;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
-    
-    if (line === '{') {
+
+    if (line === "{") {
       inCharacter = true;
       currentChar = {};
-    } else if (line === '},' || line === '}') {
+    } else if (line === "}," || line === "}") {
       if (inCharacter && currentChar && currentChar.id) {
         characters.push(currentChar);
       }
       inCharacter = false;
       currentChar = null;
-    } else if (inCharacter && line.includes(':')) {
-      const colonIndex = line.indexOf(':');
+    } else if (inCharacter && line.includes(":")) {
+      const colonIndex = line.indexOf(":");
       const field = line.substring(0, colonIndex).trim();
       let value = line.substring(colonIndex + 1).trim();
-      
-      if (value.endsWith(',')) {
+
+      if (value.endsWith(",")) {
         value = value.slice(0, -1);
       }
-      
-      if ((value.startsWith('"') && value.endsWith('"')) || 
-          (value.startsWith("'") && value.endsWith("'"))) {
+
+      if (
+        (value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'"))
+      ) {
         value = value.slice(1, -1);
       }
-      
-      if (field === 'rating') {
+
+      if (
+        field === "rating" ||
+        field === "mocRating" ||
+        field === "pfRating" ||
+        field === "asRating"
+      ) {
         currentChar[field] = parseInt(value);
       } else {
         currentChar[field] = value;
       }
     }
   }
-  
+
   return characters;
 }
 
@@ -133,73 +140,96 @@ function convertTotalRatingTo10Scale(totalRating) {
 }
 
 function mergeTierData() {
-  console.log('🔄 Merging tier data from tierUpdate.json...\n');
-  
+  console.log("🔄 Merging tier data from tierUpdate.json...\n");
+
   // Load tier data
   if (!fs.existsSync(TIER_FILE)) {
     console.error(`❌ Error: ${TIER_FILE} not found!`);
-    console.error('   Run your scraper first to generate tierUpdate.json');
+    console.error("   Run your scraper first to generate tierUpdate.json");
     process.exit(1);
   }
-  
-  const tierData = JSON.parse(fs.readFileSync(TIER_FILE, 'utf8'));
-  console.log(`📊 Loaded ${tierData.total_characters} characters from tier list`);
+
+  const tierData = JSON.parse(fs.readFileSync(TIER_FILE, "utf8"));
+  console.log(
+    `📊 Loaded ${tierData.total_characters} characters from tier list`
+  );
   console.log(`   Generated: ${tierData.generated_at}\n`);
-  
+
   // Load current characters
-  const charsContent = fs.readFileSync(CHARS_FILE, 'utf8');
+  const charsContent = fs.readFileSync(CHARS_FILE, "utf8");
   const characters = parseCharactersFromTS(charsContent);
   console.log(`📝 Loaded ${characters.length} characters from characters.ts\n`);
-  
+
   // Backup existing file
   fs.copyFileSync(CHARS_FILE, BACKUP_FILE);
   console.log(`✅ Backed up to ${BACKUP_FILE}\n`);
-  
+
   // Create character lookup by id
   const charMap = {};
-  characters.forEach(char => {
+  characters.forEach((char) => {
     charMap[char.id] = char;
   });
-  
+
   // Merge tier ratings
   let matched = 0;
   let unmatched = [];
   let updated = 0;
   const report = [];
-  
-  report.push('='.repeat(80));
-  report.push('TIER DATA MERGE REPORT');
+
+  report.push("=".repeat(80));
+  report.push("TIER DATA MERGE REPORT");
   report.push(`Generated: ${new Date().toISOString()}`);
   report.push(`Tier data from: ${tierData.generated_at}`);
-  report.push('='.repeat(80));
-  report.push('');
-  
-  tierData.characters.forEach(tierChar => {
+  report.push("=".repeat(80));
+  report.push("");
+
+  tierData.characters.forEach((tierChar) => {
     const charId = findCharacterId(tierChar.name, characters);
-    
+
     if (charId && charMap[charId]) {
       matched++;
       const char = charMap[charId];
-      const newRating = convertTotalRatingTo10Scale(tierChar.total_rating);
+      const newRating = tierChar.total_rating; // Use total rating directly (max 30)
+      const newMocRating = tierChar.MoC_rating;
+      const newPfRating = tierChar.PF_rating;
+      const newAsRating = tierChar.AS_rating;
+
       const oldRating = char.rating || 0;
-      
-      if (oldRating !== newRating) {
+      const oldMocRating = char.mocRating || 0;
+      const oldPfRating = char.pfRating || 0;
+      const oldAsRating = char.asRating || 0;
+
+      if (
+        oldRating !== newRating ||
+        oldMocRating !== newMocRating ||
+        oldPfRating !== newPfRating ||
+        oldAsRating !== newAsRating
+      ) {
         updated++;
         report.push(`✏️  UPDATED: ${char.name} (${char.id})`);
-        report.push(`   Old rating: ${oldRating} → New rating: ${newRating}`);
-        report.push(`   Tier scores: MoC=${tierChar.MoC_rating} PF=${tierChar.PF_rating} AS=${tierChar.AS_rating} (Total=${tierChar.total_rating})`);
-        report.push('');
+        report.push(`   Overall: ${oldRating} → ${newRating}`);
+        report.push(
+          `   MoC: ${oldMocRating} → ${newMocRating} | PF: ${oldPfRating} → ${newPfRating} | AS: ${oldAsRating} → ${newAsRating}`
+        );
+        report.push("");
       }
-      
+
       char.rating = newRating;
+      char.mocRating = newMocRating;
+      char.pfRating = newPfRating;
+      char.asRating = newAsRating;
     } else {
       unmatched.push(tierChar.name);
-      report.push(`⚠️  UNMATCHED: "${tierChar.name}" - no matching character found`);
-      report.push(`   Tier scores: MoC=${tierChar.MoC_rating} PF=${tierChar.PF_rating} AS=${tierChar.AS_rating} (Total=${tierChar.total_rating})`);
-      report.push('');
+      report.push(
+        `⚠️  UNMATCHED: "${tierChar.name}" - no matching character found`
+      );
+      report.push(
+        `   Tier scores: MoC=${tierChar.MoC_rating} PF=${tierChar.PF_rating} AS=${tierChar.AS_rating} (Total=${tierChar.total_rating})`
+      );
+      report.push("");
     }
   });
-  
+
   // Generate updated TypeScript
   const TYPE_DEFINITIONS = `export type Element = 'Fire' | 'Ice' | 'Lightning' | 'Physical' | 'Quantum' | 'Wind' | 'Imaginary' | 'All';
 
@@ -228,7 +258,10 @@ export type Character = {
   role?: Role;
   meta?: Meta;
   target?: Target;
-  rating?: number; // 1 to 10 stars
+  rating?: number; // Total rating (sum of MoC + PF + AS, max 30)
+  mocRating?: number; // Memory of Chaos rating (1-10)
+  pfRating?: number; // Pure Fiction rating (1-10)
+  asRating?: number; // Apocalyptic Shadow rating (1-10)
 };
 
 `;
@@ -242,32 +275,41 @@ export type Character = {
     Wind: [],
     Quantum: [],
     Imaginary: [],
-    All: []
+    All: [],
   };
-  
-  characters.forEach(char => {
+
+  characters.forEach((char) => {
     if (byElement[char.element]) {
       byElement[char.element].push(char);
     }
   });
-  
+
   // Sort within each element group by name
-  Object.keys(byElement).forEach(element => {
+  Object.keys(byElement).forEach((element) => {
     byElement[element].sort((a, b) => a.name.localeCompare(b.name));
   });
-  
+
   // Generate TypeScript content
   let content = TYPE_DEFINITIONS;
-  content += 'export const CHARACTERS: Character[] = [\n';
-  
-  const elementOrder = ['Physical', 'Fire', 'Ice', 'Lightning', 'Wind', 'Quantum', 'Imaginary', 'All'];
-  
+  content += "export const CHARACTERS: Character[] = [\n";
+
+  const elementOrder = [
+    "Physical",
+    "Fire",
+    "Ice",
+    "Lightning",
+    "Wind",
+    "Quantum",
+    "Imaginary",
+    "All",
+  ];
+
   elementOrder.forEach((element, index) => {
     const chars = byElement[element];
     if (chars.length > 0) {
       content += `  // ${element}\n`;
       chars.forEach((char, charIndex) => {
-        content += '  {\n';
+        content += "  {\n";
         content += `    id: "${char.id}",\n`;
         content += `    name: "${char.name}",\n`;
         content += `    element: "${char.element}",\n`;
@@ -276,52 +318,55 @@ export type Character = {
         if (char.meta) content += `    meta: "${char.meta}",\n`;
         if (char.target) content += `    target: "${char.target}",\n`;
         if (char.rating) content += `    rating: ${char.rating},\n`;
-        content += '  }';
+        if (char.mocRating) content += `    mocRating: ${char.mocRating},\n`;
+        if (char.pfRating) content += `    pfRating: ${char.pfRating},\n`;
+        if (char.asRating) content += `    asRating: ${char.asRating},\n`;
+        content += "  }";
         if (charIndex < chars.length - 1 || index < elementOrder.length - 1) {
-          content += ',\n';
+          content += ",\n";
         }
       });
       if (index < elementOrder.length - 1) {
-        content += '\n';
+        content += "\n";
       }
     }
   });
-  
-  content += '\n];\n';
-  
+
+  content += "\n];\n";
+
   // Write updated file
   fs.writeFileSync(CHARS_FILE, content);
   console.log(`✅ Updated ${CHARS_FILE}\n`);
-  
+
   // Write report
-  report.push('');
-  report.push('='.repeat(80));
-  report.push('SUMMARY');
-  report.push('='.repeat(80));
+  report.push("");
+  report.push("=".repeat(80));
+  report.push("SUMMARY");
+  report.push("=".repeat(80));
   report.push(`Total tier list characters: ${tierData.total_characters}`);
   report.push(`Matched: ${matched}`);
   report.push(`Updated ratings: ${updated}`);
   report.push(`Unmatched: ${unmatched.length}`);
-  report.push('');
-  
+  report.push("");
+
   if (unmatched.length > 0) {
-    report.push('Unmatched characters:');
-    unmatched.forEach(name => report.push(`  - ${name}`));
+    report.push("Unmatched characters:");
+    unmatched.forEach((name) => report.push(`  - ${name}`));
   }
-  
-  fs.writeFileSync(REPORT_FILE, report.join('\n'));
+
+  fs.writeFileSync(REPORT_FILE, report.join("\n"));
   console.log(`📋 Summary:`);
   console.log(`   Matched: ${matched}/${tierData.total_characters}`);
   console.log(`   Updated: ${updated} characters`);
   console.log(`   Unmatched: ${unmatched.length}`);
-  
+
   if (unmatched.length > 0) {
     console.log(`\n⚠️  Unmatched characters (add to NAME_ALIASES in script):`);
-    unmatched.forEach(name => console.log(`   - ${name}`));
+    unmatched.forEach((name) => console.log(`   - ${name}`));
   }
-  
+
   console.log(`\n📄 Full report saved to: ${REPORT_FILE}`);
-  console.log('\n✨ Done!');
+  console.log("\n✨ Done!");
 }
 
 // Run the merge

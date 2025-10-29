@@ -25,7 +25,10 @@ export type Character = {
   role?: Role;
   meta?: Meta;
   target?: Target;
-  rating?: number; // 1 to 10 stars
+  rating?: number; // Total rating (sum of MoC + PF + AS, max 30)
+  mocRating?: number; // Memory of Chaos rating (1-10)
+  pfRating?: number; // Pure Fiction rating (1-10)
+  asRating?: number; // Apocalyptic Shadow rating (1-10)
 };
 
 export const CHARACTERS: Character[] = [
@@ -39,6 +42,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "AoE",
     rating: 7,
+    mocRating: 7,
+    pfRating: 8,
+    asRating: 7,
   },
   {
     id: "boothill",
@@ -49,6 +55,9 @@ export const CHARACTERS: Character[] = [
     meta: "Break",
     target: "Single",
     rating: 5,
+    mocRating: 6,
+    pfRating: 1,
+    asRating: 8,
   },
   {
     id: "clara",
@@ -59,6 +68,9 @@ export const CHARACTERS: Character[] = [
     meta: "Follow-Up",
     target: "Blast",
     rating: 3,
+    mocRating: 4,
+    pfRating: 4,
+    asRating: 2,
   },
   {
     id: "danheng_terrae",
@@ -68,6 +80,9 @@ export const CHARACTERS: Character[] = [
     role: "Sustain",
     meta: "General",
     rating: 10,
+    mocRating: 10,
+    pfRating: 9,
+    asRating: 10,
   },
   {
     id: "hanya",
@@ -78,6 +93,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Single",
     rating: 2,
+    mocRating: 2,
+    pfRating: 1,
+    asRating: 4,
   },
   {
     id: "hysilens",
@@ -88,6 +106,9 @@ export const CHARACTERS: Character[] = [
     meta: "DOT",
     target: "AoE",
     rating: 10,
+    mocRating: 10,
+    pfRating: 10,
+    asRating: 9,
   },
   {
     id: "kevin",
@@ -98,6 +119,9 @@ export const CHARACTERS: Character[] = [
     meta: "Kevin",
     target: "AoE",
     rating: 10,
+    mocRating: 10,
+    pfRating: 9,
+    asRating: 10,
   },
   {
     id: "luka",
@@ -108,6 +132,9 @@ export const CHARACTERS: Character[] = [
     meta: "DOT",
     target: "Single",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
   {
     id: "natasha",
@@ -118,6 +145,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "Single",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
   {
     id: "robin",
@@ -128,6 +158,9 @@ export const CHARACTERS: Character[] = [
     meta: "Follow-Up",
     target: "Single",
     rating: 9,
+    mocRating: 9,
+    pfRating: 9,
+    asRating: 10,
   },
   {
     id: "sushang",
@@ -138,6 +171,9 @@ export const CHARACTERS: Character[] = [
     meta: "DOT",
     target: "Single",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
   {
     id: "trail_physical",
@@ -148,6 +184,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Blast",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
   {
     id: "yunli",
@@ -158,6 +197,9 @@ export const CHARACTERS: Character[] = [
     meta: "Ultimate",
     target: "Single",
     rating: 7,
+    mocRating: 8,
+    pfRating: 6,
+    asRating: 6,
   },
 
   // Fire
@@ -170,6 +212,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "AoE",
     rating: 2,
+    mocRating: 2,
+    pfRating: 1,
+    asRating: 4,
   },
   {
     id: "firefly",
@@ -180,6 +225,9 @@ export const CHARACTERS: Character[] = [
     meta: "Break",
     target: "Blast",
     rating: 6,
+    mocRating: 7,
+    pfRating: 4,
+    asRating: 8,
   },
   {
     id: "fugue",
@@ -190,6 +238,9 @@ export const CHARACTERS: Character[] = [
     meta: "Break",
     target: "Blast",
     rating: 7,
+    mocRating: 7,
+    pfRating: 7,
+    asRating: 8,
   },
   {
     id: "gallagher",
@@ -200,6 +251,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "AoE",
     rating: 9,
+    mocRating: 9,
+    pfRating: 8,
+    asRating: 9,
   },
   {
     id: "guinaifen",
@@ -210,6 +264,9 @@ export const CHARACTERS: Character[] = [
     meta: "DOT",
     target: "Blast",
     rating: 2,
+    mocRating: 2,
+    pfRating: 2,
+    asRating: 2,
   },
   {
     id: "himeko",
@@ -220,6 +277,9 @@ export const CHARACTERS: Character[] = [
     meta: "Follow-Up",
     target: "Blast",
     rating: 4,
+    mocRating: 4,
+    pfRating: 4,
+    asRating: 4,
   },
   {
     id: "hook",
@@ -230,6 +290,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Single",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
   {
     id: "jiaoqiu",
@@ -240,6 +303,9 @@ export const CHARACTERS: Character[] = [
     meta: "Raiden",
     target: "AoE",
     rating: 8,
+    mocRating: 8,
+    pfRating: 8,
+    asRating: 8,
   },
   {
     id: "lingsha",
@@ -250,6 +316,9 @@ export const CHARACTERS: Character[] = [
     meta: "Break",
     target: "AoE",
     rating: 9,
+    mocRating: 9,
+    pfRating: 9,
+    asRating: 9,
   },
   {
     id: "topaz_numby",
@@ -260,6 +329,9 @@ export const CHARACTERS: Character[] = [
     meta: "Follow-Up",
     target: "Single",
     rating: 6,
+    mocRating: 8,
+    pfRating: 2,
+    asRating: 8,
   },
   {
     id: "trail_fire",
@@ -270,6 +342,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "Single",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
 
   // Ice
@@ -291,6 +366,9 @@ export const CHARACTERS: Character[] = [
     meta: "Summon",
     target: "AoE",
     rating: 10,
+    mocRating: 10,
+    pfRating: 10,
+    asRating: 9,
   },
   {
     id: "gepard",
@@ -301,6 +379,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "Single",
     rating: 3,
+    mocRating: 2,
+    pfRating: 2,
+    asRating: 4,
   },
   {
     id: "herta",
@@ -311,6 +392,9 @@ export const CHARACTERS: Character[] = [
     meta: "Follow-Up",
     target: "AoE",
     rating: 8,
+    mocRating: 7,
+    pfRating: 9,
+    asRating: 7,
   },
   {
     id: "jingliu",
@@ -321,6 +405,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Blast",
     rating: 7,
+    mocRating: 8,
+    pfRating: 6,
+    asRating: 6,
   },
   {
     id: "march7th",
@@ -331,6 +418,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "Single",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
   {
     id: "misha",
@@ -341,6 +431,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Blast",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
   {
     id: "pela",
@@ -351,6 +444,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "AoE",
     rating: 7,
+    mocRating: 6,
+    pfRating: 7,
+    asRating: 7,
   },
   {
     id: "ruanmei",
@@ -361,6 +457,9 @@ export const CHARACTERS: Character[] = [
     meta: "Break",
     target: "Single",
     rating: 9,
+    mocRating: 9,
+    pfRating: 9,
+    asRating: 10,
   },
   {
     id: "the_herta",
@@ -371,6 +470,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "AoE",
     rating: 9,
+    mocRating: 9,
+    pfRating: 10,
+    asRating: 9,
   },
   {
     id: "trail_ice",
@@ -381,6 +483,9 @@ export const CHARACTERS: Character[] = [
     meta: "Summon",
     target: "Single",
     rating: 10,
+    mocRating: 10,
+    pfRating: 10,
+    asRating: 10,
   },
   {
     id: "yanqing",
@@ -391,6 +496,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Single",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
 
   // Lightning
@@ -403,6 +511,9 @@ export const CHARACTERS: Character[] = [
     meta: "Summon",
     target: "Blast",
     rating: 8,
+    mocRating: 9,
+    pfRating: 7,
+    asRating: 9,
   },
   {
     id: "arlan",
@@ -413,6 +524,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Single",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
   {
     id: "bailu",
@@ -423,6 +537,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "Single",
     rating: 5,
+    mocRating: 4,
+    pfRating: 4,
+    asRating: 6,
   },
   {
     id: "jingyuan",
@@ -433,6 +550,9 @@ export const CHARACTERS: Character[] = [
     meta: "Follow-Up",
     target: "AoE",
     rating: 6,
+    mocRating: 6,
+    pfRating: 7,
+    asRating: 4,
   },
   {
     id: "kafka",
@@ -443,6 +563,9 @@ export const CHARACTERS: Character[] = [
     meta: "DOT",
     target: "AoE",
     rating: 10,
+    mocRating: 10,
+    pfRating: 10,
+    asRating: 9,
   },
   {
     id: "moze",
@@ -453,6 +576,9 @@ export const CHARACTERS: Character[] = [
     meta: "Follow-Up",
     target: "Single",
     rating: 4,
+    mocRating: 6,
+    pfRating: 1,
+    asRating: 6,
   },
   {
     id: "raiden",
@@ -463,6 +589,9 @@ export const CHARACTERS: Character[] = [
     meta: "Raiden",
     target: "AoE",
     rating: 8,
+    mocRating: 8,
+    pfRating: 8,
+    asRating: 7,
   },
   {
     id: "serval",
@@ -473,6 +602,9 @@ export const CHARACTERS: Character[] = [
     meta: "DOT",
     target: "Blast",
     rating: 6,
+    mocRating: 6,
+    pfRating: 7,
+    asRating: 6,
   },
   {
     id: "tingyun",
@@ -483,6 +615,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "Single",
     rating: 8,
+    mocRating: 8,
+    pfRating: 8,
+    asRating: 8,
   },
 
   // Wind
@@ -495,6 +630,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "AoE",
     rating: 10,
+    mocRating: 10,
+    pfRating: 9,
+    asRating: 10,
   },
   {
     id: "blackswan",
@@ -505,6 +643,9 @@ export const CHARACTERS: Character[] = [
     meta: "DOT",
     target: "AoE",
     rating: 9,
+    mocRating: 9,
+    pfRating: 9,
+    asRating: 8,
   },
   {
     id: "blade",
@@ -515,6 +656,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Single",
     rating: 8,
+    mocRating: 8,
+    pfRating: 8,
+    asRating: 8,
   },
   {
     id: "bronya",
@@ -525,6 +669,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "Single",
     rating: 9,
+    mocRating: 9,
+    pfRating: 8,
+    asRating: 9,
   },
   {
     id: "cerydra",
@@ -535,6 +682,9 @@ export const CHARACTERS: Character[] = [
     meta: "Kevin",
     target: "Single",
     rating: 10,
+    mocRating: 10,
+    pfRating: 9,
+    asRating: 10,
   },
   {
     id: "danheng",
@@ -545,6 +695,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Single",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
   {
     id: "feixiao",
@@ -555,6 +708,9 @@ export const CHARACTERS: Character[] = [
     meta: "Follow-Up",
     target: "Single",
     rating: 7,
+    mocRating: 8,
+    pfRating: 4,
+    asRating: 9,
   },
   {
     id: "huohuo",
@@ -565,6 +721,9 @@ export const CHARACTERS: Character[] = [
     meta: "DOT",
     target: "Single",
     rating: 9,
+    mocRating: 9,
+    pfRating: 9,
+    asRating: 9,
   },
   {
     id: "hyacine",
@@ -575,6 +734,9 @@ export const CHARACTERS: Character[] = [
     meta: "Summon",
     target: "AoE",
     rating: 10,
+    mocRating: 10,
+    pfRating: 10,
+    asRating: 10,
   },
   {
     id: "saber",
@@ -585,6 +747,9 @@ export const CHARACTERS: Character[] = [
     meta: "Ultimate",
     target: "AoE",
     rating: 9,
+    mocRating: 9,
+    pfRating: 8,
+    asRating: 9,
   },
   {
     id: "sampo",
@@ -595,6 +760,9 @@ export const CHARACTERS: Character[] = [
     meta: "DOT",
     target: "Blast",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
 
   // Quantum
@@ -607,6 +775,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Single",
     rating: 7,
+    mocRating: 10,
+    pfRating: 2,
+    asRating: 10,
   },
   {
     id: "castorice",
@@ -617,6 +788,9 @@ export const CHARACTERS: Character[] = [
     meta: "Summon",
     target: "AoE",
     rating: 10,
+    mocRating: 10,
+    pfRating: 10,
+    asRating: 10,
   },
   {
     id: "cipher",
@@ -627,6 +801,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "Blast",
     rating: 9,
+    mocRating: 9,
+    pfRating: 9,
+    asRating: 9,
   },
   {
     id: "fuxuan",
@@ -637,6 +814,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "Single",
     rating: 8,
+    mocRating: 7,
+    pfRating: 8,
+    asRating: 8,
   },
   {
     id: "jade",
@@ -647,6 +827,9 @@ export const CHARACTERS: Character[] = [
     meta: "Follow-Up",
     target: "AoE",
     rating: 9,
+    mocRating: 8,
+    pfRating: 10,
+    asRating: 8,
   },
   {
     id: "lynx",
@@ -657,6 +840,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "Single",
     rating: 5,
+    mocRating: 4,
+    pfRating: 4,
+    asRating: 6,
   },
   {
     id: "qingque",
@@ -667,6 +853,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Blast",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
   {
     id: "seele",
@@ -677,6 +866,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Single",
     rating: 2,
+    mocRating: 2,
+    pfRating: 2,
+    asRating: 2,
   },
   {
     id: "silverwolf",
@@ -687,6 +879,9 @@ export const CHARACTERS: Character[] = [
     meta: "Raiden",
     target: "Single",
     rating: 8,
+    mocRating: 8,
+    pfRating: 8,
+    asRating: 9,
   },
   {
     id: "sparkle",
@@ -697,6 +892,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "Single",
     rating: 9,
+    mocRating: 9,
+    pfRating: 8,
+    asRating: 9,
   },
   {
     id: "tribbie",
@@ -707,6 +905,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "AoE",
     rating: 10,
+    mocRating: 10,
+    pfRating: 10,
+    asRating: 10,
   },
   {
     id: "xueyi",
@@ -717,6 +918,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Blast",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 1,
   },
 
   // Imaginary
@@ -729,6 +933,9 @@ export const CHARACTERS: Character[] = [
     meta: "Follow-Up",
     target: "Single",
     rating: 9,
+    mocRating: 9,
+    pfRating: 9,
+    asRating: 9,
   },
   {
     id: "danheng_imaginary",
@@ -739,6 +946,9 @@ export const CHARACTERS: Character[] = [
     meta: "Summon",
     target: "Blast",
     rating: 2,
+    mocRating: 2,
+    pfRating: 1,
+    asRating: 2,
   },
   {
     id: "dr_ratio",
@@ -749,6 +959,9 @@ export const CHARACTERS: Character[] = [
     meta: "Follow-Up",
     target: "Single",
     rating: 2,
+    mocRating: 2,
+    pfRating: 1,
+    asRating: 4,
   },
   {
     id: "luocha",
@@ -759,6 +972,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "AoE",
     rating: 8,
+    mocRating: 8,
+    pfRating: 8,
+    asRating: 8,
   },
   {
     id: "march7_imag",
@@ -768,7 +984,10 @@ export const CHARACTERS: Character[] = [
     role: "Sustain",
     meta: "General",
     target: "Single",
-    rating: 10,
+    rating: 6,
+    mocRating: 7,
+    pfRating: 2,
+    asRating: 8,
   },
   {
     id: "mydei",
@@ -779,6 +998,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Blast",
     rating: 8,
+    mocRating: 9,
+    pfRating: 8,
+    asRating: 8,
   },
   {
     id: "rappa",
@@ -789,6 +1011,9 @@ export const CHARACTERS: Character[] = [
     meta: "Break",
     target: "AoE",
     rating: 7,
+    mocRating: 7,
+    pfRating: 7,
+    asRating: 7,
   },
   {
     id: "sunday",
@@ -799,6 +1024,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "Team",
     rating: 10,
+    mocRating: 10,
+    pfRating: 9,
+    asRating: 10,
   },
   {
     id: "trail_imag",
@@ -809,6 +1037,9 @@ export const CHARACTERS: Character[] = [
     meta: "Break",
     target: "Blast",
     rating: 6,
+    mocRating: 6,
+    pfRating: 6,
+    asRating: 7,
   },
   {
     id: "welt",
@@ -819,6 +1050,9 @@ export const CHARACTERS: Character[] = [
     meta: "General",
     target: "AoE",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 2,
   },
   {
     id: "yukong",
@@ -829,6 +1063,9 @@ export const CHARACTERS: Character[] = [
     meta: "Crit",
     target: "Blast",
     rating: 1,
+    mocRating: 1,
+    pfRating: 1,
+    asRating: 2,
   },
 
 

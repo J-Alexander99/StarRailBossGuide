@@ -1,12 +1,320 @@
 ================================================================================
 TIER DATA MERGE REPORT
-Generated: 2025-10-29T05:21:38.473Z
+Generated: 2025-10-29T20:36:58.380Z
 Tier data from: 2025-10-29
 ================================================================================
 
+✏️  UPDATED: Castorice (castorice)
+   Overall: 10 → 30
+   MoC: 10 → 10 | PF: 10 → 10 | AS: 10 → 10
+
+✏️  UPDATED: Trailblazer-Ice (trail_ice)
+   Overall: 10 → 30
+   MoC: 10 → 10 | PF: 10 → 10 | AS: 10 → 10
+
+✏️  UPDATED: Tribbie (tribbie)
+   Overall: 10 → 30
+   MoC: 10 → 10 | PF: 10 → 10 | AS: 10 → 10
+
+✏️  UPDATED: Hyacine (hyacine)
+   Overall: 10 → 30
+   MoC: 10 → 10 | PF: 10 → 10 | AS: 10 → 10
+
+✏️  UPDATED: Anaxa (anaxa)
+   Overall: 10 → 29
+   MoC: 10 → 10 | PF: 9 → 9 | AS: 10 → 10
+
+✏️  UPDATED: Hysilens (hysilens)
+   Overall: 10 → 29
+   MoC: 10 → 10 | PF: 10 → 10 | AS: 9 → 9
+
+✏️  UPDATED: Evernight (evernight)
+   Overall: 10 → 29
+   MoC: 10 → 10 | PF: 10 → 10 | AS: 9 → 9
+
+✏️  UPDATED: Kevin (kevin)
+   Overall: 10 → 29
+   MoC: 10 → 10 | PF: 9 → 9 | AS: 10 → 10
+
+✏️  UPDATED: Kafka (kafka)
+   Overall: 10 → 29
+   MoC: 10 → 10 | PF: 10 → 10 | AS: 9 → 9
+
+✏️  UPDATED: Cerydra (cerydra)
+   Overall: 10 → 29
+   MoC: 10 → 10 | PF: 9 → 9 | AS: 10 → 10
+
+✏️  UPDATED: Sunday (sunday)
+   Overall: 10 → 29
+   MoC: 10 → 10 | PF: 9 → 9 | AS: 10 → 10
+
+✏️  UPDATED: Dan Heng • Permansor Terrae (danheng_terrae)
+   Overall: 10 → 29
+   MoC: 10 → 10 | PF: 9 → 9 | AS: 10 → 10
+
+✏️  UPDATED: The Herta (the_herta)
+   Overall: 9 → 28
+   MoC: 9 → 9 | PF: 10 → 10 | AS: 9 → 9
+
+✏️  UPDATED: Robin (robin)
+   Overall: 9 → 28
+   MoC: 9 → 9 | PF: 9 → 9 | AS: 10 → 10
+
+✏️  UPDATED: Ruan Mei (ruanmei)
+   Overall: 9 → 28
+   MoC: 9 → 9 | PF: 9 → 9 | AS: 10 → 10
+
+✏️  UPDATED: Cipher (cipher)
+   Overall: 9 → 27
+   MoC: 9 → 9 | PF: 9 → 9 | AS: 9 → 9
+
+✏️  UPDATED: Aventurine (aventurine)
+   Overall: 9 → 27
+   MoC: 9 → 9 | PF: 9 → 9 | AS: 9 → 9
+
+✏️  UPDATED: Huohuo (huohuo)
+   Overall: 9 → 27
+   MoC: 9 → 9 | PF: 9 → 9 | AS: 9 → 9
+
+✏️  UPDATED: Lingsha (lingsha)
+   Overall: 9 → 27
+   MoC: 9 → 9 | PF: 9 → 9 | AS: 9 → 9
+
+✏️  UPDATED: Saber (saber)
+   Overall: 9 → 26
+   MoC: 9 → 9 | PF: 8 → 8 | AS: 9 → 9
+
+✏️  UPDATED: Black Swan (blackswan)
+   Overall: 9 → 26
+   MoC: 9 → 9 | PF: 9 → 9 | AS: 8 → 8
+
+✏️  UPDATED: Bronya (bronya)
+   Overall: 9 → 26
+   MoC: 9 → 9 | PF: 8 → 8 | AS: 9 → 9
+
+✏️  UPDATED: Sparkle (sparkle)
+   Overall: 9 → 26
+   MoC: 9 → 9 | PF: 8 → 8 | AS: 9 → 9
+
+✏️  UPDATED: Gallagher (gallagher)
+   Overall: 9 → 26
+   MoC: 9 → 9 | PF: 8 → 8 | AS: 9 → 9
+
+✏️  UPDATED: Jade (jade)
+   Overall: 9 → 26
+   MoC: 8 → 8 | PF: 10 → 10 | AS: 8 → 8
+
+✏️  UPDATED: Aglaea (aglaea)
+   Overall: 8 → 25
+   MoC: 9 → 9 | PF: 7 → 7 | AS: 9 → 9
+
+✏️  UPDATED: Mydei (mydei)
+   Overall: 8 → 25
+   MoC: 9 → 9 | PF: 8 → 8 | AS: 8 → 8
+
+✏️  UPDATED: Silver Wolf (silverwolf)
+   Overall: 8 → 25
+   MoC: 8 → 8 | PF: 8 → 8 | AS: 9 → 9
+
+✏️  UPDATED: Blade (blade)
+   Overall: 8 → 24
+   MoC: 8 → 8 | PF: 8 → 8 | AS: 8 → 8
+
+✏️  UPDATED: Jiaoqiu (jiaoqiu)
+   Overall: 8 → 24
+   MoC: 8 → 8 | PF: 8 → 8 | AS: 8 → 8
+
+✏️  UPDATED: Tingyun (tingyun)
+   Overall: 8 → 24
+   MoC: 8 → 8 | PF: 8 → 8 | AS: 8 → 8
+
+✏️  UPDATED: Luocha (luocha)
+   Overall: 8 → 24
+   MoC: 8 → 8 | PF: 8 → 8 | AS: 8 → 8
+
+✏️  UPDATED: Raiden (raiden)
+   Overall: 8 → 23
+   MoC: 8 → 8 | PF: 8 → 8 | AS: 7 → 7
+
+✏️  UPDATED: Herta (herta)
+   Overall: 8 → 23
+   MoC: 7 → 7 | PF: 9 → 9 | AS: 7 → 7
+
+✏️  UPDATED: Fu Xuan (fuxuan)
+   Overall: 8 → 23
+   MoC: 7 → 7 | PF: 8 → 8 | AS: 8 → 8
+
+✏️  UPDATED: Archer (archer)
+   Overall: 7 → 22
+   MoC: 10 → 10 | PF: 2 → 2 | AS: 10 → 10
+
+✏️  UPDATED: Argenti (argenti)
+   Overall: 7 → 22
+   MoC: 7 → 7 | PF: 8 → 8 | AS: 7 → 7
+
+✏️  UPDATED: Fugue (fugue)
+   Overall: 7 → 22
+   MoC: 7 → 7 | PF: 7 → 7 | AS: 8 → 8
+
+✏️  UPDATED: Feixiao (feixiao)
+   Overall: 7 → 21
+   MoC: 8 → 8 | PF: 4 → 4 | AS: 9 → 9
+
+✏️  UPDATED: Rappa (rappa)
+   Overall: 7 → 21
+   MoC: 7 → 7 | PF: 7 → 7 | AS: 7 → 7
+
+✏️  UPDATED: Jingliu (jingliu)
+   Overall: 7 → 20
+   MoC: 8 → 8 | PF: 6 → 6 | AS: 6 → 6
+
+✏️  UPDATED: Yunli (yunli)
+   Overall: 7 → 20
+   MoC: 8 → 8 | PF: 6 → 6 | AS: 6 → 6
+
+✏️  UPDATED: Pela (pela)
+   Overall: 7 → 20
+   MoC: 6 → 6 | PF: 7 → 7 | AS: 7 → 7
+
+✏️  UPDATED: Firefly (firefly)
+   Overall: 6 → 19
+   MoC: 7 → 7 | PF: 4 → 4 | AS: 8 → 8
+
+✏️  UPDATED: Serval (serval)
+   Overall: 6 → 19
+   MoC: 6 → 6 | PF: 7 → 7 | AS: 6 → 6
+
+✏️  UPDATED: Trailblazer-Imaginary (trail_imag)
+   Overall: 6 → 19
+   MoC: 6 → 6 | PF: 6 → 6 | AS: 7 → 7
+
+✏️  UPDATED: Topaz & Numby (topaz_numby)
+   Overall: 6 → 18
+   MoC: 8 → 8 | PF: 2 → 2 | AS: 8 → 8
+
 ✏️  UPDATED: March 7th (march7_imag)
-   Old rating: 10 → New rating: 6
-   Tier scores: MoC=7 PF=2 AS=8 (Total=17)
+   Overall: 6 → 17
+   MoC: 7 → 7 | PF: 2 → 2 | AS: 8 → 8
+
+✏️  UPDATED: Jing Yuan (jingyuan)
+   Overall: 6 → 17
+   MoC: 6 → 6 | PF: 7 → 7 | AS: 4 → 4
+
+✏️  UPDATED: Boothill (boothill)
+   Overall: 5 → 15
+   MoC: 6 → 6 | PF: 1 → 1 | AS: 8 → 8
+
+✏️  UPDATED: Bailu (bailu)
+   Overall: 5 → 14
+   MoC: 4 → 4 | PF: 4 → 4 | AS: 6 → 6
+
+✏️  UPDATED: Lynx (lynx)
+   Overall: 5 → 14
+   MoC: 4 → 4 | PF: 4 → 4 | AS: 6 → 6
+
+✏️  UPDATED: Moze (moze)
+   Overall: 4 → 13
+   MoC: 6 → 6 | PF: 1 → 1 | AS: 6 → 6
+
+✏️  UPDATED: Himeko (himeko)
+   Overall: 4 → 12
+   MoC: 4 → 4 | PF: 4 → 4 | AS: 4 → 4
+
+✏️  UPDATED: Clara (clara)
+   Overall: 3 → 10
+   MoC: 4 → 4 | PF: 4 → 4 | AS: 2 → 2
+
+✏️  UPDATED: Gepard (gepard)
+   Overall: 3 → 8
+   MoC: 2 → 2 | PF: 2 → 2 | AS: 4 → 4
+
+✏️  UPDATED: Dr. Ratio (dr_ratio)
+   Overall: 2 → 7
+   MoC: 2 → 2 | PF: 1 → 1 | AS: 4 → 4
+
+✏️  UPDATED: Asta (asta)
+   Overall: 2 → 7
+   MoC: 2 → 2 | PF: 1 → 1 | AS: 4 → 4
+
+✏️  UPDATED: Hanya (hanya)
+   Overall: 2 → 7
+   MoC: 2 → 2 | PF: 1 → 1 | AS: 4 → 4
+
+✏️  UPDATED: Seele (seele)
+   Overall: 2 → 6
+   MoC: 2 → 2 | PF: 2 → 2 | AS: 2 → 2
+
+✏️  UPDATED: Guinaifen (guinaifen)
+   Overall: 2 → 6
+   MoC: 2 → 2 | PF: 2 → 2 | AS: 2 → 2
+
+✏️  UPDATED: Dan Heng • Imbibitor Lunae (danheng_imaginary)
+   Overall: 2 → 5
+   MoC: 2 → 2 | PF: 1 → 1 | AS: 2 → 2
+
+✏️  UPDATED: Welt (welt)
+   Overall: 1 → 4
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 2 → 2
+
+✏️  UPDATED: Yukong (yukong)
+   Overall: 1 → 4
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 2 → 2
+
+✏️  UPDATED: Arlan (arlan)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
+
+✏️  UPDATED: Dan Heng (danheng)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
+
+✏️  UPDATED: Hook (hook)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
+
+✏️  UPDATED: Luka (luka)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
+
+✏️  UPDATED: Misha (misha)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
+
+✏️  UPDATED: Qingque (qingque)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
+
+✏️  UPDATED: Sushang (sushang)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
+
+✏️  UPDATED: Trailblazer-Physical (trail_physical)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
+
+✏️  UPDATED: Xueyi (xueyi)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
+
+✏️  UPDATED: Yanqing (yanqing)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
+
+✏️  UPDATED: Sampo (sampo)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
+
+✏️  UPDATED: March 7th (march7th)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
+
+✏️  UPDATED: Natasha (natasha)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
+
+✏️  UPDATED: Trailblazer-Fire (trail_fire)
+   Overall: 1 → 3
+   MoC: 1 → 1 | PF: 1 → 1 | AS: 1 → 1
 
 
 ================================================================================
@@ -14,5 +322,5 @@ SUMMARY
 ================================================================================
 Total tier list characters: 78
 Matched: 78
-Updated ratings: 1
+Updated ratings: 78
 Unmatched: 0

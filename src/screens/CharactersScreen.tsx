@@ -119,9 +119,39 @@ export function CharactersScreen() {
     return result;
   }, [filters]);
 
-  const renderStars = (rating?: number) => {
-    if (!rating) return "";
-    return "★".repeat(rating) + "☆".repeat(10 - rating);
+  const renderGameModeStars = (
+    mocRating?: number,
+    pfRating?: number,
+    asRating?: number
+  ) => {
+    const renderModeStars = (rating: number, color: string, key: string) => {
+      // Each mode has 5 stars, each half star = 1 point (so 10 points = 5 full stars)
+      // rating is 0-10, we want 0-5 stars
+      const halfStars = Math.min(rating, 10); // Clamp to max 10
+      const fullStars = Math.floor(halfStars / 2);
+      const hasHalfStar = halfStars % 2 === 1;
+      const emptyStars = Math.max(0, 5 - fullStars - (hasHalfStar ? 1 : 0));
+
+      return (
+        <View key={key} style={{ flexDirection: "row" }}>
+          <Text style={{ color, fontSize: 16, letterSpacing: 1 }}>
+            {"★".repeat(fullStars)}
+            {hasHalfStar ? "⯨" : ""}
+          </Text>
+          <Text style={{ color: "#6b7280", fontSize: 16, letterSpacing: 1 }}>
+            {"☆".repeat(emptyStars)}
+          </Text>
+        </View>
+      );
+    };
+
+    return (
+      <View style={styles.gameModeStarsContainer}>
+        {renderModeStars(mocRating || 0, "#ef4444", "moc")}
+        {renderModeStars(pfRating || 0, "#3b82f6", "pf")}
+        {renderModeStars(asRating || 0, "#a855f7", "as")}
+      </View>
+    );
   };
 
   const renderBadge = (
@@ -181,7 +211,9 @@ export function CharactersScreen() {
         }
         renderItem={({ item }) => {
           const ratingValue = item.rating ?? 0;
-          const ratingPercent = Math.max(0, Math.min(10, ratingValue)) * 10;
+          // Convert rating from 30-point scale to percentage
+          const ratingPercent =
+            Math.max(0, Math.min(30, ratingValue)) * (100 / 30);
 
           return (
             <View style={styles.card}>
@@ -233,7 +265,7 @@ export function CharactersScreen() {
                     <View style={styles.ratingTopRow}>
                       <Text style={styles.ratingLabel}>Rating</Text>
                       <Text style={styles.ratingValue}>
-                        {item.rating ? `${item.rating}/10` : "Unrated"}
+                        {item.rating ? `${item.rating}/30` : "Unrated"}
                       </Text>
                     </View>
                     <View style={styles.ratingBar}>
@@ -244,9 +276,11 @@ export function CharactersScreen() {
                         ]}
                       />
                     </View>
-                    <Text style={styles.starString}>
-                      {renderStars(item.rating)}
-                    </Text>
+                    {renderGameModeStars(
+                      item.mocRating,
+                      item.pfRating,
+                      item.asRating
+                    )}
                   </View>
                 </View>
               </View>
@@ -692,6 +726,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     letterSpacing: 2,
     color: "#facc15",
+  },
+  gameModeStarsContainer: {
+    flexDirection: "row",
+    gap: 8,
+    marginTop: 8,
+    alignItems: "center",
   },
   filterButton: {
     backgroundColor: "#ff6ce0",
