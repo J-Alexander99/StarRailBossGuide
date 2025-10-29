@@ -768,7 +768,7 @@ export const CHARACTERS: Character[] = [
     role: "Sustain",
     meta: "General",
     target: "Single",
-    rating: 6,
+    rating: 10,
   },
   {
     id: "mydei",
