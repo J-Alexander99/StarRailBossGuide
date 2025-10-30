@@ -216,7 +216,15 @@ export function CharactersScreen() {
             Math.max(0, Math.min(30, ratingValue)) * (100 / 30);
 
           return (
-            <View style={styles.card}>
+            <TouchableOpacity
+              style={styles.card}
+              onPress={() => {
+                (navigation as any).navigate("CharacterDetail", {
+                  characterId: item.id,
+                });
+              }}
+              activeOpacity={0.7}
+            >
               <View style={styles.cardContent}>
                 <View style={styles.avatarWrapper}>
                   {getCharacterImage(item.id) ? (
@@ -284,7 +292,7 @@ export function CharactersScreen() {
                   </View>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           );
         }}
       />

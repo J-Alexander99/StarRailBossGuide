@@ -12,6 +12,7 @@ import { HomeScreen } from "./src/screens/HomeScreen";
 import { BossListScreen } from "./src/screens/BossListScreen";
 import { BossDetailScreen } from "./src/screens/BossDetailScreen";
 import { CharactersScreen } from "./src/screens/CharactersScreen";
+import { CharacterDetailScreen } from "./src/screens/CharacterDetailScreen";
 import { TeamsScreen } from "./src/screens/TeamsScreen";
 import { SettingsScreen } from "./src/screens/SettingsScreen";
 import { CharacterOwnershipProvider } from "./src/context/CharacterOwnershipContext";
@@ -60,6 +61,11 @@ function CharactersStack() {
         name="CharactersList"
         component={CharactersScreen}
         options={{ title: "Trailblazer Roster" }}
+      />
+      <Stack.Screen
+        name="CharacterDetail"
+        component={CharacterDetailScreen}
+        options={{ title: "Character Details" }}
       />
       <Stack.Screen
         name="Teams"
