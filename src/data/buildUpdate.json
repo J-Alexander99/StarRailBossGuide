@@ -1,0 +1,8182 @@
+{
+  "acheron": {
+    "characterId": "acheron",
+    "lightCones": [
+      {
+        "name": "Along the Passing Shore",
+        "notes": ""
+      },
+      {
+        "name": "Incessant Rain",
+        "notes": ""
+      },
+      {
+        "name": "Good Night and Sleep Well",
+        "notes": ""
+      },
+      {
+        "name": "Boundless Choreo",
+        "notes": ""
+      },
+      {
+        "name": "Trend of the Universal Market",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      },
+      {
+        "name": "Lies Dance on the Breeze",
+        "notes": ""
+      },
+      {
+        "name": "In the Name of the World",
+        "notes": ""
+      },
+      {
+        "name": "Patience Is All You Need",
+        "notes": ""
+      },
+      {
+        "name": "Texture of Memories",
+        "notes": ""
+      },
+      {
+        "name": "Carve the Moon, Weave the Clouds",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Band of Sizzling Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Sigonia, the Unclaimed Desolation",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Lightning DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "aglaea": {
+    "characterId": "aglaea",
+    "lightCones": [
+      {
+        "name": "Time Woven Into Gold",
+        "notes": ""
+      },
+      {
+        "name": "Sweat Now, Cry Less",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Greetings",
+        "notes": ""
+      },
+      {
+        "name": "Memory's Curtain Never Falls",
+        "notes": ""
+      },
+      {
+        "name": "Victory In a Blink",
+        "notes": ""
+      },
+      {
+        "name": "Long May Rainbows Adorn the Sky",
+        "notes": ""
+      },
+      {
+        "name": "The Flower Remembers",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Reminiscence",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Hero of Triumphant Song",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Arcadia of Woven Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Sigonia, the Unclaimed Desolation",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "Lightning DMG"
+      ],
+      "rope": [
+        "ATK%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "anaxa": {
+    "characterId": "anaxa",
+    "lightCones": [
+      {
+        "name": "Life Should Be Cast to Flames",
+        "notes": ""
+      },
+      {
+        "name": "Into the Unreachable Veil",
+        "notes": ""
+      },
+      {
+        "name": "The Great Cosmic Enterprise",
+        "notes": ""
+      },
+      {
+        "name": "Today Is Another Peaceful Day",
+        "notes": ""
+      },
+      {
+        "name": "Before Dawn",
+        "notes": ""
+      },
+      {
+        "name": "Eternal Calculus",
+        "notes": ""
+      },
+      {
+        "name": "Night on the Milky Way",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Repose",
+        "notes": ""
+      },
+      {
+        "name": "Ninjutsu Inscription: Dazzling Evilbreaker",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Passkey",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Wind DMG"
+      ],
+      "rope": [
+        "ATK%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "archer": {
+    "characterId": "archer",
+    "lightCones": [
+      {
+        "name": "The Hell Where Ideals Burn",
+        "notes": ""
+      },
+      {
+        "name": "Baptism of Pure Thought",
+        "notes": ""
+      },
+      {
+        "name": "Cruising in the Stellar Sea",
+        "notes": ""
+      },
+      {
+        "name": "See You at the End",
+        "notes": ""
+      },
+      {
+        "name": "Only Silence Remains",
+        "notes": ""
+      },
+      {
+        "name": "Sleep Like the Dead",
+        "notes": ""
+      },
+      {
+        "name": "Worrisome, Blissful",
+        "notes": ""
+      },
+      {
+        "name": "In the Night",
+        "notes": ""
+      },
+      {
+        "name": "Subscribe for More!",
+        "notes": ""
+      },
+      {
+        "name": "Swordplay",
+        "notes": ""
+      },
+      {
+        "name": "Trend of the Universal Market",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Wavestrider Captain",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate"
+      ],
+      "feet": [
+        "ATK%"
+      ],
+      "sphere": [
+        "ATK%",
+        "Quantum DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate"
+      ]
+    }
+  },
+  "argenti": {
+    "characterId": "argenti",
+    "lightCones": [
+      {
+        "name": "Into the Unreachable Veil",
+        "notes": ""
+      },
+      {
+        "name": "An Instant Before A Gaze",
+        "notes": ""
+      },
+      {
+        "name": "Today Is Another Peaceful Day",
+        "notes": ""
+      },
+      {
+        "name": "Night on the Milky Way",
+        "notes": ""
+      },
+      {
+        "name": "Eternal Calculus",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Repose",
+        "notes": ""
+      },
+      {
+        "name": "Make the World Clamor",
+        "notes": ""
+      },
+      {
+        "name": "The Seriousness of Breakfast",
+        "notes": ""
+      },
+      {
+        "name": "Before Dawn",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Champion of Streetwise Boxing",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Passkey",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Sigonia, the Unclaimed Desolation",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Physical DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "arlan": {
+    "characterId": "arlan",
+    "lightCones": [
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "The Unreachable Side",
+        "notes": ""
+      },
+      {
+        "name": "A Secret Vow",
+        "notes": ""
+      },
+      {
+        "name": "Thus Burns the Dawn",
+        "notes": ""
+      },
+      {
+        "name": "A Trail of Bygone Blood",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Band of Sizzling Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Wavestrider Captain",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Lightning DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "asta": {
+    "characterId": "asta",
+    "lightCones": [
+      {
+        "name": "Dance! Dance! Dance!",
+        "notes": ""
+      },
+      {
+        "name": "But the Battle Isn't Over",
+        "notes": ""
+      },
+      {
+        "name": "Planetary Rendezvous",
+        "notes": ""
+      },
+      {
+        "name": "Memories of the Past",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Meshing Cogs",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Watchmaker, Master of Dream Machinations",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "HP%",
+        "DEF%"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "Fire DMG"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "Speed"
+      ]
+    }
+  },
+  "aventurine": {
+    "characterId": "aventurine",
+    "lightCones": [
+      {
+        "name": "Inherently Unjust Destiny",
+        "notes": ""
+      },
+      {
+        "name": "Journey, Forever Peaceful",
+        "notes": ""
+      },
+      {
+        "name": "Moment of Victory",
+        "notes": ""
+      },
+      {
+        "name": "Day One of My New Life",
+        "notes": ""
+      },
+      {
+        "name": "Concert for Two",
+        "notes": ""
+      },
+      {
+        "name": "Trend of the Universal Market",
+        "notes": ""
+      },
+      {
+        "name": "Landau's Choice",
+        "notes": ""
+      },
+      {
+        "name": "Destiny's Threads Forewoven",
+        "notes": ""
+      },
+      {
+        "name": "Texture of Memories",
+        "notes": ""
+      },
+      {
+        "name": "This Is Me!",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Self-Enshrouded Recluse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Knight of Purity Palace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        },
+        {
+          "name": "Belobog of the Architects",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT DMG",
+        "DEF%"
+      ],
+      "feet": [
+        "DEF%",
+        "Speed"
+      ],
+      "sphere": [
+        "DEF%",
+        "Imaginary DMG"
+      ],
+      "rope": [
+        "DEF%"
+      ],
+      "subStats": [
+        "CRIT DMG",
+        "CRIT Rate",
+        "DEF%",
+        "Speed"
+      ]
+    }
+  },
+  "bailu": {
+    "characterId": "bailu",
+    "lightCones": [
+      {
+        "name": "Night of Fright",
+        "notes": ""
+      },
+      {
+        "name": "Time Waits for No One",
+        "notes": ""
+      },
+      {
+        "name": "Post-Op Conversation",
+        "notes": ""
+      },
+      {
+        "name": "Unto Tomorrow's Morrow",
+        "notes": ""
+      },
+      {
+        "name": "Perfect Timing",
+        "notes": ""
+      },
+      {
+        "name": "Quid Pro Quo",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Multiplication",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Passerby of Wandering Cloud",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Giant Tree of Rapt Brooding",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "HP%",
+        "Outgoing Healing"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "black-swan": {
+    "characterId": "black-swan",
+    "lightCones": [
+      {
+        "name": "Why Does the Ocean Sing",
+        "notes": ""
+      },
+      {
+        "name": "Those Many Springs",
+        "notes": ""
+      },
+      {
+        "name": "Reforged Remembrance",
+        "notes": ""
+      },
+      {
+        "name": "Eyes of the Prey",
+        "notes": ""
+      },
+      {
+        "name": "Good Night and Sleep Well",
+        "notes": ""
+      },
+      {
+        "name": "It's Showtime",
+        "notes": ""
+      },
+      {
+        "name": "Patience Is All You Need",
+        "notes": ""
+      },
+      {
+        "name": "Before the Tutorial Mission Starts",
+        "notes": ""
+      },
+      {
+        "name": "Solitary Healing",
+        "notes": ""
+      },
+      {
+        "name": "Resolution Shines As Pearls of Sweat",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Prisoner in Deep Confinement",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Revelry by the Sea",
+          "notes": ""
+        },
+        {
+          "name": "Pan-Cosmic Commercial Enterprise",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "ATK%",
+        "Effect Hit Rate"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Wind DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "Speed"
+      ]
+    }
+  },
+  "blade": {
+    "characterId": "blade",
+    "lightCones": [
+      {
+        "name": "The Unreachable Side",
+        "notes": ""
+      },
+      {
+        "name": "Flame of Blood, Blaze My Path",
+        "notes": ""
+      },
+      {
+        "name": "A Secret Vow",
+        "notes": ""
+      },
+      {
+        "name": "A Trail of Bygone Blood",
+        "notes": ""
+      },
+      {
+        "name": "Ninja Record: Sound Hunt",
+        "notes": ""
+      },
+      {
+        "name": "Flames Afar",
+        "notes": ""
+      },
+      {
+        "name": "I Shall Be My Own Sword",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      },
+      {
+        "name": "Time Waits for No One",
+        "notes": ""
+      },
+      {
+        "name": "Dance at Sunset",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Bone Collection's Serene Demesne",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Sigonia, the Unclaimed Desolation",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "HP%",
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "Wind DMG"
+      ],
+      "rope": [
+        "HP%"
+      ],
+      "subStats": [
+        "CRIT DMG",
+        "CRIT Rate",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "boothill": {
+    "characterId": "boothill",
+    "lightCones": [
+      {
+        "name": "Sailing Towards A Second Life",
+        "notes": ""
+      },
+      {
+        "name": "Shadowed By Night",
+        "notes": ""
+      },
+      {
+        "name": "River Flows in Spring",
+        "notes": ""
+      },
+      {
+        "name": "Swordplay",
+        "notes": ""
+      },
+      {
+        "name": "Cruising in the Stellar Sea",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Adversarial",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Iron Cavalry Against the Scourge",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Thief of Shooting Meteor",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Watchmaker, Master of Dream Machinations",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Talia: Kingdom of Banditry",
+          "notes": ""
+        },
+        {
+          "name": "Forge of the Kalpagni Lantern",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [],
+      "rope": [],
+      "subStats": [
+        "Break Effect",
+        "Speed"
+      ]
+    }
+  },
+  "bronya": {
+    "characterId": "bronya",
+    "lightCones": [
+      {
+        "name": "A Grounded Ascent",
+        "notes": ""
+      },
+      {
+        "name": "But the Battle Isn't Over",
+        "notes": ""
+      },
+      {
+        "name": "Past and Future",
+        "notes": ""
+      },
+      {
+        "name": "Dance! Dance! Dance!",
+        "notes": ""
+      },
+      {
+        "name": "Earthly Escapade",
+        "notes": ""
+      },
+      {
+        "name": "Poised to Bloom",
+        "notes": ""
+      },
+      {
+        "name": "Carve the Moon, Weave the Clouds",
+        "notes": ""
+      },
+      {
+        "name": "If Time Were a Flower",
+        "notes": ""
+      },
+      {
+        "name": "For Tomorrow's Journey",
+        "notes": ""
+      },
+      {
+        "name": "Planetary Rendezvous",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT DMG"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "CRIT DMG",
+        "Speed"
+      ]
+    }
+  },
+  "castorice": {
+    "characterId": "castorice",
+    "lightCones": [
+      {
+        "name": "Make Farewells More Beautiful",
+        "notes": ""
+      },
+      {
+        "name": "The Flower Remembers",
+        "notes": ""
+      },
+      {
+        "name": "Sweat Now, Cry Less",
+        "notes": ""
+      },
+      {
+        "name": "Time Waits for No One",
+        "notes": ""
+      },
+      {
+        "name": "The Story's Next Page",
+        "notes": ""
+      },
+      {
+        "name": "Post-Op Conversation",
+        "notes": ""
+      },
+      {
+        "name": "Victory In a Blink",
+        "notes": ""
+      },
+      {
+        "name": "To Evernight's Stars",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      },
+      {
+        "name": "Memory's Curtain Never Falls",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "World-Remaking Deliverer",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Bone Collection's Serene Demesne",
+          "notes": ""
+        },
+        {
+          "name": "Arcadia of Woven Dreams",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT DMG",
+        "HP%"
+      ],
+      "feet": [
+        "HP%"
+      ],
+      "sphere": [
+        "HP%",
+        "Quantum DMG"
+      ],
+      "rope": [
+        "HP%"
+      ],
+      "subStats": [
+        "CRIT DMG",
+        "CRIT Rate",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "cerydra": {
+    "characterId": "cerydra",
+    "lightCones": [
+      {
+        "name": "Epoch Etched in Golden Blood",
+        "notes": ""
+      },
+      {
+        "name": "Flowing Nightglow",
+        "notes": ""
+      },
+      {
+        "name": "The Forever Victual",
+        "notes": ""
+      },
+      {
+        "name": "Earthly Escapade",
+        "notes": ""
+      },
+      {
+        "name": "Planetary Rendezvous",
+        "notes": ""
+      },
+      {
+        "name": "Dance! Dance! Dance!",
+        "notes": ""
+      },
+      {
+        "name": "But the Battle Isn't Over",
+        "notes": ""
+      },
+      {
+        "name": "Past Self in Mirror",
+        "notes": ""
+      },
+      {
+        "name": "A Grounded Ascent",
+        "notes": ""
+      },
+      {
+        "name": "Carve the Moon, Weave the Clouds",
+        "notes": ""
+      },
+      {
+        "name": "For Tomorrow's Journey",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "ATK%"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%"
+      ],
+      "rope": [
+        "ATK%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "Speed"
+      ]
+    }
+  },
+  "cipher": {
+    "characterId": "cipher",
+    "lightCones": [
+      {
+        "name": "Lies Dance on the Breeze",
+        "notes": ""
+      },
+      {
+        "name": "Resolution Shines As Pearls of Sweat",
+        "notes": ""
+      },
+      {
+        "name": "Holiday Thermae Escapade",
+        "notes": ""
+      },
+      {
+        "name": "Good Night and Sleep Well",
+        "notes": ""
+      },
+      {
+        "name": "In the Name of the World",
+        "notes": ""
+      },
+      {
+        "name": "Before the Tutorial Mission Starts",
+        "notes": ""
+      },
+      {
+        "name": "Incessant Rain",
+        "notes": ""
+      },
+      {
+        "name": "Along the Passing Shore",
+        "notes": ""
+      },
+      {
+        "name": "Boundless Choreo",
+        "notes": ""
+      },
+      {
+        "name": "Eyes of the Prey",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT DMG",
+        "Effect Hit Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Quantum DMG"
+      ],
+      "rope": [
+        "ATK%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "clara": {
+    "characterId": "clara",
+    "lightCones": [
+      {
+        "name": "Dance at Sunset",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      },
+      {
+        "name": "The Unreachable Side",
+        "notes": ""
+      },
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "A Secret Vow",
+        "notes": ""
+      },
+      {
+        "name": "Ninja Record: Sound Hunt",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Champion of Streetwise Boxing",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%"
+      ],
+      "sphere": [
+        "ATK%",
+        "Physical DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "cyrene": {
+    "characterId": "cyrene",
+    "lightCones": [
+      {
+        "name": "Manual review needed",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Manual review needed",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Manual review needed",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "Elemental DMG",
+        "ATK%"
+      ],
+      "rope": [
+        "ATK%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "CRIT Rate",
+        "CRIT DMG",
+        "ATK%",
+        "Speed"
+      ]
+    }
+  },
+  "dan-heng": {
+    "characterId": "dan-heng",
+    "lightCones": [
+      {
+        "name": "In the Night",
+        "notes": ""
+      },
+      {
+        "name": "Swordplay",
+        "notes": ""
+      },
+      {
+        "name": "Only Silence Remains",
+        "notes": ""
+      },
+      {
+        "name": "Cruising in the Stellar Sea",
+        "notes": ""
+      },
+      {
+        "name": "Sleep Like the Dead",
+        "notes": ""
+      },
+      {
+        "name": "Return to Darkness",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Wind DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "imbibitor-lunae": {
+    "characterId": "imbibitor-lunae",
+    "lightCones": [
+      {
+        "name": "Brighter Than the Sun",
+        "notes": ""
+      },
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Wastelander of Banditry Desert",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Hero of Triumphant Song",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Imaginary DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate"
+      ]
+    }
+  },
+  "dan-heng-permansor-terrae": {
+    "characterId": "dan-heng-permansor-terrae",
+    "lightCones": [
+      {
+        "name": "Though Worlds Apart",
+        "notes": ""
+      },
+      {
+        "name": "Journey, Forever Peaceful",
+        "notes": ""
+      },
+      {
+        "name": "Thus Burns the Dawn",
+        "notes": ""
+      },
+      {
+        "name": "Day One of My New Life",
+        "notes": ""
+      },
+      {
+        "name": "Trend of the Universal Market",
+        "notes": ""
+      },
+      {
+        "name": "Moment of Victory",
+        "notes": ""
+      },
+      {
+        "name": "Along the Passing Shore",
+        "notes": ""
+      },
+      {
+        "name": "Brighter Than the Sun",
+        "notes": ""
+      },
+      {
+        "name": "Sleep Like the Dead",
+        "notes": ""
+      },
+      {
+        "name": "In the Name of the World",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      },
+      {
+        "name": "We Are Wildfire",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Self-Enshrouded Recluse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Prisoner in Deep Confinement",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "ATK%"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "Speed"
+      ]
+    }
+  },
+  "dr-ratio": {
+    "characterId": "dr-ratio",
+    "lightCones": [
+      {
+        "name": "Baptism of Pure Thought",
+        "notes": ""
+      },
+      {
+        "name": "Worrisome, Blissful",
+        "notes": ""
+      },
+      {
+        "name": "Only Silence Remains",
+        "notes": ""
+      },
+      {
+        "name": "Cruising in the Stellar Sea",
+        "notes": ""
+      },
+      {
+        "name": "In the Night",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Wastelander of Banditry Desert",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        },
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Imaginary DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "feixiao": {
+    "characterId": "feixiao",
+    "lightCones": [
+      {
+        "name": "I Venture Forth to Hunt",
+        "notes": ""
+      },
+      {
+        "name": "Baptism of Pure Thought",
+        "notes": ""
+      },
+      {
+        "name": "Worrisome, Blissful",
+        "notes": ""
+      },
+      {
+        "name": "Swordplay",
+        "notes": ""
+      },
+      {
+        "name": "Cruising in the Stellar Sea",
+        "notes": ""
+      },
+      {
+        "name": "In the Night",
+        "notes": ""
+      },
+      {
+        "name": "Only Silence Remains",
+        "notes": ""
+      },
+      {
+        "name": "Subscribe for More!",
+        "notes": ""
+      },
+      {
+        "name": "Sleep Like the Dead",
+        "notes": ""
+      },
+      {
+        "name": "The Hell Where Ideals Burn",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "The Wind-Soaring Valorous",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        },
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Wind DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "firefly": {
+    "characterId": "firefly",
+    "lightCones": [
+      {
+        "name": "Whereabouts Should Dreams Rest",
+        "notes": ""
+      },
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "Indelible Promise",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      },
+      {
+        "name": "Thus Burns the Dawn",
+        "notes": ""
+      },
+      {
+        "name": "Under the Blue Sky",
+        "notes": ""
+      },
+      {
+        "name": "Ninja Record: Sound Hunt",
+        "notes": ""
+      },
+      {
+        "name": "A Secret Vow",
+        "notes": ""
+      },
+      {
+        "name": "Flames Afar",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Iron Cavalry Against the Scourge",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Thief of Shooting Meteor",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Collapsing Sky",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Watchmaker, Master of Dream Machinations",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Forge of the Kalpagni Lantern",
+          "notes": ""
+        },
+        {
+          "name": "Talia: Kingdom of Banditry",
+          "notes": ""
+        },
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        },
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "ATK%"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%"
+      ],
+      "rope": [],
+      "subStats": [
+        "ATK%",
+        "Break Effect",
+        "Speed"
+      ]
+    }
+  },
+  "fu-xuan": {
+    "characterId": "fu-xuan",
+    "lightCones": [
+      {
+        "name": "She Already Shut Her Eyes",
+        "notes": ""
+      },
+      {
+        "name": "Moment of Victory",
+        "notes": ""
+      },
+      {
+        "name": "Texture of Memories",
+        "notes": ""
+      },
+      {
+        "name": "Day One of My New Life",
+        "notes": ""
+      },
+      {
+        "name": "Landau's Choice",
+        "notes": ""
+      },
+      {
+        "name": "Trend of the Universal Market",
+        "notes": ""
+      },
+      {
+        "name": "Along the Passing Shore",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Greetings",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Guard of Wuthering Snow",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Bone Collection's Serene Demesne",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "HP%",
+        "DEF%"
+      ],
+      "feet": [
+        "HP%",
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "gallagher": {
+    "characterId": "gallagher",
+    "lightCones": [
+      {
+        "name": "Scent Alone Stays True",
+        "notes": ""
+      },
+      {
+        "name": "Quid Pro Quo",
+        "notes": ""
+      },
+      {
+        "name": "Post-Op Conversation",
+        "notes": ""
+      },
+      {
+        "name": "What Is Real?",
+        "notes": ""
+      },
+      {
+        "name": "Unto Tomorrow's Morrow",
+        "notes": ""
+      },
+      {
+        "name": "Shared Feeling",
+        "notes": ""
+      },
+      {
+        "name": "Warmth Shortens Cold Nights",
+        "notes": ""
+      },
+      {
+        "name": "Dream's Montage",
+        "notes": ""
+      },
+      {
+        "name": "Perfect Timing",
+        "notes": ""
+      },
+      {
+        "name": "Time Waits for No One",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Multiplication",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Iron Cavalry Against the Scourge",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Thief of Shooting Meteor",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Watchmaker, Master of Dream Machinations",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Passerby of Wandering Cloud",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Forge of the Kalpagni Lantern",
+          "notes": ""
+        },
+        {
+          "name": "Talia: Kingdom of Banditry",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Giant Tree of Rapt Brooding",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "Outgoing Healing"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "Break Effect",
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "gepard": {
+    "characterId": "gepard",
+    "lightCones": [
+      {
+        "name": "Journey, Forever Peaceful",
+        "notes": ""
+      },
+      {
+        "name": "Moment of Victory",
+        "notes": ""
+      },
+      {
+        "name": "Day One of My New Life",
+        "notes": ""
+      },
+      {
+        "name": "Landau's Choice",
+        "notes": ""
+      },
+      {
+        "name": "Texture of Memories",
+        "notes": ""
+      },
+      {
+        "name": "Trend of the Universal Market",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Self-Enshrouded Recluse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Knight of Purity Palace",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Belobog of the Architects",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "DEF%"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "DEF%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "guinaifen": {
+    "characterId": "guinaifen",
+    "lightCones": [
+      {
+        "name": "Lies Dance on the Breeze",
+        "notes": ""
+      },
+      {
+        "name": "Those Many Springs",
+        "notes": ""
+      },
+      {
+        "name": "Resolution Shines As Pearls of Sweat",
+        "notes": ""
+      },
+      {
+        "name": "Eyes of the Prey",
+        "notes": ""
+      },
+      {
+        "name": "Solitary Healing",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Prisoner in Deep Confinement",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Iron Cavalry Against the Scourge",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Forge of the Kalpagni Lantern",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "ATK%",
+        "Effect Hit Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Fire DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "Break Effect",
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "hanya": {
+    "characterId": "hanya",
+    "lightCones": [
+      {
+        "name": "Dance! Dance! Dance!",
+        "notes": ""
+      },
+      {
+        "name": "But the Battle Isn't Over",
+        "notes": ""
+      },
+      {
+        "name": "Planetary Rendezvous",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Meshing Cogs",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "HP%",
+        "DEF%"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "Break Effect",
+        "Speed"
+      ]
+    }
+  },
+  "herta": {
+    "characterId": "herta",
+    "lightCones": [
+      {
+        "name": "Before Dawn",
+        "notes": ""
+      },
+      {
+        "name": "Night on the Milky Way",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Repose",
+        "notes": ""
+      },
+      {
+        "name": "Eternal Calculus",
+        "notes": ""
+      },
+      {
+        "name": "Today Is Another Peaceful Day",
+        "notes": ""
+      },
+      {
+        "name": "The Seriousness of Breakfast",
+        "notes": ""
+      },
+      {
+        "name": "The Birth of the Self",
+        "notes": ""
+      },
+      {
+        "name": "Yet Hope Is Priceless",
+        "notes": ""
+      },
+      {
+        "name": "The Day The Cosmos Fell",
+        "notes": ""
+      },
+      {
+        "name": "A Dream Scented in Wheat",
+        "notes": ""
+      },
+      {
+        "name": "Into the Unreachable Veil",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Hunter of Glacial Forest",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Sigonia, the Unclaimed Desolation",
+          "notes": ""
+        },
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Ice DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "himeko": {
+    "characterId": "himeko",
+    "lightCones": [
+      {
+        "name": "Before Dawn",
+        "notes": ""
+      },
+      {
+        "name": "Night on the Milky Way",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Repose",
+        "notes": ""
+      },
+      {
+        "name": "Eternal Calculus",
+        "notes": ""
+      },
+      {
+        "name": "Today Is Another Peaceful Day",
+        "notes": ""
+      },
+      {
+        "name": "The Day The Cosmos Fell",
+        "notes": ""
+      },
+      {
+        "name": "The Seriousness of Breakfast",
+        "notes": ""
+      },
+      {
+        "name": "After the Charmony Fall",
+        "notes": ""
+      },
+      {
+        "name": "Yet Hope Is Priceless",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Firesmith of Lava-Forging",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Wind-Soaring Valorous",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Thief of Shooting Meteor",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Sigonia, the Unclaimed Desolation",
+          "notes": ""
+        },
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Forge of the Kalpagni Lantern",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%"
+      ],
+      "sphere": [
+        "ATK%",
+        "Fire DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "hook": {
+    "characterId": "hook",
+    "lightCones": [
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "Woof! Walk Time!",
+        "notes": ""
+      },
+      {
+        "name": "A Secret Vow",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Firesmith of Lava-Forging",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Fire DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "huohuo": {
+    "characterId": "huohuo",
+    "lightCones": [
+      {
+        "name": "Night of Fright",
+        "notes": ""
+      },
+      {
+        "name": "Post-Op Conversation",
+        "notes": ""
+      },
+      {
+        "name": "Shared Feeling",
+        "notes": ""
+      },
+      {
+        "name": "Unto Tomorrow's Morrow",
+        "notes": ""
+      },
+      {
+        "name": "Quid Pro Quo",
+        "notes": ""
+      },
+      {
+        "name": "Time Waits for No One",
+        "notes": ""
+      },
+      {
+        "name": "Hey, Over Here",
+        "notes": ""
+      },
+      {
+        "name": "Perfect Timing",
+        "notes": ""
+      },
+      {
+        "name": "Warmth Shortens Cold Nights",
+        "notes": ""
+      },
+      {
+        "name": "Dream's Montage",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Multiplication",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Passerby of Wandering Cloud",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Giant Tree of Rapt Brooding",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "HP%",
+        "Outgoing Healing"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "hyacine": {
+    "characterId": "hyacine",
+    "lightCones": [
+      {
+        "name": "Long May Rainbows Adorn the Sky",
+        "notes": ""
+      },
+      {
+        "name": "Memory's Curtain Never Falls",
+        "notes": ""
+      },
+      {
+        "name": "The Story's Next Page",
+        "notes": ""
+      },
+      {
+        "name": "Victory In a Blink",
+        "notes": ""
+      },
+      {
+        "name": "Time Woven Into Gold",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Greetings",
+        "notes": ""
+      },
+      {
+        "name": "To Evernight's Stars",
+        "notes": ""
+      },
+      {
+        "name": "Time Waits for No One",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Shadowburn",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Reminiscence",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Giant Tree of Rapt Brooding",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Bone Collection's Serene Demesne",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "HP%",
+        "Outgoing Healing"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "CRIT DMG",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "hysilens": {
+    "characterId": "hysilens",
+    "lightCones": [
+      {
+        "name": "Why Does the Ocean Sing",
+        "notes": ""
+      },
+      {
+        "name": "Reforged Remembrance",
+        "notes": ""
+      },
+      {
+        "name": "Those Many Springs",
+        "notes": ""
+      },
+      {
+        "name": "Patience Is All You Need",
+        "notes": ""
+      },
+      {
+        "name": "Eyes of the Prey",
+        "notes": ""
+      },
+      {
+        "name": "Good Night and Sleep Well",
+        "notes": ""
+      },
+      {
+        "name": "It's Showtime",
+        "notes": ""
+      },
+      {
+        "name": "Before the Tutorial Mission Starts",
+        "notes": ""
+      },
+      {
+        "name": "Solitary Healing",
+        "notes": ""
+      },
+      {
+        "name": "In the Name of the World",
+        "notes": ""
+      },
+      {
+        "name": "Resolution Shines As Pearls of Sweat",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Prisoner in Deep Confinement",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Champion of Streetwise Boxing",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Revelry by the Sea",
+          "notes": ""
+        },
+        {
+          "name": "Pan-Cosmic Commercial Enterprise",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "ATK%",
+        "Effect Hit Rate"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Physical DMG"
+      ],
+      "rope": [
+        "ATK%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "Effect Hit Rate",
+        "Speed"
+      ]
+    }
+  },
+  "jade": {
+    "characterId": "jade",
+    "lightCones": [
+      {
+        "name": "Yet Hope Is Priceless",
+        "notes": ""
+      },
+      {
+        "name": "Before Dawn",
+        "notes": ""
+      },
+      {
+        "name": "Today Is Another Peaceful Day",
+        "notes": ""
+      },
+      {
+        "name": "Night on the Milky Way",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Repose",
+        "notes": ""
+      },
+      {
+        "name": "Eternal Calculus",
+        "notes": ""
+      },
+      {
+        "name": "The Seriousness of Breakfast",
+        "notes": ""
+      },
+      {
+        "name": "The Birth of the Self",
+        "notes": ""
+      },
+      {
+        "name": "A Dream Scented in Wheat",
+        "notes": ""
+      },
+      {
+        "name": "Into the Unreachable Veil",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Wind-Soaring Valorous",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
+          "name": "Sigonia, the Unclaimed Desolation",
+          "notes": ""
+        },
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%"
+      ],
+      "sphere": [
+        "Quantum DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "jiaoqiu": {
+    "characterId": "jiaoqiu",
+    "lightCones": [
+      {
+        "name": "Those Many Springs",
+        "notes": ""
+      },
+      {
+        "name": "Lies Dance on the Breeze",
+        "notes": ""
+      },
+      {
+        "name": "Eyes of the Prey",
+        "notes": ""
+      },
+      {
+        "name": "Resolution Shines As Pearls of Sweat",
+        "notes": ""
+      },
+      {
+        "name": "Before the Tutorial Mission Starts",
+        "notes": ""
+      },
+      {
+        "name": "Solitary Healing",
+        "notes": ""
+      },
+      {
+        "name": "Incessant Rain",
+        "notes": ""
+      },
+      {
+        "name": "Patience Is All You Need",
+        "notes": ""
+      },
+      {
+        "name": "Reforged Remembrance",
+        "notes": ""
+      },
+      {
+        "name": "Holiday Thermae Escapade",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Prisoner in Deep Confinement",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Pan-Cosmic Commercial Enterprise",
+          "notes": ""
+        },
+        {
+          "name": "Revelry by the Sea",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "Effect Hit Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "Fire DMG"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "Speed"
+      ]
+    }
+  },
+  "jing-yuan": {
+    "characterId": "jing-yuan",
+    "lightCones": [
+      {
+        "name": "Before Dawn",
+        "notes": ""
+      },
+      {
+        "name": "A Dream Scented in Wheat",
+        "notes": ""
+      },
+      {
+        "name": "Today Is Another Peaceful Day",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Repose",
+        "notes": ""
+      },
+      {
+        "name": "The Seriousness of Breakfast",
+        "notes": ""
+      },
+      {
+        "name": "Night on the Milky Way",
+        "notes": ""
+      },
+      {
+        "name": "Eternal Calculus",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Band of Sizzling Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Wavestrider Captain",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Lightning DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "jingliu": {
+    "characterId": "jingliu",
+    "lightCones": [
+      {
+        "name": "Flame of Blood, Blaze My Path",
+        "notes": ""
+      },
+      {
+        "name": "I Shall Be My Own Sword",
+        "notes": ""
+      },
+      {
+        "name": "A Trail of Bygone Blood",
+        "notes": ""
+      },
+      {
+        "name": "A Secret Vow",
+        "notes": ""
+      },
+      {
+        "name": "Ninja Record: Sound Hunt",
+        "notes": ""
+      },
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      },
+      {
+        "name": "The Unreachable Side",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Hunter of Glacial Forest",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Bone Collection's Serene Demesne",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT DMG",
+        "HP%"
+      ],
+      "feet": [
+        "HP%",
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "Ice DMG"
+      ],
+      "rope": [
+        "HP%"
+      ],
+      "subStats": [
+        "CRIT DMG",
+        "CRIT Rate",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "kafka": {
+    "characterId": "kafka",
+    "lightCones": [
+      {
+        "name": "Before the Tutorial Mission Starts",
+        "notes": ""
+      },
+      {
+        "name": "Patience Is All You Need",
+        "notes": ""
+      },
+      {
+        "name": "Lies Dance on the Breeze",
+        "notes": ""
+      },
+      {
+        "name": "Those Many Springs",
+        "notes": ""
+      },
+      {
+        "name": "Resolution Shines As Pearls of Sweat",
+        "notes": ""
+      },
+      {
+        "name": "Good Night and Sleep Well",
+        "notes": ""
+      },
+      {
+        "name": "Eyes of the Prey",
+        "notes": ""
+      },
+      {
+        "name": "Solitary Healing",
+        "notes": ""
+      },
+      {
+        "name": "In the Name of the World",
+        "notes": ""
+      },
+      {
+        "name": "Fermata",
+        "notes": ""
+      },
+      {
+        "name": "Why Does the Ocean Sing",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Prisoner in Deep Confinement",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Band of Sizzling Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Revelry by the Sea",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Pan-Cosmic Commercial Enterprise",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "ATK%",
+        "Effect Hit Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Lightning DMG"
+      ],
+      "rope": [
+        "ATK%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "Effect Hit Rate",
+        "Speed"
+      ]
+    }
+  },
+  "luka": {
+    "characterId": "luka",
+    "lightCones": [
+      {
+        "name": "Good Night and Sleep Well",
+        "notes": ""
+      },
+      {
+        "name": "Patience Is All You Need",
+        "notes": ""
+      },
+      {
+        "name": "Eyes of the Prey",
+        "notes": ""
+      },
+      {
+        "name": "Incessant Rain",
+        "notes": ""
+      },
+      {
+        "name": "In the Name of the World",
+        "notes": ""
+      },
+      {
+        "name": "Fermata",
+        "notes": ""
+      },
+      {
+        "name": "Resolution Shines As Pearls of Sweat",
+        "notes": ""
+      },
+      {
+        "name": "Solitary Healing",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Prisoner in Deep Confinement",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Thief of Shooting Meteor",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Champion of Streetwise Boxing",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Iron Cavalry Against the Scourge",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Revelry by the Sea",
+          "notes": ""
+        },
+        {
+          "name": "Talia: Kingdom of Banditry",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Pan-Cosmic Commercial Enterprise",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "ATK%",
+        "Effect Hit Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Physical DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "Break Effect",
+        "Speed"
+      ]
+    }
+  },
+  "luocha": {
+    "characterId": "luocha",
+    "lightCones": [
+      {
+        "name": "Echoes of the Coffin",
+        "notes": ""
+      },
+      {
+        "name": "Perfect Timing",
+        "notes": ""
+      },
+      {
+        "name": "Quid Pro Quo",
+        "notes": ""
+      },
+      {
+        "name": "Unto Tomorrow's Morrow",
+        "notes": ""
+      },
+      {
+        "name": "Shared Feeling",
+        "notes": ""
+      },
+      {
+        "name": "Time Waits for No One",
+        "notes": ""
+      },
+      {
+        "name": "Post-Op Conversation",
+        "notes": ""
+      },
+      {
+        "name": "Night of Fright",
+        "notes": ""
+      },
+      {
+        "name": "Dream's Montage",
+        "notes": ""
+      },
+      {
+        "name": "Hey, Over Here",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Multiplication",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Passerby of Wandering Cloud",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Giant Tree of Rapt Brooding",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "Outgoing Healing"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "lynx": {
+    "characterId": "lynx",
+    "lightCones": [
+      {
+        "name": "Night of Fright",
+        "notes": ""
+      },
+      {
+        "name": "Time Waits for No One",
+        "notes": ""
+      },
+      {
+        "name": "Post-Op Conversation",
+        "notes": ""
+      },
+      {
+        "name": "Perfect Timing",
+        "notes": ""
+      },
+      {
+        "name": "Quid Pro Quo",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Multiplication",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Passerby of Wandering Cloud",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Hero of Triumphant Song",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Giant Tree of Rapt Brooding",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "HP%",
+        "Outgoing Healing"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "march-7th": {
+    "characterId": "march-7th",
+    "lightCones": [
+      {
+        "name": "Inherently Unjust Destiny",
+        "notes": ""
+      },
+      {
+        "name": "Journey, Forever Peaceful",
+        "notes": ""
+      },
+      {
+        "name": "Day One of My New Life",
+        "notes": ""
+      },
+      {
+        "name": "Texture of Memories",
+        "notes": ""
+      },
+      {
+        "name": "Moment of Victory",
+        "notes": ""
+      },
+      {
+        "name": "Landau's Choice",
+        "notes": ""
+      },
+      {
+        "name": "Trend of the Universal Market",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Self-Enshrouded Recluse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Knight of Purity Palace",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Belobog of the Architects",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "DEF%",
+        "Effect Hit Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "DEF%"
+      ],
+      "rope": [
+        "DEF%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "DEF%",
+        "Effect Hit Rate",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "march-7th-evernight": {
+    "characterId": "march-7th-evernight",
+    "lightCones": [
+      {
+        "name": "To Evernight's Stars",
+        "notes": ""
+      },
+      {
+        "name": "Make Farewells More Beautiful",
+        "notes": ""
+      },
+      {
+        "name": "Sweat Now, Cry Less",
+        "notes": ""
+      },
+      {
+        "name": "The Flower Remembers",
+        "notes": ""
+      },
+      {
+        "name": "The Story's Next Page",
+        "notes": ""
+      },
+      {
+        "name": "Time Waits for No One",
+        "notes": ""
+      },
+      {
+        "name": "Memory's Curtain Never Falls",
+        "notes": ""
+      },
+      {
+        "name": "Victory In a Blink",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Greetings",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "World-Remaking Deliverer",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Bone Collection's Serene Demesne",
+          "notes": ""
+        },
+        {
+          "name": "Arcadia of Woven Dreams",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Giant Tree of Rapt Brooding",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT DMG"
+      ],
+      "feet": [
+        "HP%",
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "Ice DMG"
+      ],
+      "rope": [
+        "HP%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "CRIT DMG",
+        "CRIT Rate",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "march-7th-swordmaster": {
+    "characterId": "march-7th-swordmaster",
+    "lightCones": [
+      {
+        "name": "In the Night",
+        "notes": ""
+      },
+      {
+        "name": "Swordplay",
+        "notes": ""
+      },
+      {
+        "name": "Worrisome, Blissful",
+        "notes": ""
+      },
+      {
+        "name": "Cruising in the Stellar Sea",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Wastelander of Banditry Desert",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Hero of Triumphant Song",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Wind-Soaring Valorous",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Imaginary DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "misha": {
+    "characterId": "misha",
+    "lightCones": [
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "Indelible Promise",
+        "notes": ""
+      },
+      {
+        "name": "A Secret Vow",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Hunter of Glacial Forest",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Ice DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "moze": {
+    "characterId": "moze",
+    "lightCones": [
+      {
+        "name": "Worrisome, Blissful",
+        "notes": ""
+      },
+      {
+        "name": "Baptism of Pure Thought",
+        "notes": ""
+      },
+      {
+        "name": "Swordplay",
+        "notes": ""
+      },
+      {
+        "name": "Cruising in the Stellar Sea",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        },
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%"
+      ],
+      "sphere": [
+        "Lightning DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "mydei": {
+    "characterId": "mydei",
+    "lightCones": [
+      {
+        "name": "Flame of Blood, Blaze My Path",
+        "notes": ""
+      },
+      {
+        "name": "The Unreachable Side",
+        "notes": ""
+      },
+      {
+        "name": "A Secret Vow",
+        "notes": ""
+      },
+      {
+        "name": "Ninja Record: Sound Hunt",
+        "notes": ""
+      },
+      {
+        "name": "Flames Afar",
+        "notes": ""
+      },
+      {
+        "name": "I Shall Be My Own Sword",
+        "notes": ""
+      },
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "The Story's Next Page",
+        "notes": ""
+      },
+      {
+        "name": "Brighter Than the Sun",
+        "notes": ""
+      },
+      {
+        "name": "A Trail of Bygone Blood",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Bone Collection's Serene Demesne",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        },
+        {
+          "name": "Giant Tree of Rapt Brooding",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT DMG",
+        "HP%"
+      ],
+      "feet": [
+        "HP%",
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "Imaginary DMG"
+      ],
+      "rope": [
+        "HP%"
+      ],
+      "subStats": [
+        "CRIT DMG",
+        "CRIT Rate",
+        "HP%"
+      ]
+    }
+  },
+  "natasha": {
+    "characterId": "natasha",
+    "lightCones": [
+      {
+        "name": "Night of Fright",
+        "notes": ""
+      },
+      {
+        "name": "Time Waits for No One",
+        "notes": ""
+      },
+      {
+        "name": "Post-Op Conversation",
+        "notes": ""
+      },
+      {
+        "name": "Perfect Timing",
+        "notes": ""
+      },
+      {
+        "name": "Quid Pro Quo",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Multiplication",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Passerby of Wandering Cloud",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Giant Tree of Rapt Brooding",
+          "notes": ""
+        },
+        {
+          "name": "Forge of the Kalpagni Lantern",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "HP%",
+        "Outgoing Healing"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "pela": {
+    "characterId": "pela",
+    "lightCones": [
+      {
+        "name": "Lies Dance on the Breeze",
+        "notes": ""
+      },
+      {
+        "name": "Resolution Shines As Pearls of Sweat",
+        "notes": ""
+      },
+      {
+        "name": "Before the Tutorial Mission Starts",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "HP%",
+        "Effect Hit Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "Effect Hit Rate",
+        "Speed"
+      ]
+    }
+  },
+  "phainon": {
+    "characterId": "phainon",
+    "lightCones": [
+      {
+        "name": "Thus Burns the Dawn",
+        "notes": ""
+      },
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      },
+      {
+        "name": "A Trail of Bygone Blood",
+        "notes": ""
+      },
+      {
+        "name": "Brighter Than the Sun",
+        "notes": ""
+      },
+      {
+        "name": "Under the Blue Sky",
+        "notes": ""
+      },
+      {
+        "name": "I Shall Be My Own Sword",
+        "notes": ""
+      },
+      {
+        "name": "A Thankless Coronation",
+        "notes": ""
+      },
+      {
+        "name": "The Unreachable Side",
+        "notes": ""
+      },
+      {
+        "name": "Dance at Sunset",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Wavestrider Captain",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Champion of Streetwise Boxing",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Arcadia of Woven Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Bone Collection's Serene Demesne",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Physical DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "qingque": {
+    "characterId": "qingque",
+    "lightCones": [
+      {
+        "name": "Yet Hope Is Priceless",
+        "notes": ""
+      },
+      {
+        "name": "Night on the Milky Way",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Repose",
+        "notes": ""
+      },
+      {
+        "name": "Eternal Calculus",
+        "notes": ""
+      },
+      {
+        "name": "Before Dawn",
+        "notes": ""
+      },
+      {
+        "name": "Today Is Another Peaceful Day",
+        "notes": ""
+      },
+      {
+        "name": "The Seriousness of Breakfast",
+        "notes": ""
+      },
+      {
+        "name": "Into the Unreachable Veil",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "Quantum DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "rappa": {
+    "characterId": "rappa",
+    "lightCones": [
+      {
+        "name": "Ninjutsu Inscription: Dazzling Evilbreaker",
+        "notes": ""
+      },
+      {
+        "name": "After the Charmony Fall",
+        "notes": ""
+      },
+      {
+        "name": "Eternal Calculus",
+        "notes": ""
+      },
+      {
+        "name": "Make the World Clamor",
+        "notes": ""
+      },
+      {
+        "name": "Life Should Be Cast to Flames",
+        "notes": ""
+      },
+      {
+        "name": "Sleep Like the Dead",
+        "notes": ""
+      },
+      {
+        "name": "Night on the Milky Way",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Iron Cavalry Against the Scourge",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Thief of Shooting Meteor",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Watchmaker, Master of Dream Machinations",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Hunter of Glacial Forest",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Talia: Kingdom of Banditry",
+          "notes": ""
+        },
+        {
+          "name": "Forge of the Kalpagni Lantern",
+          "notes": ""
+        },
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "ATK%"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "Break Effect",
+        "Speed"
+      ]
+    }
+  },
+  "robin": {
+    "characterId": "robin",
+    "lightCones": [
+      {
+        "name": "Flowing Nightglow",
+        "notes": ""
+      },
+      {
+        "name": "But the Battle Isn't Over",
+        "notes": ""
+      },
+      {
+        "name": "For Tomorrow's Journey",
+        "notes": ""
+      },
+      {
+        "name": "Poised to Bloom",
+        "notes": ""
+      },
+      {
+        "name": "The Forever Victual",
+        "notes": ""
+      },
+      {
+        "name": "Past Self in Mirror",
+        "notes": ""
+      },
+      {
+        "name": "Carve the Moon, Weave the Clouds",
+        "notes": ""
+      },
+      {
+        "name": "Planetary Rendezvous",
+        "notes": ""
+      },
+      {
+        "name": "Dance! Dance! Dance!",
+        "notes": ""
+      },
+      {
+        "name": "Past and Future",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Meshing Cogs",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Prisoner in Deep Confinement",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Hero of Triumphant Song",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "ATK%"
+      ],
+      "feet": [
+        "ATK%"
+      ],
+      "sphere": [
+        "ATK%",
+        "Physical DMG"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "ruan-mei": {
+    "characterId": "ruan-mei",
+    "lightCones": [
+      {
+        "name": "Past Self in Mirror",
+        "notes": ""
+      },
+      {
+        "name": "In Pursuit of the Wind",
+        "notes": ""
+      },
+      {
+        "name": "Memories of the Past",
+        "notes": ""
+      },
+      {
+        "name": "Dance! Dance! Dance!",
+        "notes": ""
+      },
+      {
+        "name": "But the Battle Isn't Over",
+        "notes": ""
+      },
+      {
+        "name": "Carve the Moon, Weave the Clouds",
+        "notes": ""
+      },
+      {
+        "name": "Planetary Rendezvous",
+        "notes": ""
+      },
+      {
+        "name": "The Forever Victual",
+        "notes": ""
+      },
+      {
+        "name": "Past and Future",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Meshing Cogs",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Watchmaker, Master of Dream Machinations",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Thief of Shooting Meteor",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Talia: Kingdom of Banditry",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "HP%",
+        "DEF%"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "Break Effect",
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "saber": {
+    "characterId": "saber",
+    "lightCones": [
+      {
+        "name": "A Thankless Coronation",
+        "notes": ""
+      },
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "A Trail of Bygone Blood",
+        "notes": ""
+      },
+      {
+        "name": "A Secret Vow",
+        "notes": ""
+      },
+      {
+        "name": "Brighter Than the Sun",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      },
+      {
+        "name": "I Shall Be My Own Sword",
+        "notes": ""
+      },
+      {
+        "name": "Indelible Promise",
+        "notes": ""
+      },
+      {
+        "name": "Moment of Victory",
+        "notes": ""
+      },
+      {
+        "name": "Thus Burns the Dawn",
+        "notes": ""
+      },
+      {
+        "name": "Under the Blue Sky",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Wavestrider Captain",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Wind DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "sampo": {
+    "characterId": "sampo",
+    "lightCones": [
+      {
+        "name": "Good Night and Sleep Well",
+        "notes": ""
+      },
+      {
+        "name": "Eyes of the Prey",
+        "notes": ""
+      },
+      {
+        "name": "It's Showtime",
+        "notes": ""
+      },
+      {
+        "name": "Fermata",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Prisoner in Deep Confinement",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Revelry by the Sea",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Pan-Cosmic Commercial Enterprise",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "ATK%",
+        "Effect Hit Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Wind DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "Break Effect",
+        "Speed"
+      ]
+    }
+  },
+  "seele": {
+    "characterId": "seele",
+    "lightCones": [
+      {
+        "name": "In the Night",
+        "notes": ""
+      },
+      {
+        "name": "Swordplay",
+        "notes": ""
+      },
+      {
+        "name": "Only Silence Remains",
+        "notes": ""
+      },
+      {
+        "name": "Cruising in the Stellar Sea",
+        "notes": ""
+      },
+      {
+        "name": "The Hell Where Ideals Burn",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%"
+      ],
+      "sphere": [
+        "ATK%",
+        "Quantum DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate"
+      ]
+    }
+  },
+  "serval": {
+    "characterId": "serval",
+    "lightCones": [
+      {
+        "name": "Night on the Milky Way",
+        "notes": ""
+      },
+      {
+        "name": "Eternal Calculus",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Repose",
+        "notes": ""
+      },
+      {
+        "name": "Before Dawn",
+        "notes": ""
+      },
+      {
+        "name": "Today Is Another Peaceful Day",
+        "notes": ""
+      },
+      {
+        "name": "The Seriousness of Breakfast",
+        "notes": ""
+      },
+      {
+        "name": "Into the Unreachable Veil",
+        "notes": ""
+      },
+      {
+        "name": "Make the World Clamor",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Passkey",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Band of Sizzling Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Lightning DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "silver-wolf": {
+    "characterId": "silver-wolf",
+    "lightCones": [
+      {
+        "name": "Lies Dance on the Breeze",
+        "notes": ""
+      },
+      {
+        "name": "Resolution Shines As Pearls of Sweat",
+        "notes": ""
+      },
+      {
+        "name": "Holiday Thermae Escapade",
+        "notes": ""
+      },
+      {
+        "name": "Incessant Rain",
+        "notes": ""
+      },
+      {
+        "name": "Before the Tutorial Mission Starts",
+        "notes": ""
+      },
+      {
+        "name": "Along the Passing Shore",
+        "notes": ""
+      },
+      {
+        "name": "Good Night and Sleep Well",
+        "notes": ""
+      },
+      {
+        "name": "Boundless Choreo",
+        "notes": ""
+      },
+      {
+        "name": "Solitary Healing",
+        "notes": ""
+      },
+      {
+        "name": "Patience Is All You Need",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Pan-Cosmic Commercial Enterprise",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "Effect Hit Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Quantum DMG"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "Effect Hit Rate",
+        "Speed"
+      ]
+    }
+  },
+  "sparkle": {
+    "characterId": "sparkle",
+    "lightCones": [
+      {
+        "name": "A Grounded Ascent",
+        "notes": ""
+      },
+      {
+        "name": "Earthly Escapade",
+        "notes": ""
+      },
+      {
+        "name": "Dance! Dance! Dance!",
+        "notes": ""
+      },
+      {
+        "name": "But the Battle Isn't Over",
+        "notes": ""
+      },
+      {
+        "name": "Past and Future",
+        "notes": ""
+      },
+      {
+        "name": "Planetary Rendezvous",
+        "notes": ""
+      },
+      {
+        "name": "Carve the Moon, Weave the Clouds",
+        "notes": ""
+      },
+      {
+        "name": "Memories of the Past",
+        "notes": ""
+      },
+      {
+        "name": "Past Self in Mirror",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Meshing Cogs",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Forge of the Kalpagni Lantern",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT DMG"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "CRIT DMG",
+        "Speed"
+      ]
+    }
+  },
+  "sunday": {
+    "characterId": "sunday",
+    "lightCones": [
+      {
+        "name": "A Grounded Ascent",
+        "notes": ""
+      },
+      {
+        "name": "But the Battle Isn't Over",
+        "notes": ""
+      },
+      {
+        "name": "Past and Future",
+        "notes": ""
+      },
+      {
+        "name": "Dance! Dance! Dance!",
+        "notes": ""
+      },
+      {
+        "name": "Earthly Escapade",
+        "notes": ""
+      },
+      {
+        "name": "Carve the Moon, Weave the Clouds",
+        "notes": ""
+      },
+      {
+        "name": "Dreamville Adventure",
+        "notes": ""
+      },
+      {
+        "name": "Poised to Bloom",
+        "notes": ""
+      },
+      {
+        "name": "Planetary Rendezvous",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Meshing Cogs",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Giant Tree of Rapt Brooding",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT DMG"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "CRIT DMG",
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "sushang": {
+    "characterId": "sushang",
+    "lightCones": [
+      {
+        "name": "Sailing Towards A Second Life",
+        "notes": ""
+      },
+      {
+        "name": "Swordplay",
+        "notes": ""
+      },
+      {
+        "name": "Cruising in the Stellar Sea",
+        "notes": ""
+      },
+      {
+        "name": "Only Silence Remains",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Champion of Streetwise Boxing",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Thief of Shooting Meteor",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Talia: Kingdom of Banditry",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Physical DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "Break Effect",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "the-dahlia": {
+    "characterId": "the-dahlia",
+    "lightCones": [
+      {
+        "name": "Manual review needed",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Manual review needed",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Manual review needed",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "Elemental DMG",
+        "ATK%"
+      ],
+      "rope": [
+        "ATK%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "CRIT Rate",
+        "CRIT DMG",
+        "ATK%",
+        "Speed"
+      ]
+    }
+  },
+  "the-herta": {
+    "characterId": "the-herta",
+    "lightCones": [
+      {
+        "name": "Into the Unreachable Veil",
+        "notes": ""
+      },
+      {
+        "name": "Today Is Another Peaceful Day",
+        "notes": ""
+      },
+      {
+        "name": "Night on the Milky Way",
+        "notes": ""
+      },
+      {
+        "name": "Before Dawn",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Repose",
+        "notes": ""
+      },
+      {
+        "name": "Eternal Calculus",
+        "notes": ""
+      },
+      {
+        "name": "The Seriousness of Breakfast",
+        "notes": ""
+      },
+      {
+        "name": "The Great Cosmic Enterprise",
+        "notes": ""
+      },
+      {
+        "name": "An Instant Before A Gaze",
+        "notes": ""
+      },
+      {
+        "name": "The Day The Cosmos Fell",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Hunter of Glacial Forest",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Sigonia, the Unclaimed Desolation",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Ice DMG"
+      ],
+      "rope": [
+        "ATK%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "tingyun": {
+    "characterId": "tingyun",
+    "lightCones": [
+      {
+        "name": "A Grounded Ascent",
+        "notes": ""
+      },
+      {
+        "name": "Dance! Dance! Dance!",
+        "notes": ""
+      },
+      {
+        "name": "But the Battle Isn't Over",
+        "notes": ""
+      },
+      {
+        "name": "Planetary Rendezvous",
+        "notes": ""
+      },
+      {
+        "name": "Carve the Moon, Weave the Clouds",
+        "notes": ""
+      },
+      {
+        "name": "Earthly Escapade",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Meshing Cogs",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Forge of the Kalpagni Lantern",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "ATK%",
+        "HP%"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "HP%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "Speed"
+      ]
+    }
+  },
+  "tingyun-fugue": {
+    "characterId": "tingyun-fugue",
+    "lightCones": [
+      {
+        "name": "Long Road Leads Home",
+        "notes": ""
+      },
+      {
+        "name": "Lies Dance on the Breeze",
+        "notes": ""
+      },
+      {
+        "name": "Resolution Shines As Pearls of Sweat",
+        "notes": ""
+      },
+      {
+        "name": "Solitary Healing",
+        "notes": ""
+      },
+      {
+        "name": "Before the Tutorial Mission Starts",
+        "notes": ""
+      },
+      {
+        "name": "Holiday Thermae Escapade",
+        "notes": ""
+      },
+      {
+        "name": "Fermata",
+        "notes": ""
+      },
+      {
+        "name": "Eyes of the Prey",
+        "notes": ""
+      },
+      {
+        "name": "Boundless Choreo",
+        "notes": ""
+      },
+      {
+        "name": "Incessant Rain",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Iron Cavalry Against the Scourge",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Thief of Shooting Meteor",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Watchmaker, Master of Dream Machinations",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Forge of the Kalpagni Lantern",
+          "notes": ""
+        },
+        {
+          "name": "Talia: Kingdom of Banditry",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "Effect Hit Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "Break Effect",
+        "DEF%",
+        "Effect Hit Rate",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "topaz": {
+    "characterId": "topaz",
+    "lightCones": [
+      {
+        "name": "Worrisome, Blissful",
+        "notes": ""
+      },
+      {
+        "name": "Swordplay",
+        "notes": ""
+      },
+      {
+        "name": "Cruising in the Stellar Sea",
+        "notes": ""
+      },
+      {
+        "name": "Only Silence Remains",
+        "notes": ""
+      },
+      {
+        "name": "Final Victor",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Musketeer of Wild Wheat",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Firesmith of Lava-Forging",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Fire DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "trailblazer-destruction": {
+    "characterId": "trailblazer-destruction",
+    "lightCones": [
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "A Secret Vow",
+        "notes": ""
+      },
+      {
+        "name": "Indelible Promise",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Champion of Streetwise Boxing",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Physical DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "Break Effect",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "trailblazer-harmony": {
+    "characterId": "trailblazer-harmony",
+    "lightCones": [
+      {
+        "name": "Past Self in Mirror",
+        "notes": ""
+      },
+      {
+        "name": "Dance! Dance! Dance!",
+        "notes": ""
+      },
+      {
+        "name": "In Pursuit of the Wind",
+        "notes": ""
+      },
+      {
+        "name": "Memories of the Past",
+        "notes": ""
+      },
+      {
+        "name": "The Forever Victual",
+        "notes": ""
+      },
+      {
+        "name": "Poised to Bloom",
+        "notes": ""
+      },
+      {
+        "name": "Earthly Escapade",
+        "notes": ""
+      },
+      {
+        "name": "For Tomorrow's Journey",
+        "notes": ""
+      },
+      {
+        "name": "Carve the Moon, Weave the Clouds",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Meshing Cogs",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Watchmaker, Master of Dream Machinations",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Thief of Shooting Meteor",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Iron Cavalry Against the Scourge",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Talia: Kingdom of Banditry",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Forge of the Kalpagni Lantern",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "HP%",
+        "DEF%"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "Break Effect",
+        "DEF%",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "trailblazer-preservation": {
+    "characterId": "trailblazer-preservation",
+    "lightCones": [
+      {
+        "name": "Moment of Victory",
+        "notes": ""
+      },
+      {
+        "name": "Landau's Choice",
+        "notes": ""
+      },
+      {
+        "name": "Texture of Memories",
+        "notes": ""
+      },
+      {
+        "name": "Day One of My New Life",
+        "notes": ""
+      },
+      {
+        "name": "Trend of the Universal Market",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Knight of Purity Palace",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Belobog of the Architects",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "DEF%"
+      ],
+      "feet": [
+        "DEF%",
+        "Speed"
+      ],
+      "sphere": [
+        "DEF%",
+        "Fire DMG"
+      ],
+      "rope": [
+        "DEF%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "DEF%",
+        "Effect Hit Rate",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "trailblazer-remembrance": {
+    "characterId": "trailblazer-remembrance",
+    "lightCones": [
+      {
+        "name": "Memory's Curtain Never Falls",
+        "notes": ""
+      },
+      {
+        "name": "Victory In a Blink",
+        "notes": ""
+      },
+      {
+        "name": "To Evernight's Stars",
+        "notes": ""
+      },
+      {
+        "name": "Long May Rainbows Adorn the Sky",
+        "notes": ""
+      },
+      {
+        "name": "Time Woven Into Gold",
+        "notes": ""
+      },
+      {
+        "name": "Sweat Now, Cry Less",
+        "notes": ""
+      },
+      {
+        "name": "Geniuses' Greetings",
+        "notes": ""
+      },
+      {
+        "name": "The Story's Next Page",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Shadowburn",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "World-Remaking Deliverer",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Reminiscence",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Hero of Triumphant Song",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT DMG"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%",
+        "Ice DMG"
+      ],
+      "rope": [
+        "Energy Regen"
+      ],
+      "subStats": [
+        "CRIT DMG",
+        "Speed"
+      ]
+    }
+  },
+  "tribbie": {
+    "characterId": "tribbie",
+    "lightCones": [
+      {
+        "name": "If Time Were a Flower",
+        "notes": ""
+      },
+      {
+        "name": "Dance! Dance! Dance!",
+        "notes": ""
+      },
+      {
+        "name": "Memories of the Past",
+        "notes": ""
+      },
+      {
+        "name": "But the Battle Isn't Over",
+        "notes": ""
+      },
+      {
+        "name": "Planetary Rendezvous",
+        "notes": ""
+      },
+      {
+        "name": "Earthly Escapade",
+        "notes": ""
+      },
+      {
+        "name": "Carve the Moon, Weave the Clouds",
+        "notes": ""
+      },
+      {
+        "name": "Past and Future",
+        "notes": ""
+      },
+      {
+        "name": "Poised to Bloom",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Meshing Cogs",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Bone Collection's Serene Demesne",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "HP%",
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "Quantum DMG"
+      ],
+      "rope": [
+        "HP%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "CRIT DMG",
+        "CRIT Rate",
+        "HP%",
+        "Speed"
+      ]
+    }
+  },
+  "welt": {
+    "characterId": "welt",
+    "lightCones": [
+      {
+        "name": "Along the Passing Shore",
+        "notes": ""
+      },
+      {
+        "name": "Incessant Rain",
+        "notes": ""
+      },
+      {
+        "name": "Good Night and Sleep Well",
+        "notes": ""
+      },
+      {
+        "name": "In the Name of the World",
+        "notes": ""
+      },
+      {
+        "name": "Resolution Shines As Pearls of Sweat",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Wastelander of Banditry Desert",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Pan-Cosmic Commercial Enterprise",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "Effect Hit Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Imaginary DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "xueyi": {
+    "characterId": "xueyi",
+    "lightCones": [
+      {
+        "name": "Indelible Promise",
+        "notes": ""
+      },
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Thief of Shooting Meteor",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Talia: Kingdom of Banditry",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Quantum DMG"
+      ],
+      "rope": [],
+      "subStats": [
+        "ATK%",
+        "Break Effect",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "yanqing": {
+    "characterId": "yanqing",
+    "lightCones": [
+      {
+        "name": "In the Night",
+        "notes": ""
+      },
+      {
+        "name": "Swordplay",
+        "notes": ""
+      },
+      {
+        "name": "Only Silence Remains",
+        "notes": ""
+      },
+      {
+        "name": "Cruising in the Stellar Sea",
+        "notes": ""
+      },
+      {
+        "name": "Sleep Like the Dead",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Hunter of Glacial Forest",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Ice DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate",
+        "Speed"
+      ]
+    }
+  },
+  "yukong": {
+    "characterId": "yukong",
+    "lightCones": [
+      {
+        "name": "Memories of the Past",
+        "notes": ""
+      },
+      {
+        "name": "But the Battle Isn't Over",
+        "notes": ""
+      },
+      {
+        "name": "Planetary Rendezvous",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Meshing Cogs",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Imaginary DMG"
+      ],
+      "rope": [
+        "ATK%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "Speed"
+      ]
+    }
+  },
+  "yunli": {
+    "characterId": "yunli",
+    "lightCones": [
+      {
+        "name": "Dance at Sunset",
+        "notes": ""
+      },
+      {
+        "name": "The Unreachable Side",
+        "notes": ""
+      },
+      {
+        "name": "Brighter Than the Sun",
+        "notes": ""
+      },
+      {
+        "name": "Something Irreplaceable",
+        "notes": ""
+      },
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "Under the Blue Sky",
+        "notes": ""
+      },
+      {
+        "name": "I Shall Be My Own Sword",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "The Wind-Soaring Valorous",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%"
+      ],
+      "sphere": [
+        "ATK%",
+        "Physical DMG"
+      ],
+      "rope": [
+        "ATK%",
+        "Energy Regen"
+      ],
+      "subStats": [
+        "ATK%",
+        "CRIT DMG",
+        "CRIT Rate"
+      ]
+    }
+  }
+}

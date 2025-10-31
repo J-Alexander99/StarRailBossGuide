@@ -13,7 +13,10 @@ import { TEAMS, resolveTeamMembers } from "../data/teams";
 import { getCharacterBuild } from "../data/characterBuilds";
 import { useCharacterOwnership } from "../context/CharacterOwnershipContext";
 import { getElementIcon, getPathIcon } from "../constants/iconMappings";
-import { getCharacterImage } from "../constants/characterImageMappings";
+import {
+  getCharacterImage,
+  getCharacterDetailImage,
+} from "../constants/characterImageMappings";
 
 const palette = {
   background: "#130914",
@@ -87,10 +90,10 @@ export function CharacterDetailScreen({ route }: any) {
     );
   }
 
-  const characterImageSource = getCharacterImage(character.id);
+  const characterImageSource = getCharacterDetailImage(character.id);
   const elementIcon = getElementIcon(character.element);
   const pathIcon = character.path ? getPathIcon(character.path) : undefined;
-  
+
   // Get build recommendations for this character
   const buildData = getCharacterBuild(character.id);
 
@@ -147,30 +150,32 @@ export function CharacterDetailScreen({ route }: any) {
 
   return (
     <View style={styles.container}>
+      {/* Hero Section - Fixed Background */}
+      <View style={styles.heroSection}>
+        {characterImageSource ? (
+          <Image source={characterImageSource} style={heroImageStyles} />
+        ) : (
+          <View style={heroPlaceholderStyles}>
+            <Text style={styles.heroPlaceholderText}>
+              {character.name.charAt(0).toUpperCase()}
+            </Text>
+          </View>
+        )}
+      </View>
+
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {/* Hero Section */}
-        <View style={styles.heroSection}>
-          {characterImageSource ? (
-            <Image source={characterImageSource} style={heroImageStyles} />
-          ) : (
-            <View style={heroPlaceholderStyles}>
-              <Text style={styles.heroPlaceholderText}>
-                {character.name.charAt(0).toUpperCase()}
-              </Text>
-            </View>
-          )}
-          <View style={styles.heroOverlay}>
-            <Text style={styles.heroTitle}>{character.name}</Text>
-            <View style={styles.heroIconRow}>
-              {elementIcon && (
-                <Image source={elementIcon} style={styles.heroIcon} />
-              )}
-              {pathIcon && <Image source={pathIcon} style={styles.heroIcon} />}
-            </View>
+        {/* Hero Overlay - Scrolls with content */}
+        <View style={styles.heroOverlay}>
+          <Text style={styles.heroTitle}>{character.name}</Text>
+          <View style={styles.heroIconRow}>
+            {elementIcon && (
+              <Image source={elementIcon} style={styles.heroIcon} />
+            )}
+            {pathIcon && <Image source={pathIcon} style={styles.heroIcon} />}
           </View>
         </View>
 
@@ -201,7 +206,12 @@ export function CharacterDetailScreen({ route }: any) {
             <View
               style={[
                 styles.ratingFill,
-                { width: `${Math.min(100, ((character.rating || 0) / 30) * 100)}%` },
+                {
+                  width: `${Math.min(
+                    100,
+                    ((character.rating || 0) / 30) * 100
+                  )}%`,
+                },
               ]}
             />
           </View>
@@ -219,7 +229,10 @@ export function CharacterDetailScreen({ route }: any) {
             <View
               style={[
                 styles.chip,
-                { backgroundColor: ELEMENT_COLORS[character.element] || palette.chipFallback },
+                {
+                  backgroundColor:
+                    ELEMENT_COLORS[character.element] || palette.chipFallback,
+                },
               ]}
             >
               <Text style={styles.chipText}>{character.element}</Text>
@@ -228,7 +241,10 @@ export function CharacterDetailScreen({ route }: any) {
               <View
                 style={[
                   styles.chip,
-                  { backgroundColor: PATH_COLORS[character.path] || palette.chipFallback },
+                  {
+                    backgroundColor:
+                      PATH_COLORS[character.path] || palette.chipFallback,
+                  },
                 ]}
               >
                 <Text style={styles.chipText}>{character.path}</Text>
@@ -238,7 +254,10 @@ export function CharacterDetailScreen({ route }: any) {
               <View
                 style={[
                   styles.chip,
-                  { backgroundColor: ROLE_COLORS[character.role] || palette.chipFallback },
+                  {
+                    backgroundColor:
+                      ROLE_COLORS[character.role] || palette.chipFallback,
+                  },
                 ]}
               >
                 <Text style={styles.chipText}>{character.role}</Text>
@@ -248,7 +267,10 @@ export function CharacterDetailScreen({ route }: any) {
               <View
                 style={[
                   styles.chip,
-                  { backgroundColor: META_COLORS[character.meta] || palette.chipFallback },
+                  {
+                    backgroundColor:
+                      META_COLORS[character.meta] || palette.chipFallback,
+                  },
                 ]}
               >
                 <Text style={styles.chipText}>{character.meta}</Text>
@@ -273,7 +295,9 @@ export function CharacterDetailScreen({ route }: any) {
                 <View key={index} style={styles.recommendationItem}>
                   <Text style={styles.recommendationItemName}>• {lc.name}</Text>
                   {lc.notes && (
-                    <Text style={styles.recommendationItemNotes}>{lc.notes}</Text>
+                    <Text style={styles.recommendationItemNotes}>
+                      {lc.notes}
+                    </Text>
                   )}
                 </View>
               ))}
@@ -299,12 +323,16 @@ export function CharacterDetailScreen({ route }: any) {
                         • {relic.name} {relic.pieces && `(${relic.pieces})`}
                       </Text>
                       {relic.notes && (
-                        <Text style={styles.recommendationItemNotes}>{relic.notes}</Text>
+                        <Text style={styles.recommendationItemNotes}>
+                          {relic.notes}
+                        </Text>
                       )}
                     </View>
                   ))
                 ) : (
-                  <Text style={styles.recommendationText}>No relic set recommendations yet.</Text>
+                  <Text style={styles.recommendationText}>
+                    No relic set recommendations yet.
+                  </Text>
                 )}
               </View>
               <View style={styles.recommendationCard}>
@@ -312,14 +340,20 @@ export function CharacterDetailScreen({ route }: any) {
                 {buildData.relics.planar.length > 0 ? (
                   buildData.relics.planar.map((planar, index) => (
                     <View key={index} style={styles.recommendationItem}>
-                      <Text style={styles.recommendationItemName}>• {planar.name}</Text>
+                      <Text style={styles.recommendationItemName}>
+                        • {planar.name}
+                      </Text>
                       {planar.notes && (
-                        <Text style={styles.recommendationItemNotes}>{planar.notes}</Text>
+                        <Text style={styles.recommendationItemNotes}>
+                          {planar.notes}
+                        </Text>
                       )}
                     </View>
                   ))
                 ) : (
-                  <Text style={styles.recommendationText}>No planar recommendations yet.</Text>
+                  <Text style={styles.recommendationText}>
+                    No planar recommendations yet.
+                  </Text>
                 )}
               </View>
             </>
@@ -339,23 +373,33 @@ export function CharacterDetailScreen({ route }: any) {
                 <Text style={styles.recommendationTitle}>Main Stats</Text>
                 <View style={styles.statRow}>
                   <Text style={styles.statSlot}>Body:</Text>
-                  <Text style={styles.statValues}>{buildData.stats.body.join(", ")}</Text>
+                  <Text style={styles.statValues}>
+                    {buildData.stats.body.join(", ")}
+                  </Text>
                 </View>
                 <View style={styles.statRow}>
                   <Text style={styles.statSlot}>Feet:</Text>
-                  <Text style={styles.statValues}>{buildData.stats.feet.join(", ")}</Text>
+                  <Text style={styles.statValues}>
+                    {buildData.stats.feet.join(", ")}
+                  </Text>
                 </View>
                 <View style={styles.statRow}>
                   <Text style={styles.statSlot}>Sphere:</Text>
-                  <Text style={styles.statValues}>{buildData.stats.sphere.join(", ")}</Text>
+                  <Text style={styles.statValues}>
+                    {buildData.stats.sphere.join(", ")}
+                  </Text>
                 </View>
                 <View style={styles.statRow}>
                   <Text style={styles.statSlot}>Rope:</Text>
-                  <Text style={styles.statValues}>{buildData.stats.rope.join(", ")}</Text>
+                  <Text style={styles.statValues}>
+                    {buildData.stats.rope.join(", ")}
+                  </Text>
                 </View>
               </View>
               <View style={styles.recommendationCard}>
-                <Text style={styles.recommendationTitle}>Sub Stats Priority</Text>
+                <Text style={styles.recommendationTitle}>
+                  Sub Stats Priority
+                </Text>
                 <Text style={styles.recommendationText}>
                   {buildData.stats.subStats.join(" > ")}
                 </Text>
@@ -383,10 +427,20 @@ export function CharacterDetailScreen({ route }: any) {
                 ]}
               >
                 <View style={styles.teamHeader}>
-                  <Text style={[styles.teamName, !isAvailable && styles.teamNameDisabled]}>
+                  <Text
+                    style={[
+                      styles.teamName,
+                      !isAvailable && styles.teamNameDisabled,
+                    ]}
+                  >
                     {team.name ?? `Team ${team.id.toUpperCase()}`}
                   </Text>
-                  <Text style={[styles.teamPower, !isAvailable && styles.teamPowerDisabled]}>
+                  <Text
+                    style={[
+                      styles.teamPower,
+                      !isAvailable && styles.teamPowerDisabled,
+                    ]}
+                  >
                     {team.teamRating || 0}/120
                   </Text>
                 </View>
@@ -406,7 +460,10 @@ export function CharacterDetailScreen({ route }: any) {
                         ]}
                       >
                         {memberImage ? (
-                          <Image source={memberImage} style={styles.memberImage} />
+                          <Image
+                            source={memberImage}
+                            style={styles.memberImage}
+                          />
                         ) : (
                           <View style={styles.memberPlaceholder}>
                             <Text style={styles.memberPlaceholderText}>
@@ -442,8 +499,10 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
+    zIndex: 1,
   },
   scrollContent: {
+    paddingTop: 320,
     paddingBottom: 32,
   },
   missingText: {
@@ -451,18 +510,22 @@ const styles = StyleSheet.create({
     color: palette.textMuted,
   },
   heroSection: {
-    position: "relative",
-    height: 200,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 400,
     backgroundColor: palette.surface,
+    zIndex: 0,
   },
   heroImage: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
-    opacity: 0.4,
+    width: "80%",
+    height: "80%",
+    resizeMode: "contain",
+    alignSelf: "center",
   },
   heroImageDesktop: {
-    height: 250,
+    height: 500,
   },
   heroImagePlaceholder: {
     width: "100%",
@@ -480,12 +543,8 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   heroOverlay: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
     padding: 20,
-    backgroundColor: "rgba(19, 9, 20, 0.6)",
+    backgroundColor: "rgba(19, 9, 20, 0.9)",
   },
   heroTitle: {
     fontSize: 28,
@@ -505,7 +564,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 16,
     gap: 12,
-    backgroundColor: palette.surface,
+    backgroundColor: palette.background,
     borderBottomWidth: 1,
     borderBottomColor: palette.surfaceBorder,
   },
@@ -536,7 +595,7 @@ const styles = StyleSheet.create({
   },
   ratingSection: {
     padding: 16,
-    backgroundColor: palette.surface,
+    backgroundColor: palette.background,
     borderBottomWidth: 1,
     borderBottomColor: palette.surfaceBorder,
   },
@@ -559,8 +618,7 @@ const styles = StyleSheet.create({
   },
   section: {
     padding: 16,
-    backgroundColor: palette.surface,
-    marginTop: 8,
+    backgroundColor: palette.background,
   },
   sectionTitle: {
     fontSize: 18,

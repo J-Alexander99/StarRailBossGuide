@@ -47,7 +47,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["Lightning DMG"],
+      sphere: [],
       rope: ["ATK%", "Energy Regen"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -84,7 +84,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["Speed"],
-      sphere: ["ATK%", "Wind DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%", "Energy Regen"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -123,7 +123,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate"],
       feet: ["ATK%"],
-      sphere: ["ATK%", "Quantum DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate"],
     },
@@ -161,7 +161,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Physical DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -192,7 +192,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Lightning DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -223,7 +223,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["HP%", "DEF%"],
       feet: ["Speed"],
-      sphere: ["HP%", "Fire DMG"],
+      sphere: ["HP%"],
       rope: ["Energy Regen"],
       subStats: ["Speed"],
     },
@@ -263,7 +263,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT DMG", "DEF%"],
       feet: ["DEF%", "Speed"],
-      sphere: ["DEF%", "Imaginary DMG"],
+      sphere: ["DEF%"],
       rope: ["DEF%"],
       subStats: ["CRIT DMG", "CRIT Rate", "DEF%", "Speed"],
     },
@@ -337,7 +337,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["ATK%", "Effect Hit Rate"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Wind DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "Speed"],
     },
@@ -375,7 +375,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["HP%", "Speed"],
-      sphere: ["HP%", "Wind DMG"],
+      sphere: ["HP%"],
       rope: ["HP%"],
       subStats: ["CRIT DMG", "CRIT Rate", "HP%", "Speed"],
     },
@@ -479,7 +479,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT DMG", "HP%"],
       feet: ["HP%"],
-      sphere: ["HP%", "Quantum DMG"],
+      sphere: ["HP%"],
       rope: ["HP%"],
       subStats: ["CRIT DMG", "CRIT Rate", "HP%", "Speed"],
     },
@@ -558,7 +558,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT DMG", "Effect Hit Rate"],
       feet: ["Speed"],
-      sphere: ["ATK%", "Quantum DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%", "Energy Regen"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "DEF%", "HP%", "Speed"],
     },
@@ -591,7 +591,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%"],
-      sphere: ["ATK%", "Physical DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -621,7 +621,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Wind DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -651,7 +651,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Imaginary DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate"],
     },
@@ -724,7 +724,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Imaginary DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -760,7 +760,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT DMG"],
       feet: ["HP%", "Speed"],
-      sphere: ["HP%", "Ice DMG"],
+      sphere: ["HP%"],
       rope: ["HP%", "Energy Regen"],
       subStats: ["CRIT DMG", "CRIT Rate", "HP%", "Speed"],
     },
@@ -798,7 +798,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Wind DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -1016,7 +1016,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["ATK%", "Effect Hit Rate"],
       feet: ["Speed"],
-      sphere: ["ATK%", "Fire DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "Break Effect", "DEF%", "HP%", "Speed"],
     },
@@ -1085,7 +1085,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Ice DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -1123,7 +1123,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%"],
-      sphere: ["ATK%", "Fire DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -1150,7 +1150,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Fire DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -1269,7 +1269,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["ATK%", "Effect Hit Rate"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Physical DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%", "Energy Regen"],
       subStats: ["ATK%", "Effect Hit Rate", "Speed"],
     },
@@ -1307,7 +1307,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%"],
-      sphere: ["Quantum DMG"],
+      sphere: [],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -1349,7 +1349,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["Effect Hit Rate"],
       feet: ["Speed"],
-      sphere: ["Fire DMG"],
+      sphere: [],
       rope: ["Energy Regen"],
       subStats: ["ATK%", "Speed"],
     },
@@ -1382,7 +1382,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT DMG", "HP%"],
       feet: ["HP%", "Speed"],
-      sphere: ["HP%", "Ice DMG"],
+      sphere: ["HP%"],
       rope: ["HP%"],
       subStats: ["CRIT DMG", "CRIT Rate", "HP%", "Speed"],
     },
@@ -1414,7 +1414,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Lightning DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -1455,7 +1455,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["ATK%", "Effect Hit Rate"],
       feet: ["Speed"],
-      sphere: ["ATK%", "Lightning DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%", "Energy Regen"],
       subStats: ["ATK%", "Effect Hit Rate", "Speed"],
     },
@@ -1494,7 +1494,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Physical DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -1530,7 +1530,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["ATK%", "Effect Hit Rate"],
       feet: ["Speed"],
-      sphere: ["ATK%", "Physical DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "Break Effect", "Speed"],
     },
@@ -1635,7 +1635,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Imaginary DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -1695,7 +1695,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Ice DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -1724,7 +1724,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%"],
-      sphere: ["Lightning DMG"],
+      sphere: [],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -1758,7 +1758,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT DMG", "HP%"],
       feet: ["HP%", "Speed"],
-      sphere: ["HP%", "Imaginary DMG"],
+      sphere: ["HP%"],
       rope: ["HP%"],
       subStats: ["CRIT DMG", "CRIT Rate", "HP%"],
     },
@@ -1854,7 +1854,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["Quantum DMG"],
+      sphere: [],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -1895,7 +1895,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Lightning DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -1967,7 +1967,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["ATK%"],
       feet: ["ATK%"],
-      sphere: ["ATK%", "Physical DMG"],
+      sphere: ["ATK%"],
       rope: ["Energy Regen"],
       subStats: ["ATK%", "DEF%", "HP%", "Speed"],
     },
@@ -2041,7 +2041,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Wind DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -2069,7 +2069,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["ATK%", "Effect Hit Rate"],
       feet: ["Speed"],
-      sphere: ["ATK%", "Wind DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "Break Effect", "Speed"],
     },
@@ -2098,7 +2098,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%"],
-      sphere: ["ATK%", "Quantum DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate"],
     },
@@ -2137,7 +2137,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Lightning DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -2179,7 +2179,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "Effect Hit Rate"],
       feet: ["Speed"],
-      sphere: ["ATK%", "Quantum DMG"],
+      sphere: ["ATK%"],
       rope: ["Energy Regen"],
       subStats: ["ATK%", "CRIT DMG", "Effect Hit Rate", "Speed"],
     },
@@ -2281,7 +2281,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Physical DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "Break Effect", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -2318,7 +2318,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Ice DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%", "Energy Regen"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -2385,7 +2385,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Fire DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -2414,7 +2414,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["DEF%"],
       feet: ["DEF%", "Speed"],
-      sphere: ["DEF%", "Fire DMG"],
+      sphere: ["DEF%"],
       rope: ["DEF%", "Energy Regen"],
       subStats: ["DEF%", "Effect Hit Rate", "HP%", "Speed"],
     },
@@ -2453,7 +2453,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT DMG"],
       feet: ["Speed"],
-      sphere: ["HP%", "DEF%", "Ice DMG"],
+      sphere: ["HP%", "DEF%"],
       rope: ["Energy Regen"],
       subStats: ["CRIT DMG", "Speed"],
     },
@@ -2521,7 +2521,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Physical DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "Break Effect", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -2563,7 +2563,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["HP%", "Speed"],
-      sphere: ["HP%", "Quantum DMG"],
+      sphere: ["HP%"],
       rope: ["HP%", "Energy Regen"],
       subStats: ["CRIT DMG", "CRIT Rate", "HP%", "Speed"],
     },
@@ -2594,7 +2594,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "Effect Hit Rate"],
       feet: ["Speed"],
-      sphere: ["ATK%", "Imaginary DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -2620,7 +2620,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Quantum DMG"],
+      sphere: ["ATK%"],
       rope: [],
       subStats: ["ATK%", "Break Effect", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -2648,7 +2648,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Ice DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate", "Speed"],
     },
@@ -2676,7 +2676,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%", "Speed"],
-      sphere: ["ATK%", "Imaginary DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%", "Energy Regen"],
       subStats: ["Speed"],
     },
@@ -2706,7 +2706,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["ATK%"],
-      sphere: ["ATK%", "Physical DMG"],
+      sphere: ["ATK%"],
       rope: ["ATK%", "Energy Regen"],
       subStats: ["ATK%", "CRIT DMG", "CRIT Rate"],
     },

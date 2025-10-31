@@ -9,7 +9,10 @@ import {
   Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { getCharacterImage } from "../constants/characterImageMappings";
+import {
+  getCharacterImage,
+  getCharacterDetailImage,
+} from "../constants/characterImageMappings";
 import { getBossImage } from "../constants/bossImageMappings";
 
 const { width: screenWidth } = Dimensions.get("window");
@@ -127,6 +130,9 @@ interface CarouselProps {
   isCharacter: boolean;
   onPress: () => void;
   direction: "left" | "right";
+  useDetailImages?: boolean;
+  itemWidth?: number;
+  itemHeight?: number;
 }
 
 function SmoothCarousel({
@@ -134,10 +140,12 @@ function SmoothCarousel({
   isCharacter,
   onPress,
   direction,
+  useDetailImages = false,
+  itemWidth = 100,
+  itemHeight = 120,
 }: CarouselProps) {
   const scrollViewRef = useRef<ScrollView>(null);
   const scrollPosition = useRef(0);
-  const itemWidth = 100; // Fixed width for consistent sizing across devices
   const speed = 0.5; // Pixels per frame
 
   // Create 5 copies for truly seamless infinite scroll
@@ -195,21 +203,38 @@ function SmoothCarousel({
   }, [data.length, direction, itemWidth, singleSetWidth, speed]);
 
   const getImage = (item: string) => {
-    return isCharacter ? getCharacterImage(item) : getBossImage(item);
+    if (isCharacter) {
+      return useDetailImages
+        ? getCharacterDetailImage(item)
+        : getCharacterImage(item);
+    }
+    return getBossImage(item);
+  };
+
+  const carouselItemStyle = {
+    width: itemWidth,
+    height: itemHeight,
+    marginRight: 12,
+    borderRadius: 12,
+    overflow: "hidden" as const,
+    position: "relative" as const,
+    backgroundColor: "#191222",
+    borderWidth: 1,
+    borderColor: "rgba(255, 108, 224, 0.1)",
   };
 
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={onPress}
-      style={styles.carouselWrapper}
+      style={[styles.carouselWrapper, { height: itemHeight + 20 }]}
     >
       <ScrollView
         ref={scrollViewRef}
         horizontal
         showsHorizontalScrollIndicator={false}
         scrollEnabled={false} // Disable manual scrolling for smooth auto-scroll
-        style={styles.carousel}
+        style={[styles.carousel, { height: itemHeight }]}
         contentContainerStyle={styles.carouselContent}
       >
         {extendedData.map((item, index) => {
@@ -217,7 +242,7 @@ function SmoothCarousel({
           if (!imageSource) return null;
 
           return (
-            <View key={`${item}-${index}`} style={styles.carouselItem}>
+            <View key={`${item}-${index}`} style={carouselItemStyle}>
               <Image source={imageSource} style={styles.carouselImage} />
               <View style={styles.carouselOverlay} />
             </View>
@@ -250,6 +275,19 @@ export function HomeScreen() {
 
       {/* Center Title Section */}
       <View style={styles.centerSection}>
+        {/* Background Carousel - Behind Title */}
+        <View style={styles.backgroundCarouselContainer}>
+          <SmoothCarousel
+            data={FEATURED_CHARACTERS}
+            isCharacter={true}
+            direction="right"
+            onPress={() => {}}
+            useDetailImages={true}
+            itemWidth={200}
+            itemHeight={240}
+          />
+        </View>
+
         <View style={styles.titleContainer}>
           <Text style={styles.mainTitle}>Star Rail</Text>
           <Text style={styles.subtitle}>Boss Guide</Text>
@@ -305,12 +343,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 32,
+    position: "relative",
+  },
+
+  backgroundCarouselContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    opacity: 0.15,
+    zIndex: 0,
   },
 
   titleContainer: {
     alignItems: "center",
     marginBottom: 32,
     position: "relative",
+    zIndex: 1,
   },
 
   mainTitle: {
@@ -356,6 +407,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     borderWidth: 1,
     borderColor: "rgba(255, 108, 224, 0.1)",
+    zIndex: 1,
   },
 
   statItem: {
