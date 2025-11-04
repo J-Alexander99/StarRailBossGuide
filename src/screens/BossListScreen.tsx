@@ -8,7 +8,13 @@ import {
   Image,
   ImageSourcePropType,
 } from "react-native";
-import { BOSSES, Boss, getBossAttributes } from "../data/bosses";
+import {
+  BOSSES,
+  Boss,
+  getBossAttributes,
+  getBossAffinities,
+  type EffectivenessScore,
+} from "../data/bosses";
 import { getElementIcon } from "../constants/iconMappings";
 import { getBossImage } from "../constants/bossImageMappings";
 
@@ -50,6 +56,22 @@ const META_COLORS: Record<string, string> = {
   Ultimate: "#fb7185",
   Burn: "#fb923c",
   Freeze: "#38bdf8",
+};
+
+const RANGE_COLORS: Record<string, string> = {
+  Single: "#ec4899",
+  Blast: "#f97316",
+  AoE: "#22d3ee",
+  Bounce: "#a855f7",
+};
+
+// Score colors for effectiveness display
+const SCORE_COLORS: Record<EffectivenessScore, string> = {
+  2: "#a855f7", // Very Good - Purple
+  1: "#84cc16", // Good - Light Green
+  0: "#64748b", // Neutral - Gray
+  "-1": "#f97316", // Bad - Orange
+  "-2": "#ef4444", // Very Bad - Red
 };
 
 const ensureArray = (values: string[]): string[] => {
@@ -137,13 +159,75 @@ export function BossListScreen({ navigation }: { navigation: any }) {
     );
   };
 
+  const renderAffinityBadges = (
+    affinities: Record<string, EffectivenessScore> | undefined,
+    iconResolver?: (value: string) => ImageSourcePropType | undefined
+  ) => {
+    if (!affinities || Object.keys(affinities).length === 0) {
+      return null;
+    }
+
+    // Only show positive scores (effective) and negative scores (resisted) in list view
+    const effectiveEntries = Object.entries(affinities)
+      .filter(([, score]) => score !== 0)
+      .sort(([, a], [, b]) => b - a);
+
+    if (effectiveEntries.length === 0) return null;
+
+    return (
+      <View style={styles.affinityBadgeContainer}>
+        {effectiveEntries.map(([key, score]) => {
+          const icon = iconResolver?.(key);
+          const scoreColor = SCORE_COLORS[score];
+
+          return (
+            <View
+              key={key}
+              style={[
+                styles.affinityBadge,
+                {
+                  backgroundColor: scoreColor + "20",
+                  borderColor: scoreColor + "60",
+                },
+              ]}
+            >
+              {icon && (
+                <Image
+                  source={icon}
+                  style={styles.affinityBadgeIcon}
+                  resizeMode="contain"
+                />
+              )}
+              {!icon && (
+                <Text style={[styles.affinityBadgeText, { color: scoreColor }]}>
+                  {key}
+                </Text>
+              )}
+              <View
+                style={[
+                  styles.affinityScoreDot,
+                  { backgroundColor: scoreColor },
+                ]}
+              />
+            </View>
+          );
+        })}
+      </View>
+    );
+  };
+
   const renderItem = ({ item }: { item: Boss }) => {
     const { weaknesses, resistances, metaWeaknesses, metaResistances } =
       getBossAttributes(item);
+    const affinities = getBossAffinities(item);
     const bossImageSource = getBossImage(item.image);
 
     const descriptionText = item.description?.trim();
     const locationText = item.location?.trim();
+
+    // Check if using new affinity system
+    const hasNewAffinities =
+      affinities.elements && Object.keys(affinities.elements).length > 0;
 
     return (
       <TouchableOpacity
@@ -210,31 +294,54 @@ export function BossListScreen({ navigation }: { navigation: any }) {
 
         <View style={styles.divider} />
 
-        {renderChips(
-          "Weaknesses",
-          weaknesses,
-          ELEMENT_COLORS,
-          palette.chipFallback,
-          getElementIcon
-        )}
-        {renderChips(
-          "Resistances",
-          resistances,
-          ELEMENT_COLORS,
-          palette.chipFallback,
-          getElementIcon
-        )}
-        {renderChips(
-          "Meta Weakness",
-          metaWeaknesses,
-          META_COLORS,
-          palette.chipFallback
-        )}
-        {renderChips(
-          "Meta Resistance",
-          metaResistances,
-          META_COLORS,
-          palette.chipFallback
+        {hasNewAffinities ? (
+          <>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Element Effectiveness</Text>
+              {renderAffinityBadges(affinities.elements, getElementIcon)}
+            </View>
+            {affinities.ranges && Object.keys(affinities.ranges).length > 0 && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Range Effectiveness</Text>
+                {renderAffinityBadges(affinities.ranges)}
+              </View>
+            )}
+            {affinities.meta && Object.keys(affinities.meta).length > 0 && (
+              <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Meta Effectiveness</Text>
+                {renderAffinityBadges(affinities.meta)}
+              </View>
+            )}
+          </>
+        ) : (
+          <>
+            {renderChips(
+              "Weaknesses",
+              weaknesses,
+              ELEMENT_COLORS,
+              palette.chipFallback,
+              getElementIcon
+            )}
+            {renderChips(
+              "Resistances",
+              resistances,
+              ELEMENT_COLORS,
+              palette.chipFallback,
+              getElementIcon
+            )}
+            {renderChips(
+              "Meta Weakness",
+              metaWeaknesses,
+              META_COLORS,
+              palette.chipFallback
+            )}
+            {renderChips(
+              "Meta Resistance",
+              metaResistances,
+              META_COLORS,
+              palette.chipFallback
+            )}
+          </>
         )}
       </TouchableOpacity>
     );
@@ -479,5 +586,34 @@ const styles = StyleSheet.create({
   emptyValue: {
     fontSize: 12,
     color: palette.textMuted,
+  },
+
+  // New Affinity Badge Styles
+  affinityBadgeContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+  },
+  affinityBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 8,
+    borderWidth: 1.5,
+    gap: 6,
+  },
+  affinityBadgeIcon: {
+    width: 18,
+    height: 18,
+  },
+  affinityBadgeText: {
+    fontSize: 12,
+    fontWeight: "600",
+  },
+  affinityScoreDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
   },
 });

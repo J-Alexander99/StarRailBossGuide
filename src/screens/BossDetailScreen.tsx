@@ -8,7 +8,13 @@ import {
   ImageSourcePropType,
   useWindowDimensions,
 } from "react-native";
-import { BOSSES, getBossAttributes } from "../data/bosses";
+import {
+  BOSSES,
+  getBossAttributes,
+  getBossAffinities,
+  getEffectivenessScore,
+  type EffectivenessScore,
+} from "../data/bosses";
 import { CHARACTERS } from "../data/characters";
 import {
   teamsMatchingWeakness,
@@ -69,6 +75,30 @@ const META_COLORS: Record<string, string> = {
   Freeze: "#38bdf8",
 };
 
+const RANGE_COLORS: Record<string, string> = {
+  Single: "#ec4899",
+  Blast: "#f97316",
+  AoE: "#22d3ee",
+  Bounce: "#a855f7",
+};
+
+// Score colors for effectiveness display
+const SCORE_COLORS: Record<EffectivenessScore, string> = {
+  2: "#a855f7", // Very Good - Purple
+  1: "#84cc16", // Good - Light Green
+  0: "#64748b", // Neutral - Gray
+  "-1": "#f97316", // Bad - Orange
+  "-2": "#ef4444", // Very Bad - Red
+};
+
+const SCORE_LABELS: Record<EffectivenessScore, string> = {
+  2: "Very Effective",
+  1: "Effective",
+  0: "Neutral",
+  "-1": "Resisted",
+  "-2": "Highly Resisted",
+};
+
 const ensureArray = (values: string[]): string[] => {
   const seen = new Set<string>();
   return values
@@ -95,8 +125,11 @@ export function BossDetailScreen({ route }: any) {
     );
   }
 
+  // Get both old and new format data
   const { weaknesses, resistances, metaWeaknesses, metaResistances } =
     getBossAttributes(boss);
+  const affinities = getBossAffinities(boss);
+
   const { filteredTeams, excludedTeamsCount, totalTeamsCount } = useMemo(() => {
     const recommendedTeams: RecommendedTeam[] = getRecommendedTeamsSorted(
       weaknesses,
@@ -191,6 +224,57 @@ export function BossDetailScreen({ route }: any) {
     );
   };
 
+  // New rendering function for scored affinities
+  const renderAffinitySection = (
+    title: string,
+    affinities: Record<string, EffectivenessScore> | undefined,
+    iconResolver?: (value: string) => ImageSourcePropType | undefined
+  ) => {
+    if (!affinities || Object.keys(affinities).length === 0) {
+      return null;
+    }
+
+    // Sort by score (highest to lowest) for better visual flow
+    const sortedEntries = Object.entries(affinities).sort(
+      ([, a], [, b]) => b - a
+    );
+
+    return (
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>{title}</Text>
+        <View style={styles.affinityList}>
+          {sortedEntries.map(([key, score]) => {
+            const icon = iconResolver?.(key);
+            const scoreColor = SCORE_COLORS[score];
+            const scoreLabel = SCORE_LABELS[score];
+
+            return (
+              <View key={`${title}-${key}`} style={styles.affinityRow}>
+                <View style={styles.affinityLeft}>
+                  {icon && (
+                    <Image
+                      source={icon}
+                      style={styles.affinityIcon}
+                      resizeMode="contain"
+                    />
+                  )}
+                  <Text style={styles.affinityLabel}>{key}</Text>
+                </View>
+                <View style={styles.affinityRight}>
+                  <View
+                    style={[styles.scoreBar, { backgroundColor: scoreColor }]}
+                  >
+                    <Text style={styles.scoreText}>{scoreLabel}</Text>
+                  </View>
+                </View>
+              </View>
+            );
+          })}
+        </View>
+      </View>
+    );
+  };
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <View style={styles.heroCard}>
@@ -229,20 +313,35 @@ export function BossDetailScreen({ route }: any) {
 
       <View style={styles.sectionCard}>
         <Text style={styles.sectionHeader}>Battle Intel</Text>
-        {renderChipGroup(
-          "Elemental Weaknesses",
-          weaknesses,
-          ELEMENT_COLORS,
-          getElementIcon
+        {/* Use new scoring system if available, otherwise fall back to legacy */}
+        {affinities.elements && Object.keys(affinities.elements).length > 0 ? (
+          <>
+            {renderAffinitySection(
+              "Elemental Effectiveness",
+              affinities.elements,
+              getElementIcon
+            )}
+            {renderAffinitySection("Range Effectiveness", affinities.ranges)}
+            {renderAffinitySection("Meta Effectiveness", affinities.meta)}
+          </>
+        ) : (
+          <>
+            {renderChipGroup(
+              "Elemental Weaknesses",
+              weaknesses,
+              ELEMENT_COLORS,
+              getElementIcon
+            )}
+            {renderChipGroup(
+              "Elemental Resistances",
+              resistances,
+              ELEMENT_COLORS,
+              getElementIcon
+            )}
+            {renderChipGroup("Meta Weakness", metaWeaknesses, META_COLORS)}
+            {renderChipGroup("Meta Resistance", metaResistances, META_COLORS)}
+          </>
         )}
-        {renderChipGroup(
-          "Elemental Resistances",
-          resistances,
-          ELEMENT_COLORS,
-          getElementIcon
-        )}
-        {renderChipGroup("Meta Weakness", metaWeaknesses, META_COLORS)}
-        {renderChipGroup("Meta Resistance", metaResistances, META_COLORS)}
       </View>
 
       <View style={styles.sectionCard}>
@@ -1193,5 +1292,52 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: "rgba(255, 255, 255, 0.7)",
     textAlign: "center",
+  },
+
+  // New Affinity Scoring Styles
+  affinityList: {
+    gap: 8,
+  },
+  affinityRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.03)",
+    borderRadius: 10,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.06)",
+  },
+  affinityLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+  },
+  affinityIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+  },
+  affinityLabel: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: palette.textPrimary,
+  },
+  affinityRight: {
+    marginLeft: 12,
+  },
+  scoreBar: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 8,
+    minWidth: 120,
+    alignItems: "center",
+  },
+  scoreText: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: "#ffffff",
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
   },
 });

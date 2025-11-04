@@ -24,6 +24,13 @@ const BOSS_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   Big_Enemy_Flame_Reaver: require("../../images/bosses/Big_Enemy_Flame_Reaver.webp"),
   Big_Enemy_Argenti: require("../../images/bosses/Big_Enemy_Argenti.webp"),
   Big_Enemy_First_Genius_Zandar: require("../../images/bosses/Big_Enemy_First_Genius_Zandar.webp"),
+  Doomsday_Beast: require("../../images/bosses/Doomsday_Beast.webp"),
+  Cocolia_Mother_of_Deception: require("../../images/bosses/Cocolia_Mother_of_Deception.webp"),
+  Phantylia_The_Undying: require("../../images/bosses/Phantylia_The_Undying.webp"),
+  Skaracabaz_Synthetic: require("../../images/bosses/Skaracabaz_Synthetic.webp"),
+  Harmonious_Choir_The_Great_Septimus: require("../../images/bosses/Harmonious_Choir_The_Great_Septimus.webp"),
+  Shadow_of_Feixiao_Ecliptic_Inner_Beast: require("../../images/bosses/Shadow_of_Feixiao_Ecliptic_Inner_Beast.webp"),
+  Sublime_Radiant_Avatar_of_the_Sky: require("../../images/bosses/Sublime_Radiant_Avatar_of_the_Sky.webp"),
 };
 
 export const getBossImage = (imageKey?: string): ImageSourcePropType | null => {
