@@ -31,6 +31,7 @@ const BOSS_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   Harmonious_Choir_The_Great_Septimus: require("../../images/bosses/Harmonious_Choir_The_Great_Septimus.webp"),
   Shadow_of_Feixiao_Ecliptic_Inner_Beast: require("../../images/bosses/Shadow_of_Feixiao_Ecliptic_Inner_Beast.webp"),
   Sublime_Radiant_Avatar_of_the_Sky: require("../../images/bosses/Sublime_Radiant_Avatar_of_the_Sky.webp"),
+  Ichor_Memosprite_Judge_of_Oblivion: require("../../images/bosses/Ichor_Memosprite_Judge_of_Oblivion.webp"),
 };
 
 export const getBossImage = (imageKey?: string): ImageSourcePropType | null => {

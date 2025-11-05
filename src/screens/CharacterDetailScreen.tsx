@@ -283,7 +283,34 @@ export function CharacterDetailScreen({ route }: any) {
                 <Text style={styles.chipText}>{character.target}</Text>
               </View>
             )}
+            {character.implant && (
+              <View
+                style={[styles.chip, { backgroundColor: palette.chipFallback }]}
+              >
+                <Text style={styles.chipText}>
+                  {character.implant === "ultNegate"
+                    ? "Weakness Negation"
+                    : "Implant"}
+                </Text>
+              </View>
+            )}
           </View>
+          {character.implant && (
+            <View style={styles.implantDescription}>
+              <Text style={styles.implantText}>
+                {character.implant === "Firefly" &&
+                  `${character.name} adds Fire weakness to enemy when attacking them while in combustion state.`}
+                {character.implant === "Silver Wolf" &&
+                  `${character.name} adds weakness with skill. The element type of the weakness depends on the element of the character in position 1 of the party.`}
+                {character.implant === "Anaxa" &&
+                  `${character.name} adds random weaknesses with skill. ${character.name} adds ALL weaknesses with ultimate.`}
+                {character.implant === "ult" &&
+                  `${character.name} adds ${character.element} weakness to enemy with their ultimate.`}
+                {character.implant === "ultNegate" &&
+                  `${character.name} negates the enemy weakness with their ultimate. Attacks made with this character's ultimate will deal damage to the enemy toughness bar regardless of elemental type.`}
+              </Text>
+            </View>
+          )}
         </View>
 
         {/* Light Cones Section */}
@@ -765,5 +792,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: palette.textPrimary,
     flex: 1,
+  },
+  implantDescription: {
+    marginTop: 12,
+    padding: 12,
+    backgroundColor: palette.highlight,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: palette.highlightBorder,
+  },
+  implantText: {
+    fontSize: 14,
+    color: palette.textSecondary,
+    lineHeight: 20,
   },
 });

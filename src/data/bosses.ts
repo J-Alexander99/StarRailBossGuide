@@ -15,6 +15,7 @@ export type RangeAffinities = {
   Single?: EffectivenessScore;
   Blast?: EffectivenessScore;
   AoE?: EffectivenessScore;
+  Field?: EffectivenessScore;
   Bounce?: EffectivenessScore;
 };
 
@@ -28,22 +29,6 @@ export type MetaAffinities = {
   Kevin?: EffectivenessScore;
   Raiden?: EffectivenessScore;
   Ultimate?: EffectivenessScore;
-  Burn?: EffectivenessScore;
-  Freeze?: EffectivenessScore;
-  // Extended meta keys used by newer bosses
-  SharedHP?: EffectivenessScore;
-  Shielding?: EffectivenessScore;
-  ControlRES?: EffectivenessScore;
-  SummonAdds?: EffectivenessScore;
-  Entanglement?: EffectivenessScore;
-  ToughnessReduction?: EffectivenessScore;
-  SkillPointDrain?: EffectivenessScore;
-  HPReduction?: EffectivenessScore;
-  Safeguard?: EffectivenessScore;
-  Resonance?: EffectivenessScore;
-  WeaknessBrokenBonus?: EffectivenessScore;
-  TemperatureStack?: EffectivenessScore;
-  ThundercloudStack?: EffectivenessScore;
 };
 
 export type Boss = {
@@ -116,7 +101,6 @@ export const BOSSES: Boss[] = [
     meta: {
       Break: 1,
       DOT: 1,
-      Freeze: -2,
     },
     description:
       "-Punishment of Endless Winter: Deals massive Ice DMG (500% ATK) to all targets.\n\n" +
@@ -151,7 +135,6 @@ export const BOSSES: Boss[] = [
     meta: {
       Break: 1,
       Crit: 0,
-      Freeze: -1,
     },
     description:
       "-Frigid Waterfall: Deals Ice DMG (380% ATK) to all targets and slightly increases the DMG dealt (12%). This DMG boosting effect is stackable.\n\n" +
@@ -294,7 +277,6 @@ export const BOSSES: Boss[] = [
     },
     meta: {
       Crit: 1,
-      Freeze: -2,
     },
     description: "",
     image: "Big_Enemy_Cloud_Knight_Yanqing",
@@ -377,8 +359,6 @@ export const BOSSES: Boss[] = [
       Blast: 0,
     },
     meta: {
-      Burn: 2,
-      Freeze: -2,
       Break: 1,
     },
     description: "",
@@ -403,8 +383,6 @@ export const BOSSES: Boss[] = [
       Blast: 1,
     },
     meta: {
-      Burn: 2,
-      Freeze: -2,
       DOT: 1,
     },
     description: "",
@@ -430,8 +408,6 @@ export const BOSSES: Boss[] = [
       Blast: 1,
     },
     meta: {
-      Burn: 2,
-      Freeze: -2,
       Break: 1,
     },
     description: "",
@@ -486,7 +462,6 @@ export const BOSSES: Boss[] = [
     },
     meta: {
       Break: 2,
-      Freeze: -2,
     },
     description: "",
     image: "Big_Enemy_Banacademic_Office_Staff",
@@ -536,7 +511,6 @@ export const BOSSES: Boss[] = [
     },
     meta: {
       Summon: 2,
-      Freeze: -2,
     },
     description: "",
     image: "Big_Enemy_Pollux",
@@ -559,10 +533,7 @@ export const BOSSES: Boss[] = [
       Single: 1,
       Blast: 1,
     },
-    meta: {
-      Burn: 2,
-      Freeze: -2,
-    },
+    meta: {},
     description: "",
     image: "Big_Enemy_Savage_Incarnation_Of_Strife",
     // Legacy
@@ -584,10 +555,7 @@ export const BOSSES: Boss[] = [
       AoE: 1,
       Single: 0,
     },
-    meta: {
-      Burn: 2,
-      Freeze: -2,
-    },
+    meta: {},
     description: "",
     image: "Big_Enemy_The_Lance_of_Fury",
     // Legacy
@@ -609,10 +577,7 @@ export const BOSSES: Boss[] = [
       AoE: 1,
       Blast: 1,
     },
-    meta: {
-      Burn: 2,
-      Freeze: -2,
-    },
+    meta: {},
     description: "",
     image: "Big_Enemy_Flame_Reaver",
     // Legacy
@@ -635,8 +600,6 @@ export const BOSSES: Boss[] = [
       Blast: 0,
     },
     meta: {
-      Burn: 2,
-      Freeze: -2,
       Crit: 1,
     },
     description: "",
@@ -722,7 +685,6 @@ export const BOSSES: Boss[] = [
       AoE: 1,
     },
     meta: {
-      Freeze: -2,
       Break: 2,
       DOT: 1,
     },
@@ -801,7 +763,7 @@ export const BOSSES: Boss[] = [
       "-Breaking its Weakness during Carapace state deals massive toughness damage to all enemies.\n\n" +
       "-AoE attacks are highly effective for managing swarms.\n\n" +
       "-Quantum damage is the most effective element.",
-  image: "Skaracabaz_Synthetic",
+    image: "Skaracabaz_Synthetic",
     location: "Seclusion Zone, Herta Space Station",
     // Legacy
     weakness: "{Quantum, Ice, Physical, Imaginary}",
@@ -812,7 +774,7 @@ export const BOSSES: Boss[] = [
   },
   {
     id: "27",
-    name: "\"Harmonious Choir\" The Great Septimus",
+    name: '"Harmonious Choir" The Great Septimus',
     elements: {
       Imaginary: 2,
       Fire: 1,
@@ -824,13 +786,10 @@ export const BOSSES: Boss[] = [
       AoE: 1,
     },
     meta: {
-      SharedHP: 2,
-      Shielding: 2,
-      ControlRES: 1,
-      SummonAdds: 1,
+      Break: 2,
     },
     description:
-      "An Echo of War boss in Penacony, conducted by Dominicus, the Great Septimus fights under the title \"Harmonious Choir.\" He summons multiple Echoes of Faded Dreams whose damage is redirected to him, commands powerful Imaginary attacks (Grazioso, Maestoso, Volteggiando, Tempestoso), and in Phase 3 transforms into Embryo of Philosophy Sunday with layered Toughness bars and a massive all-target attack after 7 turns.\n\n" +
+      'An Echo of War boss in Penacony, conducted by Dominicus, the Great Septimus fights under the title "Harmonious Choir." He summons multiple Echoes of Faded Dreams whose damage is redirected to him, commands powerful Imaginary attacks (Grazioso, Maestoso, Volteggiando, Tempestoso), and in Phase 3 transforms into Embryo of Philosophy Sunday with layered Toughness bars and a massive all-target attack after 7 turns.\n\n' +
       "-Damage from Echoes is redirected to the main boss (Shared HP mechanic).\n\n" +
       "-Shielding phases grant strong damage mitigation to the choir; focus on breaking shields quickly.\n\n" +
       "-Control resistance is elevated; debuffs may be unreliable.\n\n" +
@@ -846,7 +805,7 @@ export const BOSSES: Boss[] = [
   },
   {
     id: "28",
-    name: "Shadow of \"Feixiao\" & Ecliptic Inner Beast",
+    name: 'Shadow of "Feixiao" & Ecliptic Inner Beast',
     elements: {
       Wind: 2,
       Quantum: 1,
@@ -859,13 +818,10 @@ export const BOSSES: Boss[] = [
       AoE: 1,
     },
     meta: {
-      Safeguard: 2,
-      SharedHP: 2,
-      Resonance: 2,
-      WeaknessBrokenBonus: 2,
+      Break: 2,
     },
     description:
-      "In this Echo of War fight, the Shadow of Feixiao (manifested from Feixiao’s inner corruption) fights in conjunction with the Ecliptic Inner Beast. In later phases she gains parts (Nebula Devourer, Planeshred Claws, Worldpurge Tail) which share HP with her via a ‘Seance’ effect. Safeguard shields her until a Weakness Break is inflicted; resonance mechanics with her parts restore Toughness or amplify their attacks; in Phase 3 she can use ‘Sweep the Heavens, Swallow the Earth’ to deal massive damage which scales with how many parts remain unbroken.\n\n" +
+      "In this Echo of War fight, the Shadow of Feixiao (manifested from Feixiao's inner corruption) fights in conjunction with the Ecliptic Inner Beast. In later phases she gains parts (Nebula Devourer, Planeshred Claws, Worldpurge Tail) which share HP with her via a 'Seance' effect. Safeguard shields her until a Weakness Break is inflicted; resonance mechanics with her parts restore Toughness or amplify their attacks; in Phase 3 she can use 'Sweep the Heavens, Swallow the Earth' to deal massive damage which scales with how many parts remain unbroken.\n\n" +
       "-Manage parts to avoid high damage from Sweep the Heavens; breaking parts reduces the final attack's potency.\n\n" +
       "-Safeguard phases must be removed or ignored via mechanics to enable Weakness Break opportunities.\n\n" +
       "-Resonance between parts can restore Toughness; coordinate breaks to prevent heals.",
@@ -892,14 +848,9 @@ export const BOSSES: Boss[] = [
       Blast: 1,
       AoE: 1,
     },
-    meta: {
-      TemperatureStack: 2,
-      ThundercloudStack: 2,
-      SharedHP: 1,
-      Safeguard: 1,
-    },
+    meta: {},
     description:
-      "The Sky‐Titan known as Theos Synthetos, corrupted and fused with humanity, governing the rampage of the skies in Amphoreus. In the Echo of War battle, this boss fights alongside ‘Hundred Eyes’ add-units (Daythunder Raven, Shoot of Hundred Eyes, Twig of Hundred Eyes) and cycles through phases that revolve around Fire (Day/Heat) and Lightning (Storm) mechanics, with Temperature and Thundercloud stacks driving massive multi-target damage.\n\n" +
+      "The Sky‐Titan known as Theos Synthetos, corrupted and fused with humanity, governing the rampage of the skies in Amphoreus. In the Echo of War battle, this boss fights alongside 'Hundred Eyes' add-units (Daythunder Raven, Shoot of Hundred Eyes, Twig of Hundred Eyes) and cycles through phases that revolve around Fire (Day/Heat) and Lightning (Storm) mechanics, with Temperature and Thundercloud stacks driving massive multi-target damage.\n\n" +
       "-Manage Temperature and Thundercloud stacks to avoid devastating multi-target attacks.\n\n" +
       "-Shared HP mechanics connect the boss and its Hundred Eyes adds; controlling adds reduces incoming damage.\n\n" +
       "-Safeguard phases grant temporary immunity until mechanics are resolved.",
@@ -910,6 +861,34 @@ export const BOSSES: Boss[] = [
     metaWeakness: "TemperatureStack",
     metaResistance: "Safeguard",
     rangeWeakness: "",
+    rangeResistance: "",
+  },
+  {
+    id: "30",
+    name: "Ichor Memosprite: Judge of Oblivion",
+    elements: {
+      Imaginary: 2,
+      Physical: 2,
+      Ice: 1,
+    },
+    ranges: {
+      Single: 2,
+      AoE: 1,
+      Field: 1,
+    },
+    meta: {
+      Summon: 2,
+    },
+    description:
+      "A new powerful boss in Amphoreus that locks onto targets and uses high-impact single-target abilities (Hemotort Teethgrind / Hemotort Saw) while spawning Pheasant summons via Execution in Place. Summons directly interact with the boss’ Toughness — destroying summons reduces the boss’ Toughness, making them a priority target. The boss gains Pursuer/target-lock effects and applies Hemotort Corruption based on damage taken; certain status effects (Expedite Verdict) reduce incoming damage until the boss is Weakness-Broken. Shields interact uniquely with its kit: if the target has a Shield, some of the boss’ attacks instead reduce its Toughness (so shielded playstyles are strongly recommended).",
+    image: "Ichor_Memosprite_Judge_of_Oblivion",
+    location: "Amphoreus (Memory / World boss/Encounter in 3.6 content)",
+    // Legacy
+    weakness: "{Imaginary, Physical, Ice}",
+    metaWeakness:
+      "PheasantSummons / Shields (kills summons to reduce Toughness)",
+    metaResistance: "ExpediteVerdict (DMG reduction until Weakness Break)",
+    rangeWeakness: "Single",
     rangeResistance: "",
   },
 ];

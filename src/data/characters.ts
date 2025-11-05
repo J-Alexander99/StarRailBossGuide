@@ -17,14 +17,24 @@ export type Meta =
   | "Raiden"
   | "Ultimate";
 
+export type Implant =
+  | "Firefly"
+  | "Silver Wolf"
+  | "Flat"
+  | "Anaxa"
+  | "ultNegate"
+  | "ult";
+
 export type Character = {
   id: string;
   name: string;
   element: Element;
   path?: Path;
   role?: Role;
-  meta?: Meta;
+  meta?: Meta; // Primary meta archetype
+  subMeta?: Meta | Meta[]; // Secondary/additional meta archetypes this character can function in
   target?: Target;
+  implant?: Implant; // Implant type for specific characters
   rating?: number; // Total rating (sum of MoC + PF + AS, max 30)
   mocRating?: number; // Memory of Chaos rating (1-10)
   pfRating?: number; // Pure Fiction rating (1-10)
@@ -39,7 +49,8 @@ export const CHARACTERS: Character[] = [
     element: "Physical",
     path: "Erudition",
     role: "DPS",
-    meta: "Crit",
+    meta: "Ultimate",
+    subMeta: "Crit",
     target: "AoE",
     rating: 22,
     mocRating: 7,
@@ -53,7 +64,9 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Break",
+    // subMeta:
     target: "Single",
+    implant: "ult",
     rating: 15,
     mocRating: 6,
     pfRating: 1,
@@ -66,6 +79,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Follow-Up",
+    // subMeta:
     target: "Blast",
     rating: 10,
     mocRating: 4,
@@ -79,6 +93,7 @@ export const CHARACTERS: Character[] = [
     path: "Preservation",
     role: "Sustain",
     meta: "General",
+    // subMeta:
     rating: 29,
     mocRating: 10,
     pfRating: 9,
@@ -91,6 +106,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "Crit",
+    // subMeta:
     target: "Single",
     rating: 7,
     mocRating: 2,
@@ -104,6 +120,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "DPS",
     meta: "DOT",
+    // subMeta:
     target: "AoE",
     rating: 29,
     mocRating: 10,
@@ -117,7 +134,9 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Kevin",
+    // subMeta:
     target: "AoE",
+    implant: "ult",
     rating: 29,
     mocRating: 10,
     pfRating: 9,
@@ -130,6 +149,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "DPS",
     meta: "DOT",
+    // subMeta:
     target: "Single",
     rating: 3,
     mocRating: 1,
@@ -143,6 +163,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "General",
+    // subMeta:
     target: "Single",
     rating: 3,
     mocRating: 1,
@@ -156,6 +177,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "Follow-Up",
+    subMeta: ["Crit", "Ultimate"], // Robin works well in Follow-Up (primary), Crit, and Ultimate teams
     target: "Single",
     rating: 28,
     mocRating: 9,
@@ -169,6 +191,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "DOT",
+    // subMeta:
     target: "Single",
     rating: 3,
     mocRating: 1,
@@ -182,6 +205,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "Blast",
     rating: 3,
     mocRating: 1,
@@ -195,6 +219,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Ultimate",
+    // subMeta:
     target: "Single",
     rating: 20,
     mocRating: 8,
@@ -210,6 +235,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "General",
+    // subMeta:
     target: "AoE",
     rating: 7,
     mocRating: 2,
@@ -223,7 +249,9 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Break",
+    // subMeta:
     target: "Blast",
+    implant: "Firefly",
     rating: 19,
     mocRating: 7,
     pfRating: 4,
@@ -236,6 +264,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "Break",
+    // subMeta:
     target: "Blast",
     rating: 22,
     mocRating: 7,
@@ -249,6 +278,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "General",
+    // subMeta:
     target: "AoE",
     rating: 26,
     mocRating: 9,
@@ -262,6 +292,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "DPS",
     meta: "DOT",
+    // subMeta:
     target: "Blast",
     rating: 6,
     mocRating: 2,
@@ -275,6 +306,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "Sub-DPS",
     meta: "Follow-Up",
+    // subMeta:
     target: "Blast",
     rating: 12,
     mocRating: 4,
@@ -288,6 +320,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "Single",
     rating: 3,
     mocRating: 1,
@@ -301,6 +334,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "Raiden",
+    // subMeta:
     target: "AoE",
     rating: 24,
     mocRating: 8,
@@ -314,6 +348,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "Break",
+    // subMeta:
     target: "AoE",
     rating: 27,
     mocRating: 9,
@@ -327,6 +362,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Follow-Up",
+    // subMeta:
     target: "Single",
     rating: 18,
     mocRating: 8,
@@ -340,6 +376,7 @@ export const CHARACTERS: Character[] = [
     path: "Preservation",
     role: "Sustain",
     meta: "General",
+    // subMeta:
     target: "Single",
     rating: 3,
     mocRating: 1,
@@ -355,6 +392,7 @@ export const CHARACTERS: Character[] = [
     path: "Remembrance",
     role: "Support",
     meta: "Summon",
+    // subMeta:
     rating: 10,
   },
   {
@@ -364,6 +402,7 @@ export const CHARACTERS: Character[] = [
     path: "Remembrance",
     role: "Support",
     meta: "Summon",
+    // subMeta:
     target: "AoE",
     rating: 29,
     mocRating: 10,
@@ -377,6 +416,7 @@ export const CHARACTERS: Character[] = [
     path: "Preservation",
     role: "Sustain",
     meta: "General",
+    // subMeta:
     target: "Single",
     rating: 8,
     mocRating: 2,
@@ -390,6 +430,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "Sub-DPS",
     meta: "Follow-Up",
+    // subMeta:
     target: "AoE",
     rating: 23,
     mocRating: 7,
@@ -403,6 +444,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "Blast",
     rating: 20,
     mocRating: 8,
@@ -416,6 +458,7 @@ export const CHARACTERS: Character[] = [
     path: "Preservation",
     role: "Sustain",
     meta: "General",
+    // subMeta:
     target: "Single",
     rating: 3,
     mocRating: 1,
@@ -429,6 +472,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "Blast",
     rating: 3,
     mocRating: 1,
@@ -442,6 +486,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "General",
+    // subMeta:
     target: "AoE",
     rating: 20,
     mocRating: 6,
@@ -455,6 +500,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "Break",
+    // subMeta:
     target: "Single",
     rating: 28,
     mocRating: 9,
@@ -468,6 +514,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "AoE",
     rating: 28,
     mocRating: 9,
@@ -481,6 +528,7 @@ export const CHARACTERS: Character[] = [
     path: "Remembrance",
     role: "Support",
     meta: "Summon",
+    // subMeta:
     target: "Single",
     rating: 30,
     mocRating: 10,
@@ -494,6 +542,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "Single",
     rating: 3,
     mocRating: 1,
@@ -509,6 +558,7 @@ export const CHARACTERS: Character[] = [
     path: "Remembrance",
     role: "DPS",
     meta: "Summon",
+    // subMeta:
     target: "Blast",
     rating: 25,
     mocRating: 9,
@@ -522,6 +572,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "Single",
     rating: 3,
     mocRating: 1,
@@ -535,6 +586,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "General",
+    // subMeta:
     target: "Single",
     rating: 14,
     mocRating: 4,
@@ -548,6 +600,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "DPS",
     meta: "Follow-Up",
+    // subMeta:
     target: "AoE",
     rating: 17,
     mocRating: 6,
@@ -561,6 +614,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "DOT",
+    // subMeta:
     target: "AoE",
     rating: 29,
     mocRating: 10,
@@ -574,6 +628,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "Sub-DPS",
     meta: "Follow-Up",
+    // subMeta:
     target: "Single",
     rating: 13,
     mocRating: 6,
@@ -587,7 +642,9 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "DPS",
     meta: "Raiden",
+    // subMeta:
     target: "AoE",
+    implant: "ultNegate",
     rating: 23,
     mocRating: 8,
     pfRating: 8,
@@ -600,6 +657,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "Sub-DPS",
     meta: "DOT",
+    // subMeta:
     target: "Blast",
     rating: 19,
     mocRating: 6,
@@ -613,6 +671,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "General",
+    // subMeta:
     target: "Single",
     rating: 24,
     mocRating: 8,
@@ -628,7 +687,9 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "AoE",
+    implant: "Anaxa",
     rating: 29,
     mocRating: 10,
     pfRating: 9,
@@ -641,6 +702,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "DPS",
     meta: "DOT",
+    // subMeta:
     target: "AoE",
     rating: 26,
     mocRating: 9,
@@ -654,6 +716,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "Single",
     rating: 24,
     mocRating: 8,
@@ -667,6 +730,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "General",
+    // subMeta:
     target: "Single",
     rating: 26,
     mocRating: 9,
@@ -680,6 +744,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "Kevin",
+    // subMeta:
     target: "Single",
     rating: 29,
     mocRating: 10,
@@ -693,6 +758,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "Single",
     rating: 3,
     mocRating: 1,
@@ -706,7 +772,9 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Follow-Up",
+    // subMeta:
     target: "Single",
+    implant: "ultNegate",
     rating: 21,
     mocRating: 8,
     pfRating: 4,
@@ -719,6 +787,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "DOT",
+    // subMeta:
     target: "Single",
     rating: 27,
     mocRating: 9,
@@ -732,6 +801,7 @@ export const CHARACTERS: Character[] = [
     path: "Remembrance",
     role: "Sustain",
     meta: "Summon",
+    // subMeta:
     target: "AoE",
     rating: 30,
     mocRating: 10,
@@ -745,6 +815,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Ultimate",
+    // subMeta:
     target: "AoE",
     rating: 26,
     mocRating: 9,
@@ -758,6 +829,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "DPS",
     meta: "DOT",
+    // subMeta:
     target: "Blast",
     rating: 3,
     mocRating: 1,
@@ -773,6 +845,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "Single",
     rating: 22,
     mocRating: 10,
@@ -786,6 +859,7 @@ export const CHARACTERS: Character[] = [
     path: "Remembrance",
     role: "DPS",
     meta: "Summon",
+    // subMeta:
     target: "AoE",
     rating: 30,
     mocRating: 10,
@@ -799,6 +873,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "General",
+    // subMeta:
     target: "Blast",
     rating: 27,
     mocRating: 9,
@@ -812,6 +887,7 @@ export const CHARACTERS: Character[] = [
     path: "Preservation",
     role: "Sustain",
     meta: "General",
+    // subMeta:
     target: "Single",
     rating: 23,
     mocRating: 7,
@@ -825,6 +901,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "Sub-DPS",
     meta: "Follow-Up",
+    // subMeta:
     target: "AoE",
     rating: 26,
     mocRating: 8,
@@ -838,6 +915,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "General",
+    // subMeta:
     target: "Single",
     rating: 14,
     mocRating: 4,
@@ -851,6 +929,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "Blast",
     rating: 3,
     mocRating: 1,
@@ -864,6 +943,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "Single",
     rating: 6,
     mocRating: 2,
@@ -877,7 +957,9 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "Raiden",
+    // subMeta:
     target: "Single",
+    implant: "Silver Wolf",
     rating: 25,
     mocRating: 8,
     pfRating: 8,
@@ -890,6 +972,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "General",
+    // subMeta:
     target: "Single",
     rating: 26,
     mocRating: 9,
@@ -903,6 +986,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "General",
+    // subMeta:
     target: "AoE",
     rating: 30,
     mocRating: 10,
@@ -916,6 +1000,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "Blast",
     rating: 3,
     mocRating: 1,
@@ -931,6 +1016,7 @@ export const CHARACTERS: Character[] = [
     path: "Preservation",
     role: "Sustain",
     meta: "Follow-Up",
+    // subMeta:
     target: "Single",
     rating: 27,
     mocRating: 9,
@@ -944,6 +1030,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "Sustain",
     meta: "Summon",
+    // subMeta:
     target: "Blast",
     rating: 5,
     mocRating: 2,
@@ -957,6 +1044,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "DPS",
     meta: "Follow-Up",
+    // subMeta:
     target: "Single",
     rating: 7,
     mocRating: 2,
@@ -970,6 +1058,7 @@ export const CHARACTERS: Character[] = [
     path: "Abundance",
     role: "Sustain",
     meta: "General",
+    // subMeta:
     target: "AoE",
     rating: 24,
     mocRating: 8,
@@ -983,6 +1072,7 @@ export const CHARACTERS: Character[] = [
     path: "Hunt",
     role: "Sustain",
     meta: "General",
+    // subMeta:
     target: "Single",
     rating: 17,
     mocRating: 7,
@@ -996,6 +1086,7 @@ export const CHARACTERS: Character[] = [
     path: "Destruction",
     role: "DPS",
     meta: "Crit",
+    // subMeta:
     target: "Blast",
     rating: 25,
     mocRating: 9,
@@ -1009,6 +1100,7 @@ export const CHARACTERS: Character[] = [
     path: "Erudition",
     role: "DPS",
     meta: "Break",
+    // subMeta:
     target: "AoE",
     rating: 21,
     mocRating: 7,
@@ -1022,6 +1114,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "General",
+    // subMeta:
     target: "Team",
     rating: 29,
     mocRating: 10,
@@ -1035,6 +1128,7 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "Break",
+    // subMeta:
     target: "Blast",
     rating: 19,
     mocRating: 6,
@@ -1048,6 +1142,7 @@ export const CHARACTERS: Character[] = [
     path: "Nihility",
     role: "Support",
     meta: "General",
+    // subMeta:
     target: "AoE",
     rating: 4,
     mocRating: 1,
@@ -1061,12 +1156,34 @@ export const CHARACTERS: Character[] = [
     path: "Harmony",
     role: "Support",
     meta: "Crit",
+    // subMeta:
     target: "Blast",
     rating: 4,
     mocRating: 1,
     pfRating: 1,
     asRating: 2,
   },
-
-
 ];
+
+/**
+ * Helper to get all meta types for a character (primary + secondary)
+ * @param character The character to get meta types for
+ * @returns Array of all meta types the character can function in
+ */
+export function getCharacterMetaTypes(character: Character): Meta[] {
+  const metas: Meta[] = [];
+
+  if (character.meta) {
+    metas.push(character.meta);
+  }
+
+  if (character.subMeta) {
+    if (Array.isArray(character.subMeta)) {
+      metas.push(...character.subMeta);
+    } else {
+      metas.push(character.subMeta);
+    }
+  }
+
+  return metas;
+}
