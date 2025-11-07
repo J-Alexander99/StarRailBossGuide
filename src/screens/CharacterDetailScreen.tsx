@@ -17,6 +17,7 @@ import {
   getCharacterImage,
   getCharacterDetailImage,
 } from "../constants/characterImageMappings";
+import { getLightconeImageWithFallback } from "../constants/lightconeImageMappings";
 
 const palette = {
   background: "#130914",
@@ -318,16 +319,29 @@ export function CharacterDetailScreen({ route }: any) {
           <Text style={styles.sectionTitle}>Best Light Cones</Text>
           {buildData && buildData.lightCones.length > 0 ? (
             <View style={styles.recommendationCard}>
-              {buildData.lightCones.map((lc, index) => (
-                <View key={index} style={styles.recommendationItem}>
-                  <Text style={styles.recommendationItemName}>• {lc.name}</Text>
-                  {lc.notes && (
-                    <Text style={styles.recommendationItemNotes}>
-                      {lc.notes}
-                    </Text>
-                  )}
-                </View>
-              ))}
+              {buildData.lightCones.map((lc, index) => {
+                const lightconeImage = getLightconeImageWithFallback(lc.name);
+                return (
+                  <View key={index} style={styles.lightconeItem}>
+                    {lightconeImage && (
+                      <Image
+                        source={lightconeImage}
+                        style={styles.lightconeImage}
+                      />
+                    )}
+                    <View style={styles.lightconeTextContainer}>
+                      <Text style={styles.recommendationItemName}>
+                        {lc.name}
+                      </Text>
+                      {lc.notes && (
+                        <Text style={styles.recommendationItemNotes}>
+                          {lc.notes}
+                        </Text>
+                      )}
+                    </View>
+                  </View>
+                );
+              })}
             </View>
           ) : (
             <Text style={styles.emptyText}>
@@ -776,6 +790,21 @@ const styles = StyleSheet.create({
     color: palette.textMuted,
     marginLeft: 12,
     fontStyle: "italic",
+  },
+  lightconeItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 12,
+    gap: 12,
+  },
+  lightconeImage: {
+    width: 60,
+    height: 80,
+    borderRadius: 4,
+    resizeMode: "cover",
+  },
+  lightconeTextContainer: {
+    flex: 1,
   },
   statRow: {
     flexDirection: "row",
