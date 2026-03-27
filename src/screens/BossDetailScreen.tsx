@@ -17,8 +17,6 @@ import {
 } from "../data/bosses";
 import { CHARACTERS } from "../data/characters";
 import {
-  teamsMatchingWeakness,
-  resolveTeamMembers,
   getRecommendedTeamsSorted,
 } from "../data/teams";
 import { useCharacterOwnership } from "../context/CharacterOwnershipContext";
@@ -29,9 +27,43 @@ import { getCharacterImage } from "../constants/characterImageMappings";
 type RecommendedTeam = {
   team: any;
   members: any[];
+  teamPower: number;
   score: number;
   isAvailable: boolean;
 };
+
+type ScoreThresholds = {
+  excellentMin: number;
+  goodMin: number;
+};
+
+function quantile(values: number[], q: number) {
+  if (!values.length) return 0;
+  const sorted = [...values].sort((a, b) => a - b);
+  const position = Math.min(sorted.length - 1, Math.max(0, (sorted.length - 1) * q));
+  const lower = Math.floor(position);
+  const upper = Math.ceil(position);
+  if (lower === upper) return sorted[lower];
+  const weight = position - lower;
+  return sorted[lower] + (sorted[upper] - sorted[lower]) * weight;
+}
+
+function getScoreThresholds(scores: number[]): ScoreThresholds {
+  if (!scores.length) {
+    return { excellentMin: 0, goodMin: 0 };
+  }
+
+  return {
+    excellentMin: quantile(scores, 0.8),
+    goodMin: quantile(scores, 0.45),
+  };
+}
+
+function getRecommendationTier(score: number, thresholds: ScoreThresholds) {
+  if (score >= thresholds.excellentMin) return "EXCELLENT" as const;
+  if (score >= thresholds.goodMin) return "GOOD" as const;
+  return "FAIR" as const;
+}
 
 const palette = {
   background: "#130914",
@@ -157,6 +189,11 @@ export function BossDetailScreen({ route }: any) {
     metaResistances,
     isCharacterOwned,
   ]);
+
+  const scoreThresholds = useMemo(
+    () => getScoreThresholds(filteredTeams.map((team) => team.score)),
+    [filteredTeams]
+  );
 
   const descriptionText = boss.description?.trim();
   const locationText = boss.location?.trim();
@@ -356,7 +393,7 @@ export function BossDetailScreen({ route }: any) {
             // Calculate statistics
             const averageRating =
               filteredTeams.reduce(
-                (sum, { team }) => sum + (team.teamRating || 0),
+                (sum, { teamPower }) => sum + teamPower,
                 0
               ) / filteredTeams.length;
             const averagePower =
@@ -459,14 +496,17 @@ export function BossDetailScreen({ route }: any) {
             );
           })()}
         {filteredTeams.length ? (
-          filteredTeams.map(({ team, members, score }: RecommendedTeam) => (
+          filteredTeams.map(({ team, members, teamPower, score }: RecommendedTeam) => {
+            const tier = getRecommendationTier(score, scoreThresholds);
+
+            return (
             <View
               key={team.id}
               style={[
                 styles.teamCard,
-                score >= 150
+                tier === "EXCELLENT"
                   ? styles.teamCardExcellent
-                  : score >= 100
+                  : tier === "GOOD"
                   ? styles.teamCardGood
                   : styles.teamCardFair,
               ]}
@@ -481,7 +521,7 @@ export function BossDetailScreen({ route }: any) {
                     <Text style={styles.teamIdText}>ID: {team.id}</Text>
                     <View style={styles.teamSubDivider} />
                     <Text style={styles.teamPowerText}>
-                      Power: {team.teamRating || 0}/120
+                      Power: {teamPower}/120
                     </Text>
                   </View>
                 </View>
@@ -490,9 +530,9 @@ export function BossDetailScreen({ route }: any) {
                   <View
                     style={[
                       styles.recommendationBadgeLarge,
-                      score >= 150
+                      tier === "EXCELLENT"
                         ? styles.recommendationBadgeHighLarge
-                        : score >= 100
+                        : tier === "GOOD"
                         ? styles.recommendationBadgeMediumLarge
                         : styles.recommendationBadgeLowLarge,
                     ]}
@@ -501,11 +541,7 @@ export function BossDetailScreen({ route }: any) {
                       {Math.round(score)}
                     </Text>
                     <Text style={styles.recommendationLabelText}>
-                      {score >= 150
-                        ? "EXCELLENT"
-                        : score >= 100
-                        ? "GOOD"
-                        : "FAIR"}
+                      {tier}
                     </Text>
                   </View>
                 </View>
@@ -577,7 +613,8 @@ export function BossDetailScreen({ route }: any) {
                 })}
               </View>
             </View>
-          ))
+          );
+          })
         ) : (
           <Text style={styles.emptyValue}>
             No strike teams match the documented weaknesses with your current

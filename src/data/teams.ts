@@ -1,11 +1,11 @@
-import { CHARACTERS, type Character } from './characters';
+import { CHARACTERS, getCharacterMetaTypes, type Character } from './characters';
 
 export type Team = {
   id: string;
   name?: string;
   members: [string, string, string, string];
   notes?: string;
-  teamRating?: number; // Sum of all character ratings (out of 40)
+  teamRating?: number; // Sum of all character ratings (out of ~120)
 };
 
 // Helper function to calculate team rating
@@ -3500,6 +3500,466 @@ export const TEAMS: Team[] = [
     name: "evernight team 499",
     members: ["evernight", "trail_ice", "ruanmei", "huohuo"],
   },
+  {
+    id: "t-600",
+    name: "aglaea team 500",
+    members: ["aglaea", "trail_ice", "robin", "huohuo"],
+  },
+  {
+    id: "t-601",
+    name: "aglaea team 501",
+    members: ["aglaea", "trail_ice", "sunday", "fuxuan"],
+  },
+  {
+    id: "t-602",
+    name: "ashveil team 502",
+    members: ["ashveil", "sunday", "tribbie", "danheng_terrae"],
+  },
+  {
+    id: "t-603",
+    name: "ashveil team 503",
+    members: ["ashveil", "sparkle", "trail_ice", "danheng_terrae"],
+  },
+  {
+    id: "t-604",
+    name: "ashveil team 504",
+    members: ["ashveil", "feixiao", "robin", "danheng_terrae"],
+  },
+  {
+    id: "t-605",
+    name: "ashveil team 505",
+    members: ["ashveil", "feixiao", "tribbie", "danheng_terrae"],
+  },
+  {
+    id: "t-606",
+    name: "ashveil team 506",
+    members: ["ashveil", "dr_ratio", "tribbie", "danheng_terrae"],
+  },
+  {
+    id: "t-607",
+    name: "himeko team 507",
+    members: ["himeko", "asta", "ruanmei", "aventurine"],
+  },
+  {
+    id: "t-608",
+    name: "castorice team 508",
+    members: ["castorice", "evernight", "elysia", "hyacine"],
+  },
+  {
+    id: "t-609",
+    name: "evernight team 509",
+    members: ["evernight", "elysia", "trail_ice", "hyacine"],
+  },
+  {
+    id: "t-610",
+    name: "kevin team 510",
+    members: ["kevin", "cerydra", "elysia", "danheng_terrae"],
+  },
+  {
+    id: "t-611",
+    name: "castorice team 511",
+    members: ["castorice", "elysia", "tribbie", "hyacine"],
+  },
+  {
+    id: "t-612",
+    name: "castorice team 512",
+    members: ["castorice", "elysia", "trail_ice", "hyacine"],
+  },
+  {
+    id: "t-613",
+    name: "kevin team 513",
+    members: ["kevin", "cerydra", "elysia", "trail_ice"],
+  },
+  {
+    id: "t-614",
+    name: "anaxa team 514",
+    members: ["anaxa", "cerydra", "elysia", "danheng_terrae"],
+  },
+  {
+    id: "t-615",
+    name: "kevin team 515",
+    members: ["kevin", "elysia", "sunday", "danheng_terrae"],
+  },
+  {
+    id: "t-616",
+    name: "mydei team 516",
+    members: ["mydei", "elysia", "tribbie", "hyacine"],
+  },
+  {
+    id: "t-617",
+    name: "mydei team 517",
+    members: ["mydei", "elysia", "trail_ice", "hyacine"],
+  },
+  {
+    id: "t-618",
+    name: "danheng_imaginary team 518",
+    members: ["danheng_imaginary", "sparkle", "tingyun", "luocha"],
+  },
+  {
+    id: "t-619",
+    name: "danheng_imaginary team 519",
+    members: ["danheng_imaginary", "robin", "sparkle", "huohuo"],
+  },
+  {
+    id: "t-620",
+    name: "danheng_imaginary team 520",
+    members: ["danheng_imaginary", "robin", "sparkle", "aventurine"],
+  },
+  {
+    id: "t-621",
+    name: "danheng_imaginary team 521",
+    members: ["danheng_imaginary", "robin", "sparkle", "gallagher"],
+  },
+  {
+    id: "t-622",
+    name: "danheng_imaginary team 522",
+    members: ["danheng_imaginary", "jiaoqiu", "sparkle", "luocha"],
+  },
+  {
+    id: "t-623",
+    name: "danheng_imaginary team 523",
+    members: ["danheng_imaginary", "ruanmei", "sparkle", "huohuo"],
+  },
+  {
+    id: "t-624",
+    name: "danheng_imaginary team 524",
+    members: ["danheng_imaginary", "sparkle", "tingyun", "aventurine"],
+  },
+  {
+    id: "t-625",
+    name: "danheng_imaginary team 525",
+    members: ["danheng_imaginary", "ruanmei", "sparkle", "gallagher"],
+  },
+  {
+    id: "t-626",
+    name: "danheng_imaginary team 526",
+    members: ["danheng_imaginary", "ruanmei", "sparkle", "luocha"],
+  },
+  {
+    id: "t-627",
+    name: "danheng_imaginary team 527",
+    members: ["danheng_imaginary", "ruanmei", "sparkle", "aventurine"],
+  },
+  {
+    id: "t-628",
+    name: "hysilens team 528",
+    members: ["hysilens", "kafka", "blackswan", "danheng_terrae"],
+  },
+  {
+    id: "t-629",
+    name: "archer team 529",
+    members: ["archer", "sparkle", "yaoguang", "danheng_terrae"],
+  },
+  {
+    id: "t-630",
+    name: "kevin team 530",
+    members: ["kevin", "cerydra", "sunday", "danheng_terrae"],
+  },
+  {
+    id: "t-631",
+    name: "sparxie team 531",
+    members: ["sparxie", "sparkle", "yaoguang", "danheng_terrae"],
+  },
+  {
+    id: "t-632",
+    name: "archer team 532",
+    members: ["archer", "sparkle", "tribbie", "danheng_terrae"],
+  },
+  {
+    id: "t-633",
+    name: "kevin team 533",
+    members: ["kevin", "bronya", "sunday", "danheng_terrae"],
+  },
+  {
+    id: "t-634",
+    name: "kevin team 534",
+    members: ["kevin", "sparkle", "sunday", "danheng_terrae"],
+  },
+  {
+    id: "t-635",
+    name: "the_herta team 535",
+    members: ["the_herta", "anaxa", "tribbie", "danheng_terrae"],
+  },
+  {
+    id: "t-636",
+    name: "archer team 536",
+    members: ["archer", "trail_ice", "sparkle", "danheng_terrae"],
+  },
+  {
+    id: "t-637",
+    name: "raiden team 537",
+    members: ["raiden", "guinaifen", "jiaoqiu", "gallagher"],
+  },
+  {
+    id: "t-638",
+    name: "raiden team 538",
+    members: ["raiden", "guinaifen", "jiaoqiu", "aventurine"],
+  },
+  {
+    id: "t-639",
+    name: "danheng_imaginary team 539",
+    members: ["danheng_imaginary", "hanya", "ruanmei", "gallagher"],
+  },
+  {
+    id: "t-640",
+    name: "danheng_imaginary team 540",
+    members: ["danheng_imaginary", "hanya", "tingyun", "aventurine"],
+  },
+  {
+    id: "t-641",
+    name: "danheng_imaginary team 541",
+    members: ["danheng_imaginary", "hanya", "sparkle", "luocha"],
+  },
+  {
+    id: "t-642",
+    name: "danheng_imaginary team 542",
+    members: ["danheng_imaginary", "himeko", "ruanmei", "aventurine"],
+  },
+  {
+    id: "t-643",
+    name: "castorice team 543",
+    members: ["castorice", "cipher", "tribbie", "hyacine"],
+  },
+  {
+    id: "t-644",
+    name: "castorice team 544",
+    members: ["castorice", "cipher", "trail_ice", "hyacine"],
+  },
+  {
+    id: "t-645",
+    name: "castorice team 545",
+    members: ["castorice", "sunday", "tribbie", "hyacine"],
+  },
+  {
+    id: "t-646",
+    name: "castorice team 546",
+    members: ["castorice", "ruanmei", "tribbie", "hyacine"],
+  },
+  {
+    id: "t-647",
+    name: "castorice team 547",
+    members: ["castorice", "trail_ice", "pela", "hyacine"],
+  },
+  {
+    id: "t-648",
+    name: "castorice team 548",
+    members: ["castorice", "trail_ice", "sunday", "hyacine"],
+  },
+  {
+    id: "t-649",
+    name: "dr_ratio team 549",
+    members: ["dr_ratio", "moze", "tingyun", "lingsha"],
+  },
+  {
+    id: "t-650",
+    name: "dr_ratio team 550",
+    members: ["dr_ratio", "moze", "robin", "lingsha"],
+  },
+  {
+    id: "t-651",
+    name: "feixiao team 551",
+    members: ["feixiao", "moze", "robin", "luocha"],
+  },
+  {
+    id: "t-652",
+    name: "blade team 552",
+    members: ["blade", "bronya", "sparkle", "lynx"],
+  },
+  {
+    id: "t-653",
+    name: "feixiao team 553",
+    members: ["feixiao", "moze", "robin", "march7_imag"],
+  },
+  {
+    id: "t-654",
+    name: "raiden team 554",
+    members: ["raiden", "bronya", "pela", "march7_imag"],
+  },
+  {
+    id: "t-655",
+    name: "raiden team 555",
+    members: ["raiden", "jiaoqiu", "sparkle", "march7_imag"],
+  },
+  {
+    id: "t-656",
+    name: "yunli team 556",
+    members: ["yunli", "topaz_numby", "robin", "march7_imag"],
+  },
+  {
+    id: "t-657",
+    name: "blackswan team 557",
+    members: ["blackswan", "serval", "tingyun", "march7_imag"],
+  },
+  {
+    id: "t-658",
+    name: "rappa team 558",
+    members: ["rappa", "trail_imag", "ruanmei", "aventurine"],
+  },
+  {
+    id: "t-659",
+    name: "sparxie team 559",
+    members: ["sparxie", "sparkle", "yaoguang", "huohuo"],
+  },
+  {
+    id: "t-660",
+    name: "sparxie team 560",
+    members: ["sparxie", "sparkle", "tribbie", "danheng_terrae"],
+  },
+  {
+    id: "t-661",
+    name: "sparxie team 561",
+    members: ["sparxie", "trail_ice", "sparkle", "danheng_terrae"],
+  },
+  {
+    id: "t-662",
+    name: "sparxie team 562",
+    members: ["sparxie", "sparkle", "yaoguang", "aventurine"],
+  },
+  {
+    id: "t-663",
+    name: "sparxie team 563",
+    members: ["sparxie", "sparkle", "yaoguang", "fuxuan"],
+  },
+  {
+    id: "t-664",
+    name: "sparxie team 564",
+    members: ["sparxie", "sparkle", "yaoguang", "hyacine"],
+  },
+  {
+    id: "t-665",
+    name: "sparxie team 565",
+    members: ["sparxie", "cipher", "sparkle", "danheng_terrae"],
+  },
+  {
+    id: "t-666",
+    name: "sparxie team 566",
+    members: ["sparxie", "sparkle", "yaoguang", "luocha"],
+  },
+  {
+    id: "t-667",
+    name: "sparxie team 567",
+    members: ["sparxie", "sparkle", "tribbie", "huohuo"],
+  },
+  {
+    id: "t-668",
+    name: "danheng_imaginary team 568",
+    members: ["danheng_imaginary", "sunday", "robin", "luocha"],
+  },
+  {
+    id: "t-669",
+    name: "danheng_imaginary team 569",
+    members: ["danheng_imaginary", "sunday", "tingyun", "luocha"],
+  },
+  {
+    id: "t-670",
+    name: "danheng_imaginary team 570",
+    members: ["danheng_imaginary", "sunday", "ruanmei", "luocha"],
+  },
+  {
+    id: "t-671",
+    name: "firefly team 571",
+    members: ["firefly", "fugue", "thedahlia", "lingsha"],
+  },
+  {
+    id: "t-672",
+    name: "firefly team 572",
+    members: ["firefly", "fugue", "trail_imag", "thedahlia"],
+  },
+  {
+    id: "t-673",
+    name: "firefly team 573",
+    members: ["firefly", "fugue", "thedahlia", "gallagher"],
+  },
+  {
+    id: "t-674",
+    name: "firefly team 574",
+    members: ["firefly", "fugue", "ruanmei", "thedahlia"],
+  },
+  {
+    id: "t-675",
+    name: "firefly team 575",
+    members: ["firefly", "trail_imag", "thedahlia", "lingsha"],
+  },
+  {
+    id: "t-676",
+    name: "firefly team 576",
+    members: ["firefly", "trail_imag", "thedahlia", "gallagher"],
+  },
+  {
+    id: "t-677",
+    name: "firefly team 577",
+    members: ["firefly", "trail_imag", "ruanmei", "thedahlia"],
+  },
+  {
+    id: "t-678",
+    name: "lingsha team 578",
+    members: ["lingsha", "fugue", "trail_imag", "thedahlia"],
+  },
+  {
+    id: "t-679",
+    name: "lingsha team 579",
+    members: ["lingsha", "fugue", "ruanmei", "thedahlia"],
+  },
+  {
+    id: "t-680",
+    name: "rappa team 580",
+    members: ["rappa", "fugue", "thedahlia", "lingsha"],
+  },
+  {
+    id: "t-681",
+    name: "the_herta team 581",
+    members: ["the_herta", "herta", "trail_ice", "lingsha"],
+  },
+  {
+    id: "t-682",
+    name: "yunli team 582",
+    members: ["yunli", "robin", "trail_ice", "huohuo"],
+  },
+  {
+    id: "t-683",
+    name: "raiden team 583",
+    members: ["raiden", "jiaoqiu", "tribbie", "aventurine"],
+  },
+  {
+    id: "t-684",
+    name: "the_herta team 584",
+    members: ["the_herta", "herta", "tribbie", "huohuo"],
+  },
+  {
+    id: "t-685",
+    name: "the_herta team 585",
+    members: ["the_herta", "herta", "tribbie", "fuxuan"],
+  },
+  {
+    id: "t-686",
+    name: "raiden team 586",
+    members: ["raiden", "welt", "sparkle", "aventurine"],
+  },
+  {
+    id: "t-687",
+    name: "archer team 587",
+    members: ["archer", "sparkle", "yaoguang", "hyacine"],
+  },
+  {
+    id: "t-688",
+    name: "archer team 588",
+    members: ["archer", "sparkle", "yaoguang", "huohuo"],
+  },
+  {
+    id: "t-689",
+    name: "archer team 589",
+    members: ["archer", "sparkle", "yaoguang", "aventurine"],
+  },
+  {
+    id: "t-690",
+    name: "archer team 590",
+    members: ["archer", "sparkle", "yaoguang", "fuxuan"],
+  },
+  {
+    id: "t-691",
+    name: "danheng_imaginary team 591",
+    members: ["danheng_imaginary", "tingyun", "yukong", "luocha"],
+  },
 ];
 
 
@@ -3509,13 +3969,22 @@ export function resolveTeamMembers(team: Team) {
     .filter(Boolean) as Character[];
 }
 
+export function getTeamPower(team: Team, members?: Character[]) {
+  if (typeof team.teamRating === 'number') {
+    return team.teamRating;
+  }
+
+  const resolvedMembers = members ?? resolveTeamMembers(team);
+  return resolvedMembers.reduce((sum, member) => sum + (member.rating || 0), 0);
+}
+
 export function teamsMatchingWeakness(weakness?: string | string[]) {
   if (!weakness) return TEAMS;
   const weaknesses = Array.isArray(weakness) ? weakness : [weakness];
   return TEAMS.filter((team) =>
     resolveTeamMembers(team).some(
       (m) =>
-        m.role === "DPS" &&
+        (m.role === "DPS" || m.role === "Sub-DPS") &&
         (weaknesses.includes(m.element) || m.element === "All")
     )
   );
@@ -3527,75 +3996,117 @@ export function calculateTeamRecommendationScore(
   bossWeaknesses: string[] = [],
   bossResistances: string[] = [],
   bossMetaWeaknesses: string[] = [],
-  bossMetaResistances: string[] = []
+  bossMetaResistances: string[] = [],
+  membersOverride?: Character[]
 ): number {
-  const members = resolveTeamMembers(team);
+  const members = membersOverride ?? resolveTeamMembers(team);
+  const expectedMemberCount = team.members.length;
+  const missingMembers = Math.max(0, expectedMemberCount - members.length);
+
+  if (members.length === 0) {
+    return 0;
+  }
+
+  const maxCharacterRating = Math.max(
+    ...CHARACTERS.map((character) => character.rating || 0),
+    1
+  );
+
+  const teamPower = getTeamPower(team, members);
   let score = 0;
-  
-  // Base score from team power (normalized to 0-100)
-  const teamPower = team.teamRating || 0;
-  score += (teamPower / 40) * 100; // Max 100 points for team power
-  
+
+  // Team power is the strongest base factor. Keep it dominant before matchup terms.
+  const powerCap = expectedMemberCount * maxCharacterRating;
+  score += (teamPower / powerCap) * 130;
+
+  // Hard penalty for teams with missing/invalid members.
+  score -= missingMembers * 40;
+
   // Element matching bonuses/penalties
-  const elementScores = members.map(member => {
+  const elementScores = members.map((member) => {
     let elementScore = 0;
-    
+
     // Major bonus for DPS characters hitting weakness
     if (member.role === 'DPS' && bossWeaknesses.includes(member.element)) {
-      elementScore += 50;
+      elementScore += 45;
     }
-    // Medium bonus for Sub-DPS hitting weakness  
-    else if (member.role === 'Sub-DPS' && bossWeaknesses.includes(member.element)) {
-      elementScore += 25;
+    // Medium bonus for Sub-DPS hitting weakness
+    else if (
+      member.role === 'Sub-DPS' &&
+      bossWeaknesses.includes(member.element)
+    ) {
+      elementScore += 20;
     }
-    // Small bonus for any character hitting weakness
+    // Very small bonus for non-DPS units; their elements matter less.
     else if (bossWeaknesses.includes(member.element)) {
-      elementScore += 10;
+      elementScore += 4;
     }
-    
+
     // Penalty for characters hitting resistance
     if (bossResistances.includes(member.element)) {
-      elementScore -= 20;
+      if (member.role === 'DPS') {
+        elementScore -= 30;
+      } else if (member.role === 'Sub-DPS') {
+        elementScore -= 14;
+      } else {
+        elementScore -= 6;
+      }
     }
-    
+
     return elementScore;
   });
-  
-  score += Math.max(...elementScores); // Take best element match
-  
+
+  // Sum contribution from all members with a slight cap so element does not eclipse power.
+  const totalElementScore = elementScores.reduce((sum, value) => sum + value, 0);
+  score += Math.min(70, totalElementScore);
+
+  const dpsMembers = members.filter((member) => member.role === 'DPS');
+  const hasDpsWeaknessMatch = dpsMembers.some((member) =>
+    bossWeaknesses.includes(member.element)
+  );
+  if (bossWeaknesses.length > 0 && dpsMembers.length > 0 && !hasDpsWeaknessMatch) {
+    score -= 12;
+  }
+
   // Meta archetype matching
-  const metaScores = members.map(member => {
+  const metaScores = members.map((member) => {
     let metaScore = 0;
-    
-    if (member.meta && bossMetaWeaknesses.includes(member.meta)) {
-      metaScore += 30; // Bonus for meta advantage
+
+    const metas = getCharacterMetaTypes(member);
+    const hasMetaWeakness = metas.some((meta) => bossMetaWeaknesses.includes(meta));
+    const hasMetaResistance = metas.some((meta) =>
+      bossMetaResistances.includes(meta)
+    );
+
+    if (hasMetaWeakness) {
+      metaScore += member.role === 'DPS' ? 14 : 9;
     }
-    
-    if (member.meta && bossMetaResistances.includes(member.meta)) {
-      metaScore -= 15; // Penalty for meta disadvantage
+
+    if (hasMetaResistance) {
+      metaScore -= member.role === 'DPS' ? 10 : 7;
     }
-    
+
     return metaScore;
   });
-  
-  score += metaScores.reduce((sum, s) => sum + s, 0); // Sum all meta bonuses
-  
+
+  score += metaScores.reduce((sum, value) => sum + value, 0);
+
   // Team composition bonuses
-  const roles = members.map(m => m.role).filter(Boolean);
+  const roles = members.map((member) => member.role).filter(Boolean);
   const hasSupport = roles.includes('Support');
   const hasSustain = roles.includes('Sustain');
   const hasDPS = roles.includes('DPS');
   const hasSubDPS = roles.includes('Sub-DPS');
-  
+
   // Balanced team composition bonus
   if (hasDPS && hasSustain) score += 10;
   if (hasSupport) score += 5;
   if (hasDPS && hasSubDPS) score += 5;
-  
+
   // Element diversity bonus (different elements can break different weaknesses)
-  const uniqueElements = new Set(members.map(m => m.element)).size;
+  const uniqueElements = new Set(members.map((member) => member.element)).size;
   if (uniqueElements >= 3) score += 5;
-  
+
   return Math.max(0, score); // Ensure non-negative score
 }
 
@@ -3608,24 +4119,30 @@ export function getRecommendedTeamsSorted(
   onlyAvailable: boolean = true,
   isCharacterOwned?: (id: string) => boolean
 ) {
-  const baseTeams = teamsMatchingWeakness(bossWeaknesses);
+  const hasBossWeaknesses = bossWeaknesses.length > 0;
+  const baseTeams = hasBossWeaknesses ? teamsMatchingWeakness(bossWeaknesses) : TEAMS;
   
   const enrichedTeams = baseTeams.map((team) => {
     const members = resolveTeamMembers(team);
+    const teamPower = getTeamPower(team, members);
     const score = calculateTeamRecommendationScore(
       team,
       bossWeaknesses,
       bossResistances,
       bossMetaWeaknesses,
-      bossMetaResistances
+      bossMetaResistances,
+      members
     );
     
-    const isAvailable = isCharacterOwned ? 
-      members.every((member) => isCharacterOwned(member.id)) : true;
+    const isAvailable = isCharacterOwned
+      ? members.length === team.members.length &&
+        members.every((member) => isCharacterOwned(member.id))
+      : members.length === team.members.length;
     
     return {
       team,
       members,
+      teamPower,
       score,
       isAvailable
     };
@@ -3636,5 +4153,8 @@ export function getRecommendedTeamsSorted(
     enrichedTeams.filter(t => t.isAvailable) : enrichedTeams;
   
   // Sort by score (highest first)
-  return filteredTeams.sort((a, b) => b.score - a.score);
+  return filteredTeams.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return b.teamPower - a.teamPower;
+  });
 }
