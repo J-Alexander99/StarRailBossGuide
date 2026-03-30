@@ -10,15 +10,11 @@ import {
 } from "react-native";
 import {
   BOSSES,
-  getBossAttributes,
   getBossAffinities,
-  getEffectivenessScore,
   type EffectivenessScore,
 } from "../data/bosses";
 import { CHARACTERS } from "../data/characters";
-import {
-  getRecommendedTeamsSorted,
-} from "../data/teams";
+import { getRecommendedTeamsSorted } from "../data/teams";
 import { useCharacterOwnership } from "../context/CharacterOwnershipContext";
 import { getElementIcon } from "../constants/iconMappings";
 import { getBossImage } from "../constants/bossImageMappings";
@@ -40,7 +36,10 @@ type ScoreThresholds = {
 function quantile(values: number[], q: number) {
   if (!values.length) return 0;
   const sorted = [...values].sort((a, b) => a - b);
-  const position = Math.min(sorted.length - 1, Math.max(0, (sorted.length - 1) * q));
+  const position = Math.min(
+    sorted.length - 1,
+    Math.max(0, (sorted.length - 1) * q),
+  );
   const lower = Math.floor(position);
   const upper = Math.ceil(position);
   if (lower === upper) return sorted[lower];
@@ -93,27 +92,6 @@ const ELEMENT_COLORS: Record<string, string> = {
   All: "#94a3b8",
 };
 
-const META_COLORS: Record<string, string> = {
-  DOT: "#f97316",
-  Crit: "#38bdf8",
-  Break: "#a855f7",
-  "Follow-Up": "#22d3ee",
-  Summon: "#8b5cf6",
-  General: "#facc15",
-  Kevin: "#f87171",
-  Raiden: "#60a5fa",
-  Ultimate: "#fb7185",
-  Burn: "#fb923c",
-  Freeze: "#38bdf8",
-};
-
-const RANGE_COLORS: Record<string, string> = {
-  Single: "#ec4899",
-  Blast: "#f97316",
-  AoE: "#22d3ee",
-  Bounce: "#a855f7",
-};
-
 // Score colors for effectiveness display
 const SCORE_COLORS: Record<EffectivenessScore, string> = {
   2: "#a855f7", // Very Good - Purple
@@ -131,18 +109,6 @@ const SCORE_LABELS: Record<EffectivenessScore, string> = {
   "-2": "Highly Resisted",
 };
 
-const ensureArray = (values: string[]): string[] => {
-  const seen = new Set<string>();
-  return values
-    .map((value) => value.trim().replace(/\s+/g, " "))
-    .filter((value) => {
-      if (!value) return false;
-      if (seen.has(value)) return false;
-      seen.add(value);
-      return true;
-    });
-};
-
 export function BossDetailScreen({ route }: any) {
   const { bossId } = route.params;
   const boss = BOSSES.find((b) => b.id === bossId);
@@ -157,10 +123,19 @@ export function BossDetailScreen({ route }: any) {
     );
   }
 
-  // Get both old and new format data
-  const { weaknesses, resistances, metaWeaknesses, metaResistances } =
-    getBossAttributes(boss);
   const affinities = getBossAffinities(boss);
+  const weaknesses = Object.entries(affinities.elements)
+    .filter(([, score]) => score > 0)
+    .map(([key]) => key);
+  const resistances = Object.entries(affinities.elements)
+    .filter(([, score]) => score < 0)
+    .map(([key]) => key);
+  const metaWeaknesses = Object.entries(affinities.meta)
+    .filter(([, score]) => score > 0)
+    .map(([key]) => key);
+  const metaResistances = Object.entries(affinities.meta)
+    .filter(([, score]) => score < 0)
+    .map(([key]) => key);
 
   const { filteredTeams, excludedTeamsCount, totalTeamsCount } = useMemo(() => {
     const recommendedTeams: RecommendedTeam[] = getRecommendedTeamsSorted(
@@ -169,11 +144,11 @@ export function BossDetailScreen({ route }: any) {
       metaWeaknesses,
       metaResistances,
       false, // Don't filter by availability yet
-      isCharacterOwned
+      isCharacterOwned,
     );
 
     const availableTeams = recommendedTeams.filter(
-      (t: RecommendedTeam) => t.isAvailable
+      (t: RecommendedTeam) => t.isAvailable,
     );
     const excludedCount = recommendedTeams.length - availableTeams.length;
 
@@ -192,7 +167,7 @@ export function BossDetailScreen({ route }: any) {
 
   const scoreThresholds = useMemo(
     () => getScoreThresholds(filteredTeams.map((team) => team.score)),
-    [filteredTeams]
+    [filteredTeams],
   );
 
   const descriptionText = boss.description?.trim();
@@ -207,65 +182,11 @@ export function BossDetailScreen({ route }: any) {
     ...(width >= 900 ? [styles.heroImagePlaceholderDesktop] : []),
   ];
 
-  const renderChipGroup = (
-    title: string,
-    values: string[],
-    colorMap: Record<string, string>,
-    iconResolver?: (value: string) => ImageSourcePropType | undefined
-  ) => {
-    const cleaned = ensureArray(values);
-    return (
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>{title}</Text>
-        {cleaned.length ? (
-          <View style={styles.chipRow}>
-            {cleaned.map((value) => {
-              const icon = iconResolver?.(value);
-              const hasIcon = Boolean(icon);
-              const baseStyles = hasIcon
-                ? [styles.chip, styles.chipIconOnly]
-                : iconResolver
-                ? [styles.chip, styles.chipNeutral]
-                : [
-                    styles.chip,
-                    {
-                      backgroundColor: colorMap[value] ?? palette.chipFallback,
-                    },
-                  ];
-
-              return (
-                <View key={`${title}-${value}`} style={baseStyles}>
-                  {hasIcon ? (
-                    <Image
-                      source={icon!}
-                      style={styles.chipIcon}
-                      resizeMode="contain"
-                    />
-                  ) : (
-                    <Text
-                      style={
-                        iconResolver ? styles.chipNeutralText : styles.chipText
-                      }
-                    >
-                      {value}
-                    </Text>
-                  )}
-                </View>
-              );
-            })}
-          </View>
-        ) : (
-          <Text style={styles.emptyValue}>None</Text>
-        )}
-      </View>
-    );
-  };
-
   // New rendering function for scored affinities
   const renderAffinitySection = (
     title: string,
     affinities: Record<string, EffectivenessScore> | undefined,
-    iconResolver?: (value: string) => ImageSourcePropType | undefined
+    iconResolver?: (value: string) => ImageSourcePropType | undefined,
   ) => {
     if (!affinities || Object.keys(affinities).length === 0) {
       return null;
@@ -273,7 +194,7 @@ export function BossDetailScreen({ route }: any) {
 
     // Sort by score (highest to lowest) for better visual flow
     const sortedEntries = Object.entries(affinities).sort(
-      ([, a], [, b]) => b - a
+      ([, a], [, b]) => b - a,
     );
 
     return (
@@ -350,35 +271,13 @@ export function BossDetailScreen({ route }: any) {
 
       <View style={styles.sectionCard}>
         <Text style={styles.sectionHeader}>Battle Intel</Text>
-        {/* Use new scoring system if available, otherwise fall back to legacy */}
-        {affinities.elements && Object.keys(affinities.elements).length > 0 ? (
-          <>
-            {renderAffinitySection(
-              "Elemental Effectiveness",
-              affinities.elements,
-              getElementIcon
-            )}
-            {renderAffinitySection("Range Effectiveness", affinities.ranges)}
-            {renderAffinitySection("Meta Effectiveness", affinities.meta)}
-          </>
-        ) : (
-          <>
-            {renderChipGroup(
-              "Elemental Weaknesses",
-              weaknesses,
-              ELEMENT_COLORS,
-              getElementIcon
-            )}
-            {renderChipGroup(
-              "Elemental Resistances",
-              resistances,
-              ELEMENT_COLORS,
-              getElementIcon
-            )}
-            {renderChipGroup("Meta Weakness", metaWeaknesses, META_COLORS)}
-            {renderChipGroup("Meta Resistance", metaResistances, META_COLORS)}
-          </>
+        {renderAffinitySection(
+          "Elemental Effectiveness",
+          affinities.elements,
+          getElementIcon,
         )}
+        {renderAffinitySection("Range Effectiveness", affinities.ranges)}
+        {renderAffinitySection("Meta Effectiveness", affinities.meta)}
       </View>
 
       <View style={styles.sectionCard}>
@@ -392,10 +291,8 @@ export function BossDetailScreen({ route }: any) {
 
             // Calculate statistics
             const averageRating =
-              filteredTeams.reduce(
-                (sum, { teamPower }) => sum + teamPower,
-                0
-              ) / filteredTeams.length;
+              filteredTeams.reduce((sum, { teamPower }) => sum + teamPower, 0) /
+              filteredTeams.length;
             const averagePower =
               filteredTeams.reduce((sum, { score }) => sum + score, 0) /
               filteredTeams.length;
@@ -423,18 +320,18 @@ export function BossDetailScreen({ route }: any) {
             });
 
             const mostCommonElement = Object.entries(elementCounts).reduce(
-              (a, b) => (elementCounts[a[0]] > elementCounts[b[0]] ? a : b)
+              (a, b) => (elementCounts[a[0]] > elementCounts[b[0]] ? a : b),
             )[0];
             const mostCommonMeta =
               Object.keys(metaCounts).length > 0
                 ? Object.entries(metaCounts).reduce((a, b) =>
-                    metaCounts[a[0]] > metaCounts[b[0]] ? a : b
+                    metaCounts[a[0]] > metaCounts[b[0]] ? a : b,
                   )[0]
                 : "None";
             const mostCommonPath =
               Object.keys(pathCounts).length > 0
                 ? Object.entries(pathCounts).reduce((a, b) =>
-                    pathCounts[a[0]] > pathCounts[b[0]] ? a : b
+                    pathCounts[a[0]] > pathCounts[b[0]] ? a : b,
                   )[0]
                 : "None";
 
@@ -496,125 +393,129 @@ export function BossDetailScreen({ route }: any) {
             );
           })()}
         {filteredTeams.length ? (
-          filteredTeams.map(({ team, members, teamPower, score }: RecommendedTeam) => {
-            const tier = getRecommendationTier(score, scoreThresholds);
+          filteredTeams.map(
+            ({ team, members, teamPower, score }: RecommendedTeam) => {
+              const tier = getRecommendationTier(score, scoreThresholds);
 
-            return (
-            <View
-              key={team.id}
-              style={[
-                styles.teamCard,
-                tier === "EXCELLENT"
-                  ? styles.teamCardExcellent
-                  : tier === "GOOD"
-                  ? styles.teamCardGood
-                  : styles.teamCardFair,
-              ]}
-            >
-              {/* Header with recommendation score prominence */}
-              <View style={styles.teamHeader}>
-                <View style={styles.teamTitleSection}>
-                  <Text style={styles.teamName}>
-                    {team.name ?? `Team ${team.id.toUpperCase()}`}
-                  </Text>
-                  <View style={styles.teamSubInfo}>
-                    <Text style={styles.teamIdText}>ID: {team.id}</Text>
-                    <View style={styles.teamSubDivider} />
-                    <Text style={styles.teamPowerText}>
-                      Power: {teamPower}/120
-                    </Text>
-                  </View>
-                </View>
-
-                <View style={styles.recommendationSection}>
-                  <View
-                    style={[
-                      styles.recommendationBadgeLarge,
-                      tier === "EXCELLENT"
-                        ? styles.recommendationBadgeHighLarge
-                        : tier === "GOOD"
-                        ? styles.recommendationBadgeMediumLarge
-                        : styles.recommendationBadgeLowLarge,
-                    ]}
-                  >
-                    <Text style={styles.recommendationScoreText}>
-                      {Math.round(score)}
-                    </Text>
-                    <Text style={styles.recommendationLabelText}>
-                      {tier}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-
-              {team.notes && <Text style={styles.teamNotes}>{team.notes}</Text>}
-              <View style={styles.memberGrid}>
-                {members.map((member) => {
-                  const memberImage = getCharacterImage(member.id);
-                  const elementIcon = getElementIcon(member.element);
-
-                  return (
-                    <View key={member.id} style={styles.memberCard}>
-                      {memberImage ? (
-                        <Image
-                          source={memberImage}
-                          style={styles.memberAvatar}
-                        />
-                      ) : (
-                        <View
-                          style={[
-                            styles.memberAvatar,
-                            styles.memberPlaceholder,
-                          ]}
-                        >
-                          <Text style={styles.memberPlaceholderText}>
-                            {member.name.charAt(0).toUpperCase()}
-                          </Text>
-                        </View>
-                      )}
-                      <View style={styles.memberInfo}>
-                        <Text style={styles.memberName}>{member.name}</Text>
-                        <View style={styles.memberMetaRow}>
-                          <View
-                            style={[
-                              styles.memberChip,
-                              elementIcon
-                                ? styles.memberChipIconOnly
-                                : {
-                                    backgroundColor:
-                                      ELEMENT_COLORS[member.element] ??
-                                      palette.chipFallback,
-                                  },
-                            ]}
-                          >
-                            {elementIcon ? (
-                              <Image
-                                source={elementIcon}
-                                style={styles.memberChipIcon}
-                                resizeMode="contain"
-                              />
-                            ) : (
-                              <Text style={styles.memberChipText}>
-                                {member.element}
-                              </Text>
-                            )}
-                          </View>
-                          {member.role ? (
-                            <View style={styles.memberRolePill}>
-                              <Text style={styles.memberRoleText}>
-                                {member.role}
-                              </Text>
-                            </View>
-                          ) : null}
-                        </View>
+              return (
+                <View
+                  key={team.id}
+                  style={[
+                    styles.teamCard,
+                    tier === "EXCELLENT"
+                      ? styles.teamCardExcellent
+                      : tier === "GOOD"
+                        ? styles.teamCardGood
+                        : styles.teamCardFair,
+                  ]}
+                >
+                  {/* Header with recommendation score prominence */}
+                  <View style={styles.teamHeader}>
+                    <View style={styles.teamTitleSection}>
+                      <Text style={styles.teamName}>
+                        {team.name ?? `Team ${team.id.toUpperCase()}`}
+                      </Text>
+                      <View style={styles.teamSubInfo}>
+                        <Text style={styles.teamIdText}>ID: {team.id}</Text>
+                        <View style={styles.teamSubDivider} />
+                        <Text style={styles.teamPowerText}>
+                          Power: {teamPower}/120
+                        </Text>
                       </View>
                     </View>
-                  );
-                })}
-              </View>
-            </View>
-          );
-          })
+
+                    <View style={styles.recommendationSection}>
+                      <View
+                        style={[
+                          styles.recommendationBadgeLarge,
+                          tier === "EXCELLENT"
+                            ? styles.recommendationBadgeHighLarge
+                            : tier === "GOOD"
+                              ? styles.recommendationBadgeMediumLarge
+                              : styles.recommendationBadgeLowLarge,
+                        ]}
+                      >
+                        <Text style={styles.recommendationScoreText}>
+                          {Math.round(score)}
+                        </Text>
+                        <Text style={styles.recommendationLabelText}>
+                          {tier}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+
+                  {team.notes && (
+                    <Text style={styles.teamNotes}>{team.notes}</Text>
+                  )}
+                  <View style={styles.memberGrid}>
+                    {members.map((member) => {
+                      const memberImage = getCharacterImage(member.id);
+                      const elementIcon = getElementIcon(member.element);
+
+                      return (
+                        <View key={member.id} style={styles.memberCard}>
+                          {memberImage ? (
+                            <Image
+                              source={memberImage}
+                              style={styles.memberAvatar}
+                            />
+                          ) : (
+                            <View
+                              style={[
+                                styles.memberAvatar,
+                                styles.memberPlaceholder,
+                              ]}
+                            >
+                              <Text style={styles.memberPlaceholderText}>
+                                {member.name.charAt(0).toUpperCase()}
+                              </Text>
+                            </View>
+                          )}
+                          <View style={styles.memberInfo}>
+                            <Text style={styles.memberName}>{member.name}</Text>
+                            <View style={styles.memberMetaRow}>
+                              <View
+                                style={[
+                                  styles.memberChip,
+                                  elementIcon
+                                    ? styles.memberChipIconOnly
+                                    : {
+                                        backgroundColor:
+                                          ELEMENT_COLORS[member.element] ??
+                                          palette.chipFallback,
+                                      },
+                                ]}
+                              >
+                                {elementIcon ? (
+                                  <Image
+                                    source={elementIcon}
+                                    style={styles.memberChipIcon}
+                                    resizeMode="contain"
+                                  />
+                                ) : (
+                                  <Text style={styles.memberChipText}>
+                                    {member.element}
+                                  </Text>
+                                )}
+                              </View>
+                              {member.role ? (
+                                <View style={styles.memberRolePill}>
+                                  <Text style={styles.memberRoleText}>
+                                    {member.role}
+                                  </Text>
+                                </View>
+                              ) : null}
+                            </View>
+                          </View>
+                        </View>
+                      );
+                    })}
+                  </View>
+                </View>
+              );
+            },
+          )
         ) : (
           <Text style={styles.emptyValue}>
             No strike teams match the documented weaknesses with your current

@@ -2,9 +2,14 @@ import React, {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const DISABLED_CHARACTER_STORAGE_KEY = "bossguide:disabledCharacterIds";
 
 export type CharacterOwnershipContextValue = {
   disabledCharacterIds: Set<string>;
@@ -25,9 +30,53 @@ export const CharacterOwnershipProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const hasHydratedFromStorage = useRef(false);
   const [disabledCharacterIds, setDisabledCharacterIds] = useState<Set<string>>(
-    () => new Set()
+    () => new Set(),
   );
+
+  useEffect(() => {
+    const hydrateOwnership = async () => {
+      try {
+        const raw = await AsyncStorage.getItem(DISABLED_CHARACTER_STORAGE_KEY);
+        if (!raw) {
+          return;
+        }
+
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          setDisabledCharacterIds(
+            new Set(parsed.filter((id) => typeof id === "string")),
+          );
+        }
+      } catch {
+        // Keep defaults if persisted settings cannot be read.
+      } finally {
+        hasHydratedFromStorage.current = true;
+      }
+    };
+
+    hydrateOwnership();
+  }, []);
+
+  useEffect(() => {
+    if (!hasHydratedFromStorage.current) {
+      return;
+    }
+
+    const persistOwnership = async () => {
+      try {
+        await AsyncStorage.setItem(
+          DISABLED_CHARACTER_STORAGE_KEY,
+          JSON.stringify(Array.from(disabledCharacterIds)),
+        );
+      } catch {
+        // Ignore write failures so the app remains usable.
+      }
+    };
+
+    persistOwnership();
+  }, [disabledCharacterIds]);
 
   const toggleCharacterOwnership = useCallback((characterId: string) => {
     setDisabledCharacterIds((previous) => {
@@ -53,7 +102,7 @@ export const CharacterOwnershipProvider = ({
         return next;
       });
     },
-    []
+    [],
   );
 
   const resetOwnership = useCallback(() => {
@@ -62,12 +111,12 @@ export const CharacterOwnershipProvider = ({
 
   const isCharacterOwned = useCallback(
     (characterId: string) => !disabledCharacterIds.has(characterId),
-    [disabledCharacterIds]
+    [disabledCharacterIds],
   );
 
   const isCharacterDisabled = useCallback(
     (characterId: string) => disabledCharacterIds.has(characterId),
-    [disabledCharacterIds]
+    [disabledCharacterIds],
   );
 
   const contextValue = useMemo<CharacterOwnershipContextValue>(
@@ -87,7 +136,7 @@ export const CharacterOwnershipProvider = ({
       toggleCharacterOwnership,
       setCharacterOwned,
       resetOwnership,
-    ]
+    ],
   );
 
   return (

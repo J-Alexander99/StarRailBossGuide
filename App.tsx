@@ -15,6 +15,7 @@ import { CharactersScreen } from "./src/screens/CharactersScreen";
 import { CharacterDetailScreen } from "./src/screens/CharacterDetailScreen";
 import { TeamsScreen } from "./src/screens/TeamsScreen";
 import { SettingsScreen } from "./src/screens/SettingsScreen";
+import { LiveEventsScreen } from "./src/screens/LiveEventsScreen";
 import { CharacterOwnershipProvider } from "./src/context/CharacterOwnershipContext";
 
 const Tab = createBottomTabNavigator();
@@ -71,6 +72,43 @@ function CharactersStack() {
         name="Teams"
         component={TeamsScreen}
         options={{ title: "Strike Teams" }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function HomeStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#191222",
+          borderBottomColor: "rgba(255, 255, 255, 0.06)",
+          borderBottomWidth: 1,
+          shadowColor: "#2a1538",
+          shadowOpacity: 0.3,
+          shadowRadius: 8,
+          shadowOffset: { width: 0, height: 4 },
+          elevation: 8,
+        },
+        headerTitleStyle: {
+          fontSize: 20,
+          fontWeight: "700",
+          color: "#f4ecff",
+        },
+        headerTintColor: "#ff6ce0",
+        headerBackTitleVisible: false,
+      }}
+    >
+      <Stack.Screen
+        name="HomeMain"
+        component={HomeScreen}
+        options={{ title: "Guide Hub" }}
+      />
+      <Stack.Screen
+        name="LiveEvents"
+        component={LiveEventsScreen}
+        options={{ title: "Live Events" }}
       />
     </Stack.Navigator>
   );
@@ -154,8 +192,9 @@ function TabNavigator() {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStack}
         options={{
+          headerShown: false,
           title: "Guide Hub",
           tabBarLabel: "Home",
           tabBarIcon: ({ focused, color }) => (

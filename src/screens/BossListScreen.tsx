@@ -11,7 +11,6 @@ import {
 import {
   BOSSES,
   Boss,
-  getBossAttributes,
   getBossAffinities,
   type EffectivenessScore,
 } from "../data/bosses";
@@ -33,38 +32,6 @@ const palette = {
   accent: "#ff6ce0",
 };
 
-const ELEMENT_COLORS: Record<string, string> = {
-  Physical: "#ec4899",
-  Fire: "#f97316",
-  Ice: "#38bdf8",
-  Lightning: "#a855f7",
-  Wind: "#22d3ee",
-  Quantum: "#8b5cf6",
-  Imaginary: "#facc15",
-  All: "#94a3b8",
-};
-
-const META_COLORS: Record<string, string> = {
-  DOT: "#f97316",
-  Crit: "#38bdf8",
-  Break: "#a855f7",
-  "Follow-Up": "#22d3ee",
-  Summon: "#8b5cf6",
-  General: "#facc15",
-  Kevin: "#f87171",
-  Raiden: "#60a5fa",
-  Ultimate: "#fb7185",
-  Burn: "#fb923c",
-  Freeze: "#38bdf8",
-};
-
-const RANGE_COLORS: Record<string, string> = {
-  Single: "#ec4899",
-  Blast: "#f97316",
-  AoE: "#22d3ee",
-  Bounce: "#a855f7",
-};
-
 // Score colors for effectiveness display
 const SCORE_COLORS: Record<EffectivenessScore, string> = {
   2: "#a855f7", // Very Good - Purple
@@ -74,21 +41,9 @@ const SCORE_COLORS: Record<EffectivenessScore, string> = {
   "-2": "#ef4444", // Very Bad - Red
 };
 
-const ensureArray = (values: string[]): string[] => {
-  const seen = new Set<string>();
-  return values
-    .map((value) => value.trim().replace(/\s+/g, " "))
-    .filter((value) => {
-      if (!value) return false;
-      if (seen.has(value)) return false;
-      seen.add(value);
-      return true;
-    });
-};
-
 export function BossListScreen({ navigation }: { navigation: any }) {
   const [expandedDescriptions, setExpandedDescriptions] = useState<Set<string>>(
-    new Set()
+    new Set(),
   );
 
   const toggleDescription = (bossId: string) => {
@@ -103,65 +58,9 @@ export function BossListScreen({ navigation }: { navigation: any }) {
     });
   };
 
-  const renderChips = (
-    title: string,
-    values: string[],
-    colorMap: Record<string, string>,
-    defaultColor: string,
-    iconResolver?: (value: string) => ImageSourcePropType | undefined
-  ) => {
-    const normalized = ensureArray(values);
-
-    return (
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>{title}</Text>
-        {normalized.length ? (
-          <View style={styles.chipRow}>
-            {normalized.map((value) => {
-              const icon = iconResolver?.(value);
-              const hasIcon = Boolean(icon);
-              const baseStyles = hasIcon
-                ? [styles.chip, styles.chipIconOnly]
-                : iconResolver
-                ? [styles.chip, styles.chipNeutral]
-                : [
-                    styles.chip,
-                    {
-                      backgroundColor: colorMap[value] ?? defaultColor,
-                    },
-                  ];
-
-              return (
-                <View key={`${title}-${value}`} style={baseStyles}>
-                  {hasIcon ? (
-                    <Image
-                      source={icon!}
-                      style={styles.chipIcon}
-                      resizeMode="contain"
-                    />
-                  ) : (
-                    <Text
-                      style={
-                        iconResolver ? styles.chipNeutralText : styles.chipText
-                      }
-                    >
-                      {value}
-                    </Text>
-                  )}
-                </View>
-              );
-            })}
-          </View>
-        ) : (
-          <Text style={styles.emptyValue}>None</Text>
-        )}
-      </View>
-    );
-  };
-
   const renderAffinityBadges = (
     affinities: Record<string, EffectivenessScore> | undefined,
-    iconResolver?: (value: string) => ImageSourcePropType | undefined
+    iconResolver?: (value: string) => ImageSourcePropType | undefined,
   ) => {
     if (!affinities || Object.keys(affinities).length === 0) {
       return null;
@@ -217,17 +116,11 @@ export function BossListScreen({ navigation }: { navigation: any }) {
   };
 
   const renderItem = ({ item }: { item: Boss }) => {
-    const { weaknesses, resistances, metaWeaknesses, metaResistances } =
-      getBossAttributes(item);
     const affinities = getBossAffinities(item);
     const bossImageSource = getBossImage(item.image);
 
     const descriptionText = item.description?.trim();
     const locationText = item.location?.trim();
-
-    // Check if using new affinity system
-    const hasNewAffinities =
-      affinities.elements && Object.keys(affinities.elements).length > 0;
 
     return (
       <TouchableOpacity
@@ -294,55 +187,24 @@ export function BossListScreen({ navigation }: { navigation: any }) {
 
         <View style={styles.divider} />
 
-        {hasNewAffinities ? (
-          <>
+        <>
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Element Effectiveness</Text>
+            {renderAffinityBadges(affinities.elements, getElementIcon)}
+          </View>
+          {affinities.ranges && Object.keys(affinities.ranges).length > 0 && (
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Element Effectiveness</Text>
-              {renderAffinityBadges(affinities.elements, getElementIcon)}
+              <Text style={styles.sectionTitle}>Range Effectiveness</Text>
+              {renderAffinityBadges(affinities.ranges)}
             </View>
-            {affinities.ranges && Object.keys(affinities.ranges).length > 0 && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Range Effectiveness</Text>
-                {renderAffinityBadges(affinities.ranges)}
-              </View>
-            )}
-            {affinities.meta && Object.keys(affinities.meta).length > 0 && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Meta Effectiveness</Text>
-                {renderAffinityBadges(affinities.meta)}
-              </View>
-            )}
-          </>
-        ) : (
-          <>
-            {renderChips(
-              "Weaknesses",
-              weaknesses,
-              ELEMENT_COLORS,
-              palette.chipFallback,
-              getElementIcon
-            )}
-            {renderChips(
-              "Resistances",
-              resistances,
-              ELEMENT_COLORS,
-              palette.chipFallback,
-              getElementIcon
-            )}
-            {renderChips(
-              "Meta Weakness",
-              metaWeaknesses,
-              META_COLORS,
-              palette.chipFallback
-            )}
-            {renderChips(
-              "Meta Resistance",
-              metaResistances,
-              META_COLORS,
-              palette.chipFallback
-            )}
-          </>
-        )}
+          )}
+          {affinities.meta && Object.keys(affinities.meta).length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Meta Effectiveness</Text>
+              {renderAffinityBadges(affinities.meta)}
+            </View>
+          )}
+        </>
       </TouchableOpacity>
     );
   };

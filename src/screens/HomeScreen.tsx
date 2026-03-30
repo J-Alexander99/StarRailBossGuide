@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
+  Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -14,6 +15,11 @@ import {
   getCharacterDetailImage,
 } from "../constants/characterImageMappings";
 import { getBossImage } from "../constants/bossImageMappings";
+import {
+  formatTimeRemaining,
+  getLiveEventTheme,
+  getLiveEvents,
+} from "../data/liveEvents";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -24,6 +30,7 @@ const FEATURED_CHARACTERS = [
   "archer",
   "argenti",
   "arlan",
+  "ashveil",
   "asta",
   "aventurine",
   "bailu",
@@ -82,9 +89,11 @@ const FEATURED_CHARACTERS = [
   "seele",
   "serval",
   "silverwolf",
+  "sparxie",
   "sparkle",
   "sunday",
   "sushang",
+  "thedahlia",
   "the_herta",
   "tingyun",
   "topaz_numby",
@@ -96,6 +105,7 @@ const FEATURED_CHARACTERS = [
   "welt",
   "xueyi",
   "yanqing",
+  "yaoguang",
   "yukong",
   "yunli",
 ];
@@ -125,6 +135,21 @@ const FEATURED_BOSSES = [
   "Big_Enemy_The_Past_Present_Show",
 ];
 
+const MOBILE_PRIORITY_CHARACTERS = [
+  "march7_imag",
+  "ashveil",
+  "sparxie",
+  "thedahlia",
+  "yaoguang",
+];
+
+const MOBILE_FEATURED_CHARACTERS = [
+  ...MOBILE_PRIORITY_CHARACTERS,
+  ...FEATURED_CHARACTERS.filter(
+    (id) => !MOBILE_PRIORITY_CHARACTERS.includes(id),
+  ),
+];
+
 interface CarouselProps {
   data: string[];
   isCharacter: boolean;
@@ -133,6 +158,7 @@ interface CarouselProps {
   useDetailImages?: boolean;
   itemWidth?: number;
   itemHeight?: number;
+  maxItems?: number;
 }
 
 function SmoothCarousel({
@@ -143,54 +169,74 @@ function SmoothCarousel({
   useDetailImages = false,
   itemWidth = 100,
   itemHeight = 120,
+  maxItems,
 }: CarouselProps) {
   const scrollViewRef = useRef<ScrollView>(null);
   const scrollPosition = useRef(0);
-  const speed = 0.5; // Pixels per frame
+  const lastFrameTime = useRef(0);
+  const isWeb = Platform.OS === "web";
+  const speed = isWeb ? 0.5 : 0.35;
+  const targetFrameInterval = isWeb ? 1000 / 60 : 1000 / 30;
 
-  // Create 5 copies for truly seamless infinite scroll
-  const extendedData = [...data, ...data, ...data, ...data, ...data];
-  const singleSetWidth = data.length * itemWidth;
-  const totalWidth = extendedData.length * itemWidth;
+  // On native, cap rendered items to reduce memory/CPU load.
+  const limitedData = data.slice(
+    0,
+    Math.min(maxItems ?? data.length, data.length),
+  );
+  const copyCount = isWeb ? 5 : 3;
+
+  // Repeat enough copies for seamless looping while avoiding excessive native rendering.
+  const extendedData = Array.from(
+    { length: copyCount },
+    () => limitedData,
+  ).flat();
+  const singleSetWidth = limitedData.length * itemWidth;
 
   useEffect(() => {
     let animationFrame: number;
 
-    const smoothScroll = () => {
+    if (limitedData.length === 0 || singleSetWidth === 0) {
+      return;
+    }
+
+    const smoothScroll = (timestamp = 0) => {
       if (scrollViewRef.current) {
-        if (direction === "right") {
-          scrollPosition.current += speed;
-        } else {
-          scrollPosition.current -= speed;
-        }
+        // Throttle frame work on native to keep the UI thread responsive.
+        if (timestamp - lastFrameTime.current >= targetFrameInterval) {
+          if (direction === "right") {
+            scrollPosition.current += speed;
+          } else {
+            scrollPosition.current -= speed;
+          }
 
-        // Seamless looping logic - reset position when we're in the buffer zones
-        // but not visible to the user
-        if (scrollPosition.current >= singleSetWidth * 3) {
-          // Reset to equivalent position in the middle set
-          scrollPosition.current = scrollPosition.current - singleSetWidth;
-        } else if (scrollPosition.current <= singleSetWidth) {
-          // Reset to equivalent position in the middle set
-          scrollPosition.current = scrollPosition.current + singleSetWidth;
-        }
+          // Keep position around the middle copies to avoid visible jump.
+          if (scrollPosition.current >= singleSetWidth * (copyCount - 1)) {
+            scrollPosition.current = scrollPosition.current - singleSetWidth;
+          } else if (scrollPosition.current <= singleSetWidth) {
+            scrollPosition.current = scrollPosition.current + singleSetWidth;
+          }
 
-        scrollViewRef.current.scrollTo({
-          x: scrollPosition.current,
-          animated: false,
-        });
+          scrollViewRef.current.scrollTo({
+            x: scrollPosition.current,
+            animated: false,
+          });
+
+          lastFrameTime.current = timestamp;
+        }
       }
 
       animationFrame = requestAnimationFrame(smoothScroll);
     };
 
-    // Initialize position to middle set (2nd copy)
+    // Initialize position in a middle copy so wrap corrections are off-screen.
     setTimeout(() => {
       if (scrollViewRef.current) {
-        scrollPosition.current = singleSetWidth * 2; // Start at 2nd set
+        scrollPosition.current = singleSetWidth * Math.floor(copyCount / 2);
         scrollViewRef.current.scrollTo({
           x: scrollPosition.current,
           animated: false,
         });
+        lastFrameTime.current = 0;
         animationFrame = requestAnimationFrame(smoothScroll);
       }
     }, 50);
@@ -200,7 +246,15 @@ function SmoothCarousel({
         cancelAnimationFrame(animationFrame);
       }
     };
-  }, [data.length, direction, itemWidth, singleSetWidth, speed]);
+  }, [
+    limitedData.length,
+    direction,
+    itemWidth,
+    singleSetWidth,
+    speed,
+    targetFrameInterval,
+    copyCount,
+  ]);
 
   const getImage = (item: string) => {
     if (isCharacter) {
@@ -233,7 +287,8 @@ function SmoothCarousel({
         ref={scrollViewRef}
         horizontal
         showsHorizontalScrollIndicator={false}
-        scrollEnabled={false} // Disable manual scrolling for smooth auto-scroll
+        scrollEnabled={false}
+        removeClippedSubviews={!isWeb}
         style={[styles.carousel, { height: itemHeight }]}
         contentContainerStyle={styles.carouselContent}
       >
@@ -255,15 +310,28 @@ function SmoothCarousel({
 
 export function HomeScreen() {
   const navigation = useNavigation();
+  const isWeb = Platform.OS === "web";
+  const [now, setNow] = useState(() => new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setNow(new Date());
+    }, 30_000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const previewEvents = useMemo(() => getLiveEvents(now).slice(0, 2), [now]);
 
   return (
     <View style={styles.container}>
       {/* Character Carousel - Top */}
       <View style={styles.topCarouselContainer}>
         <SmoothCarousel
-          data={FEATURED_CHARACTERS}
+          data={isWeb ? FEATURED_CHARACTERS : MOBILE_FEATURED_CHARACTERS}
           isCharacter={true}
           direction="right"
+          maxItems={isWeb ? FEATURED_CHARACTERS.length : 18}
           onPress={() => navigation.navigate("Characters" as never)}
         />
         <View style={styles.carouselLabel}>
@@ -276,17 +344,19 @@ export function HomeScreen() {
       {/* Center Title Section */}
       <View style={styles.centerSection}>
         {/* Background Carousel - Behind Title */}
-        <View style={styles.backgroundCarouselContainer}>
-          <SmoothCarousel
-            data={FEATURED_CHARACTERS}
-            isCharacter={true}
-            direction="right"
-            onPress={() => {}}
-            useDetailImages={true}
-            itemWidth={200}
-            itemHeight={240}
-          />
-        </View>
+        {isWeb ? (
+          <View style={styles.backgroundCarouselContainer}>
+            <SmoothCarousel
+              data={FEATURED_CHARACTERS}
+              isCharacter={true}
+              direction="right"
+              onPress={() => {}}
+              useDetailImages={true}
+              itemWidth={200}
+              itemHeight={240}
+            />
+          </View>
+        ) : null}
 
         <View style={styles.titleContainer}>
           <Text style={styles.mainTitle}>Star Rail</Text>
@@ -294,18 +364,54 @@ export function HomeScreen() {
           <View style={styles.titleAccent} />
         </View>
 
-        {/* Quick Stats */}
-        <View style={styles.statsRow}>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>70+</Text>
-            <Text style={styles.statLabel}>Characters</Text>
+        <TouchableOpacity
+          activeOpacity={0.85}
+          style={styles.liveEventsCard}
+          onPress={() => navigation.navigate("LiveEvents" as never)}
+        >
+          <View style={styles.liveEventsHeader}>
+            <Text style={styles.liveEventsTitle}>Live Events</Text>
+            <Text style={styles.liveEventsCta}>View All</Text>
           </View>
-          <View style={styles.statDivider} />
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>12+</Text>
-            <Text style={styles.statLabel}>Bosses</Text>
-          </View>
-        </View>
+
+          {previewEvents.map((event) => {
+            const theme = getLiveEventTheme(event.id);
+
+            return (
+              <View
+                key={event.id}
+                style={[
+                  styles.liveEventsRow,
+                  {
+                    borderColor: theme.borderColor,
+                    backgroundColor: theme.labelBackground,
+                  },
+                ]}
+              >
+                <View
+                  style={[
+                    styles.liveEventsDot,
+                    { backgroundColor: theme.accentColor },
+                  ]}
+                />
+                <Text
+                  style={[styles.liveEventsName, { color: theme.nameText }]}
+                  numberOfLines={1}
+                >
+                  {event.name}
+                </Text>
+                <Text
+                  style={[
+                    styles.liveEventsCountdown,
+                    { color: theme.countdownText },
+                  ]}
+                >
+                  {formatTimeRemaining(event.nextReset, now)}
+                </Text>
+              </View>
+            );
+          })}
+        </TouchableOpacity>
       </View>
 
       {/* Boss Carousel - Bottom */}
@@ -317,6 +423,7 @@ export function HomeScreen() {
           data={FEATURED_BOSSES}
           isCharacter={false}
           direction="left"
+          maxItems={isWeb ? FEATURED_BOSSES.length : 12}
           onPress={() => navigation.navigate("Bosses" as never)}
         />
       </View>
@@ -397,42 +504,67 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
   },
 
-  // Stats
-  statsRow: {
-    flexDirection: "row",
-    alignItems: "center",
+  liveEventsCard: {
+    flexDirection: "column",
     backgroundColor: "rgba(25, 18, 34, 0.6)",
     borderRadius: 20,
     paddingHorizontal: 24,
-    paddingVertical: 16,
+    paddingVertical: 14,
     borderWidth: 1,
     borderColor: "rgba(255, 108, 224, 0.1)",
     zIndex: 1,
+    width: "100%",
   },
 
-  statItem: {
+  liveEventsHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
+    marginBottom: 8,
+  },
+
+  liveEventsTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#f4ecff",
+  },
+
+  liveEventsCta: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: "#ff6ce0",
+    letterSpacing: 0.4,
+    textTransform: "uppercase",
+  },
+
+  liveEventsRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderRadius: 12,
+    gap: 8,
+    marginBottom: 8,
+  },
+
+  liveEventsDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 999,
+  },
+
+  liveEventsName: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#c7b9d6",
     flex: 1,
   },
 
-  statNumber: {
-    fontSize: 28,
-    fontWeight: "800",
-    color: "#ff6ce0",
-    marginBottom: 4,
-  },
-
-  statLabel: {
+  liveEventsCountdown: {
     fontSize: 14,
-    fontWeight: "500",
-    color: "#b8a6d9",
-  },
-
-  statDivider: {
-    width: 1,
-    height: 40,
-    backgroundColor: "rgba(255, 108, 224, 0.2)",
-    marginHorizontal: 24,
+    fontWeight: "700",
+    marginLeft: "auto",
   },
 
   // Bottom Carousel
