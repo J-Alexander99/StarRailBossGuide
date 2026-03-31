@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from "react";
 import { StatusBar, Image } from "react-native";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -17,6 +17,11 @@ import { TeamsScreen } from "./src/screens/TeamsScreen";
 import { SettingsScreen } from "./src/screens/SettingsScreen";
 import { LiveEventsScreen } from "./src/screens/LiveEventsScreen";
 import { CharacterOwnershipProvider } from "./src/context/CharacterOwnershipContext";
+import { AppPreferencesProvider } from "./src/context/AppPreferencesContext";
+import {
+  initializeEventNotifications,
+  syncEventNotificationsIfEnabled,
+} from "./src/services/eventNotifications";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -269,14 +274,24 @@ function TabNavigator() {
 }
 
 export default function App() {
+  useEffect(() => {
+    initializeEventNotifications()
+      .then(() => syncEventNotificationsIfEnabled())
+      .catch(() => {
+        // Notifications remain optional; app should continue if setup fails.
+      });
+  }, []);
+
   return (
     <SafeAreaProvider>
-      <CharacterOwnershipProvider>
-        <StatusBar barStyle="light-content" backgroundColor="#130914" />
-        <NavigationContainer theme={DarkTheme}>
-          <TabNavigator />
-        </NavigationContainer>
-      </CharacterOwnershipProvider>
+      <AppPreferencesProvider>
+        <CharacterOwnershipProvider>
+          <StatusBar barStyle="light-content" backgroundColor="#130914" />
+          <NavigationContainer theme={DarkTheme}>
+            <TabNavigator />
+          </NavigationContainer>
+        </CharacterOwnershipProvider>
+      </AppPreferencesProvider>
     </SafeAreaProvider>
   );
 }

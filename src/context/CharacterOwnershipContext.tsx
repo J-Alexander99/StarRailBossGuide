@@ -18,6 +18,7 @@ export type CharacterOwnershipContextValue = {
   isCharacterDisabled: (characterId: string) => boolean;
   toggleCharacterOwnership: (characterId: string) => void;
   setCharacterOwned: (characterId: string, owned: boolean) => void;
+  replaceDisabledCharacterList: (characterIds: string[]) => void;
   resetOwnership: () => void;
 };
 
@@ -109,6 +110,12 @@ export const CharacterOwnershipProvider = ({
     setDisabledCharacterIds(new Set());
   }, []);
 
+  const replaceDisabledCharacterList = useCallback((characterIds: string[]) => {
+    setDisabledCharacterIds(
+      new Set(characterIds.filter((id) => typeof id === "string")),
+    );
+  }, []);
+
   const isCharacterOwned = useCallback(
     (characterId: string) => !disabledCharacterIds.has(characterId),
     [disabledCharacterIds],
@@ -127,6 +134,7 @@ export const CharacterOwnershipProvider = ({
       isCharacterDisabled,
       toggleCharacterOwnership,
       setCharacterOwned,
+      replaceDisabledCharacterList,
       resetOwnership,
     }),
     [
@@ -135,6 +143,7 @@ export const CharacterOwnershipProvider = ({
       isCharacterDisabled,
       toggleCharacterOwnership,
       setCharacterOwned,
+      replaceDisabledCharacterList,
       resetOwnership,
     ],
   );

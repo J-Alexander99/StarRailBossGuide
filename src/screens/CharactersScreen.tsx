@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { CHARACTERS, Character } from "../data/characters";
 import { getElementIcon, getPathIcon } from "../constants/iconMappings";
 import { getCharacterImage } from "../constants/characterImageMappings";
+import { StarRatingRow } from "../components/StarRatingRow";
 
 const ELEMENT_COLORS: Record<string, string> = {
   Physical: "#ec4899",
@@ -122,34 +123,13 @@ export function CharactersScreen() {
   const renderGameModeStars = (
     mocRating?: number,
     pfRating?: number,
-    asRating?: number
+    asRating?: number,
   ) => {
-    const renderModeStars = (rating: number, color: string, key: string) => {
-      // Each mode has 5 stars, each half star = 1 point (so 10 points = 5 full stars)
-      // rating is 0-10, we want 0-5 stars
-      const halfStars = Math.min(rating, 10); // Clamp to max 10
-      const fullStars = Math.floor(halfStars / 2);
-      const hasHalfStar = halfStars % 2 === 1;
-      const emptyStars = Math.max(0, 5 - fullStars - (hasHalfStar ? 1 : 0));
-
-      return (
-        <View key={key} style={{ flexDirection: "row" }}>
-          <Text style={{ color, fontSize: 16, letterSpacing: 1 }}>
-            {"★".repeat(fullStars)}
-            {hasHalfStar ? "⯨" : ""}
-          </Text>
-          <Text style={{ color: "#6b7280", fontSize: 16, letterSpacing: 1 }}>
-            {"☆".repeat(emptyStars)}
-          </Text>
-        </View>
-      );
-    };
-
     return (
       <View style={styles.gameModeStarsContainer}>
-        {renderModeStars(mocRating || 0, "#ef4444", "moc")}
-        {renderModeStars(pfRating || 0, "#3b82f6", "pf")}
-        {renderModeStars(asRating || 0, "#a855f7", "as")}
+        <StarRatingRow rating={mocRating || 0} color="#ef4444" size={16} />
+        <StarRatingRow rating={pfRating || 0} color="#3b82f6" size={16} />
+        <StarRatingRow rating={asRating || 0} color="#a855f7" size={16} />
       </View>
     );
   };
@@ -157,7 +137,7 @@ export function CharactersScreen() {
   const renderBadge = (
     label: string,
     color: string,
-    icon?: ImageSourcePropType
+    icon?: ImageSourcePropType,
   ) => {
     if (icon) {
       return (
@@ -255,18 +235,18 @@ export function CharactersScreen() {
                     {renderBadge(
                       item.element,
                       ELEMENT_COLORS[item.element] ?? "#475569",
-                      getElementIcon(item.element)
+                      getElementIcon(item.element),
                     )}
                     {item.path &&
                       renderBadge(
                         item.path,
                         PATH_COLORS[item.path] ?? "#334155",
-                        getPathIcon(item.path)
+                        getPathIcon(item.path),
                       )}
                     {item.role &&
                       renderBadge(
                         item.role,
-                        ROLE_COLORS[item.role] ?? "#1e293b"
+                        ROLE_COLORS[item.role] ?? "#1e293b",
                       )}
                   </View>
                   <View style={styles.ratingSection}>
@@ -287,7 +267,7 @@ export function CharactersScreen() {
                     {renderGameModeStars(
                       item.mocRating,
                       item.pfRating,
-                      item.asRating
+                      item.asRating,
                     )}
                   </View>
                 </View>

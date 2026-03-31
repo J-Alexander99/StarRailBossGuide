@@ -18,6 +18,7 @@ import {
   getCharacterDetailImage,
 } from "../constants/characterImageMappings";
 import { getLightconeImageWithFallback } from "../constants/lightconeImageMappings";
+import { StarRatingRow } from "../components/StarRatingRow";
 
 const palette = {
   background: "#130914",
@@ -110,32 +111,13 @@ export function CharacterDetailScreen({ route }: any) {
   const renderGameModeStars = (
     mocRating?: number,
     pfRating?: number,
-    asRating?: number
+    asRating?: number,
   ) => {
-    const renderModeStars = (rating: number, color: string, key: string) => {
-      const halfStars = Math.min(rating, 10);
-      const fullStars = Math.floor(halfStars / 2);
-      const hasHalfStar = halfStars % 2 === 1;
-      const emptyStars = Math.max(0, 5 - fullStars - (hasHalfStar ? 1 : 0));
-
-      return (
-        <View key={key} style={{ flexDirection: "row" }}>
-          <Text style={{ color, fontSize: 18, letterSpacing: 1 }}>
-            {"★".repeat(fullStars)}
-            {hasHalfStar ? "⯨" : ""}
-          </Text>
-          <Text style={{ color: "#6b7280", fontSize: 18, letterSpacing: 1 }}>
-            {"☆".repeat(emptyStars)}
-          </Text>
-        </View>
-      );
-    };
-
     return (
       <View style={styles.gameModeStarsContainer}>
-        {renderModeStars(mocRating || 0, "#ef4444", "moc")}
-        {renderModeStars(pfRating || 0, "#3b82f6", "pf")}
-        {renderModeStars(asRating || 0, "#a855f7", "as")}
+        <StarRatingRow rating={mocRating || 0} color="#ef4444" size={18} />
+        <StarRatingRow rating={pfRating || 0} color="#3b82f6" size={18} />
+        <StarRatingRow rating={asRating || 0} color="#a855f7" size={18} />
       </View>
     );
   };
@@ -210,7 +192,7 @@ export function CharacterDetailScreen({ route }: any) {
                 {
                   width: `${Math.min(
                     100,
-                    ((character.rating || 0) / 30) * 100
+                    ((character.rating || 0) / 30) * 100,
                   )}%`,
                 },
               ]}
@@ -219,7 +201,7 @@ export function CharacterDetailScreen({ route }: any) {
           {renderGameModeStars(
             character.mocRating,
             character.pfRating,
-            character.asRating
+            character.asRating,
           )}
         </View>
 
