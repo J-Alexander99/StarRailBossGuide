@@ -32,6 +32,7 @@ const NAME_ALIASES = {
   "dan heng": "danheng",
   phainon: "kevin",
   acheron: "raiden",
+  cyrene: "elysia",
 };
 
 function normalizeName(name) {

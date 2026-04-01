@@ -10,8 +10,14 @@
     "web": "expo start --web",
     "validate:teams": "npx ts-node scripts/validateTeams.ts",
     "scrape:prydwen": "node scripts/scrapePrydwen.js",
+    "scrape:builds": "node scripts/scrapeBuildData.js",
+    "scrape:builds:test": "node scripts/scrapeBuildData.js --character hyacine",
+    "scrape:builds:char": "node scripts/scrapeBuildData.js",
     "generate:characters": "node scripts/generateCharacters.js",
     "update:characters": "npm run scrape:prydwen && npm run generate:characters",
+    "update:builds": "npm run scrape:builds && npm run merge:builds",
+    "merge:builds": "node scripts/mergeBuildData.js",
+    "palette:characters": "node scripts/extractCharacterPalettes.js",
     "merge:tiers": "node scripts/mergeTierData.js"
   },
   "dependencies": {
@@ -33,6 +39,7 @@
   },
   "devDependencies": {
     "@types/react": "~19.1.10",
+    "sharp": "^0.33.5",
     "typescript": "~5.9.2"
   }
 }

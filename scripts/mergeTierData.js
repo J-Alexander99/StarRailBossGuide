@@ -47,6 +47,7 @@ const NAME_ALIASES = {
   "Dan Heng": "danheng",
   Phainon: "kevin",
   Acheron: "raiden",
+  Cyrene: "elysia",
 };
 
 function normalizeNameForMatching(name) {

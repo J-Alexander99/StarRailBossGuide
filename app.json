@@ -1,10 +1,24 @@
 {
   "expo": {
-    "name": "BossGuide",
+    "name": "Project Pathfinder",
     "slug": "bossguide",
     "version": "1.0.0",
     "sdkVersion": "54.0.0",
     "platforms": ["ios", "android", "web"],
-    "plugins": ["expo-notifications"]
+    "icon": "./images/apk/icon.png",
+    "android": {
+      "package": "com.cryptic.bossguide",
+      "adaptiveIcon": {
+        "foregroundImage": "./images/apk/icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "plugins": ["expo-notifications"],
+    "extra": {
+      "eas": {
+        "projectId": "af138963-002b-4f06-a711-48fe0b97e7bf"
+      }
+    },
+    "owner": "crypticclarity"
   }
 }

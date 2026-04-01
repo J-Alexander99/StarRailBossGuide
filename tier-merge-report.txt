@@ -1,13 +1,44 @@
 ================================================================================
-SAFE CHARACTER RATING UPDATE REPORT
-Generated: 2026-03-27T18:31:22.883Z
-Tier data from: 2026-03-27
+TIER DATA MERGE REPORT
+Generated: 2026-04-01T00:13:12.728Z
+Tier data from: 2026-03-31
 ================================================================================
 
-UNMATCHED: Cyrene
-UPDATED: March 7th - The Hunt -> march7th | 6/3/8 (total 17)
-UPDATED: March 7th -> march7th | 3/3/3 (total 9)
+✏️  UPDATED: Elysia (elysia)
+   Overall: 10 → 30
+   MoC: 3 → 10 | PF: 3 → 10 | AS: 4 → 10
 
-Total in tier file: 83
-Updated: 2
-Unmatched: 1
+⚠️  UNMATCHED: "Trailblazer - Remembrance" - no matching character found
+   Tier scores: MoC=9 PF=10 AS=10 (Total=29)
+
+⚠️  UNMATCHED: "Trailblazer - Harmony" - no matching character found
+   Tier scores: MoC=8 PF=7 AS=8 (Total=23)
+
+✏️  UPDATED: March 7th (march7th)
+   Overall: 9 → 17
+   MoC: 3 → 6 | PF: 3 → 3 | AS: 3 → 8
+
+✏️  UPDATED: March 7th (march7th)
+   Overall: 17 → 9
+   MoC: 6 → 3 | PF: 3 → 3 | AS: 8 → 3
+
+⚠️  UNMATCHED: "Trailblazer - Destruction" - no matching character found
+   Tier scores: MoC=3 PF=3 AS=3 (Total=9)
+
+⚠️  UNMATCHED: "Trailblazer - Preservation" - no matching character found
+   Tier scores: MoC=3 PF=3 AS=3 (Total=9)
+
+
+================================================================================
+SUMMARY
+================================================================================
+Total tier list characters: 83
+Matched: 79
+Updated ratings: 3
+Unmatched: 4
+
+Unmatched characters:
+  - Trailblazer - Remembrance
+  - Trailblazer - Harmony
+  - Trailblazer - Destruction
+  - Trailblazer - Preservation

@@ -1,0 +1,611 @@
+{
+  "aglaea": {
+    "accent": "#3b5569",
+    "accentSoft": "rgba(59, 85, 105, 0.18)",
+    "accentBorder": "rgba(59, 85, 105, 0.35)",
+    "secondary": "#53696e",
+    "tertiary": "#80879a"
+  },
+  "anaxa": {
+    "accent": "#3c5253",
+    "accentSoft": "rgba(60, 82, 83, 0.18)",
+    "accentBorder": "rgba(60, 82, 83, 0.35)",
+    "secondary": "#243b3e",
+    "tertiary": "#255353"
+  },
+  "archer": {
+    "accent": "#3f363a",
+    "accentSoft": "rgba(63, 54, 58, 0.18)",
+    "accentBorder": "rgba(63, 54, 58, 0.35)",
+    "secondary": "#513c3f",
+    "tertiary": "#6b5353"
+  },
+  "argenti": {
+    "accent": "#3b3b4f",
+    "accentSoft": "rgba(59, 59, 79, 0.18)",
+    "accentBorder": "rgba(59, 59, 79, 0.35)",
+    "secondary": "#383640",
+    "tertiary": "#832123"
+  },
+  "arlan": {
+    "accent": "#3d3956",
+    "accentSoft": "rgba(61, 57, 86, 0.18)",
+    "accentBorder": "rgba(61, 57, 86, 0.35)",
+    "secondary": "#525481",
+    "tertiary": "#212852"
+  },
+  "ashveil": {
+    "accent": "#434365",
+    "accentSoft": "rgba(67, 67, 101, 0.18)",
+    "accentBorder": "rgba(67, 67, 101, 0.35)",
+    "secondary": "#3c3a53",
+    "tertiary": "#4e4d6d"
+  },
+  "asta": {
+    "accent": "#4e4e70",
+    "accentSoft": "rgba(78, 78, 112, 0.18)",
+    "accentBorder": "rgba(78, 78, 112, 0.35)",
+    "secondary": "#25243a",
+    "tertiary": "#57577e"
+  },
+  "aventurine": {
+    "accent": "#3f424e",
+    "accentSoft": "rgba(63, 66, 78, 0.18)",
+    "accentBorder": "rgba(63, 66, 78, 0.35)",
+    "secondary": "#3a2525",
+    "tertiary": "#675b50"
+  },
+  "bailu": {
+    "accent": "#273d58",
+    "accentSoft": "rgba(39, 61, 88, 0.18)",
+    "accentBorder": "rgba(39, 61, 88, 0.35)",
+    "secondary": "#236a9b",
+    "tertiary": "#52b5c9"
+  },
+  "blackswan": {
+    "accent": "#6f5d91",
+    "accentSoft": "rgba(111, 93, 145, 0.18)",
+    "accentBorder": "rgba(111, 93, 145, 0.35)",
+    "secondary": "#55506d",
+    "tertiary": "#997cb3"
+  },
+  "blade": {
+    "accent": "#382427",
+    "accentSoft": "rgba(56, 36, 39, 0.18)",
+    "accentBorder": "rgba(56, 36, 39, 0.35)",
+    "secondary": "#242a3a",
+    "tertiary": "#393f54"
+  },
+  "boothill": {
+    "accent": "#3a3c56",
+    "accentSoft": "rgba(58, 60, 86, 0.18)",
+    "accentBorder": "rgba(58, 60, 86, 0.35)",
+    "secondary": "#53516b",
+    "tertiary": "#3d4167"
+  },
+  "bronya": {
+    "accent": "#8285b4",
+    "accentSoft": "rgba(130, 133, 180, 0.18)",
+    "accentBorder": "rgba(130, 133, 180, 0.35)",
+    "secondary": "#696a9e",
+    "tertiary": "#9b9cc7"
+  },
+  "castorice": {
+    "accent": "#37536c",
+    "accentSoft": "rgba(55, 83, 108, 0.18)",
+    "accentBorder": "rgba(55, 83, 108, 0.35)",
+    "secondary": "#253c53",
+    "tertiary": "#394152"
+  },
+  "cerydra": {
+    "accent": "#6d6784",
+    "accentSoft": "rgba(109, 103, 132, 0.18)",
+    "accentBorder": "rgba(109, 103, 132, 0.35)",
+    "secondary": "#545483",
+    "tertiary": "#56516d"
+  },
+  "cipher": {
+    "accent": "#523e3c",
+    "accentSoft": "rgba(82, 62, 60, 0.18)",
+    "accentBorder": "rgba(82, 62, 60, 0.35)",
+    "secondary": "#f8e69f",
+    "tertiary": "#3e373b"
+  },
+  "clara": {
+    "accent": "#3b3954",
+    "accentSoft": "rgba(59, 57, 84, 0.18)",
+    "accentBorder": "rgba(59, 57, 84, 0.35)",
+    "secondary": "#28263b",
+    "tertiary": "#514f6c"
+  },
+  "dahlia": {
+    "accent": "#6d96ce",
+    "accentSoft": "rgba(109, 150, 206, 0.18)",
+    "accentBorder": "rgba(109, 150, 206, 0.35)",
+    "secondary": "#6a8ac7",
+    "tertiary": "#b5e4fb"
+  },
+  "danheng": {
+    "accent": "#b4716b",
+    "accentSoft": "rgba(180, 113, 107, 0.18)",
+    "accentBorder": "rgba(180, 113, 107, 0.35)",
+    "secondary": "#b3574e",
+    "tertiary": "#4f4041"
+  },
+  "danheng_imaginary": {
+    "accent": "#273b50",
+    "accentSoft": "rgba(39, 59, 80, 0.18)",
+    "accentBorder": "rgba(39, 59, 80, 0.35)",
+    "secondary": "#3b6a71",
+    "tertiary": "#23373f"
+  },
+  "danheng_terrae": {
+    "accent": "#f6e6b3",
+    "accentSoft": "rgba(246, 230, 179, 0.18)",
+    "accentBorder": "rgba(246, 230, 179, 0.35)",
+    "secondary": "#e6e0b2",
+    "tertiary": "#f9e49c"
+  },
+  "dr_ratio": {
+    "accent": "#393d51",
+    "accentSoft": "rgba(57, 61, 81, 0.18)",
+    "accentBorder": "rgba(57, 61, 81, 0.35)",
+    "secondary": "#ff0100",
+    "tertiary": "#212a3e"
+  },
+  "elysia": {
+    "accent": "#f7c9e5",
+    "accentSoft": "rgba(247, 201, 229, 0.18)",
+    "accentBorder": "rgba(247, 201, 229, 0.35)",
+    "secondary": "#e5b3e2",
+    "tertiary": "#f6b6e1"
+  },
+  "evanescia": {
+    "accent": "#a09682",
+    "accentSoft": "rgba(160, 150, 130, 0.18)",
+    "accentBorder": "rgba(160, 150, 130, 0.35)",
+    "secondary": "#ae8182",
+    "tertiary": "#9a8781"
+  },
+  "evernight": {
+    "accent": "#cbcbe6",
+    "accentSoft": "rgba(203, 203, 230, 0.18)",
+    "accentBorder": "rgba(203, 203, 230, 0.35)",
+    "secondary": "#9a87b3",
+    "tertiary": "#b4b6e2"
+  },
+  "feixiao": {
+    "accent": "#546c81",
+    "accentSoft": "rgba(84, 108, 129, 0.18)",
+    "accentBorder": "rgba(84, 108, 129, 0.35)",
+    "secondary": "#686e82",
+    "tertiary": "#6d8298"
+  },
+  "firefly": {
+    "accent": "#546b66",
+    "accentSoft": "rgba(84, 107, 102, 0.18)",
+    "accentBorder": "rgba(84, 107, 102, 0.35)",
+    "secondary": "#6d849b",
+    "tertiary": "#546984"
+  },
+  "fugue": {
+    "accent": "#695241",
+    "accentSoft": "rgba(105, 82, 65, 0.18)",
+    "accentBorder": "rgba(105, 82, 65, 0.35)",
+    "secondary": "#836955",
+    "tertiary": "#6e574f"
+  },
+  "fuxuan": {
+    "accent": "#3d353c",
+    "accentSoft": "rgba(61, 53, 60, 0.18)",
+    "accentBorder": "rgba(61, 53, 60, 0.35)",
+    "secondary": "#523e52",
+    "tertiary": "#6b5257"
+  },
+  "gallagher": {
+    "accent": "#3d363c",
+    "accentSoft": "rgba(61, 54, 60, 0.18)",
+    "accentBorder": "rgba(61, 54, 60, 0.35)",
+    "secondary": "#392726",
+    "tertiary": "#523e3a"
+  },
+  "gepard": {
+    "accent": "#23283b",
+    "accentSoft": "rgba(35, 40, 59, 0.18)",
+    "accentBorder": "rgba(35, 40, 59, 0.35)",
+    "secondary": "#3a3b53",
+    "tertiary": "#02239c"
+  },
+  "guinaifen": {
+    "accent": "#6e6981",
+    "accentSoft": "rgba(110, 105, 129, 0.18)",
+    "accentBorder": "rgba(110, 105, 129, 0.35)",
+    "secondary": "#978188",
+    "tertiary": "#3b2725"
+  },
+  "hanya": {
+    "accent": "#3c3955",
+    "accentSoft": "rgba(60, 57, 85, 0.18)",
+    "accentBorder": "rgba(60, 57, 85, 0.35)",
+    "secondary": "#26233d",
+    "tertiary": "#54516a"
+  },
+  "herta": {
+    "accent": "#262752",
+    "accentSoft": "rgba(38, 39, 82, 0.18)",
+    "accentBorder": "rgba(38, 39, 82, 0.35)",
+    "secondary": "#656fb4",
+    "tertiary": "#3a363d"
+  },
+  "himiko": {
+    "accent": "#b29eb6",
+    "accentSoft": "rgba(178, 158, 182, 0.18)",
+    "accentBorder": "rgba(178, 158, 182, 0.35)",
+    "secondary": "#3d353d",
+    "tertiary": "#9a879c"
+  },
+  "hook": {
+    "accent": "#e1834b",
+    "accentSoft": "rgba(225, 131, 75, 0.18)",
+    "accentBorder": "rgba(225, 131, 75, 0.35)",
+    "secondary": "#f9cc6a",
+    "tertiary": "#e3b155"
+  },
+  "huohuo": {
+    "accent": "#273a50",
+    "accentSoft": "rgba(39, 58, 80, 0.18)",
+    "accentBorder": "rgba(39, 58, 80, 0.35)",
+    "secondary": "#202a3d",
+    "tertiary": "#233942"
+  },
+  "hyacine": {
+    "accent": "#f9ceb5",
+    "accentSoft": "rgba(249, 206, 181, 0.18)",
+    "accentBorder": "rgba(249, 206, 181, 0.35)",
+    "secondary": "#97af70",
+    "tertiary": "#cfe188"
+  },
+  "hysilens": {
+    "accent": "#cde3fa",
+    "accentSoft": "rgba(205, 227, 250, 0.18)",
+    "accentBorder": "rgba(205, 227, 250, 0.35)",
+    "secondary": "#21366e",
+    "tertiary": "#524fcd"
+  },
+  "jade": {
+    "accent": "#9d99c8",
+    "accentSoft": "rgba(157, 153, 200, 0.18)",
+    "accentBorder": "rgba(157, 153, 200, 0.35)",
+    "secondary": "#3f3b53",
+    "tertiary": "#52526c"
+  },
+  "jiaqiu": {
+    "accent": "#6d4334",
+    "accentSoft": "rgba(109, 67, 52, 0.18)",
+    "accentBorder": "rgba(109, 67, 52, 0.35)",
+    "secondary": "#513f3a",
+    "tertiary": "#6b5a58"
+  },
+  "jingliu": {
+    "accent": "#1e2752",
+    "accentSoft": "rgba(30, 39, 82, 0.18)",
+    "accentBorder": "rgba(30, 39, 82, 0.35)",
+    "secondary": "#213a6a",
+    "tertiary": "#3a54b3"
+  },
+  "jingyuan": {
+    "accent": "#6c513b",
+    "accentSoft": "rgba(108, 81, 59, 0.18)",
+    "accentBorder": "rgba(108, 81, 59, 0.35)",
+    "secondary": "#856a51",
+    "tertiary": "#543f37"
+  },
+  "kafka": {
+    "accent": "#3f363b",
+    "accentSoft": "rgba(63, 54, 59, 0.18)",
+    "accentBorder": "rgba(63, 54, 59, 0.35)",
+    "secondary": "#382b36",
+    "tertiary": "#53414d"
+  },
+  "kevin": {
+    "accent": "#97a2b7",
+    "accentSoft": "rgba(151, 162, 183, 0.18)",
+    "accentBorder": "rgba(151, 162, 183, 0.35)",
+    "secondary": "#696d81",
+    "tertiary": "#80879c"
+  },
+  "lingsha": {
+    "accent": "#52413e",
+    "accentSoft": "rgba(82, 65, 62, 0.18)",
+    "accentBorder": "rgba(82, 65, 62, 0.35)",
+    "secondary": "#3a2724",
+    "tertiary": "#71857e"
+  },
+  "luka": {
+    "accent": "#3b2125",
+    "accentSoft": "rgba(59, 33, 37, 0.18)",
+    "accentBorder": "rgba(59, 33, 37, 0.35)",
+    "secondary": "#563e3a",
+    "tertiary": "#222938"
+  },
+  "luocha": {
+    "accent": "#283539",
+    "accentSoft": "rgba(40, 53, 57, 0.18)",
+    "accentBorder": "rgba(40, 53, 57, 0.35)",
+    "secondary": "#233a50",
+    "tertiary": "#717f7f"
+  },
+  "lynx": {
+    "accent": "#1e3c54",
+    "accentSoft": "rgba(30, 60, 84, 0.18)",
+    "accentBorder": "rgba(30, 60, 84, 0.35)",
+    "secondary": "#5d7b96",
+    "tertiary": "#133741"
+  },
+  "march7th": {
+    "accent": "#f6b5f8",
+    "accentSoft": "rgba(246, 181, 248, 0.18)",
+    "accentBorder": "rgba(246, 181, 248, 0.35)",
+    "secondary": "#e7b3f5",
+    "tertiary": "#6c9cea"
+  },
+  "march7_imag": {
+    "accent": "#cbe2fc",
+    "accentSoft": "rgba(203, 226, 252, 0.18)",
+    "accentBorder": "rgba(203, 226, 252, 0.35)",
+    "secondary": "#cbcae6",
+    "tertiary": "#c7baf8"
+  },
+  "misha": {
+    "accent": "#c5d0b6",
+    "accentSoft": "rgba(197, 208, 182, 0.18)",
+    "accentBorder": "rgba(197, 208, 182, 0.35)",
+    "secondary": "#9999b7",
+    "tertiary": "#8888b0"
+  },
+  "moze": {
+    "accent": "#37393f",
+    "accentSoft": "rgba(55, 57, 63, 0.18)",
+    "accentBorder": "rgba(55, 57, 63, 0.35)",
+    "secondary": "#3d404e",
+    "tertiary": "#262835"
+  },
+  "mydei": {
+    "accent": "#3d363f",
+    "accentSoft": "rgba(61, 54, 63, 0.18)",
+    "accentBorder": "rgba(61, 54, 63, 0.35)",
+    "secondary": "#362a3a",
+    "tertiary": "#563e41"
+  },
+  "natasha": {
+    "accent": "#b4af9f",
+    "accentSoft": "rgba(180, 175, 159, 0.18)",
+    "accentBorder": "rgba(180, 175, 159, 0.35)",
+    "secondary": "#847f70",
+    "tertiary": "#2c362b"
+  },
+  "pela": {
+    "accent": "#22386f",
+    "accentSoft": "rgba(34, 56, 111, 0.18)",
+    "accentBorder": "rgba(34, 56, 111, 0.35)",
+    "secondary": "#27407f",
+    "tertiary": "#84b1ce"
+  },
+  "qingque": {
+    "accent": "#e0b484",
+    "accentSoft": "rgba(224, 180, 132, 0.18)",
+    "accentBorder": "rgba(224, 180, 132, 0.35)",
+    "secondary": "#3a5157",
+    "tertiary": "#3e5768"
+  },
+  "raiden": {
+    "accent": "#392227",
+    "accentSoft": "rgba(57, 34, 39, 0.18)",
+    "accentBorder": "rgba(57, 34, 39, 0.35)",
+    "secondary": "#521f27",
+    "tertiary": "#3e3b52"
+  },
+  "rappa": {
+    "accent": "#aef075",
+    "accentSoft": "rgba(174, 240, 117, 0.18)",
+    "accentBorder": "rgba(174, 240, 117, 0.35)",
+    "secondary": "#0c4e7c",
+    "tertiary": "#222350"
+  },
+  "robin": {
+    "accent": "#392320",
+    "accentSoft": "rgba(57, 35, 32, 0.18)",
+    "accentBorder": "rgba(57, 35, 32, 0.35)",
+    "secondary": "#272534",
+    "tertiary": "#543927"
+  },
+  "ruanmei": {
+    "accent": "#85889d",
+    "accentSoft": "rgba(133, 136, 157, 0.18)",
+    "accentBorder": "rgba(133, 136, 157, 0.35)",
+    "secondary": "#9a836b",
+    "tertiary": "#836a56"
+  },
+  "saber": {
+    "accent": "#fee36c",
+    "accentSoft": "rgba(254, 227, 108, 0.18)",
+    "accentBorder": "rgba(254, 227, 108, 0.35)",
+    "secondary": "#1b2b69",
+    "tertiary": "#203983"
+  },
+  "sampo": {
+    "accent": "#57526c",
+    "accentSoft": "rgba(87, 82, 108, 0.18)",
+    "accentBorder": "rgba(87, 82, 108, 0.35)",
+    "secondary": "#3d3954",
+    "tertiary": "#6f6885"
+  },
+  "seele": {
+    "accent": "#cac7e4",
+    "accentSoft": "rgba(202, 199, 228, 0.18)",
+    "accentBorder": "rgba(202, 199, 228, 0.35)",
+    "secondary": "#b4283f",
+    "tertiary": "#e4cdfc"
+  },
+  "serval": {
+    "accent": "#39363d",
+    "accentSoft": "rgba(57, 54, 61, 0.18)",
+    "accentBorder": "rgba(57, 54, 61, 0.35)",
+    "secondary": "#26263a",
+    "tertiary": "#3d3c52"
+  },
+  "silverwolf": {
+    "accent": "#0f376b",
+    "accentSoft": "rgba(15, 55, 107, 0.18)",
+    "accentBorder": "rgba(15, 55, 107, 0.35)",
+    "secondary": "#213c6c",
+    "tertiary": "#9c85e6"
+  },
+  "silver_wolf_999": {
+    "accent": "#b3e8f5",
+    "accentSoft": "rgba(179, 232, 245, 0.18)",
+    "accentBorder": "rgba(179, 232, 245, 0.35)",
+    "secondary": "#baeaec",
+    "tertiary": "#292482"
+  },
+  "sparkle": {
+    "accent": "#253984",
+    "accentSoft": "rgba(37, 57, 132, 0.18)",
+    "accentBorder": "rgba(37, 57, 132, 0.35)",
+    "secondary": "#3c3d81",
+    "tertiary": "#283670"
+  },
+  "sparxie": {
+    "accent": "#109db7",
+    "accentSoft": "rgba(16, 157, 183, 0.18)",
+    "accentBorder": "rgba(16, 157, 183, 0.35)",
+    "secondary": "#019901",
+    "tertiary": "#e7d0fd"
+  },
+  "sunday": {
+    "accent": "#e4ccca",
+    "accentSoft": "rgba(228, 204, 202, 0.18)",
+    "accentBorder": "rgba(228, 204, 202, 0.35)",
+    "secondary": "#6b699b",
+    "tertiary": "#8482b1"
+  },
+  "sushang": {
+    "accent": "#c5ccde",
+    "accentSoft": "rgba(197, 204, 222, 0.18)",
+    "accentBorder": "rgba(197, 204, 222, 0.35)",
+    "secondary": "#b4d0e9",
+    "tertiary": "#cddeeb"
+  },
+  "the_dahlia": {
+    "accent": "#5569a0",
+    "accentSoft": "rgba(85, 105, 160, 0.18)",
+    "accentBorder": "rgba(85, 105, 160, 0.35)",
+    "secondary": "#6d709c",
+    "tertiary": "#6b80a0"
+  },
+  "the_herta": {
+    "accent": "#29233c",
+    "accentSoft": "rgba(41, 35, 60, 0.18)",
+    "accentBorder": "rgba(41, 35, 60, 0.35)",
+    "secondary": "#3f3653",
+    "tertiary": "#574e6c"
+  },
+  "tingyun": {
+    "accent": "#3b2620",
+    "accentSoft": "rgba(59, 38, 32, 0.18)",
+    "accentBorder": "rgba(59, 38, 32, 0.35)",
+    "secondary": "#c95301",
+    "tertiary": "#543727"
+  },
+  "topaz_numby": {
+    "accent": "#362e1f",
+    "accentSoft": "rgba(54, 46, 31, 0.18)",
+    "accentBorder": "rgba(54, 46, 31, 0.35)",
+    "secondary": "#3c4052",
+    "tertiary": "#242937"
+  },
+  "trail": {
+    "accent": "#212452",
+    "accentSoft": "rgba(33, 36, 82, 0.18)",
+    "accentBorder": "rgba(33, 36, 82, 0.35)",
+    "secondary": "#50413d",
+    "tertiary": "#3e53b5"
+  },
+  "trail_elat": {
+    "accent": "#3d3953",
+    "accentSoft": "rgba(61, 57, 83, 0.18)",
+    "accentBorder": "rgba(61, 57, 83, 0.35)",
+    "secondary": "#3d363f",
+    "tertiary": "#36283c"
+  },
+  "trail_fire": {
+    "accent": "#b29b84",
+    "accentSoft": "rgba(178, 155, 132, 0.18)",
+    "accentBorder": "rgba(178, 155, 132, 0.35)",
+    "secondary": "#e5ccb2",
+    "tertiary": "#ccb49b"
+  },
+  "trail_ice": {
+    "accent": "#9f99b3",
+    "accentSoft": "rgba(159, 153, 179, 0.18)",
+    "accentBorder": "rgba(159, 153, 179, 0.35)",
+    "secondary": "#847f9e",
+    "tertiary": "#6d6987"
+  },
+  "trail_imag": {
+    "accent": "#3a253e",
+    "accentSoft": "rgba(58, 37, 62, 0.18)",
+    "accentBorder": "rgba(58, 37, 62, 0.35)",
+    "secondary": "#3c3a53",
+    "tertiary": "#282436"
+  },
+  "tribbie": {
+    "accent": "#a09ab5",
+    "accentSoft": "rgba(160, 154, 181, 0.18)",
+    "accentBorder": "rgba(160, 154, 181, 0.35)",
+    "secondary": "#b0a1b5",
+    "tertiary": "#cab4b6"
+  },
+  "welt": {
+    "accent": "#52539d",
+    "accentSoft": "rgba(82, 83, 157, 0.18)",
+    "accentBorder": "rgba(82, 83, 157, 0.35)",
+    "secondary": "#3e3b6a",
+    "tertiary": "#829dcc"
+  },
+  "xueyi": {
+    "accent": "#382627",
+    "accentSoft": "rgba(56, 38, 39, 0.18)",
+    "accentBorder": "rgba(56, 38, 39, 0.35)",
+    "secondary": "#3f383c",
+    "tertiary": "#513d3c"
+  },
+  "yanqing": {
+    "accent": "#b3cce1",
+    "accentSoft": "rgba(179, 204, 225, 0.18)",
+    "accentBorder": "rgba(179, 204, 225, 0.35)",
+    "secondary": "#9cb3d0",
+    "tertiary": "#b2bbdd"
+  },
+  "yao_guang": {
+    "accent": "#fcb87a",
+    "accentSoft": "rgba(252, 184, 122, 0.18)",
+    "accentBorder": "rgba(252, 184, 122, 0.35)",
+    "secondary": "#245068",
+    "tertiary": "#113b50"
+  },
+  "yukong": {
+    "accent": "#3a4052",
+    "accentSoft": "rgba(58, 64, 82, 0.18)",
+    "accentBorder": "rgba(58, 64, 82, 0.35)",
+    "secondary": "#9e6a52",
+    "tertiary": "#6a5751"
+  },
+  "yunli": {
+    "accent": "#8c97b6",
+    "accentSoft": "rgba(140, 151, 182, 0.18)",
+    "accentBorder": "rgba(140, 151, 182, 0.35)",
+    "secondary": "#3a2a2a",
+    "tertiary": "#3f434c"
+  }
+}

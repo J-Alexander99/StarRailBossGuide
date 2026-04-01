@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import {
   View,
   Text,
@@ -7,11 +7,14 @@ import {
   Image,
   ImageSourcePropType,
   useWindowDimensions,
+  Platform,
+  Pressable,
 } from "react-native";
 import {
   BOSSES,
   getBossAffinities,
   type EffectivenessScore,
+  type Boss,
 } from "../data/bosses";
 import { CHARACTERS } from "../data/characters";
 import { getRecommendedTeamsSorted } from "../data/teams";
@@ -19,50 +22,7 @@ import { useCharacterOwnership } from "../context/CharacterOwnershipContext";
 import { getElementIcon } from "../constants/iconMappings";
 import { getBossImage } from "../constants/bossImageMappings";
 import { getCharacterImage } from "../constants/characterImageMappings";
-
-type RecommendedTeam = {
-  team: any;
-  members: any[];
-  teamPower: number;
-  score: number;
-  isAvailable: boolean;
-};
-
-type ScoreThresholds = {
-  excellentMin: number;
-  goodMin: number;
-};
-
-function quantile(values: number[], q: number) {
-  if (!values.length) return 0;
-  const sorted = [...values].sort((a, b) => a - b);
-  const position = Math.min(
-    sorted.length - 1,
-    Math.max(0, (sorted.length - 1) * q),
-  );
-  const lower = Math.floor(position);
-  const upper = Math.ceil(position);
-  if (lower === upper) return sorted[lower];
-  const weight = position - lower;
-  return sorted[lower] + (sorted[upper] - sorted[lower]) * weight;
-}
-
-function getScoreThresholds(scores: number[]): ScoreThresholds {
-  if (!scores.length) {
-    return { excellentMin: 0, goodMin: 0 };
-  }
-
-  return {
-    excellentMin: quantile(scores, 0.8),
-    goodMin: quantile(scores, 0.45),
-  };
-}
-
-function getRecommendationTier(score: number, thresholds: ScoreThresholds) {
-  if (score >= thresholds.excellentMin) return "EXCELLENT" as const;
-  if (score >= thresholds.goodMin) return "GOOD" as const;
-  return "FAIR" as const;
-}
+import { getCharacterPalette } from "../constants/characterPalettes";
 
 const palette = {
   background: "#130914",
@@ -92,28 +52,124 @@ const ELEMENT_COLORS: Record<string, string> = {
   All: "#94a3b8",
 };
 
-// Score colors for effectiveness display
+const PATH_COLORS: Record<string, string> = {
+  Destruction: "#ef4444",
+  Hunt: "#22c55e",
+  Erudition: "#3b82f6",
+  Harmony: "#f59e0b",
+  Nihility: "#8b5cf6",
+  Preservation: "#0ea5e9",
+  Abundance: "#10b981",
+  Elation: "#14b8a6",
+  Remembrance: "#6366f1",
+};
+
+const ROLE_COLORS: Record<string, string> = {
+  "Sub-DPS": "#f97316",
+  DPS: "#ef4444",
+  Support: "#22c55e",
+  Sustain: "#14b8a6",
+};
+
+const META_COLORS: Record<string, string> = {
+  DOT: "#f97316",
+  Crit: "#38bdf8",
+  Break: "#a855f7",
+  "Follow-Up": "#22d3ee",
+  Summon: "#8b5cf6",
+  General: "#facc15",
+  Kevin: "#f87171",
+  Raiden: "#60a5fa",
+  Ultimate: "#fb7185",
+};
+
 const SCORE_COLORS: Record<EffectivenessScore, string> = {
-  2: "#a855f7", // Very Good - Purple
-  1: "#84cc16", // Good - Light Green
-  0: "#64748b", // Neutral - Gray
-  "-1": "#f97316", // Bad - Orange
-  "-2": "#ef4444", // Very Bad - Red
+  [-2]: "#ef4444",
+  [-1]: "#f97316",
+  [0]: "#9ca3af",
+  [1]: "#22c55e",
+  [2]: "#10b981",
 };
 
 const SCORE_LABELS: Record<EffectivenessScore, string> = {
-  2: "Very Effective",
-  1: "Effective",
-  0: "Neutral",
-  "-1": "Resisted",
-  "-2": "Highly Resisted",
+  [-2]: "Terrible",
+  [-1]: "Bad",
+  [0]: "Neutral",
+  [1]: "Good",
+  [2]: "Great",
 };
+
+type RecommendedTeam = {
+  team: any;
+  members: any[];
+  teamPower: number;
+  score: number;
+  isAvailable: boolean;
+};
+
+type ScoreThresholds = {
+  excellentMin: number;
+  goodMin: number;
+};
+
+const hexToRgba = (hex: string, alpha: number) => {
+  const normalized = hex.replace("#", "");
+  if (normalized.length !== 6) return hex;
+  const r = parseInt(normalized.slice(0, 2), 16);
+  const g = parseInt(normalized.slice(2, 4), 16);
+  const b = parseInt(normalized.slice(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+
+function quantile(values: number[], q: number) {
+  if (!values.length) return 0;
+  const sorted = [...values].sort((a, b) => a - b);
+  const position = Math.min(
+    sorted.length - 1,
+    Math.max(0, (sorted.length - 1) * q),
+  );
+  const lower = Math.floor(position);
+  const upper = Math.ceil(position);
+  if (lower === upper) return sorted[lower];
+  const weight = position - lower;
+  return sorted[lower] * (1 - weight) + sorted[upper] * weight;
+}
+
+function getScoreThresholds(scores: number[]): ScoreThresholds {
+  if (!scores.length) return { excellentMin: 90, goodMin: 70 };
+  return {
+    excellentMin: quantile(scores, 0.7),
+    goodMin: quantile(scores, 0.4),
+  };
+}
+
+function getRecommendationTier(
+  score: number,
+  thresholds: ScoreThresholds,
+): "EXCELLENT" | "GOOD" | "FAIR" {
+  if (score >= thresholds.excellentMin) return "EXCELLENT";
+  if (score >= thresholds.goodMin) return "GOOD";
+  return "FAIR";
+}
+
+function keysByScore(
+  map: Record<string, EffectivenessScore> | undefined,
+  predicate: (value: EffectivenessScore) => boolean,
+) {
+  return Object.entries(map || {})
+    .filter(([, value]) => predicate(value))
+    .map(([key]) => key);
+}
 
 export function BossDetailScreen({ route }: any) {
   const { bossId } = route.params;
-  const boss = BOSSES.find((b) => b.id === bossId);
+  const boss: Boss | undefined = BOSSES.find((b) => b.id === bossId);
   const { isCharacterOwned } = useCharacterOwnership();
   const { width } = useWindowDimensions();
+  const isWeb = Platform.OS === "web";
+  const [hoveredMemberKey, setHoveredMemberKey] = useState<string | null>(
+    null,
+  );
 
   if (!boss) {
     return (
@@ -123,47 +179,41 @@ export function BossDetailScreen({ route }: any) {
     );
   }
 
-  const affinities = getBossAffinities(boss);
-  const weaknesses = Object.entries(affinities.elements)
-    .filter(([, score]) => score > 0)
-    .map(([key]) => key);
-  const resistances = Object.entries(affinities.elements)
-    .filter(([, score]) => score < 0)
-    .map(([key]) => key);
-  const metaWeaknesses = Object.entries(affinities.meta)
-    .filter(([, score]) => score > 0)
-    .map(([key]) => key);
-  const metaResistances = Object.entries(affinities.meta)
-    .filter(([, score]) => score < 0)
-    .map(([key]) => key);
+  const affinities = useMemo(() => getBossAffinities(boss), [boss]);
+  const weaknesses = useMemo(
+    () => keysByScore(affinities.elements, (value) => value > 0),
+    [affinities.elements],
+  );
+  const resistances = useMemo(
+    () => keysByScore(affinities.elements, (value) => value < 0),
+    [affinities.elements],
+  );
+  const metaWeaknesses = useMemo(
+    () => keysByScore(affinities.meta, (value) => value > 0),
+    [affinities.meta],
+  );
+  const metaResistances = useMemo(
+    () => keysByScore(affinities.meta, (value) => value < 0),
+    [affinities.meta],
+  );
 
   const { filteredTeams, excludedTeamsCount, totalTeamsCount } = useMemo(() => {
-    const recommendedTeams: RecommendedTeam[] = getRecommendedTeamsSorted(
+    const recommendedTeams = getRecommendedTeamsSorted(
       weaknesses,
       resistances,
       metaWeaknesses,
       metaResistances,
-      false, // Don't filter by availability yet
+      false,
       isCharacterOwned,
     );
 
-    const availableTeams = recommendedTeams.filter(
-      (t: RecommendedTeam) => t.isAvailable,
-    );
-    const excludedCount = recommendedTeams.length - availableTeams.length;
-
+    const availableTeams = recommendedTeams.filter((t: RecommendedTeam) => t.isAvailable);
     return {
       filteredTeams: availableTeams,
-      excludedTeamsCount: excludedCount,
+      excludedTeamsCount: recommendedTeams.length - availableTeams.length,
       totalTeamsCount: recommendedTeams.length,
     };
-  }, [
-    weaknesses,
-    resistances,
-    metaWeaknesses,
-    metaResistances,
-    isCharacterOwned,
-  ]);
+  }, [weaknesses, resistances, metaWeaknesses, metaResistances, isCharacterOwned]);
 
   const scoreThresholds = useMemo(
     () => getScoreThresholds(filteredTeams.map((team) => team.score)),
@@ -182,20 +232,17 @@ export function BossDetailScreen({ route }: any) {
     ...(width >= 900 ? [styles.heroImagePlaceholderDesktop] : []),
   ];
 
-  // New rendering function for scored affinities
   const renderAffinitySection = (
     title: string,
-    affinities: Record<string, EffectivenessScore> | undefined,
+    scored: Record<string, EffectivenessScore> | undefined,
     iconResolver?: (value: string) => ImageSourcePropType | undefined,
   ) => {
-    if (!affinities || Object.keys(affinities).length === 0) {
-      return null;
-    }
+    if (!scored) return null;
 
-    // Sort by score (highest to lowest) for better visual flow
-    const sortedEntries = Object.entries(affinities).sort(
-      ([, a], [, b]) => b - a,
-    );
+    const filteredEntries = Object.entries(scored).filter(([, score]) => score !== 0);
+    if (!filteredEntries.length) return null;
+
+    const sortedEntries = filteredEntries.sort(([, a], [, b]) => b - a);
 
     return (
       <View style={styles.section}>
@@ -228,6 +275,91 @@ export function BossDetailScreen({ route }: any) {
               </View>
             );
           })}
+        </View>
+      </View>
+    );
+  };
+
+  const renderMemberHoverCard = (member: any) => {
+    const paletteEntry = getCharacterPalette(member.id);
+    const accent =
+      paletteEntry?.accent ||
+      ELEMENT_COLORS[member.element] ||
+      palette.accent;
+    const accentSoft =
+      paletteEntry?.accentSoft ||
+      (accent.startsWith("#") ? hexToRgba(accent, 0.18) : palette.accentSoft);
+    const accentBorder =
+      paletteEntry?.accentBorder ||
+      (accent.startsWith("#") ? hexToRgba(accent, 0.45) : palette.accentBorder);
+
+    return (
+      <View
+        style={[
+          styles.memberHoverCard,
+          { borderColor: accentBorder, backgroundColor: accentSoft },
+        ]}
+      >
+        <View style={styles.memberHoverHeader}>
+          <Text style={styles.memberHoverName}>{member.name}</Text>
+          <Text style={[styles.memberHoverRating, { color: accent }]}>
+            {member.rating ? `${member.rating}/30` : "Unrated"}
+          </Text>
+        </View>
+        <View style={styles.memberHoverBadges}>
+          <View style={styles.memberHoverBadge}>
+            <View
+              style={[
+                styles.memberHoverBadgeFill,
+                { backgroundColor: ELEMENT_COLORS[member.element] ?? accent },
+              ]}
+            />
+            <Text style={styles.memberHoverBadgeText}>{member.element}</Text>
+          </View>
+          {member.path && (
+            <View style={styles.memberHoverBadge}>
+              <View
+                style={[
+                  styles.memberHoverBadgeFill,
+                  { backgroundColor: PATH_COLORS[member.path] ?? accent },
+                ]}
+              />
+              <Text style={styles.memberHoverBadgeText}>{member.path}</Text>
+            </View>
+          )}
+          {member.role && (
+            <View style={styles.memberHoverBadge}>
+              <View
+                style={[
+                  styles.memberHoverBadgeFill,
+                  { backgroundColor: ROLE_COLORS[member.role] ?? accent },
+                ]}
+              />
+              <Text style={styles.memberHoverBadgeText}>{member.role}</Text>
+            </View>
+          )}
+          {member.meta && (
+            <View style={styles.memberHoverBadge}>
+              <View
+                style={[
+                  styles.memberHoverBadgeFill,
+                  { backgroundColor: META_COLORS[member.meta] ?? accent },
+                ]}
+              />
+              <Text style={styles.memberHoverBadgeText}>{member.meta}</Text>
+            </View>
+          )}
+        </View>
+        <View style={styles.memberHoverStars}>
+          <Text style={[styles.memberHoverStarValue, { color: accent }]}>
+            MoC {member.mocRating || 0}
+          </Text>
+          <Text style={[styles.memberHoverStarValue, { color: accent }]}>
+            PF {member.pfRating || 0}
+          </Text>
+          <Text style={[styles.memberHoverStarValue, { color: accent }]}>
+            AS {member.asRating || 0}
+          </Text>
         </View>
       </View>
     );
@@ -282,14 +414,19 @@ export function BossDetailScreen({ route }: any) {
 
       <View style={styles.sectionCard}>
         <Text style={styles.sectionHeader}>Recommended Strike Teams</Text>
+        {excludedTeamsCount > 0 ? (
+          <Text style={styles.filterHint}>
+            Filtered out {excludedTeamsCount} team(s) you do not own ({
+              totalTeamsCount
+            } total available).
+          </Text>
+        ) : null}
 
-        {/* Team Statistics Summary */}
         {filteredTeams.length > 0 &&
           (() => {
             const allCharacters = CHARACTERS;
             const totalTeams = totalTeamsCount;
 
-            // Calculate statistics
             const averageRating =
               filteredTeams.reduce((sum, { teamPower }) => sum + teamPower, 0) /
               filteredTeams.length;
@@ -297,13 +434,11 @@ export function BossDetailScreen({ route }: any) {
               filteredTeams.reduce((sum, { score }) => sum + score, 0) /
               filteredTeams.length;
 
-            // Get all unique characters used in recommended teams
             const usedCharacterIds = new Set<string>();
             filteredTeams.forEach(({ members }) => {
               members.forEach((member) => usedCharacterIds.add(member.id));
             });
 
-            // Count most common attributes
             const elementCounts: Record<string, number> = {};
             const metaCounts: Record<string, number> = {};
             const pathCounts: Record<string, number> = {};
@@ -409,7 +544,6 @@ export function BossDetailScreen({ route }: any) {
                         : styles.teamCardFair,
                   ]}
                 >
-                  {/* Header with recommendation score prominence */}
                   <View style={styles.teamHeader}>
                     <View style={styles.teamTitleSection}>
                       <Text style={styles.teamName}>
@@ -452,19 +586,61 @@ export function BossDetailScreen({ route }: any) {
                     {members.map((member) => {
                       const memberImage = getCharacterImage(member.id);
                       const elementIcon = getElementIcon(member.element);
+                      const paletteEntry = getCharacterPalette(member.id);
+                      const accent =
+                        paletteEntry?.accent ||
+                        ELEMENT_COLORS[member.element] ||
+                        palette.accent;
+                      const accentSoft =
+                        paletteEntry?.accentSoft ||
+                        (accent.startsWith("#")
+                          ? hexToRgba(accent, 0.18)
+                          : palette.accentSoft);
+                      const accentBorder =
+                        paletteEntry?.accentBorder ||
+                        (accent.startsWith("#")
+                          ? hexToRgba(accent, 0.45)
+                          : palette.accentBorder);
+                      const instanceKey = `${team.id}-${member.id}`;
 
                       return (
-                        <View key={member.id} style={styles.memberCard}>
+                        <Pressable
+                          key={instanceKey}
+                          style={[
+                            styles.memberCard,
+                            hoveredMemberKey === instanceKey &&
+                              styles.memberCardActive,
+                          ]}
+                          onHoverIn={() => setHoveredMemberKey(instanceKey)}
+                          onHoverOut={() =>
+                            setHoveredMemberKey((prev) =>
+                              prev === instanceKey ? null : prev,
+                            )
+                          }
+                          onPressIn={() => setHoveredMemberKey(instanceKey)}
+                          onPressOut={() =>
+                            setHoveredMemberKey((prev) =>
+                              prev === instanceKey ? null : prev,
+                            )
+                          }
+                        >
                           {memberImage ? (
                             <Image
                               source={memberImage}
-                              style={styles.memberAvatar}
+                              style={[
+                                styles.memberAvatar,
+                                {
+                                  borderColor: accentBorder,
+                                  backgroundColor: accentSoft,
+                                },
+                              ]}
                             />
                           ) : (
                             <View
                               style={[
                                 styles.memberAvatar,
                                 styles.memberPlaceholder,
+                                { borderColor: accentBorder, backgroundColor: accentSoft },
                               ]}
                             >
                               <Text style={styles.memberPlaceholderText}>
@@ -500,15 +676,31 @@ export function BossDetailScreen({ route }: any) {
                                 )}
                               </View>
                               {member.role ? (
-                                <View style={styles.memberRolePill}>
-                                  <Text style={styles.memberRoleText}>
+                                <View
+                                  style={[
+                                    styles.memberRolePill,
+                                    {
+                                      borderColor: accentBorder,
+                                      backgroundColor: accentSoft,
+                                    },
+                                  ]}
+                                >
+                                  <Text
+                                    style={[
+                                      styles.memberRoleText,
+                                      { color: accent },
+                                    ]}
+                                  >
                                     {member.role}
                                   </Text>
                                 </View>
                               ) : null}
                             </View>
                           </View>
-                        </View>
+                          {isWeb && hoveredMemberKey === instanceKey
+                            ? renderMemberHoverCard(member)
+                            : null}
+                        </Pressable>
                       );
                     })}
                   </View>
@@ -794,12 +986,18 @@ const styles = StyleSheet.create({
     padding: 10,
     minWidth: 150,
     gap: 12,
+    position: "relative",
+  },
+  memberCardActive: {
+    zIndex: 20,
   },
   memberAvatar: {
     width: 44,
     height: 44,
     borderRadius: 12,
     backgroundColor: "rgba(255, 255, 255, 0.06)",
+    borderWidth: 2,
+    borderColor: palette.surfaceBorder,
   },
   memberPlaceholder: {
     justifyContent: "center",
@@ -851,11 +1049,85 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     paddingHorizontal: 10,
     paddingVertical: 4,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.1)",
   },
   memberRoleText: {
     fontSize: 11,
     fontWeight: "600",
     color: palette.textSecondary,
+  },
+  memberHoverCard: {
+    position: "absolute",
+    top: -160,
+    left: -8,
+    width: 220,
+    backgroundColor: "#1c1024",
+    borderColor: "rgba(255, 255, 255, 0.08)",
+    borderWidth: 1,
+    borderRadius: 12,
+    padding: 12,
+    shadowColor: palette.surfaceShadow,
+    shadowOpacity: 0.35,
+    shadowRadius: 18,
+    shadowOffset: { width: 0, height: 10 },
+    elevation: 10,
+    zIndex: 30,
+  },
+  memberHoverHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 6,
+  },
+  memberHoverName: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: palette.textPrimary,
+    flexShrink: 1,
+  },
+  memberHoverRating: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: palette.accent,
+  },
+  memberHoverBadges: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 6,
+    marginBottom: 8,
+  },
+  memberHoverBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    backgroundColor: "#191222",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.06)",
+    gap: 6,
+  },
+  memberHoverBadgeFill: {
+    width: 10,
+    height: 10,
+    borderRadius: 20,
+    backgroundColor: "#6b7280",
+  },
+  memberHoverBadgeText: {
+    color: palette.textSecondary,
+    fontSize: 12,
+    fontWeight: "600",
+  },
+  memberHoverStars: {
+    flexDirection: "row",
+    gap: 8,
+    alignItems: "center",
+  },
+  memberHoverStarValue: {
+    fontSize: 12,
+    color: palette.textSecondary,
+    fontWeight: "600",
   },
   recommendationBadge: {
     borderWidth: 1,
@@ -883,7 +1155,6 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     letterSpacing: 0.5,
   },
-  // Recommendation Summary Styles
   recommendationSummary: {
     backgroundColor: "rgba(30, 41, 59, 0.95)",
     padding: 16,
@@ -963,7 +1234,6 @@ const styles = StyleSheet.create({
     color: "rgba(255, 255, 255, 0.6)",
     textAlign: "center",
   },
-  // Enhanced Team Card Styles
   teamCardHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -1003,7 +1273,6 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     letterSpacing: 0.5,
   },
-
   matchTitle: {
     fontSize: 12,
     fontWeight: "600",
@@ -1053,7 +1322,6 @@ const styles = StyleSheet.create({
   matchTextNeutral: {
     color: "#9ca3af",
   },
-  // Summary Badge Styles
   summaryBadge: {
     flexDirection: "row",
     alignItems: "center",
@@ -1086,7 +1354,6 @@ const styles = StyleSheet.create({
     color: "rgba(255, 255, 255, 0.5)",
     marginBottom: 2,
   },
-  // Quality Distribution Styles
   qualityRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -1123,7 +1390,6 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: "rgba(255, 255, 255, 0.8)",
   },
-  // Enhanced Team Card Quality Styles
   teamCardExcellent: {
     borderLeftWidth: 3,
     borderLeftColor: "#10b981",
@@ -1186,8 +1452,6 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     letterSpacing: 0.5,
   },
-
-  // Statistics Summary Styles
   statsSummary: {
     backgroundColor: "rgba(30, 41, 59, 0.95)",
     padding: 16,
@@ -1231,8 +1495,6 @@ const styles = StyleSheet.create({
     color: "rgba(255, 255, 255, 0.7)",
     textAlign: "center",
   },
-
-  // New Affinity Scoring Styles
   affinityList: {
     gap: 8,
   },

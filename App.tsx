@@ -161,6 +161,7 @@ function TabNavigator() {
 
   return (
     <Tab.Navigator
+      id="rootTab"
       screenOptions={{
         tabBarStyle: {
           backgroundColor: "#191222",

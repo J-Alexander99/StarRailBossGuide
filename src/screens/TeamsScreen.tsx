@@ -8,16 +8,19 @@ import {
   TouchableOpacity,
   Modal,
   ScrollView,
+  Platform,
+  Pressable,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TEAMS, resolveTeamMembers } from "../data/teams";
 import { getCharacterImage } from "../constants/characterImageMappings";
 import { getElementIcon, getPathIcon } from "../constants/iconMappings";
 import { useCharacterOwnership } from "../context/CharacterOwnershipContext";
+import { getCharacterPalette } from "../constants/characterPalettes";
 
 const ELEMENT_COLORS: Record<string, string> = {
   Physical: "#ec4899",
-  Fire: "#f97316", 
+  Fire: "#f97316",
   Ice: "#38bdf8",
   Lightning: "#a855f7",
   Wind: "#22d3ee",
@@ -29,20 +32,30 @@ const ELEMENT_COLORS: Record<string, string> = {
 const PATH_COLORS: Record<string, string> = {
   Destruction: "#ef4444",
   Hunt: "#22c55e",
-  Erudition: "#3b82f6", 
+  Erudition: "#3b82f6",
   Harmony: "#f59e0b",
   Nihility: "#8b5cf6",
   Preservation: "#0ea5e9",
   Abundance: "#10b981",
+  Elation: "#14b8a6",
   Remembrance: "#6366f1",
 };
 
+const hexToRgba = (hex: string, alpha: number) => {
+  const normalized = hex.replace("#", "");
+  if (normalized.length !== 6) return hex;
+  const r = parseInt(normalized.slice(0, 2), 16);
+  const g = parseInt(normalized.slice(2, 4), 16);
+  const b = parseInt(normalized.slice(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+
 type FilterState = {
-  availability: 'all' | 'available' | 'unavailable';
+  availability: "all" | "available" | "unavailable";
   minRating: number;
   maxRating: number;
-  sortBy: 'name' | 'rating' | 'id';
-  sortOrder: 'asc' | 'desc';
+  sortBy: "name" | "rating" | "id";
+  sortOrder: "asc" | "desc";
   element: string | null;
   path: string | null;
   role: string | null;
@@ -54,6 +67,8 @@ type FilterState = {
 export function TeamsScreen() {
   const navigation = useNavigation();
   const { isCharacterOwned } = useCharacterOwnership();
+  const isWeb = Platform.OS === "web";
+  const [hoveredMemberKey, setHoveredMemberKey] = useState<string | null>(null);
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
     availability: "all",
@@ -70,19 +85,33 @@ export function TeamsScreen() {
   });
 
   const enrichedTeams = useMemo(() => {
-    return TEAMS.map((team) => ({
-      team,
-      members: resolveTeamMembers(team),
-    }));
+    return TEAMS.map((team) => {
+      const members = resolveTeamMembers(team);
+      const computedPower = members.reduce(
+        (sum, m) => sum + (m.rating || 0),
+        0,
+      );
+      const teamPower =
+        Number.isFinite(team.teamRating) && (team.teamRating as number) > 0
+          ? (team.teamRating as number)
+          : computedPower;
+
+      return {
+        team,
+        members,
+        teamPower,
+      };
+    });
   }, []);
 
   const { availableTeams, unavailableTeams, filteredAndSortedTeams } =
     useMemo(() => {
       const available = enrichedTeams.filter(({ members }) =>
-        members.every((member) => isCharacterOwned(member.id))
+        members.every((member) => isCharacterOwned(member.id)),
       );
       const unavailable = enrichedTeams.filter(
-        ({ members }) => !members.every((member) => isCharacterOwned(member.id))
+        ({ members }) =>
+          !members.every((member) => isCharacterOwned(member.id)),
       );
 
       // Apply filters
@@ -94,8 +123,8 @@ export function TeamsScreen() {
       }
 
       // Filter by rating range and character attributes
-      const filtered = teamsToFilter.filter(({ team, members }) => {
-        const rating = team.teamRating || 0;
+      const filtered = teamsToFilter.filter(({ teamPower, members }) => {
+        const rating = teamPower || 0;
         if (rating < filters.minRating || rating > filters.maxRating) {
           return false;
         }
@@ -115,15 +144,15 @@ export function TeamsScreen() {
           // Team must have ALL selected attributes
           return attributeFilters.every(({ filter, memberAttribute }) =>
             members.some(
-              (member) => (member as any)[memberAttribute] === filter
-            )
+              (member) => (member as any)[memberAttribute] === filter,
+            ),
           );
         } else {
           // Team must have ANY of the selected attributes
           return attributeFilters.some(({ filter, memberAttribute }) =>
             members.some(
-              (member) => (member as any)[memberAttribute] === filter
-            )
+              (member) => (member as any)[memberAttribute] === filter,
+            ),
           );
         }
       });
@@ -134,8 +163,8 @@ export function TeamsScreen() {
 
         switch (filters.sortBy) {
           case "rating":
-            aValue = a.team.teamRating || 0;
-            bValue = b.team.teamRating || 0;
+            aValue = a.teamPower || 0;
+            bValue = b.teamPower || 0;
             break;
           case "id":
             aValue = a.team.id;
@@ -177,7 +206,7 @@ export function TeamsScreen() {
     mocTotal: number,
     pfTotal: number,
     asTotal: number,
-    isAvailable: boolean
+    isAvailable: boolean,
   ) => {
     const renderModeStars = (rating: number, color: string, key: string) => {
       // Each mode: 4 points per half star, so 5 stars = 40 points
@@ -188,7 +217,13 @@ export function TeamsScreen() {
 
       return (
         <View key={key} style={{ flexDirection: "row" }}>
-          <Text style={{ color: isAvailable ? color : "#4b5563", fontSize: 16, letterSpacing: 1 }}>
+          <Text
+            style={{
+              color: isAvailable ? color : "#4b5563",
+              fontSize: 16,
+              letterSpacing: 1,
+            }}
+          >
             {"★".repeat(fullStars)}
             {hasHalfStar ? "⯨" : ""}
           </Text>
@@ -211,9 +246,9 @@ export function TeamsScreen() {
   const renderTeamCard = ({
     item,
   }: {
-    item: { team: any; members: any[] };
+    item: { team: any; members: any[]; teamPower: number };
   }) => {
-    const { team, members } = item;
+    const { team, members, teamPower } = item;
     const isAvailable = members.every((member) => isCharacterOwned(member.id));
 
     return (
@@ -266,7 +301,7 @@ export function TeamsScreen() {
                 !isAvailable && styles.teamRatingValueDisabled,
               ]}
             >
-              {team.teamRating || 0}/120
+              {teamPower || 0}/120
             </Text>
           </View>
           <View
@@ -280,16 +315,14 @@ export function TeamsScreen() {
                 styles.teamRatingFill,
                 !isAvailable && styles.teamRatingFillDisabled,
                 {
-                  width: `${Math.min(
-                    100,
-                    ((team.teamRating || 0) / 120) * 100
-                  )}%`,
+                  width: `${Math.min(100, ((teamPower || 0) / 120) * 100)}%`,
                 },
               ]}
             />
           </View>
           {(() => {
-            const { mocTotal, pfTotal, asTotal } = calculateTeamModeRatings(members);
+            const { mocTotal, pfTotal, asTotal } =
+              calculateTeamModeRatings(members);
             return renderGameModeStars(mocTotal, pfTotal, asTotal, isAvailable);
           })()}
         </View>
@@ -299,9 +332,44 @@ export function TeamsScreen() {
             const elementIcon = getElementIcon(member.element);
             const pathIcon = getPathIcon(member.path);
             const isOwned = isCharacterOwned(member.id);
+            const instanceKey = `${team.id}-${member.id}`;
+            const paletteEntry = getCharacterPalette(member.id);
+            const accent =
+              paletteEntry?.accent ||
+              ELEMENT_COLORS[member.element] ||
+              PATH_COLORS[member.path] ||
+              "#ff6ce0";
+            const accentSoft =
+              paletteEntry?.accentSoft ||
+              (accent.startsWith("#")
+                ? hexToRgba(accent, 0.18)
+                : "rgba(255, 108, 224, 0.18)");
+            const accentBorder =
+              paletteEntry?.accentBorder ||
+              (accent.startsWith("#")
+                ? hexToRgba(accent, 0.45)
+                : "rgba(255, 108, 224, 0.45)");
 
             return (
-              <View key={member.id} style={styles.memberCard}>
+              <Pressable
+                key={instanceKey}
+                style={[
+                  styles.memberCard,
+                  hoveredMemberKey === instanceKey && styles.memberCardActive,
+                ]}
+                onHoverIn={() => setHoveredMemberKey(instanceKey)}
+                onHoverOut={() =>
+                  setHoveredMemberKey((prev) =>
+                    prev === instanceKey ? null : prev,
+                  )
+                }
+                onPressIn={() => setHoveredMemberKey(instanceKey)}
+                onPressOut={() =>
+                  setHoveredMemberKey((prev) =>
+                    prev === instanceKey ? null : prev,
+                  )
+                }
+              >
                 <View style={styles.memberImageContainer}>
                   {memberImage ? (
                     <Image
@@ -309,6 +377,10 @@ export function TeamsScreen() {
                       style={[
                         styles.memberAvatar,
                         !isOwned && styles.memberAvatarDisabled,
+                        {
+                          borderColor: accentBorder,
+                          backgroundColor: accentSoft,
+                        },
                       ]}
                     />
                   ) : (
@@ -317,6 +389,10 @@ export function TeamsScreen() {
                         styles.memberAvatar,
                         styles.memberPlaceholder,
                         !isOwned && styles.memberAvatarDisabled,
+                        {
+                          borderColor: accentBorder,
+                          backgroundColor: accentSoft,
+                        },
                       ]}
                     >
                       <Text style={styles.memberPlaceholderText}>
@@ -382,9 +458,100 @@ export function TeamsScreen() {
                     </View>
                   </View>
                 </View>
-              </View>
+                {isWeb && hoveredMemberKey === instanceKey
+                  ? renderMemberHoverCard(member, {
+                      accent,
+                      accentSoft,
+                      accentBorder,
+                    })
+                  : null}
+              </Pressable>
             );
           })}
+        </View>
+      </View>
+    );
+  };
+
+  const renderMemberHoverCard = (
+    member: any,
+    colors: { accent: string; accentSoft: string; accentBorder: string },
+  ) => {
+    return (
+      <View
+        style={[
+          styles.memberHoverCard,
+          {
+            borderColor: colors.accentBorder,
+            backgroundColor: colors.accentSoft,
+          },
+        ]}
+      >
+        <View style={styles.memberHoverHeader}>
+          <Text style={styles.memberHoverName}>{member.name}</Text>
+          <Text style={[styles.memberHoverRating, { color: colors.accent }]}>
+            {member.rating ? `${member.rating}/30` : "Unrated"}
+          </Text>
+        </View>
+        <View style={styles.memberHoverBadges}>
+          <View style={styles.memberHoverBadge}>
+            <View
+              style={[
+                styles.memberHoverBadgeFill,
+                {
+                  backgroundColor:
+                    ELEMENT_COLORS[member.element] ?? colors.accent,
+                },
+              ]}
+            />
+            <Text style={styles.memberHoverBadgeText}>{member.element}</Text>
+          </View>
+          {member.path && (
+            <View style={styles.memberHoverBadge}>
+              <View
+                style={[
+                  styles.memberHoverBadgeFill,
+                  {
+                    backgroundColor: PATH_COLORS[member.path] ?? colors.accent,
+                  },
+                ]}
+              />
+              <Text style={styles.memberHoverBadgeText}>{member.path}</Text>
+            </View>
+          )}
+          {member.role && (
+            <View style={styles.memberHoverBadge}>
+              <View
+                style={[
+                  styles.memberHoverBadgeFill,
+                  { backgroundColor: colors.accent },
+                ]}
+              />
+              <Text style={styles.memberHoverBadgeText}>{member.role}</Text>
+            </View>
+          )}
+          {member.meta && (
+            <View style={styles.memberHoverBadge}>
+              <View
+                style={[
+                  styles.memberHoverBadgeFill,
+                  { backgroundColor: colors.accent },
+                ]}
+              />
+              <Text style={styles.memberHoverBadgeText}>{member.meta}</Text>
+            </View>
+          )}
+        </View>
+        <View style={styles.memberHoverStars}>
+          <Text style={[styles.memberHoverStarValue, { color: colors.accent }]}>
+            MoC {member.mocRating || 0}
+          </Text>
+          <Text style={[styles.memberHoverStarValue, { color: colors.accent }]}>
+            PF {member.pfRating || 0}
+          </Text>
+          <Text style={[styles.memberHoverStarValue, { color: colors.accent }]}>
+            AS {member.asRating || 0}
+          </Text>
         </View>
       </View>
     );
@@ -678,6 +845,7 @@ export function TeamsScreen() {
                     "Nihility",
                     "Preservation",
                     "Abundance",
+                    "Elation",
                     "Remembrance",
                   ].map((path) => (
                     <TouchableOpacity
@@ -1056,6 +1224,10 @@ const styles = StyleSheet.create({
   memberCard: {
     flex: 1,
     alignItems: "center",
+    position: "relative",
+  },
+  memberCardActive: {
+    zIndex: 20,
   },
   memberImageContainer: {
     position: "relative",
@@ -1130,6 +1302,78 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: "600",
     color: "#ffffff",
+  },
+  memberHoverCard: {
+    position: "absolute",
+    top: -160,
+    left: -10,
+    width: 220,
+    backgroundColor: "#1c1024",
+    borderColor: "rgba(255, 255, 255, 0.08)",
+    borderWidth: 1,
+    borderRadius: 12,
+    padding: 12,
+    shadowColor: "#2a1538",
+    shadowOpacity: 0.35,
+    shadowRadius: 18,
+    shadowOffset: { width: 0, height: 10 },
+    elevation: 10,
+    zIndex: 30,
+  },
+  memberHoverHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 6,
+  },
+  memberHoverName: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#f4ecff",
+    flexShrink: 1,
+  },
+  memberHoverRating: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: "#ff6ce0",
+  },
+  memberHoverBadges: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 6,
+    marginBottom: 8,
+  },
+  memberHoverBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    backgroundColor: "#191222",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.06)",
+    gap: 6,
+  },
+  memberHoverBadgeFill: {
+    width: 10,
+    height: 10,
+    borderRadius: 20,
+    backgroundColor: "#6b7280",
+  },
+  memberHoverBadgeText: {
+    color: "#c7b9d6",
+    fontSize: 12,
+    fontWeight: "600",
+  },
+  memberHoverStars: {
+    flexDirection: "row",
+    gap: 8,
+    alignItems: "center",
+  },
+  memberHoverStarValue: {
+    fontSize: 12,
+    color: "#d8c7f5",
+    fontWeight: "600",
   },
   filterButton: {
     backgroundColor: "#ff6ce0",
