@@ -9,8 +9,11 @@ import {
   View,
   Platform,
   Pressable,
+  InteractionManager,
 } from "react-native";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useFonts } from "expo-font";
 import { StarRatingRow } from "../components/StarRatingRow";
 import { getCharacterPalette } from "../constants/characterPalettes";
 import {
@@ -138,7 +141,13 @@ export function CharacterDetailScreen({ route }: any) {
   const { width } = useWindowDimensions();
   const isWeb = Platform.OS === "web";
   const [hoveredMemberKey, setHoveredMemberKey] = useState<string | null>(null);
+  const [isTeamsWithCharacterReady, setIsTeamsWithCharacterReady] =
+    useState(false);
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
+  const [fontsLoaded] = useFonts({
+    NadoorBoldItalic: require("../../assets/fonts/NadoorBoldItalic.otf"),
+  });
 
   if (!character) {
     return (
@@ -206,6 +215,30 @@ export function CharacterDetailScreen({ route }: any) {
 
   const styles = useMemo(() => createStyles(theme), [theme]);
 
+  useEffect(() => {
+    let isMounted = true;
+    setIsTeamsWithCharacterReady(false);
+
+    const task = InteractionManager.runAfterInteractions(() => {
+      if (isMounted) {
+        setIsTeamsWithCharacterReady(true);
+      }
+    });
+
+    // Fallback: continuous animations can keep interactions "busy" forever.
+    const fallbackTimer = setTimeout(() => {
+      if (isMounted) {
+        setIsTeamsWithCharacterReady(true);
+      }
+    }, 350);
+
+    return () => {
+      isMounted = false;
+      task.cancel();
+      clearTimeout(fallbackTimer);
+    };
+  }, [character.id]);
+
   const sectionTone = {
     borderColor: accentBorder,
     shadowColor: accentTone,
@@ -241,16 +274,18 @@ export function CharacterDetailScreen({ route }: any) {
             backgroundColor: "#191222",
             borderTopColor: "rgba(255, 255, 255, 0.06)",
             borderTopWidth: 1,
-            paddingBottom: 8,
+            paddingBottom: Math.max(insets.bottom, 8),
             paddingTop: 8,
-            height: 60,
+            height: 60 + Math.max(insets.bottom, 0),
           },
           tabBarActiveTintColor: "#ff6ce0",
           tabBarInactiveTintColor: "#9f8ab8",
         } as const;
 
         const headerStyle = {
-          backgroundColor: hexToRgba(accentTone, 0.24),
+          backgroundColor: isWeb
+            ? hexToRgba(accentTone, 0.24)
+            : blendColors(accentTone, "#191222", 0.78),
           borderBottomColor: accentBorder,
           borderBottomWidth: 1,
           shadowColor: accentTone,
@@ -261,24 +296,33 @@ export function CharacterDetailScreen({ route }: any) {
         } as const;
 
         const tabBarStyle = {
-          backgroundColor: hexToRgba("#05070f", 0.78),
-          borderTopColor: hexToRgba(accentColor, 0.3),
+          backgroundColor: isWeb
+            ? hexToRgba("#05070f", 0.78)
+            : blendColors(accentColor, "#191222", 0.24),
+          borderTopColor: isWeb
+            ? hexToRgba(accentColor, 0.3)
+            : blendColors(accentColor, "#191222", 0.5),
           borderTopWidth: 1,
-          paddingBottom: 8,
+          paddingBottom: Math.max(insets.bottom, 8),
           paddingTop: 8,
-          height: 60,
+          height: 60 + Math.max(insets.bottom, 0),
         } as const;
 
         // Apply when focused
         navigation.setOptions({
           headerStyle,
           headerTintColor: accentTone,
-          headerTitleStyle: { fontSize: 20, fontWeight: "700", color: "#f4ecff" },
+          headerTitleStyle: {
+            fontSize: 20,
+            fontWeight: "700",
+            color: "#f4ecff",
+          },
           headerBackTitleVisible: false,
         });
 
-        const tabNavigator = (navigation as any).getParent?.("rootTab")
-          ?? (navigation as any).getParent?.()?.getParent?.();
+        const tabNavigator =
+          (navigation as any).getParent?.("rootTab") ??
+          (navigation as any).getParent?.()?.getParent?.();
         tabNavigator?.setOptions({
           tabBarStyle,
           tabBarActiveTintColor: accentTone,
@@ -291,7 +335,7 @@ export function CharacterDetailScreen({ route }: any) {
           tabNavigator?.setOptions(defaultTabOptions);
         };
       },
-      [accentBorder, accentTone, navigation],
+      [accentBorder, accentTone, insets.bottom, isWeb, navigation],
     ),
   );
 
@@ -302,36 +346,57 @@ export function CharacterDetailScreen({ route }: any) {
 
   // Find teams that include this character
   const teamsWithCharacter = useMemo(() => {
+    if (!isTeamsWithCharacterReady) {
+      return [];
+    }
+
     return TEAMS.map((team) => {
       const members = resolveTeamMembers(team);
-      const computedPower = members.reduce((sum, m) => sum + (m.rating || 0), 0);
-      const teamPower = Number.isFinite(team.teamRating) && team.teamRating! > 0
-        ? team.teamRating
-        : computedPower;
+      const computedPower = members.reduce(
+        (sum, m) => sum + (m.rating || 0),
+        0,
+      );
+      const teamPower =
+        Number.isFinite(team.teamRating) && team.teamRating! > 0
+          ? team.teamRating
+          : computedPower;
 
       return {
         team,
         members,
         teamPower,
-        isAvailable: team.members.every((memberId) => isCharacterOwned(memberId)),
+        isAvailable: team.members.every((memberId) =>
+          isCharacterOwned(memberId),
+        ),
       };
     }).filter(({ team }) => team.members.includes(character.id));
-  }, [character.id, isCharacterOwned]);
+  }, [character.id, isCharacterOwned, isTeamsWithCharacterReady]);
 
   const renderGameModeStars = (
     mocRating?: number,
     pfRating?: number,
     asRating?: number,
   ) => {
+    const compactMobileStars = !isWeb && width < 430;
+    const starSize = compactMobileStars ? 14 : 18;
+
     return (
       <View style={styles.gameModeStarsContainer}>
-        <StarRatingRow rating={mocRating || 0} color={accentTone} size={18} />
+        <StarRatingRow
+          rating={mocRating || 0}
+          color={accentTone}
+          size={starSize}
+        />
         <StarRatingRow
           rating={pfRating || 0}
           color={secondaryColor}
-          size={18}
+          size={starSize}
         />
-        <StarRatingRow rating={asRating || 0} color={tertiaryColor} size={18} />
+        <StarRatingRow
+          rating={asRating || 0}
+          color={tertiaryColor}
+          size={starSize}
+        />
       </View>
     );
   };
@@ -449,7 +514,7 @@ export function CharacterDetailScreen({ route }: any) {
 
   const heroOverlayOpacity = scrollY.current.interpolate({
     inputRange: [0, 200],
-    outputRange: [1, 0.75],
+    outputRange: [1, 1],
     extrapolate: "clamp",
   });
 
@@ -468,6 +533,62 @@ export function CharacterDetailScreen({ route }: any) {
       opacity: heroWallpaperOpacity,
     },
   ];
+
+  const isCompactQuickRatings = width < 2200;
+  const isCompactHeroHeader = width < 430;
+  const quickRatingCards = isCompactQuickRatings
+    ? [
+        {
+          key: "moc",
+          value: character.mocRating || 0,
+          label: "MoC",
+          subtext: "Memory of Chaos",
+        },
+        {
+          key: "pf",
+          value: character.pfRating || 0,
+          label: "Pure Fiction",
+          subtext: "Multi-target burst",
+        },
+        {
+          key: "as",
+          value: character.asRating || 0,
+          label: "Apoc Shadow",
+          subtext: "Solo endurance",
+        },
+        {
+          key: "composite",
+          value: character.rating || 0,
+          label: "Composite",
+          subtext: "All modes weighted",
+        },
+      ]
+    : [
+        {
+          key: "composite",
+          value: character.rating || 0,
+          label: "Composite",
+          subtext: "All modes weighted",
+        },
+        {
+          key: "moc",
+          value: character.mocRating || 0,
+          label: "MoC",
+          subtext: "Memory of Chaos",
+        },
+        {
+          key: "pf",
+          value: character.pfRating || 0,
+          label: "Pure Fiction",
+          subtext: "Multi-target burst",
+        },
+        {
+          key: "as",
+          value: character.asRating || 0,
+          label: "Apoc Shadow",
+          subtext: "Solo endurance",
+        },
+      ];
 
   useEffect(() => {
     const loop = Animated.loop(
@@ -562,8 +683,74 @@ export function CharacterDetailScreen({ route }: any) {
           <View style={styles.heroOverlayHeader}>
             <View style={styles.heroTitleGroup}>
               <Text style={styles.heroEyebrow}>Character dossier</Text>
-              <Text style={styles.heroTitle}>{character.name}</Text>
-              <View style={styles.heroChipRow}>
+              <Text
+                style={[
+                  styles.heroTitle,
+                  fontsLoaded && styles.heroTitleCustom,
+                ]}
+              >
+                {character.name}
+              </Text>
+              {!isCompactHeroHeader ? (
+                <View style={styles.heroChipRow}>
+                  {elementIcon && (
+                    <View style={styles.heroChip}>
+                      <Image source={elementIcon} style={styles.heroChipIcon} />
+                      <Text style={styles.heroChipText}>
+                        {character.element}
+                      </Text>
+                    </View>
+                  )}
+                  {pathIcon && (
+                    <View style={styles.heroChip}>
+                      <Image source={pathIcon} style={styles.heroChipIcon} />
+                      <Text style={styles.heroChipText}>{character.path}</Text>
+                    </View>
+                  )}
+                  {character.role && (
+                    <View style={styles.heroChip}>
+                      <Text style={styles.heroChipText}>{character.role}</Text>
+                    </View>
+                  )}
+                  {character.meta && (
+                    <View style={styles.heroChip}>
+                      <Text style={styles.heroChipText}>{character.meta}</Text>
+                    </View>
+                  )}
+                  <View
+                    style={[
+                      styles.heroChip,
+                      isOwned
+                        ? styles.heroChipPositive
+                        : styles.heroChipNegative,
+                    ]}
+                  >
+                    <Text style={styles.heroChipText}>
+                      {isOwned ? "Owned" : "Wishlist"}
+                    </Text>
+                  </View>
+                </View>
+              ) : null}
+            </View>
+            {!isCompactHeroHeader ? (
+              <View
+                style={[styles.heroScoreBadge, { borderColor: accentBorder }]}
+              >
+                <Text style={[styles.heroScoreValue, { color: accentTone }]}>
+                  {character.rating || 0}/30
+                </Text>
+                <Text style={styles.heroScoreLabel}>Composite power</Text>
+                <Text style={styles.heroScoreSubtext}>
+                  MoC {character.mocRating || 0} · PF {character.pfRating || 0}{" "}
+                  · AS {character.asRating || 0}
+                </Text>
+              </View>
+            ) : null}
+          </View>
+
+          {isCompactHeroHeader ? (
+            <View style={styles.heroHeaderSecondaryRow}>
+              <View style={[styles.heroChipRow, styles.heroChipRowCompact]}>
                 {elementIcon && (
                   <View style={styles.heroChip}>
                     <Image source={elementIcon} style={styles.heroChipIcon} />
@@ -597,20 +784,24 @@ export function CharacterDetailScreen({ route }: any) {
                   </Text>
                 </View>
               </View>
+              <View
+                style={[
+                  styles.heroScoreBadge,
+                  styles.heroScoreBadgeCompact,
+                  { borderColor: accentBorder },
+                ]}
+              >
+                <Text style={[styles.heroScoreValue, { color: accentTone }]}>
+                  {character.rating || 0}/30
+                </Text>
+                <Text style={styles.heroScoreLabel}>Composite power</Text>
+                <Text style={styles.heroScoreSubtext}>
+                  MoC {character.mocRating || 0} · PF {character.pfRating || 0}{" "}
+                  · AS {character.asRating || 0}
+                </Text>
+              </View>
             </View>
-            <View
-              style={[styles.heroScoreBadge, { borderColor: accentBorder }]}
-            >
-              <Text style={[styles.heroScoreValue, { color: accentTone }]}>
-                {character.rating || 0}/30
-              </Text>
-              <Text style={styles.heroScoreLabel}>Composite power</Text>
-              <Text style={styles.heroScoreSubtext}>
-                MoC {character.mocRating || 0} · PF {character.pfRating || 0} ·
-                AS {character.asRating || 0}
-              </Text>
-            </View>
-          </View>
+          ) : null}
 
           <View style={styles.heroOverlayFooter}>
             <View style={styles.heroRatingBar}>
@@ -663,34 +854,17 @@ export function CharacterDetailScreen({ route }: any) {
             </Text>
           </View>
           <View style={styles.statsSection}>
-            <View style={styles.statCard}>
-              <Text style={[styles.statValue, { color: "#ffffff" }]}>
-                {character.rating || 0}/30
-              </Text>
-              <Text style={styles.statLabel}>Composite</Text>
-              <Text style={styles.statSubtext}>All modes weighted</Text>
-            </View>
-            <View style={styles.statCard}>
-              <Text style={[styles.statValue, { color: "#ffffff" }]}>
-                {character.mocRating || 0}/10
-              </Text>
-              <Text style={styles.statLabel}>MoC</Text>
-              <Text style={styles.statSubtext}>Memory of Chaos</Text>
-            </View>
-            <View style={styles.statCard}>
-              <Text style={[styles.statValue, { color: "#ffffff" }]}>
-                {character.pfRating || 0}/10
-              </Text>
-              <Text style={styles.statLabel}>Pure Fiction</Text>
-              <Text style={styles.statSubtext}>Multi-target burst</Text>
-            </View>
-            <View style={styles.statCard}>
-              <Text style={[styles.statValue, { color: "#ffffff" }]}>
-                {character.asRating || 0}/10
-              </Text>
-              <Text style={styles.statLabel}>Apoc Shadow</Text>
-              <Text style={styles.statSubtext}>Solo endurance</Text>
-            </View>
+            {quickRatingCards.map((card) => (
+              <View key={card.key} style={styles.statCard}>
+                <Text style={[styles.statValue, { color: "#ffffff" }]}>
+                  {card.key === "composite"
+                    ? `${card.value}/30`
+                    : `${card.value}/10`}
+                </Text>
+                <Text style={styles.statLabel}>{card.label}</Text>
+                <Text style={styles.statSubtext}>{card.subtext}</Text>
+              </View>
+            ))}
           </View>
         </View>
 
@@ -1013,102 +1187,101 @@ export function CharacterDetailScreen({ route }: any) {
         {/* Teams Section */}
         <View style={[styles.section, sectionTone]}>
           <Text style={styles.sectionTitle}>
-            Teams ({teamsWithCharacter.length})
+            Teams (
+            {isTeamsWithCharacterReady ? teamsWithCharacter.length : "..."})
           </Text>
-          {teamsWithCharacter.length > 0 ? (
-            teamsWithCharacter.map(({ team, members, teamPower, isAvailable }) => (
-              <View
-                key={team.id}
-                style={[
-                  styles.teamCard,
-                  {
-                    borderColor: accentBorder,
-                    backgroundColor: secondarySurface,
-                  },
-                  !isAvailable && styles.teamCardDisabled,
-                ]}
-              >
+          {!isTeamsWithCharacterReady ? (
+            <Text style={styles.emptyText}>Loading team synergies...</Text>
+          ) : teamsWithCharacter.length > 0 ? (
+            teamsWithCharacter.map(
+              ({ team, members, teamPower, isAvailable }) => (
                 <View
+                  key={team.id}
                   style={[
-                    styles.teamHeader,
-                    { borderBottomColor: accentBorder, borderBottomWidth: 1 },
+                    styles.teamCard,
+                    {
+                      borderColor: accentBorder,
+                      backgroundColor: secondarySurface,
+                    },
+                    !isAvailable && styles.teamCardDisabled,
                   ]}
                 >
-                  <Text
+                  <View
                     style={[
-                      styles.teamName,
-                      !isAvailable && styles.teamNameDisabled,
+                      styles.teamHeader,
+                      { borderBottomColor: accentBorder, borderBottomWidth: 1 },
                     ]}
                   >
-                    {team.name ?? `Team ${team.id.toUpperCase()}`}
-                  </Text>
-                  <Text
-                    style={[
-                      styles.teamPower,
-                      { color: accentTone },
-                      !isAvailable && styles.teamPowerDisabled,
-                    ]}
-                  >
-                    {teamPower || 0}/120
-                  </Text>
-                </View>
-                <View style={styles.teamMembers}>
-                  {members.map((member) => {
-                    const memberImage = getCharacterImage(member.id);
-                    const isOwned = isCharacterOwned(member.id);
-                    const isCurrentChar = member.id === character.id;
-                    const instanceKey = `${team.id}-${member.id}`;
+                    <Text
+                      style={[
+                        styles.teamName,
+                        !isAvailable && styles.teamNameDisabled,
+                      ]}
+                    >
+                      {team.name ?? `Team ${team.id.toUpperCase()}`}
+                    </Text>
+                    <Text
+                      style={[
+                        styles.teamPower,
+                        { color: accentTone },
+                        !isAvailable && styles.teamPowerDisabled,
+                      ]}
+                    >
+                      {teamPower || 0}/120
+                    </Text>
+                  </View>
+                  <View style={styles.teamMembers}>
+                    {members.map((member) => {
+                      const memberImage = getCharacterImage(member.id);
+                      const isOwned = isCharacterOwned(member.id);
+                      const isCurrentChar = member.id === character.id;
+                      const instanceKey = `${team.id}-${member.id}`;
 
-                    return (
-                      <Pressable
-                        key={member.id}
-                        style={[
-                          styles.memberIconWrapper,
-                          hoveredMemberKey === instanceKey &&
-                            styles.memberIconWrapperActive,
-                        ]}
-                        onHoverIn={() => setHoveredMemberKey(instanceKey)}
-                        onHoverOut={() =>
-                          setHoveredMemberKey((prev) =>
-                            prev === instanceKey ? null : prev,
-                          )
-                        }
-                        onPressIn={() => setHoveredMemberKey(instanceKey)}
-                        onPressOut={() =>
-                          setHoveredMemberKey((prev) =>
-                            prev === instanceKey ? null : prev,
-                          )
-                        }
-                      >
-                        <View
+                      return (
+                        <Pressable
+                          key={member.id}
                           style={[
-                            styles.memberIcon,
-                            isCurrentChar && styles.memberIconHighlight,
-                            !isOwned && styles.memberIconDisabled,
+                            styles.memberIconWrapper,
+                            hoveredMemberKey === instanceKey &&
+                              styles.memberIconWrapperActive,
                           ]}
+                          onHoverIn={() => setHoveredMemberKey(instanceKey)}
+                          onHoverOut={() =>
+                            setHoveredMemberKey((prev) =>
+                              prev === instanceKey ? null : prev,
+                            )
+                          }
                         >
-                          {memberImage ? (
-                            <Image
-                              source={memberImage}
-                              style={styles.memberImage}
-                            />
-                          ) : (
-                            <View style={styles.memberPlaceholder}>
-                              <Text style={styles.memberPlaceholderText}>
-                                {member.name.charAt(0)}
-                              </Text>
-                            </View>
-                          )}
-                        </View>
-                        {isWeb && hoveredMemberKey === instanceKey
-                          ? renderMemberHoverCard(member)
-                          : null}
-                      </Pressable>
-                    );
-                  })}
+                          <View
+                            style={[
+                              styles.memberIcon,
+                              isCurrentChar && styles.memberIconHighlight,
+                              !isOwned && styles.memberIconDisabled,
+                            ]}
+                          >
+                            {memberImage ? (
+                              <Image
+                                source={memberImage}
+                                style={styles.memberImage}
+                              />
+                            ) : (
+                              <View style={styles.memberPlaceholder}>
+                                <Text style={styles.memberPlaceholderText}>
+                                  {member.name.charAt(0)}
+                                </Text>
+                              </View>
+                            )}
+                          </View>
+                          {isWeb && hoveredMemberKey === instanceKey
+                            ? renderMemberHoverCard(member)
+                            : null}
+                        </Pressable>
+                      );
+                    })}
+                  </View>
                 </View>
-              </View>
-            ))
+              ),
+            )
           ) : (
             <Text style={styles.emptyText}>
               No teams found with this character
@@ -1204,12 +1377,13 @@ const createStyles = (palette: ThemePalette) =>
       backgroundColor: palette.background,
       borderRadius: 18,
       borderWidth: 1,
-      borderColor: palette.highlightBorder,
+      borderColor:
+        Platform.OS === "web" ? palette.highlightBorder : palette.background,
       shadowColor: palette.surfaceShadow,
-      shadowOpacity: 0.35,
+      shadowOpacity: Platform.OS === "web" ? 0.35 : 0,
       shadowRadius: 18,
       shadowOffset: { width: 0, height: 10 },
-      elevation: 8,
+      elevation: Platform.OS === "web" ? 8 : 0,
       gap: 14,
     },
     heroOverlayHeader: {
@@ -1233,10 +1407,25 @@ const createStyles = (palette: ThemePalette) =>
       fontWeight: "700",
       color: palette.textPrimary,
     },
+    heroTitleCustom: {
+      fontFamily: "NadoorBoldItalic",
+      fontWeight: "normal",
+    },
     heroChipRow: {
       flexDirection: "row",
       flexWrap: "wrap",
       gap: 8,
+    },
+    heroChipRowCompact: {
+      flex: 1,
+      paddingRight: 8,
+      alignContent: "flex-start",
+    },
+    heroHeaderSecondaryRow: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      justifyContent: "space-between",
+      gap: 10,
     },
     heroChip: {
       flexDirection: "row",
@@ -1272,7 +1461,14 @@ const createStyles = (palette: ThemePalette) =>
       borderRadius: 14,
       padding: 14,
       borderWidth: 1,
-      borderColor: palette.highlightBorder,
+      borderColor:
+        Platform.OS === "web" ? palette.highlightBorder : palette.surface,
+    },
+    heroScoreBadgeCompact: {
+      minWidth: 136,
+      maxWidth: 160,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
     },
     heroScoreValue: {
       fontSize: 24,
@@ -1301,7 +1497,8 @@ const createStyles = (palette: ThemePalette) =>
       borderRadius: 12,
       padding: 12,
       borderWidth: 1,
-      borderColor: palette.surfaceBorder,
+      borderColor:
+        Platform.OS === "web" ? palette.surfaceBorder : palette.surface,
     },
     ratingBar: {
       height: 8,
@@ -1325,7 +1522,8 @@ const createStyles = (palette: ThemePalette) =>
       borderRadius: 12,
       padding: 12,
       borderWidth: 1,
-      borderColor: palette.surfaceBorder,
+      borderColor:
+        Platform.OS === "web" ? palette.surfaceBorder : palette.surface,
       alignItems: "center",
     },
     gameModeStarsContainer: {
@@ -1347,17 +1545,17 @@ const createStyles = (palette: ThemePalette) =>
     statCard: {
       flex: 1,
       minWidth: 150,
-      backgroundColor: palette.highlight,
+      backgroundColor: palette.highlightBorder,
       borderRadius: 14,
       padding: 16,
       alignItems: "center",
       borderWidth: 1,
       borderColor: palette.highlightBorder,
       shadowColor: palette.surfaceShadow,
-      shadowOpacity: 0.2,
+      shadowOpacity: Platform.OS === "web" ? 0.2 : 0,
       shadowRadius: 10,
       shadowOffset: { width: 0, height: 6 },
-      elevation: 4,
+      elevation: Platform.OS === "web" ? 4 : 0,
     },
     statValue: {
       fontSize: 24,
@@ -1382,12 +1580,13 @@ const createStyles = (palette: ThemePalette) =>
       marginHorizontal: 16,
       marginBottom: 16,
       borderWidth: 1,
-      borderColor: palette.surfaceBorder,
+      borderColor:
+        Platform.OS === "web" ? palette.surfaceBorder : palette.surface,
       shadowColor: palette.surfaceShadow,
-      shadowOpacity: 0.25,
+      shadowOpacity: Platform.OS === "web" ? 0.25 : 0,
       shadowRadius: 12,
       shadowOffset: { width: 0, height: 8 },
-      elevation: 4,
+      elevation: Platform.OS === "web" ? 4 : 0,
     },
     sectionFloating: {
       borderColor: palette.accentBorder,
@@ -1428,7 +1627,8 @@ const createStyles = (palette: ThemePalette) =>
       padding: 16,
       marginBottom: 12,
       borderWidth: 1,
-      borderColor: palette.highlightBorder,
+      borderColor:
+        Platform.OS === "web" ? palette.highlightBorder : palette.highlight,
     },
     teamCardDisabled: {
       opacity: 0.5,
@@ -1579,7 +1779,8 @@ const createStyles = (palette: ThemePalette) =>
       padding: 16,
       marginBottom: 12,
       borderWidth: 1,
-      borderColor: palette.highlightBorder,
+      borderColor:
+        Platform.OS === "web" ? palette.highlightBorder : palette.highlight,
     },
     recommendationTitle: {
       fontSize: 15,
@@ -1644,7 +1845,8 @@ const createStyles = (palette: ThemePalette) =>
       backgroundColor: palette.highlight,
       borderRadius: 8,
       borderWidth: 1,
-      borderColor: palette.highlightBorder,
+      borderColor:
+        Platform.OS === "web" ? palette.highlightBorder : palette.highlight,
     },
     implantText: {
       fontSize: 14,

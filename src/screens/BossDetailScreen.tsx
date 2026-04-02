@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   View,
   Text,
@@ -9,7 +9,12 @@ import {
   useWindowDimensions,
   Platform,
   Pressable,
+  TouchableOpacity,
+  Modal,
+  TouchableWithoutFeedback,
+  InteractionManager,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import {
   BOSSES,
   getBossAffinities,
@@ -107,6 +112,20 @@ type RecommendedTeam = {
   isAvailable: boolean;
 };
 
+type TeamFilterState = {
+  availability: "all" | "available" | "unavailable";
+  sortBy: "rating" | "power" | "name" | "id" | "random";
+  sortOrder: "asc" | "desc";
+  element: string[];
+  path: string[];
+  role: string[];
+  meta: string[];
+  target: string[];
+  containsAll: boolean;
+};
+
+type TeamMultiFilterKey = "element" | "path" | "role" | "meta" | "target";
+
 type ScoreThresholds = {
   excellentMin: number;
   goodMin: number;
@@ -164,12 +183,49 @@ function keysByScore(
 export function BossDetailScreen({ route }: any) {
   const { bossId } = route.params;
   const boss: Boss | undefined = BOSSES.find((b) => b.id === bossId);
+  const navigation = useNavigation();
   const { isCharacterOwned } = useCharacterOwnership();
   const { width } = useWindowDimensions();
   const isWeb = Platform.OS === "web";
-  const [hoveredMemberKey, setHoveredMemberKey] = useState<string | null>(
-    null,
-  );
+  const [hoveredMemberKey, setHoveredMemberKey] = useState<string | null>(null);
+  const [showTeamFilterModal, setShowTeamFilterModal] = useState(false);
+  const [isTeamDataReady, setIsTeamDataReady] = useState(false);
+  const [teamFilters, setTeamFilters] = useState<TeamFilterState>({
+    availability: "available",
+    sortBy: "rating",
+    sortOrder: "desc",
+    element: [],
+    path: [],
+    role: [],
+    meta: [],
+    target: [],
+    containsAll: false,
+  });
+
+  const toggleTeamMultiFilter = (key: TeamMultiFilterKey, value: string) => {
+    setTeamFilters((prev) => {
+      const currentValues = prev[key];
+      const nextValues = currentValues.includes(value)
+        ? currentValues.filter((item) => item !== value)
+        : [...currentValues, value];
+
+      return {
+        ...prev,
+        [key]: nextValues,
+      };
+    });
+  };
+
+  useEffect(() => {
+    setIsTeamDataReady(false);
+    const task = InteractionManager.runAfterInteractions(() => {
+      setIsTeamDataReady(true);
+    });
+
+    return () => {
+      task.cancel();
+    };
+  }, [bossId]);
 
   if (!boss) {
     return (
@@ -198,6 +254,14 @@ export function BossDetailScreen({ route }: any) {
   );
 
   const { filteredTeams, excludedTeamsCount, totalTeamsCount } = useMemo(() => {
+    if (!isTeamDataReady) {
+      return {
+        filteredTeams: [] as RecommendedTeam[],
+        excludedTeamsCount: 0,
+        totalTeamsCount: 0,
+      };
+    }
+
     const recommendedTeams = getRecommendedTeamsSorted(
       weaknesses,
       resistances,
@@ -205,15 +269,113 @@ export function BossDetailScreen({ route }: any) {
       metaResistances,
       false,
       isCharacterOwned,
+    ) as RecommendedTeam[];
+
+    const total = recommendedTeams.length;
+    const excludedByOwnership = recommendedTeams.filter(
+      (t) => !t.isAvailable,
+    ).length;
+
+    let teamsToFilter = recommendedTeams;
+    if (teamFilters.availability === "available") {
+      teamsToFilter = teamsToFilter.filter((team) => team.isAvailable);
+    } else if (teamFilters.availability === "unavailable") {
+      teamsToFilter = teamsToFilter.filter((team) => !team.isAvailable);
+    }
+
+    const attributeGroups = [
+      { selected: teamFilters.element, memberAttribute: "element" },
+      { selected: teamFilters.path, memberAttribute: "path" },
+      { selected: teamFilters.role, memberAttribute: "role" },
+      { selected: teamFilters.meta, memberAttribute: "meta" },
+      { selected: teamFilters.target, memberAttribute: "target" },
+    ].filter((group) => group.selected.length > 0);
+
+    const selectedAttributeFilters = attributeGroups.flatMap(
+      ({ selected, memberAttribute }) =>
+        selected.map((value) => ({ value, memberAttribute })),
     );
 
-    const availableTeams = recommendedTeams.filter((t: RecommendedTeam) => t.isAvailable);
+    const attributeFiltered = teamsToFilter.filter(({ members }) => {
+      if (!selectedAttributeFilters.length) return true;
+
+      if (teamFilters.containsAll) {
+        return selectedAttributeFilters.every(({ value, memberAttribute }) =>
+          members.some((member) => (member as any)[memberAttribute] === value),
+        );
+      }
+
+      return selectedAttributeFilters.some(({ value, memberAttribute }) =>
+        members.some((member) => (member as any)[memberAttribute] === value),
+      );
+    });
+
+    if (teamFilters.sortBy === "random") {
+      const shuffled = [...attributeFiltered];
+      for (let i = shuffled.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = shuffled[i];
+        shuffled[i] = shuffled[j];
+        shuffled[j] = temp;
+      }
+
+      return {
+        filteredTeams:
+          teamFilters.sortOrder === "desc" ? shuffled.reverse() : shuffled,
+        excludedTeamsCount: excludedByOwnership,
+        totalTeamsCount: total,
+      };
+    }
+
+    const sortedTeams = [...attributeFiltered].sort((a, b) => {
+      let aValue: number | string;
+      let bValue: number | string;
+
+      switch (teamFilters.sortBy) {
+        case "rating":
+          aValue = a.score;
+          bValue = b.score;
+          break;
+        case "power":
+          aValue = a.teamPower;
+          bValue = b.teamPower;
+          break;
+        case "id":
+          aValue = a.team.id;
+          bValue = b.team.id;
+          break;
+        case "name":
+        default:
+          aValue = a.team.name || a.team.id;
+          bValue = b.team.name || b.team.id;
+          break;
+      }
+
+      if (typeof aValue === "string" && typeof bValue === "string") {
+        return teamFilters.sortOrder === "asc"
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue);
+      }
+
+      return teamFilters.sortOrder === "asc"
+        ? (aValue as number) - (bValue as number)
+        : (bValue as number) - (aValue as number);
+    });
+
     return {
-      filteredTeams: availableTeams,
-      excludedTeamsCount: recommendedTeams.length - availableTeams.length,
-      totalTeamsCount: recommendedTeams.length,
+      filteredTeams: sortedTeams,
+      excludedTeamsCount: excludedByOwnership,
+      totalTeamsCount: total,
     };
-  }, [weaknesses, resistances, metaWeaknesses, metaResistances, isCharacterOwned]);
+  }, [
+    weaknesses,
+    resistances,
+    metaWeaknesses,
+    metaResistances,
+    isCharacterOwned,
+    teamFilters,
+    isTeamDataReady,
+  ]);
 
   const scoreThresholds = useMemo(
     () => getScoreThresholds(filteredTeams.map((team) => team.score)),
@@ -239,7 +401,9 @@ export function BossDetailScreen({ route }: any) {
   ) => {
     if (!scored) return null;
 
-    const filteredEntries = Object.entries(scored).filter(([, score]) => score !== 0);
+    const filteredEntries = Object.entries(scored).filter(
+      ([, score]) => score !== 0,
+    );
     if (!filteredEntries.length) return null;
 
     const sortedEntries = filteredEntries.sort(([, a], [, b]) => b - a);
@@ -283,9 +447,7 @@ export function BossDetailScreen({ route }: any) {
   const renderMemberHoverCard = (member: any) => {
     const paletteEntry = getCharacterPalette(member.id);
     const accent =
-      paletteEntry?.accent ||
-      ELEMENT_COLORS[member.element] ||
-      palette.accent;
+      paletteEntry?.accent || ELEMENT_COLORS[member.element] || palette.accent;
     const accentSoft =
       paletteEntry?.accentSoft ||
       (accent.startsWith("#") ? hexToRgba(accent, 0.18) : palette.accentSoft);
@@ -413,12 +575,26 @@ export function BossDetailScreen({ route }: any) {
       </View>
 
       <View style={styles.sectionCard}>
-        <Text style={styles.sectionHeader}>Recommended Strike Teams</Text>
-        {excludedTeamsCount > 0 ? (
+        <View style={styles.sectionHeaderRow}>
+          <Text style={styles.sectionHeader}>Recommended Strike Teams</Text>
+          <TouchableOpacity
+            style={styles.teamFilterButton}
+            onPress={() => setShowTeamFilterModal(true)}
+          >
+            <Text style={styles.teamFilterButtonText}>Filter & Sort</Text>
+          </TouchableOpacity>
+        </View>
+
+        {!isTeamDataReady ? (
+          <Text style={styles.filterHint}>Loading recommendations...</Text>
+        ) : null}
+
+        {isTeamDataReady &&
+        teamFilters.availability === "available" &&
+        excludedTeamsCount > 0 ? (
           <Text style={styles.filterHint}>
-            Filtered out {excludedTeamsCount} team(s) you do not own ({
-              totalTeamsCount
-            } total available).
+            Filtered out {excludedTeamsCount} team(s) you do not own (
+            {totalTeamsCount} total available).
           </Text>
         ) : null}
 
@@ -611,14 +787,13 @@ export function BossDetailScreen({ route }: any) {
                             hoveredMemberKey === instanceKey &&
                               styles.memberCardActive,
                           ]}
+                          onPress={() => {
+                            (navigation as any).navigate("CharacterDetail", {
+                              characterId: member.id,
+                            });
+                          }}
                           onHoverIn={() => setHoveredMemberKey(instanceKey)}
                           onHoverOut={() =>
-                            setHoveredMemberKey((prev) =>
-                              prev === instanceKey ? null : prev,
-                            )
-                          }
-                          onPressIn={() => setHoveredMemberKey(instanceKey)}
-                          onPressOut={() =>
                             setHoveredMemberKey((prev) =>
                               prev === instanceKey ? null : prev,
                             )
@@ -640,7 +815,10 @@ export function BossDetailScreen({ route }: any) {
                               style={[
                                 styles.memberAvatar,
                                 styles.memberPlaceholder,
-                                { borderColor: accentBorder, backgroundColor: accentSoft },
+                                {
+                                  borderColor: accentBorder,
+                                  backgroundColor: accentSoft,
+                                },
                               ]}
                             >
                               <Text style={styles.memberPlaceholderText}>
@@ -715,6 +893,315 @@ export function BossDetailScreen({ route }: any) {
           </Text>
         )}
       </View>
+      <Modal
+        visible={showTeamFilterModal}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowTeamFilterModal(false)}
+      >
+        <TouchableWithoutFeedback onPress={() => setShowTeamFilterModal(false)}>
+          <View style={styles.modalBackdrop}>
+            <TouchableWithoutFeedback onPress={() => {}}>
+              <View style={styles.modalContainer}>
+                <View style={styles.modalHeader}>
+                  <Text style={styles.modalTitle}>Filter & Sort Teams</Text>
+                  <TouchableOpacity
+                    style={styles.closeButton}
+                    onPress={() => setShowTeamFilterModal(false)}
+                  >
+                    <Text style={styles.closeButtonText}>✕</Text>
+                  </TouchableOpacity>
+                </View>
+
+                <ScrollView style={styles.modalContent}>
+                  <TouchableOpacity
+                    style={styles.teamFilterClearButton}
+                    onPress={() =>
+                      setTeamFilters({
+                        availability: "available",
+                        sortBy: "rating",
+                        sortOrder: "desc",
+                        element: [],
+                        path: [],
+                        role: [],
+                        meta: [],
+                        target: [],
+                        containsAll: false,
+                      })
+                    }
+                  >
+                    <Text style={styles.teamFilterClearButtonText}>
+                      Clear Filters
+                    </Text>
+                  </TouchableOpacity>
+
+                  <View style={styles.teamFilterSection}>
+                    <Text style={styles.teamFilterTitle}>Sort By</Text>
+                    <View style={styles.teamFilterRow}>
+                      {[
+                        { key: "rating", label: "Rating" },
+                        { key: "power", label: "Power" },
+                        { key: "name", label: "Name" },
+                        { key: "id", label: "ID" },
+                        { key: "random", label: "Random" },
+                      ].map(({ key, label }) => (
+                        <TouchableOpacity
+                          key={key}
+                          style={[
+                            styles.teamFilterChip,
+                            teamFilters.sortBy === key &&
+                              styles.teamFilterChipActive,
+                          ]}
+                          onPress={() =>
+                            setTeamFilters((prev) => ({
+                              ...prev,
+                              sortBy: key as TeamFilterState["sortBy"],
+                            }))
+                          }
+                        >
+                          <Text
+                            style={[
+                              styles.teamFilterChipText,
+                              teamFilters.sortBy === key &&
+                                styles.teamFilterChipTextActive,
+                            ]}
+                          >
+                            {label}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                    <View style={styles.teamFilterRow}>
+                      <TouchableOpacity
+                        style={[
+                          styles.teamFilterChip,
+                          teamFilters.sortOrder === "desc" &&
+                            styles.teamFilterChipActive,
+                        ]}
+                        onPress={() =>
+                          setTeamFilters((prev) => ({
+                            ...prev,
+                            sortOrder: "desc",
+                          }))
+                        }
+                      >
+                        <Text
+                          style={[
+                            styles.teamFilterChipText,
+                            teamFilters.sortOrder === "desc" &&
+                              styles.teamFilterChipTextActive,
+                          ]}
+                        >
+                          Descending
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={[
+                          styles.teamFilterChip,
+                          teamFilters.sortOrder === "asc" &&
+                            styles.teamFilterChipActive,
+                        ]}
+                        onPress={() =>
+                          setTeamFilters((prev) => ({
+                            ...prev,
+                            sortOrder: "asc",
+                          }))
+                        }
+                      >
+                        <Text
+                          style={[
+                            styles.teamFilterChipText,
+                            teamFilters.sortOrder === "asc" &&
+                              styles.teamFilterChipTextActive,
+                          ]}
+                        >
+                          Ascending
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+
+                  <View style={styles.teamFilterSection}>
+                    <Text style={styles.teamFilterTitle}>Availability</Text>
+                    <View style={styles.teamFilterRow}>
+                      {[
+                        { key: "all", label: "All" },
+                        { key: "available", label: "Owned" },
+                        { key: "unavailable", label: "Missing" },
+                      ].map(({ key, label }) => (
+                        <TouchableOpacity
+                          key={key}
+                          style={[
+                            styles.teamFilterChip,
+                            teamFilters.availability === key &&
+                              styles.teamFilterChipActive,
+                          ]}
+                          onPress={() =>
+                            setTeamFilters((prev) => ({
+                              ...prev,
+                              availability:
+                                key as TeamFilterState["availability"],
+                            }))
+                          }
+                        >
+                          <Text
+                            style={[
+                              styles.teamFilterChipText,
+                              teamFilters.availability === key &&
+                                styles.teamFilterChipTextActive,
+                            ]}
+                          >
+                            {label}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                  </View>
+
+                  <View style={styles.teamFilterSection}>
+                    <Text style={styles.teamFilterTitle}>Match Logic</Text>
+                    <View style={styles.teamFilterRow}>
+                      <TouchableOpacity
+                        style={[
+                          styles.teamFilterChip,
+                          !teamFilters.containsAll &&
+                            styles.teamFilterChipActive,
+                        ]}
+                        onPress={() =>
+                          setTeamFilters((prev) => ({
+                            ...prev,
+                            containsAll: false,
+                          }))
+                        }
+                      >
+                        <Text
+                          style={[
+                            styles.teamFilterChipText,
+                            !teamFilters.containsAll &&
+                              styles.teamFilterChipTextActive,
+                          ]}
+                        >
+                          Any Match
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={[
+                          styles.teamFilterChip,
+                          teamFilters.containsAll &&
+                            styles.teamFilterChipActive,
+                        ]}
+                        onPress={() =>
+                          setTeamFilters((prev) => ({
+                            ...prev,
+                            containsAll: true,
+                          }))
+                        }
+                      >
+                        <Text
+                          style={[
+                            styles.teamFilterChipText,
+                            teamFilters.containsAll &&
+                              styles.teamFilterChipTextActive,
+                          ]}
+                        >
+                          Must Have All
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+
+                  {[
+                    {
+                      title: "Element",
+                      key: "element" as const,
+                      values: [
+                        "Fire",
+                        "Ice",
+                        "Lightning",
+                        "Physical",
+                        "Quantum",
+                        "Wind",
+                        "Imaginary",
+                      ],
+                    },
+                    {
+                      title: "Path",
+                      key: "path" as const,
+                      values: [
+                        "Destruction",
+                        "Hunt",
+                        "Erudition",
+                        "Harmony",
+                        "Nihility",
+                        "Preservation",
+                        "Abundance",
+                        "Elation",
+                        "Remembrance",
+                      ],
+                    },
+                    {
+                      title: "Role",
+                      key: "role" as const,
+                      values: ["DPS", "Sub-DPS", "Support", "Sustain"],
+                    },
+                    {
+                      title: "Meta",
+                      key: "meta" as const,
+                      values: [
+                        "DOT",
+                        "Crit",
+                        "Break",
+                        "Follow-Up",
+                        "Summon",
+                        "General",
+                        "Kevin",
+                        "Raiden",
+                        "Ultimate",
+                      ],
+                    },
+                    {
+                      title: "Target",
+                      key: "target" as const,
+                      values: ["Single", "Blast", "AoE", "Team"],
+                    },
+                  ].map((group) => (
+                    <View key={group.key} style={styles.teamFilterSection}>
+                      <Text style={styles.teamFilterTitle}>{group.title}</Text>
+                      <View style={styles.teamFilterRow}>
+                        {group.values.map((value) => {
+                          const isActive =
+                            teamFilters[group.key].includes(value);
+                          return (
+                            <TouchableOpacity
+                              key={value}
+                              style={[
+                                styles.teamFilterChip,
+                                isActive && styles.teamFilterChipActive,
+                              ]}
+                              onPress={() =>
+                                toggleTeamMultiFilter(group.key, value)
+                              }
+                            >
+                              <Text
+                                style={[
+                                  styles.teamFilterChipText,
+                                  isActive && styles.teamFilterChipTextActive,
+                                ]}
+                              >
+                                {value}
+                              </Text>
+                            </TouchableOpacity>
+                          );
+                        })}
+                      </View>
+                    </View>
+                  ))}
+                </ScrollView>
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
     </ScrollView>
   );
 }
@@ -854,11 +1341,128 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: palette.textPrimary,
   },
+  sectionHeaderRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 10,
+  },
+  teamFilterButton: {
+    backgroundColor: palette.accent,
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderWidth: 1,
+    borderColor: palette.accentBorder,
+  },
+  teamFilterButtonText: {
+    color: "#ffffff",
+    fontSize: 13,
+    fontWeight: "700",
+  },
   filterHint: {
     fontSize: 12,
     color: palette.textMuted,
     marginTop: -4,
     marginBottom: 4,
+  },
+  modalBackdrop: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "flex-end",
+  },
+  modalContainer: {
+    backgroundColor: "rgba(19, 9, 20, 0.95)",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    maxHeight: "80%",
+    minHeight: "60%",
+  },
+  modalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#2a2a3a",
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#ffffff",
+  },
+  closeButton: {
+    padding: 8,
+    backgroundColor: "#2a2a3a",
+    borderRadius: 20,
+    width: 36,
+    height: 36,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  closeButtonText: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  modalContent: {
+    flex: 1,
+    padding: 16,
+  },
+  teamFilterPanel: {
+    borderWidth: 1,
+    borderColor: palette.surfaceBorder,
+    borderRadius: 14,
+    padding: 12,
+    gap: 10,
+    backgroundColor: "rgba(255, 255, 255, 0.02)",
+  },
+  teamFilterSection: {
+    gap: 6,
+  },
+  teamFilterTitle: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: palette.textSecondary,
+    letterSpacing: 0.4,
+  },
+  teamFilterRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+  },
+  teamFilterChip: {
+    borderWidth: 1,
+    borderColor: palette.surfaceBorder,
+    borderRadius: 999,
+    paddingHorizontal: 12,
+    paddingVertical: 7,
+    backgroundColor: "rgba(255, 255, 255, 0.015)",
+  },
+  teamFilterChipActive: {
+    borderColor: palette.accent,
+    backgroundColor: palette.accentSoft,
+  },
+  teamFilterChipText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: palette.textSecondary,
+  },
+  teamFilterChipTextActive: {
+    color: palette.accent,
+  },
+  teamFilterClearButton: {
+    alignSelf: "flex-start",
+    borderWidth: 1,
+    borderColor: palette.surfaceBorder,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+  },
+  teamFilterClearButtonText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: palette.textMuted,
   },
   section: {
     gap: 6,

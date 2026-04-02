@@ -20,6 +20,7 @@ import {
   getLiveEventTheme,
   getLiveEvents,
 } from "../data/liveEvents";
+import { useFonts } from "expo-font";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -312,6 +313,9 @@ export function HomeScreen() {
   const navigation = useNavigation();
   const isWeb = Platform.OS === "web";
   const [now, setNow] = useState(() => new Date());
+  const [fontsLoaded] = useFonts({
+    NadoorBoldItalic: require("../../assets/fonts/NadoorBoldItalic.otf"),
+  });
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -359,8 +363,13 @@ export function HomeScreen() {
         ) : null}
 
         <View style={styles.titleContainer}>
-          <Text style={styles.mainTitle}>Star Rail</Text>
-          <Text style={styles.subtitle}>Boss Guide</Text>
+          <Text style={styles.subtitle}>Project</Text>
+          <Text
+            style={[styles.mainTitle, fontsLoaded && styles.mainTitleCustom]}
+          >
+            PathFinder
+          </Text>
+
           <View style={styles.titleAccent} />
         </View>
 
@@ -480,6 +489,10 @@ const styles = StyleSheet.create({
     textShadowColor: "rgba(255, 108, 224, 0.3)",
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 8,
+  },
+  mainTitleCustom: {
+    fontFamily: "NadoorBoldItalic",
+    fontWeight: "normal",
   },
 
   subtitle: {

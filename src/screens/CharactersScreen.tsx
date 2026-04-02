@@ -11,6 +11,8 @@ import {
   TouchableWithoutFeedback,
   Modal,
   ScrollView,
+  Platform,
+  useWindowDimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { CHARACTERS, Character } from "../data/characters";
@@ -70,6 +72,8 @@ type FilterState = {
 
 export function CharactersScreen() {
   const navigation = useNavigation();
+  const { width } = useWindowDimensions();
+  const isCompactMobile = Platform.OS !== "web" && width < 430;
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
     element: null,
@@ -219,10 +223,14 @@ export function CharactersScreen() {
             "#ff6ce0";
           const accentSoft =
             paletteEntry?.accentSoft ||
-            (accent.startsWith("#") ? hexToRgba(accent, 0.18) : "rgba(255, 108, 224, 0.18)");
+            (accent.startsWith("#")
+              ? hexToRgba(accent, 0.18)
+              : "rgba(255, 108, 224, 0.18)");
           const accentBorder =
             paletteEntry?.accentBorder ||
-            (accent.startsWith("#") ? hexToRgba(accent, 0.45) : "rgba(255, 108, 224, 0.45)");
+            (accent.startsWith("#")
+              ? hexToRgba(accent, 0.45)
+              : "rgba(255, 108, 224, 0.45)");
 
           return (
             <TouchableOpacity
@@ -246,7 +254,10 @@ export function CharactersScreen() {
                       source={getCharacterImage(item.id)!}
                       style={[
                         styles.characterImage,
-                        { borderColor: accentBorder, backgroundColor: accentSoft },
+                        {
+                          borderColor: accentBorder,
+                          backgroundColor: accentSoft,
+                        },
                       ]}
                     />
                   ) : (
@@ -266,7 +277,10 @@ export function CharactersScreen() {
                       <View
                         style={[
                           styles.metaPill,
-                          { borderColor: accentBorder, backgroundColor: accentSoft },
+                          {
+                            borderColor: accentBorder,
+                            backgroundColor: accentSoft,
+                          },
                         ]}
                       >
                         <Text style={[styles.metaPillText, { color: accent }]}>
@@ -304,18 +318,31 @@ export function CharactersScreen() {
                       <View
                         style={[
                           styles.ratingFill,
-                          { width: `${ratingPercent}%`, backgroundColor: accent },
+                          {
+                            width: `${ratingPercent}%`,
+                            backgroundColor: accent,
+                          },
                         ]}
                       />
                     </View>
-                    {renderGameModeStars(
-                      item.mocRating,
-                      item.pfRating,
-                      item.asRating,
-                    )}
+                    {!isCompactMobile &&
+                      renderGameModeStars(
+                        item.mocRating,
+                        item.pfRating,
+                        item.asRating,
+                      )}
                   </View>
                 </View>
               </View>
+              {isCompactMobile && (
+                <View style={styles.mobileStarsRow}>
+                  {renderGameModeStars(
+                    item.mocRating,
+                    item.pfRating,
+                    item.asRating,
+                  )}
+                </View>
+              )}
             </TouchableOpacity>
           );
         }}
@@ -806,6 +833,11 @@ const styles = StyleSheet.create({
     gap: 8,
     marginTop: 8,
     alignItems: "center",
+  },
+  mobileStarsRow: {
+    width: "100%",
+    marginTop: 8,
+    alignItems: "flex-start",
   },
   filterButton: {
     backgroundColor: "#ff6ce0",

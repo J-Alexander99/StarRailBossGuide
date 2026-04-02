@@ -10,6 +10,7 @@ import {
   ScrollView,
   Platform,
   Pressable,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TEAMS, resolveTeamMembers } from "../data/teams";
@@ -17,6 +18,7 @@ import { getCharacterImage } from "../constants/characterImageMappings";
 import { getElementIcon, getPathIcon } from "../constants/iconMappings";
 import { useCharacterOwnership } from "../context/CharacterOwnershipContext";
 import { getCharacterPalette } from "../constants/characterPalettes";
+import { StarRatingRow } from "../components/StarRatingRow";
 
 const ELEMENT_COLORS: Record<string, string> = {
   Physical: "#ec4899",
@@ -54,15 +56,17 @@ type FilterState = {
   availability: "all" | "available" | "unavailable";
   minRating: number;
   maxRating: number;
-  sortBy: "name" | "rating" | "id";
+  sortBy: "name" | "rating" | "id" | "random";
   sortOrder: "asc" | "desc";
-  element: string | null;
-  path: string | null;
-  role: string | null;
-  meta: string | null;
-  target: string | null;
+  element: string[];
+  path: string[];
+  role: string[];
+  meta: string[];
+  target: string[];
   containsAll: boolean; // true = team must have ALL selected attributes, false = team must have ANY
 };
+
+type MultiFilterKey = "element" | "path" | "role" | "meta" | "target";
 
 export function TeamsScreen() {
   const navigation = useNavigation();
@@ -76,13 +80,27 @@ export function TeamsScreen() {
     maxRating: 120,
     sortBy: "name",
     sortOrder: "asc",
-    element: null,
-    path: null,
-    role: null,
-    meta: null,
-    target: null,
+    element: [],
+    path: [],
+    role: [],
+    meta: [],
+    target: [],
     containsAll: false,
   });
+
+  const toggleMultiFilter = (key: MultiFilterKey, value: string) => {
+    setFilters((prev) => {
+      const currentValues = prev[key] as string[];
+      const nextValues = currentValues.includes(value)
+        ? currentValues.filter((item) => item !== value)
+        : [...currentValues, value];
+
+      return {
+        ...prev,
+        [key]: nextValues,
+      };
+    });
+  };
 
   const enrichedTeams = useMemo(() => {
     return TEAMS.map((team) => {
@@ -131,25 +149,30 @@ export function TeamsScreen() {
 
         // Check character attribute filters
         const attributeFilters = [
-          { filter: filters.element, memberAttribute: "element" },
-          { filter: filters.path, memberAttribute: "path" },
-          { filter: filters.role, memberAttribute: "role" },
-          { filter: filters.meta, memberAttribute: "meta" },
-          { filter: filters.target, memberAttribute: "target" },
-        ].filter((f) => f.filter !== null);
+          { filters: filters.element, memberAttribute: "element" },
+          { filters: filters.path, memberAttribute: "path" },
+          { filters: filters.role, memberAttribute: "role" },
+          { filters: filters.meta, memberAttribute: "meta" },
+          { filters: filters.target, memberAttribute: "target" },
+        ].filter((f) => f.filters.length > 0);
 
-        if (attributeFilters.length === 0) return true;
+        const selectedAttributeFilters = attributeFilters.flatMap(
+          ({ filters: selectedValues, memberAttribute }) =>
+            selectedValues.map((filter) => ({ filter, memberAttribute })),
+        );
+
+        if (selectedAttributeFilters.length === 0) return true;
 
         if (filters.containsAll) {
           // Team must have ALL selected attributes
-          return attributeFilters.every(({ filter, memberAttribute }) =>
+          return selectedAttributeFilters.every(({ filter, memberAttribute }) =>
             members.some(
               (member) => (member as any)[memberAttribute] === filter,
             ),
           );
         } else {
           // Team must have ANY of the selected attributes
-          return attributeFilters.some(({ filter, memberAttribute }) =>
+          return selectedAttributeFilters.some(({ filter, memberAttribute }) =>
             members.some(
               (member) => (member as any)[memberAttribute] === filter,
             ),
@@ -158,6 +181,23 @@ export function TeamsScreen() {
       });
 
       // Sort teams
+      if (filters.sortBy === "random") {
+        const shuffled = [...filtered];
+        for (let i = shuffled.length - 1; i > 0; i -= 1) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const temp = shuffled[i];
+          shuffled[i] = shuffled[j];
+          shuffled[j] = temp;
+        }
+
+        return {
+          availableTeams: available,
+          unavailableTeams: unavailable,
+          filteredAndSortedTeams:
+            filters.sortOrder === "desc" ? shuffled.reverse() : shuffled,
+        };
+      }
+
       const sorted = [...filtered].sort((a, b) => {
         let aValue, bValue;
 
@@ -208,31 +248,17 @@ export function TeamsScreen() {
     asTotal: number,
     isAvailable: boolean,
   ) => {
-    const renderModeStars = (rating: number, color: string, key: string) => {
-      // Each mode: 4 points per half star, so 5 stars = 40 points
-      const halfStars = Math.round(rating / 4);
-      const fullStars = Math.floor(halfStars / 2);
-      const hasHalfStar = halfStars % 2 === 1;
-      const emptyStars = Math.max(0, 5 - fullStars - (hasHalfStar ? 1 : 0));
-
-      return (
-        <View key={key} style={{ flexDirection: "row" }}>
-          <Text
-            style={{
-              color: isAvailable ? color : "#4b5563",
-              fontSize: 16,
-              letterSpacing: 1,
-            }}
-          >
-            {"★".repeat(fullStars)}
-            {hasHalfStar ? "⯨" : ""}
-          </Text>
-          <Text style={{ color: "#6b7280", fontSize: 16, letterSpacing: 1 }}>
-            {"☆".repeat(emptyStars)}
-          </Text>
-        </View>
-      );
-    };
+    const renderModeStars = (rating: number, color: string, key: string) => (
+      <View key={key}>
+        <StarRatingRow
+          rating={rating / 4}
+          color={isAvailable ? color : "#4b5563"}
+          size={16}
+          spacing={1}
+          emptyColor="#6b7280"
+        />
+      </View>
+    );
 
     return (
       <View style={styles.gameModeStarsContainer}>
@@ -609,418 +635,420 @@ export function TeamsScreen() {
         transparent={true}
         onRequestClose={() => setShowFilterModal(false)}
       >
-        <View style={styles.modalBackdrop}>
-          <View style={styles.modalContainer}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Filter & Sort Teams</Text>
-              <TouchableOpacity
-                style={styles.closeButton}
-                onPress={() => setShowFilterModal(false)}
-              >
-                <Text style={styles.closeButtonText}>✕</Text>
-              </TouchableOpacity>
-            </View>
-
-            <ScrollView style={styles.modalContent}>
-              {/* Clear Filters */}
-              <TouchableOpacity
-                style={styles.clearButton}
-                onPress={() =>
-                  setFilters({
-                    availability: "all",
-                    minRating: 0,
-                    maxRating: 120,
-                    sortBy: "name",
-                    sortOrder: "asc",
-                    element: null,
-                    path: null,
-                    role: null,
-                    meta: null,
-                    target: null,
-                    containsAll: false,
-                  })
-                }
-              >
-                <Text style={styles.clearButtonText}>Clear All Filters</Text>
-              </TouchableOpacity>
-
-              {/* Sort Options */}
-              <View style={styles.filterSection}>
-                <Text style={styles.filterSectionTitle}>Sort By</Text>
-                <View style={styles.filterRow}>
-                  {["name", "rating", "id"].map((sort) => (
-                    <TouchableOpacity
-                      key={sort}
-                      style={[
-                        styles.filterChip,
-                        filters.sortBy === sort && styles.filterChipActive,
-                      ]}
-                      onPress={() =>
-                        setFilters((prev) => ({ ...prev, sortBy: sort as any }))
-                      }
-                    >
-                      <Text
-                        style={[
-                          styles.filterChipText,
-                          filters.sortBy === sort &&
-                            styles.filterChipTextActive,
-                        ]}
-                      >
-                        {sort.charAt(0).toUpperCase() + sort.slice(1)}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-
-                <View style={styles.filterRow}>
+        <TouchableWithoutFeedback onPress={() => setShowFilterModal(false)}>
+          <View style={styles.modalBackdrop}>
+            <TouchableWithoutFeedback onPress={() => {}}>
+              <View style={styles.modalContainer}>
+                <View style={styles.modalHeader}>
+                  <Text style={styles.modalTitle}>Filter & Sort Teams</Text>
                   <TouchableOpacity
-                    style={[
-                      styles.filterChip,
-                      filters.sortOrder === "asc" && styles.filterChipActive,
-                    ]}
-                    onPress={() =>
-                      setFilters((prev) => ({ ...prev, sortOrder: "asc" }))
-                    }
+                    style={styles.closeButton}
+                    onPress={() => setShowFilterModal(false)}
                   >
-                    <Text
-                      style={[
-                        styles.filterChipText,
-                        filters.sortOrder === "asc" &&
-                          styles.filterChipTextActive,
-                      ]}
-                    >
-                      Ascending
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={[
-                      styles.filterChip,
-                      filters.sortOrder === "desc" && styles.filterChipActive,
-                    ]}
-                    onPress={() =>
-                      setFilters((prev) => ({ ...prev, sortOrder: "desc" }))
-                    }
-                  >
-                    <Text
-                      style={[
-                        styles.filterChipText,
-                        filters.sortOrder === "desc" &&
-                          styles.filterChipTextActive,
-                      ]}
-                    >
-                      Descending
-                    </Text>
+                    <Text style={styles.closeButtonText}>✕</Text>
                   </TouchableOpacity>
                 </View>
-              </View>
 
-              {/* Availability Filter */}
-              <View style={styles.filterSection}>
-                <Text style={styles.filterSectionTitle}>Availability</Text>
-                <View style={styles.filterRow}>
-                  {[
-                    { key: "all", label: "All Teams" },
-                    { key: "available", label: "Available Only" },
-                    { key: "unavailable", label: "Missing Characters" },
-                  ].map(({ key, label }) => (
-                    <TouchableOpacity
-                      key={key}
-                      style={[
-                        styles.filterChip,
-                        filters.availability === key && styles.filterChipActive,
-                      ]}
-                      onPress={() =>
-                        setFilters((prev) => ({
-                          ...prev,
-                          availability: key as any,
-                        }))
-                      }
-                    >
-                      <Text
-                        style={[
-                          styles.filterChipText,
-                          filters.availability === key &&
-                            styles.filterChipTextActive,
-                        ]}
-                      >
-                        {label}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              </View>
-
-              {/* Match Logic */}
-              <View style={styles.filterSection}>
-                <Text style={styles.filterSectionTitle}>Match Logic</Text>
-                <View style={styles.filterRow}>
+                <ScrollView style={styles.modalContent}>
+                  {/* Clear Filters */}
                   <TouchableOpacity
-                    style={[
-                      styles.filterChip,
-                      !filters.containsAll && styles.filterChipActive,
-                    ]}
+                    style={styles.clearButton}
                     onPress={() =>
-                      setFilters((prev) => ({ ...prev, containsAll: false }))
+                      setFilters({
+                        availability: "all",
+                        minRating: 0,
+                        maxRating: 120,
+                        sortBy: "name",
+                        sortOrder: "asc",
+                        element: [],
+                        path: [],
+                        role: [],
+                        meta: [],
+                        target: [],
+                        containsAll: false,
+                      })
                     }
                   >
-                    <Text
-                      style={[
-                        styles.filterChipText,
-                        !filters.containsAll && styles.filterChipTextActive,
-                      ]}
-                    >
-                      Any Match
+                    <Text style={styles.clearButtonText}>
+                      Clear All Filters
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    style={[
-                      styles.filterChip,
-                      filters.containsAll && styles.filterChipActive,
-                    ]}
-                    onPress={() =>
-                      setFilters((prev) => ({ ...prev, containsAll: true }))
-                    }
-                  >
-                    <Text
-                      style={[
-                        styles.filterChipText,
-                        filters.containsAll && styles.filterChipTextActive,
-                      ]}
-                    >
-                      Must Have All
+
+                  {/* Sort Options */}
+                  <View style={styles.filterSection}>
+                    <Text style={styles.filterSectionTitle}>Sort By</Text>
+                    <View style={styles.filterRow}>
+                      {["name", "rating", "id", "random"].map((sort) => (
+                        <TouchableOpacity
+                          key={sort}
+                          style={[
+                            styles.filterChip,
+                            filters.sortBy === sort && styles.filterChipActive,
+                          ]}
+                          onPress={() =>
+                            setFilters((prev) => ({
+                              ...prev,
+                              sortBy: sort as any,
+                            }))
+                          }
+                        >
+                          <Text
+                            style={[
+                              styles.filterChipText,
+                              filters.sortBy === sort &&
+                                styles.filterChipTextActive,
+                            ]}
+                          >
+                            {sort.charAt(0).toUpperCase() + sort.slice(1)}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+
+                    <View style={styles.filterRow}>
+                      <TouchableOpacity
+                        style={[
+                          styles.filterChip,
+                          filters.sortOrder === "asc" &&
+                            styles.filterChipActive,
+                        ]}
+                        onPress={() =>
+                          setFilters((prev) => ({ ...prev, sortOrder: "asc" }))
+                        }
+                      >
+                        <Text
+                          style={[
+                            styles.filterChipText,
+                            filters.sortOrder === "asc" &&
+                              styles.filterChipTextActive,
+                          ]}
+                        >
+                          Ascending
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={[
+                          styles.filterChip,
+                          filters.sortOrder === "desc" &&
+                            styles.filterChipActive,
+                        ]}
+                        onPress={() =>
+                          setFilters((prev) => ({ ...prev, sortOrder: "desc" }))
+                        }
+                      >
+                        <Text
+                          style={[
+                            styles.filterChipText,
+                            filters.sortOrder === "desc" &&
+                              styles.filterChipTextActive,
+                          ]}
+                        >
+                          Descending
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+
+                  {/* Availability Filter */}
+                  <View style={styles.filterSection}>
+                    <Text style={styles.filterSectionTitle}>Availability</Text>
+                    <View style={styles.filterRow}>
+                      {[
+                        { key: "all", label: "All Teams" },
+                        { key: "available", label: "Available Only" },
+                        { key: "unavailable", label: "Missing Characters" },
+                      ].map(({ key, label }) => (
+                        <TouchableOpacity
+                          key={key}
+                          style={[
+                            styles.filterChip,
+                            filters.availability === key &&
+                              styles.filterChipActive,
+                          ]}
+                          onPress={() =>
+                            setFilters((prev) => ({
+                              ...prev,
+                              availability: key as any,
+                            }))
+                          }
+                        >
+                          <Text
+                            style={[
+                              styles.filterChipText,
+                              filters.availability === key &&
+                                styles.filterChipTextActive,
+                            ]}
+                          >
+                            {label}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                  </View>
+
+                  {/* Match Logic */}
+                  <View style={styles.filterSection}>
+                    <Text style={styles.filterSectionTitle}>Match Logic</Text>
+                    <View style={styles.filterRow}>
+                      <TouchableOpacity
+                        style={[
+                          styles.filterChip,
+                          !filters.containsAll && styles.filterChipActive,
+                        ]}
+                        onPress={() =>
+                          setFilters((prev) => ({
+                            ...prev,
+                            containsAll: false,
+                          }))
+                        }
+                      >
+                        <Text
+                          style={[
+                            styles.filterChipText,
+                            !filters.containsAll && styles.filterChipTextActive,
+                          ]}
+                        >
+                          Any Match
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={[
+                          styles.filterChip,
+                          filters.containsAll && styles.filterChipActive,
+                        ]}
+                        onPress={() =>
+                          setFilters((prev) => ({ ...prev, containsAll: true }))
+                        }
+                      >
+                        <Text
+                          style={[
+                            styles.filterChipText,
+                            filters.containsAll && styles.filterChipTextActive,
+                          ]}
+                        >
+                          Must Have All
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+
+                  {/* Element Filter */}
+                  <View style={styles.filterSection}>
+                    <Text style={styles.filterSectionTitle}>Element</Text>
+                    <View style={styles.filterRow}>
+                      {[
+                        "Fire",
+                        "Ice",
+                        "Lightning",
+                        "Physical",
+                        "Quantum",
+                        "Wind",
+                        "Imaginary",
+                      ].map((element) => (
+                        <TouchableOpacity
+                          key={element}
+                          style={[
+                            styles.filterChip,
+                            filters.element.includes(element) &&
+                              styles.filterChipActive,
+                          ]}
+                          onPress={() => toggleMultiFilter("element", element)}
+                        >
+                          <Text
+                            style={[
+                              styles.filterChipText,
+                              filters.element.includes(element) &&
+                                styles.filterChipTextActive,
+                            ]}
+                          >
+                            {element}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                  </View>
+
+                  {/* Path Filter */}
+                  <View style={styles.filterSection}>
+                    <Text style={styles.filterSectionTitle}>Path</Text>
+                    <View style={styles.filterRow}>
+                      {[
+                        "Destruction",
+                        "Hunt",
+                        "Erudition",
+                        "Harmony",
+                        "Nihility",
+                        "Preservation",
+                        "Abundance",
+                        "Elation",
+                        "Remembrance",
+                      ].map((path) => (
+                        <TouchableOpacity
+                          key={path}
+                          style={[
+                            styles.filterChip,
+                            filters.path.includes(path) &&
+                              styles.filterChipActive,
+                          ]}
+                          onPress={() => toggleMultiFilter("path", path)}
+                        >
+                          <Text
+                            style={[
+                              styles.filterChipText,
+                              filters.path.includes(path) &&
+                                styles.filterChipTextActive,
+                            ]}
+                          >
+                            {path}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                  </View>
+
+                  {/* Role Filter */}
+                  <View style={styles.filterSection}>
+                    <Text style={styles.filterSectionTitle}>Role</Text>
+                    <View style={styles.filterRow}>
+                      {["DPS", "Sub-DPS", "Support", "Sustain"].map((role) => (
+                        <TouchableOpacity
+                          key={role}
+                          style={[
+                            styles.filterChip,
+                            filters.role.includes(role) &&
+                              styles.filterChipActive,
+                          ]}
+                          onPress={() => toggleMultiFilter("role", role)}
+                        >
+                          <Text
+                            style={[
+                              styles.filterChipText,
+                              filters.role.includes(role) &&
+                                styles.filterChipTextActive,
+                            ]}
+                          >
+                            {role}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                  </View>
+
+                  {/* Meta Filter */}
+                  <View style={styles.filterSection}>
+                    <Text style={styles.filterSectionTitle}>
+                      Meta Archetype
                     </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
+                    <View style={styles.filterRow}>
+                      {[
+                        "DOT",
+                        "Crit",
+                        "Break",
+                        "Follow-Up",
+                        "Summon",
+                        "General",
+                        "Kevin",
+                        "Raiden",
+                        "Ultimate",
+                      ].map((meta) => (
+                        <TouchableOpacity
+                          key={meta}
+                          style={[
+                            styles.filterChip,
+                            filters.meta.includes(meta) &&
+                              styles.filterChipActive,
+                          ]}
+                          onPress={() => toggleMultiFilter("meta", meta)}
+                        >
+                          <Text
+                            style={[
+                              styles.filterChipText,
+                              filters.meta.includes(meta) &&
+                                styles.filterChipTextActive,
+                            ]}
+                          >
+                            {meta}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                  </View>
 
-              {/* Element Filter */}
-              <View style={styles.filterSection}>
-                <Text style={styles.filterSectionTitle}>Element</Text>
-                <View style={styles.filterRow}>
-                  {[
-                    "Fire",
-                    "Ice",
-                    "Lightning",
-                    "Physical",
-                    "Quantum",
-                    "Wind",
-                    "Imaginary",
-                  ].map((element) => (
-                    <TouchableOpacity
-                      key={element}
-                      style={[
-                        styles.filterChip,
-                        filters.element === element && styles.filterChipActive,
-                      ]}
-                      onPress={() =>
-                        setFilters((prev) => ({
-                          ...prev,
-                          element: prev.element === element ? null : element,
-                        }))
-                      }
-                    >
-                      <Text
-                        style={[
-                          styles.filterChipText,
-                          filters.element === element &&
-                            styles.filterChipTextActive,
-                        ]}
-                      >
-                        {element}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              </View>
+                  {/* Target Filter */}
+                  <View style={styles.filterSection}>
+                    <Text style={styles.filterSectionTitle}>Target Type</Text>
+                    <View style={styles.filterRow}>
+                      {["Single", "Blast", "AoE", "Team"].map((target) => (
+                        <TouchableOpacity
+                          key={target}
+                          style={[
+                            styles.filterChip,
+                            filters.target.includes(target) &&
+                              styles.filterChipActive,
+                          ]}
+                          onPress={() => toggleMultiFilter("target", target)}
+                        >
+                          <Text
+                            style={[
+                              styles.filterChipText,
+                              filters.target.includes(target) &&
+                                styles.filterChipTextActive,
+                            ]}
+                          >
+                            {target}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                  </View>
 
-              {/* Path Filter */}
-              <View style={styles.filterSection}>
-                <Text style={styles.filterSectionTitle}>Path</Text>
-                <View style={styles.filterRow}>
-                  {[
-                    "Destruction",
-                    "Hunt",
-                    "Erudition",
-                    "Harmony",
-                    "Nihility",
-                    "Preservation",
-                    "Abundance",
-                    "Elation",
-                    "Remembrance",
-                  ].map((path) => (
-                    <TouchableOpacity
-                      key={path}
-                      style={[
-                        styles.filterChip,
-                        filters.path === path && styles.filterChipActive,
-                      ]}
-                      onPress={() =>
-                        setFilters((prev) => ({
-                          ...prev,
-                          path: prev.path === path ? null : path,
-                        }))
-                      }
-                    >
-                      <Text
-                        style={[
-                          styles.filterChipText,
-                          filters.path === path && styles.filterChipTextActive,
-                        ]}
-                      >
-                        {path}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
+                  {/* Rating Range Filter */}
+                  <View style={styles.filterSection}>
+                    <Text style={styles.filterSectionTitle}>
+                      Team Power Range
+                    </Text>
+                    <View style={styles.filterRow}>
+                      {[
+                        { min: 0, max: 120, label: "All Power Levels" },
+                        { min: 90, max: 120, label: "High Power (90-120)" },
+                        { min: 60, max: 89, label: "Medium Power (60-89)" },
+                        { min: 0, max: 59, label: "Low Power (0-59)" },
+                      ].map(({ min, max, label }) => (
+                        <TouchableOpacity
+                          key={`${min}-${max}`}
+                          style={[
+                            styles.filterChip,
+                            filters.minRating === min &&
+                              filters.maxRating === max &&
+                              styles.filterChipActive,
+                          ]}
+                          onPress={() =>
+                            setFilters((prev) => ({
+                              ...prev,
+                              minRating: min,
+                              maxRating: max,
+                            }))
+                          }
+                        >
+                          <Text
+                            style={[
+                              styles.filterChipText,
+                              filters.minRating === min &&
+                                filters.maxRating === max &&
+                                styles.filterChipTextActive,
+                            ]}
+                          >
+                            {label}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                  </View>
+                </ScrollView>
               </View>
-
-              {/* Role Filter */}
-              <View style={styles.filterSection}>
-                <Text style={styles.filterSectionTitle}>Role</Text>
-                <View style={styles.filterRow}>
-                  {["DPS", "Sub-DPS", "Support", "Sustain"].map((role) => (
-                    <TouchableOpacity
-                      key={role}
-                      style={[
-                        styles.filterChip,
-                        filters.role === role && styles.filterChipActive,
-                      ]}
-                      onPress={() =>
-                        setFilters((prev) => ({
-                          ...prev,
-                          role: prev.role === role ? null : role,
-                        }))
-                      }
-                    >
-                      <Text
-                        style={[
-                          styles.filterChipText,
-                          filters.role === role && styles.filterChipTextActive,
-                        ]}
-                      >
-                        {role}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              </View>
-
-              {/* Meta Filter */}
-              <View style={styles.filterSection}>
-                <Text style={styles.filterSectionTitle}>Meta Archetype</Text>
-                <View style={styles.filterRow}>
-                  {[
-                    "DOT",
-                    "Crit",
-                    "Break",
-                    "Follow-Up",
-                    "Summon",
-                    "General",
-                    "Kevin",
-                    "Raiden",
-                    "Ultimate",
-                  ].map((meta) => (
-                    <TouchableOpacity
-                      key={meta}
-                      style={[
-                        styles.filterChip,
-                        filters.meta === meta && styles.filterChipActive,
-                      ]}
-                      onPress={() =>
-                        setFilters((prev) => ({
-                          ...prev,
-                          meta: prev.meta === meta ? null : meta,
-                        }))
-                      }
-                    >
-                      <Text
-                        style={[
-                          styles.filterChipText,
-                          filters.meta === meta && styles.filterChipTextActive,
-                        ]}
-                      >
-                        {meta}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              </View>
-
-              {/* Target Filter */}
-              <View style={styles.filterSection}>
-                <Text style={styles.filterSectionTitle}>Target Type</Text>
-                <View style={styles.filterRow}>
-                  {["Single", "Blast", "AoE", "Team"].map((target) => (
-                    <TouchableOpacity
-                      key={target}
-                      style={[
-                        styles.filterChip,
-                        filters.target === target && styles.filterChipActive,
-                      ]}
-                      onPress={() =>
-                        setFilters((prev) => ({
-                          ...prev,
-                          target: prev.target === target ? null : target,
-                        }))
-                      }
-                    >
-                      <Text
-                        style={[
-                          styles.filterChipText,
-                          filters.target === target &&
-                            styles.filterChipTextActive,
-                        ]}
-                      >
-                        {target}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              </View>
-
-              {/* Rating Range Filter */}
-              <View style={styles.filterSection}>
-                <Text style={styles.filterSectionTitle}>Team Power Range</Text>
-                <View style={styles.filterRow}>
-                  {[
-                    { min: 0, max: 120, label: "All Power Levels" },
-                    { min: 90, max: 120, label: "High Power (90-120)" },
-                    { min: 60, max: 89, label: "Medium Power (60-89)" },
-                    { min: 0, max: 59, label: "Low Power (0-59)" },
-                  ].map(({ min, max, label }) => (
-                    <TouchableOpacity
-                      key={`${min}-${max}`}
-                      style={[
-                        styles.filterChip,
-                        filters.minRating === min &&
-                          filters.maxRating === max &&
-                          styles.filterChipActive,
-                      ]}
-                      onPress={() =>
-                        setFilters((prev) => ({
-                          ...prev,
-                          minRating: min,
-                          maxRating: max,
-                        }))
-                      }
-                    >
-                      <Text
-                        style={[
-                          styles.filterChipText,
-                          filters.minRating === min &&
-                            filters.maxRating === max &&
-                            styles.filterChipTextActive,
-                        ]}
-                      >
-                        {label}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              </View>
-            </ScrollView>
+            </TouchableWithoutFeedback>
           </View>
-        </View>
+        </TouchableWithoutFeedback>
       </Modal>
     </View>
   );
