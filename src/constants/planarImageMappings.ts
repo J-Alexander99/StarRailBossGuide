@@ -13,6 +13,7 @@ const PLANAR_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   "Giant Tree of Rapt Brooding": require("../../images/planar/PO_Giant_Tree_of_Rapt_Brooding.webp"),
   "Inert Salsotto": require("../../images/planar/PO_Inert_Salsotto.png"),
   "Izumo Gensei and Takama Divine Realm": require("../../images/planar/PO_Izumo_Gensei_and_Takama_Divine_Realm.webp"),
+  "City of Converging Stars": require("../../images/planar/PO_City_of_Converging_Stars.webp"),
   "Lushaka, the Sunken Seas": require("../../images/planar/PO_Lushaka,_the_Sunken_Seas.png"),
   "Pan-Cosmic Commercial Enterprise": require("../../images/planar/PO_Pan_Cosmic_Commercial_Enterprise.webp"),
   "Penacony, Land of the Dreams": require("../../images/planar/PO_Penacony,_Land_of_the_Dreams.png"),

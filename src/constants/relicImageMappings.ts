@@ -3,7 +3,9 @@ import { ImageSourcePropType } from "react-native";
 const RELIC_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   "Band of Sizzling Thunder": require("../../images/relics/Relic_Band_of_Sizzling_Thunder.webp"),
   "Champion of Streetwise Boxing": require("../../images/relics/Relic_Champion_of_Streetwise_Boxing.png"),
+  "Diviner of Distant Reach": require("../../images/relics/Relic_Diviner_of_Distant_Reach.webp"),
   "Eagle of Twilight Line": require("../../images/relics/Relic_Eagle_of_Twilight_Line.webp"),
+  "Ever-Glorious Magical Girl": require("../../images/relics/Relic_Ever-Glorious_Magical_Girl.webp"),
   "Firesmith of Lava-Forging": require("../../images/relics/Relic_Firesmith_of_Lava_Forging.png"),
   "Genius of Brilliant Stars": require("../../images/relics/Relic_Genius_of_Brilliant_Stars.webp"),
   "Hero of Triumphant Song": require("../../images/relics/Relic_Hero_of_Triumphant_Song.webp"),
