@@ -26,10 +26,11 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Hero of Triumphant Song", pieces: "4pc" },
-        { name: "Scholar Lost in Erudition", pieces: "4pc" },
+        { name: "Scholar Lost in Erudition", pieces: "2pc" },
         { name: "Musketeer of Wild Wheat", pieces: "4pc" }
       ],
       planar: [
+        { name: "The Wondrous BananAmusement Park" },
         { name: "Rutilant Arena" },
         { name: "Firmament Frontline: Glamoth" },
         { name: "Arcadia of Woven Dreams" }
@@ -54,10 +55,12 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
-        { name: "Eagle of Twilight Line", pieces: "4pc" },
-        { name: "Pioneer Diver of Dead Waters", pieces: "4pc" },
+        { name: "As Navigator Isee Sees It", pieces: "4pc" },
+        { name: "Wavestrider Captain", pieces: "4pc" },
         { name: "Genius of Brilliant Stars", pieces: "4pc" },
-        { name: "Scholar Lost in Erudition", pieces: "4pc" }
+        { name: "Scholar Lost in Erudition", pieces: "4pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" },
+        { name: "Divine-Querying Master Smith", pieces: "4pc" }
       ],
       planar: [
         { name: "Izumo Gensei and Takama Divine Realm" },
@@ -75,6 +78,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
   archer: {
     characterId: "archer",
     lightCones: [
+      { name: "The Finale of a Lie" },
       { name: "The Hell Where Ideals Burn" },
       { name: "Baptism of Pure Thought" },
       { name: "Cruising in the Stellar Sea" },
@@ -83,14 +87,15 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
+        { name: "As Navigator Isee Sees It", pieces: "4pc" },
         { name: "Genius of Brilliant Stars", pieces: "4pc" },
         { name: "Poet of Mourning Collapse", pieces: "4pc" },
         { name: "Wavestrider Captain", pieces: "4pc" },
         { name: "Scholar Lost in Erudition", pieces: "4pc" }
       ],
       planar: [
-        { name: "Rutilant Arena" },
         { name: "Tengoku@Livestream" },
+        { name: "Rutilant Arena" },
         { name: "Inert Salsotto" }
       ],
     },
@@ -172,11 +177,13 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
+        { name: "The Ashblazing Grand Duke", pieces: "4pc" },
         { name: "Pioneer Diver of Dead Waters", pieces: "4pc" }
       ],
       planar: [
         { name: "City of Converging Stars" },
         { name: "Duran, Dynasty of Running Wolves" },
+        { name: "The Wondrous BananAmusement Park" },
         { name: "Inert Salsotto" }
       ],
     },
@@ -198,7 +205,9 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "4pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" },
+        { name: "Watchmaker, Master of Dream Machinations", pieces: "4pc" }
       ],
       planar: [
         { name: "Sprightly Vonwacq" },
@@ -230,13 +239,15 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Self-Enshrouded Recluse", pieces: "4pc" },
-        { name: "Knight of Purity Palace", pieces: "4pc" }
+        { name: "Knight of Purity Palace", pieces: "4pc" },
+        { name: "Pioneer Diver of Dead Waters", pieces: "4pc" }
       ],
       planar: [
         { name: "Broken Keel" },
         { name: "Fleet of the Ageless" },
         { name: "Penacony, Land of the Dreams" },
-        { name: "Lushaka, the Sunken Seas" }
+        { name: "Lushaka, the Sunken Seas" },
+        { name: "Inert Salsotto" }
       ],
     },
     stats: {
@@ -292,7 +303,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Prisoner in Deep Confinement", pieces: "4pc" },
-        { name: "Pioneer Diver of Dead Waters", pieces: "4pc" }
+        { name: "Pioneer Diver of Dead Waters", pieces: "2pc" }
       ],
       planar: [
         { name: "Revelry by the Sea" },
@@ -320,7 +331,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Longevous Disciple", pieces: "4pc" },
-        { name: "Scholar Lost in Erudition", pieces: "4pc" }
+        { name: "Scholar Lost in Erudition", pieces: "2pc" }
       ],
       planar: [
         { name: "Bone Collection's Serene Demesne" },
@@ -358,9 +369,9 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       ],
     },
     stats: {
-      body: ["Anything", "CRIT Rate"],
+      body: ["Anything"],
       feet: ["Speed"],
-      sphere: ["Anything", "Physical DMG"],
+      sphere: ["Anything"],
       rope: ["Break Effect"],
       subStats: ["SPD (Until breakpoint OR if you got nothing else to stack) >= Break Effect"],
     },
@@ -376,13 +387,15 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Sacerdos' Relived Ordeal", pieces: "4pc" },
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" }
       ],
       planar: [
         { name: "Broken Keel" },
         { name: "Fleet of the Ageless" },
         { name: "Penacony, Land of the Dreams" },
-        { name: "Lushaka, the Sunken Seas" }
+        { name: "Lushaka, the Sunken Seas" },
+        { name: "Sprightly Vonwacq" }
       ],
     },
     stats: {
@@ -407,11 +420,12 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Poet of Mourning Collapse", pieces: "4pc" },
-        { name: "Scholar Lost in Erudition", pieces: "4pc" }
+        { name: "Scholar Lost in Erudition", pieces: "2pc" }
       ],
       planar: [
         { name: "Bone Collection's Serene Demesne" },
-        { name: "Arcadia of Woven Dreams" }
+        { name: "Arcadia of Woven Dreams" },
+        { name: "The Wondrous BananAmusement Park" }
       ],
     },
     stats: {
@@ -433,7 +447,8 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
-        { name: "Sacerdos' Relived Ordeal", pieces: "4pc" }
+        { name: "Sacerdos' Relived Ordeal", pieces: "4pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" }
       ],
       planar: [
         { name: "Lushaka, the Sunken Seas" },
@@ -458,7 +473,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" },
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" },
         { name: "Pioneer Diver of Dead Waters", pieces: "4pc" },
         { name: "Genius of Brilliant Stars", pieces: "4pc" }
       ],
@@ -551,7 +566,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
         { name: "Poet of Mourning Collapse", pieces: "4pc" },
         { name: "Wastelander of Banditry Desert", pieces: "4pc" },
         { name: "Musketeer of Wild Wheat", pieces: "4pc" },
-        { name: "Scholar Lost in Erudition", pieces: "4pc" }
+        { name: "Scholar Lost in Erudition", pieces: "2pc" }
       ],
       planar: [
         { name: "Rutilant Arena" },
@@ -579,7 +594,9 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
-        { name: "Self-Enshrouded Recluse", pieces: "4pc" }
+        { name: "Self-Enshrouded Recluse", pieces: "4pc" },
+        { name: "Warrior Goddess of Sun and Thunder", pieces: "4pc" },
+        { name: "Sacerdos' Relived Ordeal", pieces: "4pc" }
       ],
       planar: [
         { name: "Lushaka, the Sunken Seas" },
@@ -609,7 +626,8 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Pioneer Diver of Dead Waters", pieces: "4pc" },
-        { name: "Wastelander of Banditry Desert", pieces: "4pc" }
+        { name: "Wastelander of Banditry Desert", pieces: "4pc" },
+        { name: "The Ashblazing Grand Duke", pieces: "2pc" }
       ],
       planar: [
         { name: "Duran, Dynasty of Running Wolves" },
@@ -622,7 +640,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["Speed", "ATK%"],
       sphere: ["Imaginary DMG", "ATK%"],
-      rope: ["ATK%", "ATK"],
+      rope: ["ATK%"],
       subStats: ["SPD (breakpoint) > CRIT RATE = CRIT DMG > ATK%"],
     },
   },
@@ -635,7 +653,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" },
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" },
         { name: "World-Remaking Deliverer", pieces: "4pc" }
       ],
       planar: [
@@ -649,6 +667,31 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sphere: ["HP%", "Ice DMG"],
       rope: ["HP%"],
       subStats: ["SPD (until 180/200) > Crit Rate > Crit DMG > HP%"],
+    },
+  },
+  evanescia: {
+    characterId: "evanescia",
+    lightCones: [
+      { name: "Until the Flowers Bloom Again" },
+      { name: "Today's Good Luck" },
+      { name: "Dazzled by a Flowery World" },
+      { name: "Mushy Shroomy's Adventures" },
+      { name: "Tomorrow, Together" }
+    ],
+    relics: {
+      sets: [
+        { name: "Ever-Glorious Magical Girl", pieces: "4pc" }
+      ],
+      planar: [
+        { name: "Punklorde Stage Zero" }
+      ],
+    },
+    stats: {
+      body: ["CRIT DMG"],
+      feet: ["Anything"],
+      sphere: ["Anything"],
+      rope: ["Energy Regen Rate"],
+      subStats: ["CRIT Rate until 100% in combat > CRIT DMG"],
     },
   },
   evernight: {
@@ -690,11 +733,8 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
-        { name: "Pioneer Diver of Dead Waters", pieces: "4pc" },
-        { name: "Scholar Lost in Erudition", pieces: "4pc" },
-        { name: "Musketeer of Wild Wheat", pieces: "4pc" },
-        { name: "Prisoner in Deep Confinement", pieces: "4pc" },
-        { name: "Eagle of Twilight Line", pieces: "4pc" }
+        { name: "The Wind-Soaring Valorous", pieces: "4pc" },
+        { name: "The Ashblazing Grand Duke", pieces: "4pc" }
       ],
       planar: [
         { name: "Duran, Dynasty of Running Wolves" },
@@ -748,11 +788,14 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Iron Cavalry Against the Scourge", pieces: "4pc" },
-        { name: "Thief of Shooting Meteor", pieces: "4pc" }
+        { name: "Thief of Shooting Meteor", pieces: "4pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" }
       ],
       planar: [
         { name: "Forge of the Kalpagni Lantern" },
-        { name: "Talia: Kingdom of Banditry" }
+        { name: "Talia: Kingdom of Banditry" },
+        { name: "Sprightly Vonwacq" },
+        { name: "Lushaka, the Sunken Seas" }
       ],
     },
     stats: {
@@ -776,7 +819,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Warrior Goddess of Sun and Thunder", pieces: "4pc" },
-        { name: "Longevous Disciple", pieces: "4pc" }
+        { name: "Longevous Disciple", pieces: "2pc" }
       ],
       planar: [
         { name: "Broken Keel" },
@@ -808,11 +851,17 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Warrior Goddess of Sun and Thunder", pieces: "4pc" },
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" },
+        { name: "Iron Cavalry Against the Scourge", pieces: "4pc" },
+        { name: "Thief of Shooting Meteor", pieces: "4pc" }
       ],
       planar: [
         { name: "Forge of the Kalpagni Lantern" },
-        { name: "Talia: Kingdom of Banditry" }
+        { name: "Talia: Kingdom of Banditry" },
+        { name: "Fleet of the Ageless" },
+        { name: "Broken Keel" },
+        { name: "Penacony, Land of the Dreams" },
+        { name: "Lushaka, the Sunken Seas" }
       ],
     },
     stats: {
@@ -842,7 +891,8 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
         { name: "Broken Keel" },
         { name: "Fleet of the Ageless" },
         { name: "Penacony, Land of the Dreams" },
-        { name: "Lushaka, the Sunken Seas" }
+        { name: "Lushaka, the Sunken Seas" },
+        { name: "Belobog of the Architects" }
       ],
     },
     stats: {
@@ -851,6 +901,37 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sphere: ["DEF%"],
       rope: ["Energy Regen Rate"],
       subStats: ["SPD (breakpoint) = DEF% > HP% = EFF RES%"],
+    },
+  },
+  gilgamesh: {
+    characterId: "gilgamesh",
+    lightCones: [
+      { name: "I Am As You Behold" },
+      { name: "A Thankless Coronation" },
+      { name: "Thus Burns the Dawn" },
+      { name: "A Trail of Bygone Blood" },
+      { name: "On the Fall of an Aeon" },
+      { name: "A Secret Vow" }
+    ],
+    relics: {
+      sets: [
+        { name: "Genius of Brilliant Stars", pieces: "4pc" },
+        { name: "The Ashblazing Grand Duke", pieces: "4pc" },
+        { name: "Scholar Lost in Erudition", pieces: "4pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" }
+      ],
+      planar: [
+        { name: "Cosmic Life Sciences Institute" },
+        { name: "City of Converging Stars" },
+        { name: "Izumo Gensei and Takama Divine Realm" }
+      ],
+    },
+    stats: {
+      body: ["CRIT Rate"],
+      feet: ["ATK%"],
+      sphere: ["Lightning DMG"],
+      rope: ["ATK%"],
+      subStats: ["CRIT Rate untill 100% in combat > CRIT DMG > ATK% > SPD"],
     },
   },
   guinaifen: {
@@ -864,13 +945,17 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" },
+        { name: "Prisoner in Deep Confinement", pieces: "4pc" },
+        { name: "Iron Cavalry Against the Scourge", pieces: "4pc" }
       ],
       planar: [
         { name: "Fleet of the Ageless" },
         { name: "Broken Keel" },
         { name: "Penacony, Land of the Dreams" },
-        { name: "Lushaka, the Sunken Seas" }
+        { name: "Lushaka, the Sunken Seas" },
+        { name: "Firmament Frontline: Glamoth" },
+        { name: "Forge of the Kalpagni Lantern" }
       ],
     },
     stats: {
@@ -892,13 +977,15 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Messenger Traversing Hackerspace", pieces: "4pc" },
-        { name: "Sacerdos' Relived Ordeal", pieces: "4pc" }
+        { name: "Sacerdos' Relived Ordeal", pieces: "4pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" }
       ],
       planar: [
         { name: "Broken Keel" },
         { name: "Fleet of the Ageless" },
         { name: "Penacony, Land of the Dreams" },
-        { name: "Lushaka, the Sunken Seas" }
+        { name: "Lushaka, the Sunken Seas" },
+        { name: "Sprightly Vonwacq" }
       ],
     },
     stats: {
@@ -914,7 +1001,6 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     lightCones: [
       { name: "Before Dawn" },
       { name: "Night on the Milky Way" },
-      { name: "For Pure Fiction only." },
       { name: "Geniuses' Repose" },
       { name: "Eternal Calculus" },
       { name: "Today Is Another Peaceful Day" },
@@ -923,6 +1009,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
+        { name: "The Ashblazing Grand Duke", pieces: "4pc" },
         { name: "Scholar Lost in Erudition", pieces: "4pc" },
         { name: "Hunter of Glacial Forest", pieces: "4pc" }
       ],
@@ -945,9 +1032,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     characterId: "himeko",
     lightCones: [
       { name: "Before Dawn" },
-      { name: "Best overall option for Himeko." },
       { name: "Night on the Milky Way" },
-      { name: "Pure Fiction only." },
       { name: "Geniuses' Repose" },
       { name: "Eternal Calculus" },
       { name: "Today Is Another Peaceful Day" },
@@ -957,6 +1042,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
+        { name: "The Ashblazing Grand Duke", pieces: "4pc" },
         { name: "Firesmith of Lava-Forging", pieces: "4pc" }
       ],
       planar: [
@@ -967,10 +1053,40 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     },
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
-      feet: ["ATK%", "Speed"],
+      feet: ["ATK%"],
       sphere: ["Fire DMG", "ATK%"],
       rope: ["ATK%"],
       subStats: ["SPD (breakpoint) = CRIT RATE = CRIT DMG > ATK%"],
+    },
+  },
+  himekonova: {
+    characterId: "himekonova",
+    lightCones: [
+      { name: "A Star That Lights the Night" },
+      { name: "Into the Unreachable Veil" },
+      { name: "Night on the Milky Way" },
+      { name: "Today Is Another Peaceful Day" },
+      { name: "The Day The Cosmos Fell" },
+      { name: "The Seriousness of Breakfast" }
+    ],
+    relics: {
+      sets: [
+        { name: "As Navigator Isee Sees It", pieces: "4pc" },
+        { name: "Scholar Lost in Erudition", pieces: "4pc" },
+        { name: "Wavestrider Captain", pieces: "4pc" }
+      ],
+      planar: [
+        { name: "Fallen Star Anchorage" },
+        { name: "The Wondrous BananAmusement Park" },
+        { name: "Rutilant Arena" }
+      ],
+    },
+    stats: {
+      body: ["CRIT Rate", "CRIT DMG"],
+      feet: ["ATK%", "Speed"],
+      sphere: ["ATK%", "Fire DMG"],
+      rope: ["ATK%"],
+      subStats: ["CRIT Rate = CRIT DMG > ATK% > SPD"],
     },
   },
   hook: {
@@ -1006,21 +1122,20 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       { name: "Night of Fright" },
       { name: "Post-Op Conversation" },
       { name: "Shared Feeling" },
-      { name: "Unto Tomorrow's Morrow" },
       { name: "Quid Pro Quo" },
-      { name: "Multiplication" }
+      { name: "Unto Tomorrow's Morrow" }
     ],
     relics: {
       sets: [
         { name: "Warrior Goddess of Sun and Thunder", pieces: "4pc" },
-        { name: "Passerby of Wandering Cloud", pieces: "4pc" },
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "4pc" },
+        { name: "Passerby of Wandering Cloud", pieces: "4pc" }
       ],
       planar: [
-        { name: "Fleet of the Ageless" },
-        { name: "Broken Keel" },
-        { name: "Penacony, Land of the Dreams" },
         { name: "Lushaka, the Sunken Seas" },
+        { name: "Broken Keel" },
+        { name: "Fleet of the Ageless" },
+        { name: "Sprightly Vonwacq" },
         { name: "Giant Tree of Rapt Brooding" }
       ],
     },
@@ -1042,13 +1157,11 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Warrior Goddess of Sun and Thunder", pieces: "4pc" },
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" }
       ],
       planar: [
         { name: "Giant Tree of Rapt Brooding" },
-        { name: "Lushaka, the Sunken Seas" },
-        { name: "Penacony, Land of the Dreams" },
-        { name: "Broken Keel" }
+        { name: "Amphoreus, The Eternal Land" }
       ],
     },
     stats: {
@@ -1074,7 +1187,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sets: [
         { name: "Prisoner in Deep Confinement", pieces: "4pc" },
         { name: "Champion of Streetwise Boxing", pieces: "4pc" },
-        { name: "Pioneer Diver of Dead Waters", pieces: "4pc" }
+        { name: "Pioneer Diver of Dead Waters", pieces: "2pc" }
       ],
       planar: [
         { name: "Revelry by the Sea" },
@@ -1107,7 +1220,9 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sets: [
         { name: "Poet of Mourning Collapse", pieces: "4pc" },
         { name: "Genius of Brilliant Stars", pieces: "4pc" },
-        { name: "Scholar Lost in Erudition", pieces: "4pc" }
+        { name: "The Ashblazing Grand Duke", pieces: "4pc" },
+        { name: "The Wind-Soaring Valorous", pieces: "4pc" },
+        { name: "Scholar Lost in Erudition", pieces: "2pc" }
       ],
       planar: [
         { name: "Izumo Gensei and Takama Divine Realm" },
@@ -1137,14 +1252,16 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Eagle of Twilight Line", pieces: "4pc" },
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" },
+        { name: "Prisoner in Deep Confinement", pieces: "4pc" }
       ],
       planar: [
         { name: "Sprightly Vonwacq" },
         { name: "Fleet of the Ageless" },
         { name: "Broken Keel" },
         { name: "Penacony, Land of the Dreams" },
-        { name: "Lushaka, the Sunken Seas" }
+        { name: "Lushaka, the Sunken Seas" },
+        { name: "Pan-Cosmic Commercial Enterprise" }
       ],
     },
     stats: {
@@ -1168,7 +1285,8 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sets: [
         { name: "Scholar Lost in Erudition", pieces: "4pc" },
         { name: "Longevous Disciple", pieces: "4pc" },
-        { name: "Hunter of Glacial Forest", pieces: "4pc" }
+        { name: "Hunter of Glacial Forest", pieces: "4pc" },
+        { name: "Genius of Brilliant Stars", pieces: "4pc" }
       ],
       planar: [
         { name: "Bone Collection's Serene Demesne" },
@@ -1195,9 +1313,11 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
+        { name: "The Ashblazing Grand Duke", pieces: "4pc" },
         { name: "Band of Sizzling Thunder", pieces: "4pc" }
       ],
       planar: [
+        { name: "The Wondrous BananAmusement Park" },
         { name: "Inert Salsotto" }
       ],
     },
@@ -1223,10 +1343,14 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Eagle of Twilight Line", pieces: "4pc" },
-        { name: "Sacerdos' Relived Ordeal", pieces: "4pc" }
+        { name: "Sacerdos' Relived Ordeal", pieces: "2pc" },
+        { name: "Prisoner in Deep Confinement", pieces: "4pc" }
       ],
       planar: [
-        { name: "Lushaka, the Sunken Seas" }
+        { name: "Lushaka, the Sunken Seas" },
+        { name: "Revelry by the Sea" },
+        { name: "Firmament Frontline: Glamoth" },
+        { name: "Pan-Cosmic Commercial Enterprise" }
       ],
     },
     stats: {
@@ -1247,9 +1371,12 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
+        { name: "As Navigator Isee Sees It", pieces: "4pc" },
         { name: "Wavestrider Captain", pieces: "4pc" },
         { name: "Scholar Lost in Erudition", pieces: "4pc" },
-        { name: "Champion of Streetwise Boxing", pieces: "4pc" }
+        { name: "Champion of Streetwise Boxing", pieces: "4pc" },
+        { name: "Genius of Brilliant Stars", pieces: "4pc" },
+        { name: "Poet of Mourning Collapse", pieces: "4pc" }
       ],
       planar: [
         { name: "Arcadia of Woven Dreams" },
@@ -1277,17 +1404,22 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sets: [
         { name: "Iron Cavalry Against the Scourge", pieces: "4pc" },
         { name: "Warrior Goddess of Sun and Thunder", pieces: "4pc" },
-        { name: "Thief of Shooting Meteor", pieces: "4pc" }
+        { name: "Thief of Shooting Meteor", pieces: "2pc" },
+        { name: "Passerby of Wandering Cloud", pieces: "4pc" }
       ],
       planar: [
         { name: "Forge of the Kalpagni Lantern" },
-        { name: "Talia: Kingdom of Banditry" }
+        { name: "Talia: Kingdom of Banditry" },
+        { name: "Sprightly Vonwacq" },
+        { name: "Fleet of the Ageless" },
+        { name: "Broken Keel" },
+        { name: "Penacony, Land of the Dreams" }
       ],
     },
     stats: {
       body: ["Outgoing Healing"],
       feet: ["Speed"],
-      sphere: ["ATK%", "HP%"],
+      sphere: ["ATK%"],
       rope: ["Energy Regen Rate", "Break Effect"],
       subStats: ["SPD (until the desired breakpoint) > BREAK% >= ATK%"],
     },
@@ -1306,7 +1438,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
         { name: "Prisoner in Deep Confinement", pieces: "4pc" },
         { name: "Thief of Shooting Meteor", pieces: "4pc" },
         { name: "Champion of Streetwise Boxing", pieces: "4pc" },
-        { name: "Pioneer Diver of Dead Waters", pieces: "4pc" }
+        { name: "Pioneer Diver of Dead Waters", pieces: "2pc" }
       ],
       planar: [
         { name: "Revelry by the Sea" },
@@ -1331,14 +1463,13 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       { name: "Perfect Timing" },
       { name: "Quid Pro Quo" },
       { name: "Unto Tomorrow's Morrow" },
-      { name: "Provides allies with some DMG boost." },
       { name: "Shared Feeling" },
       { name: "Multiplication" }
     ],
     relics: {
       sets: [
         { name: "Warrior Goddess of Sun and Thunder", pieces: "4pc" },
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" },
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" },
         { name: "Musketeer of Wild Wheat", pieces: "4pc" },
         { name: "Passerby of Wandering Cloud", pieces: "4pc" }
       ],
@@ -1372,7 +1503,8 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sets: [
         { name: "Warrior Goddess of Sun and Thunder", pieces: "4pc" },
         { name: "Messenger Traversing Hackerspace", pieces: "4pc" },
-        { name: "Passerby of Wandering Cloud", pieces: "4pc" }
+        { name: "Passerby of Wandering Cloud", pieces: "4pc" },
+        { name: "Sacerdos' Relived Ordeal", pieces: "4pc" }
       ],
       planar: [
         { name: "Fleet of the Ageless" },
@@ -1398,26 +1530,26 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       { name: "Worrisome, Blissful" },
       { name: "Cruising in the Stellar Sea" },
       { name: "Sailing Towards A Second Life" },
-      { name: "Premium Super Break option" },
-      { name: "Shadowed By Night" },
-      { name: "Gacha option for Super Break team." }
+      { name: "Shadowed By Night" }
     ],
     relics: {
       sets: [
         { name: "Musketeer of Wild Wheat", pieces: "4pc" },
-        { name: "Wastelander of Banditry Desert", pieces: "4pc" }
+        { name: "Wastelander of Banditry Desert", pieces: "4pc" },
+        { name: "Iron Cavalry Against the Scourge", pieces: "4pc" }
       ],
       planar: [
         { name: "Rutilant Arena" },
         { name: "Izumo Gensei and Takama Divine Realm" },
-        { name: "Firmament Frontline: Glamoth" }
+        { name: "Firmament Frontline: Glamoth" },
+        { name: "Forge of the Kalpagni Lantern" }
       ],
     },
     stats: {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["Speed", "ATK%"],
       sphere: ["Imaginary DMG", "ATK%"],
-      rope: ["ATK%", "ATK"],
+      rope: ["ATK%"],
       subStats: ["SPD (Until breakpoint) > CRIT RATE% = CRIT DMG% > ATK%"],
     },
   },
@@ -1442,7 +1574,8 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
         { name: "Fleet of the Ageless" },
         { name: "Penacony, Land of the Dreams" },
         { name: "Lushaka, the Sunken Seas" },
-        { name: "Belobog of the Architects" }
+        { name: "Belobog of the Architects" },
+        { name: "Space Sealing Station" }
       ],
     },
     stats: {
@@ -1475,8 +1608,37 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       body: ["CRIT Rate", "CRIT DMG"],
       feet: ["Speed", "ATK%"],
       sphere: ["Ice DMG", "ATK%"],
-      rope: ["ATK%", "ATK"],
+      rope: ["ATK%"],
       subStats: ["SPD (Breakpoint) > CRIT Rate = CRIT DMG > ATK%"],
+    },
+  },
+  mortenax: {
+    characterId: "mortenax",
+    lightCones: [
+      { name: "Reforged in Hellfire" },
+      { name: "Lies Dance on the Breeze" },
+      { name: "Before the Tutorial Mission Starts" },
+      { name: "Resolution Shines As Pearls of Sweat" },
+      { name: "Holiday Thermae Escapade" }
+    ],
+    relics: {
+      sets: [
+        { name: "Divine-Querying Master Smith", pieces: "4pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" },
+        { name: "Longevous Disciple", pieces: "4pc" }
+      ],
+      planar: [
+        { name: "Sprightly Vonwacq" },
+        { name: "Bone Collection's Serene Demesne" },
+        { name: "Lushaka, the Sunken Seas" }
+      ],
+    },
+    stats: {
+      body: ["CRIT Rate", "Effect HIT Rate"],
+      feet: ["Speed"],
+      sphere: ["HP%", "Fire DMG"],
+      rope: ["Energy Regen Rate", "HP%"],
+      subStats: ["CRIT Rate = CRIT DMG > SPD > HP%"],
     },
   },
   moze: {
@@ -1489,12 +1651,15 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
-        { name: "Pioneer Diver of Dead Waters", pieces: "4pc" }
+        { name: "Pioneer Diver of Dead Waters", pieces: "4pc" },
+        { name: "The Ashblazing Grand Duke", pieces: "4pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" }
       ],
       planar: [
         { name: "Duran, Dynasty of Running Wolves" },
         { name: "Izumo Gensei and Takama Divine Realm" },
-        { name: "Inert Salsotto" }
+        { name: "Inert Salsotto" },
+        { name: "Lushaka, the Sunken Seas" }
       ],
     },
     stats: {
@@ -1574,13 +1739,14 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Eagle of Twilight Line", pieces: "4pc" },
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" }
       ],
       planar: [
         { name: "Broken Keel" },
         { name: "Fleet of the Ageless" },
         { name: "Penacony, Land of the Dreams" },
-        { name: "Lushaka, the Sunken Seas" }
+        { name: "Lushaka, the Sunken Seas" },
+        { name: "Sprightly Vonwacq" }
       ],
     },
     stats: {
@@ -1606,7 +1772,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sets: [
         { name: "Poet of Mourning Collapse", pieces: "4pc" },
         { name: "Genius of Brilliant Stars", pieces: "4pc" },
-        { name: "Scholar Lost in Erudition", pieces: "4pc" }
+        { name: "Scholar Lost in Erudition", pieces: "2pc" }
       ],
       planar: [
         { name: "Rutilant Arena" },
@@ -1679,18 +1845,51 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       subStats: ["SPD (Until Desired Breakpoint) > Break Effect > ATK%"],
     },
   },
+  rin: {
+    characterId: "rin",
+    lightCones: [
+      { name: "Flickering Stars" },
+      { name: "Life Should Be Cast to Flames" },
+      { name: "Into the Unreachable Veil" },
+      { name: "Eternal Calculus" },
+      { name: "Today Is Another Peaceful Day" },
+      { name: "Make the World Clamor" }
+    ],
+    relics: {
+      sets: [
+        { name: "Genius of Brilliant Stars", pieces: "4pc" },
+        { name: "The Ashblazing Grand Duke", pieces: "4pc" },
+        { name: "Scholar Lost in Erudition", pieces: "4pc" }
+      ],
+      planar: [
+        { name: "Penacony, Land of the Dreams" },
+        { name: "City of Converging Stars" },
+        { name: "Lushaka, the Sunken Seas" },
+        { name: "Tengoku@Livestream" }
+      ],
+    },
+    stats: {
+      body: ["CRIT Rate"],
+      feet: ["Speed", "ATK%"],
+      sphere: ["Quantum DMG"],
+      rope: ["Energy Regen Rate", "ATK%"],
+      subStats: ["SPD until desired goal > CRIT Rate / CRIT DMG > ATK%"],
+    },
+  },
   robin: {
     characterId: "robin",
     lightCones: [
       { name: "Flowing Nightglow" },
       { name: "But the Battle Isn't Over" },
       { name: "For Tomorrow's Journey" },
-      { name: "Meshing Cogs" },
-      { name: "Poised to Bloom" }
+      { name: "If Time Were a Flower" },
+      { name: "Past Self in Mirror" },
+      { name: "Poised to Bloom" },
+      { name: "Meshing Cogs" }
     ],
     relics: {
       sets: [
-        { name: "Musketeer of Wild Wheat", pieces: "4pc" }
+        { name: "Musketeer of Wild Wheat", pieces: "2pc" }
       ],
       planar: [
         { name: "Sprightly Vonwacq" },
@@ -1728,7 +1927,8 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
         { name: "Broken Keel" },
         { name: "Fleet of the Ageless" },
         { name: "Penacony, Land of the Dreams" },
-        { name: "Lushaka, the Sunken Seas" }
+        { name: "Lushaka, the Sunken Seas" },
+        { name: "Talia: Kingdom of Banditry" }
       ],
     },
     stats: {
@@ -1743,7 +1943,9 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     characterId: "saber",
     lightCones: [
       { name: "A Thankless Coronation" },
+      { name: "I Am As You Behold" },
       { name: "On the Fall of an Aeon" },
+      { name: "Thus Burns the Dawn" },
       { name: "A Trail of Bygone Blood" },
       { name: "A Secret Vow" }
     ],
@@ -1753,10 +1955,9 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
         { name: "Scholar Lost in Erudition", pieces: "4pc" }
       ],
       planar: [
-        { name: "Inert Salsotto" },
-        { name: "Firmament Frontline: Glamoth" },
-        { name: "Space Sealing Station" },
-        { name: "Rutilant Arena" }
+        { name: "Cosmic Life Sciences Institute" },
+        { name: "Izumo Gensei and Takama Divine Realm" },
+        { name: "Inert Salsotto" }
       ],
     },
     stats: {
@@ -1773,13 +1974,12 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       { name: "Lies Dance on the Breeze" },
       { name: "Good Night and Sleep Well" },
       { name: "Eyes of the Prey" },
-      { name: "Resolution Shines As Pearls of Sweat" },
-      { name: "Support Sampo" }
+      { name: "Resolution Shines As Pearls of Sweat" }
     ],
     relics: {
       sets: [
         { name: "Prisoner in Deep Confinement", pieces: "4pc" },
-        { name: "Eagle of Twilight Line", pieces: "4pc" }
+        { name: "Eagle of Twilight Line", pieces: "2pc" }
       ],
       planar: [
         { name: "Revelry by the Sea" },
@@ -1790,7 +1990,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     },
     stats: {
       body: ["Effect HIT Rate", "ATK%"],
-      feet: ["Speed", "ATK%"],
+      feet: ["Speed"],
       sphere: ["Wind DMG", "ATK%"],
       rope: ["ATK%"],
       subStats: ["SPD (breakpoint) = EHR (Until recommended) > ATK% > Break Effect"],
@@ -1801,19 +2001,18 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     lightCones: [
       { name: "The Hell Where Ideals Burn" },
       { name: "In the Night" },
-      { name: "Swordplay" },
-      { name: "Only Silence Remains" },
       { name: "Cruising in the Stellar Sea" }
     ],
     relics: {
       sets: [
+        { name: "As Navigator Isee Sees It", pieces: "4pc" },
         { name: "Genius of Brilliant Stars", pieces: "4pc" },
         { name: "Scholar Lost in Erudition", pieces: "4pc" }
       ],
       planar: [
         { name: "Rutilant Arena" },
         { name: "Firmament Frontline: Glamoth" },
-        { name: "Inert Salsotto" }
+        { name: "The Wondrous BananAmusement Park" }
       ],
     },
     stats: {
@@ -1828,7 +2027,6 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     characterId: "serval",
     lightCones: [
       { name: "Night on the Milky Way" },
-      { name: "For Pure Fiction only." },
       { name: "Eternal Calculus" },
       { name: "Geniuses' Repose" },
       { name: "Before Dawn" },
@@ -1840,7 +2038,8 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sets: [
         { name: "Pioneer Diver of Dead Waters", pieces: "4pc" },
         { name: "Band of Sizzling Thunder", pieces: "4pc" },
-        { name: "Scholar Lost in Erudition", pieces: "4pc" }
+        { name: "Scholar Lost in Erudition", pieces: "4pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" }
       ],
       planar: [
         { name: "Firmament Frontline: Glamoth" },
@@ -1872,12 +2071,17 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Eagle of Twilight Line", pieces: "4pc" },
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" },
+        { name: "Genius of Brilliant Stars", pieces: "4pc" },
+        { name: "Pioneer Diver of Dead Waters", pieces: "4pc" },
+        { name: "Scholar Lost in Erudition", pieces: "4pc" }
       ],
       planar: [
         { name: "Lushaka, the Sunken Seas" },
         { name: "Penacony, Land of the Dreams" },
-        { name: "Sprightly Vonwacq" }
+        { name: "Sprightly Vonwacq" },
+        { name: "Inert Salsotto" },
+        { name: "Firmament Frontline: Glamoth" }
       ],
     },
     stats: {
@@ -1886,6 +2090,30 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sphere: ["Quantum DMG", "ATK%"],
       rope: ["Energy Regen Rate"],
       subStats: ["Effect Hit Rate (Until 50-67%) > SPD > CRIT = CRIT DMG > ATK%"],
+    },
+  },
+  silverwolf999: {
+    characterId: "silverwolf999",
+    lightCones: [
+      { name: "Welcome to the Cosmic City" },
+      { name: "Today's Good Luck" },
+      { name: "Mushy Shroomy's Adventures" }
+    ],
+    relics: {
+      sets: [
+        { name: "Ever-Glorious Magical Girl", pieces: "4pc" },
+        { name: "Diviner of Distant Reach", pieces: "4pc" }
+      ],
+      planar: [
+        { name: "Punklorde Stage Zero" }
+      ],
+    },
+    stats: {
+      body: ["CRIT Rate"],
+      feet: ["Speed"],
+      sphere: ["Anything"],
+      rope: ["Anything"],
+      subStats: ["SPD > CRIT Rate = CRIT DMG"],
     },
   },
   sparkle: {
@@ -1900,7 +2128,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sets: [
         { name: "Sacerdos' Relived Ordeal", pieces: "4pc" },
         { name: "Eagle of Twilight Line", pieces: "4pc" },
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" }
       ],
       planar: [
         { name: "Lushaka, the Sunken Seas" },
@@ -1926,18 +2154,19 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Ever-Glorious Magical Girl", pieces: "4pc" },
-        { name: "Scholar Lost in Erudition", pieces: "4pc" }
+        { name: "Scholar Lost in Erudition", pieces: "2pc" }
       ],
       planar: [
         { name: "Tengoku@Livestream" },
+        { name: "The Wondrous BananAmusement Park" },
         { name: "Izumo Gensei and Takama Divine Realm" }
       ],
     },
     stats: {
       body: ["CRIT Rate"],
-      feet: ["ATK%", "Speed"],
+      feet: ["ATK%"],
       sphere: ["ATK%"],
-      rope: ["Energy Regen Rate", "ATK%"],
+      rope: ["Energy Regen Rate"],
       subStats: ["ATK until 3600 (after team buffs) > CRIT Rate >= CRIT DMG"],
     },
   },
@@ -1952,13 +2181,15 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Sacerdos' Relived Ordeal", pieces: "4pc" },
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" }
       ],
       planar: [
         { name: "Lushaka, the Sunken Seas" },
         { name: "Broken Keel" },
         { name: "Penacony, Land of the Dreams" },
-        { name: "Fleet of the Ageless" }
+        { name: "Fleet of the Ageless" },
+        { name: "Sprightly Vonwacq" }
       ],
     },
     stats: {
@@ -1973,7 +2204,6 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     characterId: "sushang",
     lightCones: [
       { name: "Sailing Towards A Second Life" },
-      { name: "Sushang's best in slot Light Cone." },
       { name: "Swordplay" },
       { name: "Cruising in the Stellar Sea" },
       { name: "Only Silence Remains" }
@@ -2011,12 +2241,14 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Scholar Lost in Erudition", pieces: "4pc" },
-        { name: "Hunter of Glacial Forest", pieces: "4pc" }
+        { name: "Hunter of Glacial Forest", pieces: "4pc" },
+        { name: "Poet of Mourning Collapse", pieces: "4pc" }
       ],
       planar: [
         { name: "Izumo Gensei and Takama Divine Realm" },
         { name: "Rutilant Arena" },
-        { name: "Firmament Frontline: Glamoth" }
+        { name: "Firmament Frontline: Glamoth" },
+        { name: "Sigonia, the Unclaimed Desolation" }
       ],
     },
     stats: {
@@ -2041,7 +2273,8 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sets: [
         { name: "Iron Cavalry Against the Scourge", pieces: "4pc" },
         { name: "Thief of Shooting Meteor", pieces: "4pc" },
-        { name: "Sacerdos' Relived Ordeal", pieces: "4pc" }
+        { name: "Sacerdos' Relived Ordeal", pieces: "2pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" }
       ],
       planar: [
         { name: "Forge of the Kalpagni Lantern" },
@@ -2070,7 +2303,8 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sets: [
         { name: "Sacerdos' Relived Ordeal", pieces: "4pc" },
         { name: "Messenger Traversing Hackerspace", pieces: "4pc" },
-        { name: "Musketeer of Wild Wheat", pieces: "4pc" }
+        { name: "Musketeer of Wild Wheat", pieces: "4pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" }
       ],
       planar: [
         { name: "Sprightly Vonwacq" },
@@ -2099,10 +2333,12 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
+        { name: "The Ashblazing Grand Duke", pieces: "4pc" },
         { name: "Pioneer Diver of Dead Waters", pieces: "4pc" }
       ],
       planar: [
         { name: "Duran, Dynasty of Running Wolves" },
+        { name: "The Wondrous BananAmusement Park" },
         { name: "Izumo Gensei and Takama Divine Realm" },
         { name: "Inert Salsotto" }
       ],
@@ -2113,6 +2349,35 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sphere: ["Fire DMG", "ATK%"],
       rope: ["ATK%"],
       subStats: ["SPD (breakpoint) > CRIT RATE = CRIT DMG > ATK%"],
+    },
+  },
+  trail_elation: {
+    characterId: "trail_elation",
+    lightCones: [
+      { name: "When She Decided to See" },
+      { name: "Elation Brimming With Blessings" },
+      { name: "Mushy Shroomy's Adventures" },
+      { name: "Tomorrow, Together" }
+    ],
+    relics: {
+      sets: [
+        { name: "Diviner of Distant Reach", pieces: "4pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" },
+        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+      ],
+      planar: [
+        { name: "Sprightly Vonwacq" },
+        { name: "City of Converging Stars" },
+        { name: "Broken Keel" },
+        { name: "Lushaka, the Sunken Seas" }
+      ],
+    },
+    stats: {
+      body: ["CRIT Rate", "HP%", "DEF%"],
+      feet: ["Speed"],
+      sphere: ["HP%", "DEF%", "ATK%"],
+      rope: ["Energy Regen Rate"],
+      subStats: ["SPD > CRIT Rate = CRIT DMG = HP%"],
     },
   },
   trail_fire: {
@@ -2156,7 +2421,8 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "World-Remaking Deliverer", pieces: "4pc" },
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" }
       ],
       planar: [
         { name: "Amphoreus, The Eternal Land" },
@@ -2167,7 +2433,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     stats: {
       body: ["CRIT DMG"],
       feet: ["Speed"],
-      sphere: ["Ice DMG", "HP%"],
+      sphere: ["Ice DMG", "HP%", "DEF%"],
       rope: ["Energy Regen Rate"],
       subStats: ["SPD > CRIT DMG > Effect RES (until 30% with Broken Keel)"],
     },
@@ -2184,14 +2450,16 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Watchmaker, Master of Dream Machinations", pieces: "4pc" },
-        { name: "Thief of Shooting Meteor", pieces: "4pc" }
+        { name: "Thief of Shooting Meteor", pieces: "2pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" }
       ],
       planar: [
         { name: "Talia: Kingdom of Banditry" },
         { name: "Broken Keel" },
         { name: "Fleet of the Ageless" },
         { name: "Penacony, Land of the Dreams" },
-        { name: "Lushaka, the Sunken Seas" }
+        { name: "Lushaka, the Sunken Seas" },
+        { name: "Forge of the Kalpagni Lantern" }
       ],
     },
     stats: {
@@ -2213,7 +2481,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sets: [
         { name: "Scholar Lost in Erudition", pieces: "4pc" },
         { name: "Champion of Streetwise Boxing", pieces: "4pc" },
-        { name: "Pioneer Diver of Dead Waters", pieces: "4pc" }
+        { name: "Pioneer Diver of Dead Waters", pieces: "2pc" }
       ],
       planar: [
         { name: "Rutilant Arena" },
@@ -2242,14 +2510,16 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       sets: [
         { name: "Poet of Mourning Collapse", pieces: "4pc" },
         { name: "Longevous Disciple", pieces: "4pc" },
-        { name: "Scholar Lost in Erudition", pieces: "4pc" }
+        { name: "Scholar Lost in Erudition", pieces: "2pc" },
+        { name: "Eagle of Twilight Line", pieces: "4pc" }
       ],
       planar: [
         { name: "Bone Collection's Serene Demesne" },
         { name: "Inert Salsotto" },
         { name: "Lushaka, the Sunken Seas" },
         { name: "Penacony, Land of the Dreams" },
-        { name: "Fleet of the Ageless" }
+        { name: "Fleet of the Ageless" },
+        { name: "Sprightly Vonwacq" }
       ],
     },
     stats: {
@@ -2264,27 +2534,28 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     characterId: "welt",
     lightCones: [
       { name: "Lies Dance on the Breeze" },
-      { name: "Along the Passing Shore" },
-      { name: "Best DPS option" },
-      { name: "Incessant Rain" },
-      { name: "Good Night and Sleep Well" },
-      { name: "In the Name of the World" },
       { name: "Holiday Thermae Escapade" },
-      { name: "Support option (whale)" },
       { name: "Resolution Shines As Pearls of Sweat" },
-      { name: "Support option" }
+      { name: "Before the Tutorial Mission Starts" },
+      { name: "Incessant Rain" },
+      { name: "Along the Passing Shore" },
+      { name: "Those Many Springs" },
+      { name: "In the Name of the World" },
+      { name: "Good Night and Sleep Well" }
     ],
     relics: {
       sets: [
-        { name: "Pioneer Diver of Dead Waters", pieces: "4pc" },
-        { name: "Wastelander of Banditry Desert", pieces: "4pc" }
+        { name: "Eagle of Twilight Line", pieces: "4pc" },
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" },
+        { name: "Pioneer Diver of Dead Waters", pieces: "4pc" }
       ],
       planar: [
-        { name: "Izumo Gensei and Takama Divine Realm" },
-        { name: "Firmament Frontline: Glamoth" },
-        { name: "Rutilant Arena" },
+        { name: "Lushaka, the Sunken Seas" },
+        { name: "Sprightly Vonwacq" },
         { name: "Pan-Cosmic Commercial Enterprise" },
-        { name: "Inert Salsotto" }
+        { name: "The Wondrous BananAmusement Park" },
+        { name: "Izumo Gensei and Takama Divine Realm" },
+        { name: "Rutilant Arena" }
       ],
     },
     stats: {
@@ -2328,8 +2599,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
       { name: "Swordplay" },
       { name: "Only Silence Remains" },
       { name: "Cruising in the Stellar Sea" },
-      { name: "Sleep Like the Dead" },
-      { name: "Buffs Yanqing's Crit Rate during Ultimate Downtime" }
+      { name: "Sleep Like the Dead" }
     ],
     relics: {
       sets: [
@@ -2359,7 +2629,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     relics: {
       sets: [
         { name: "Diviner of Distant Reach", pieces: "4pc" },
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" }
       ],
       planar: [
         { name: "Lushaka, the Sunken Seas" },
@@ -2386,13 +2656,14 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
-        { name: "Messenger Traversing Hackerspace", pieces: "4pc" }
+        { name: "Messenger Traversing Hackerspace", pieces: "2pc" }
       ],
       planar: [
         { name: "Broken Keel" },
         { name: "Fleet of the Ageless" },
         { name: "Penacony, Land of the Dreams" },
-        { name: "Lushaka, the Sunken Seas" }
+        { name: "Lushaka, the Sunken Seas" },
+        { name: "Inert Salsotto" }
       ],
     },
     stats: {
@@ -2407,6 +2678,7 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     characterId: "yunli",
     lightCones: [
       { name: "Dance at Sunset" },
+      { name: "Thus Burns the Dawn" },
       { name: "The Unreachable Side" },
       { name: "Brighter Than the Sun" },
       { name: "Something Irreplaceable" },
@@ -2415,7 +2687,9 @@ export const CHARACTER_BUILDS: Record<string, CharacterBuild> = {
     ],
     relics: {
       sets: [
-        { name: "Poet of Mourning Collapse", pieces: "4pc" }
+        { name: "The Wind-Soaring Valorous", pieces: "4pc" },
+        { name: "Poet of Mourning Collapse", pieces: "4pc" },
+        { name: "The Ashblazing Grand Duke", pieces: "4pc" }
       ],
       planar: [
         { name: "Inert Salsotto" },

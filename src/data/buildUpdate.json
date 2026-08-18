@@ -6725,5 +6725,524 @@
         "SPD > HP = DEF > EFF RES% (30% if using Broken Keel)"
       ]
     }
+  },
+  "evanescia": {
+    "characterId": "evanescia",
+    "lightCones": [
+      {
+        "name": "Until the Flowers Bloom Again",
+        "notes": ""
+      },
+      {
+        "name": "Today's Good Luck",
+        "notes": ""
+      },
+      {
+        "name": "Dazzled by a Flowery World",
+        "notes": ""
+      },
+      {
+        "name": "Mushy Shroomy's Adventures",
+        "notes": ""
+      },
+      {
+        "name": "Tomorrow, Together",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Ever-Glorious Magical Girl",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Punklorde Stage Zero",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT DMG"
+      ],
+      "feet": [
+        "Anything"
+      ],
+      "sphere": [
+        "Anything"
+      ],
+      "rope": [
+        "Energy Regen Rate"
+      ],
+      "subStats": [
+        "CRIT Rate until 100% in combat > CRIT DMG"
+      ]
+    }
+  },
+  "gilgamesh": {
+    "characterId": "gilgamesh",
+    "lightCones": [
+      {
+        "name": "I Am As You Behold",
+        "notes": ""
+      },
+      {
+        "name": "A Thankless Coronation",
+        "notes": ""
+      },
+      {
+        "name": "Thus Burns the Dawn",
+        "notes": ""
+      },
+      {
+        "name": "A Trail of Bygone Blood",
+        "notes": ""
+      },
+      {
+        "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "A Secret Vow",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Cosmic Life Sciences Institute",
+          "notes": ""
+        },
+        {
+          "name": "City of Converging Stars",
+          "notes": ""
+        },
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate"
+      ],
+      "feet": [
+        "ATK%"
+      ],
+      "sphere": [
+        "Lightning DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "CRIT Rate untill 100% in combat > CRIT DMG > ATK% > SPD"
+      ]
+    }
+  },
+  "rin": {
+    "characterId": "rin",
+    "lightCones": [
+      {
+        "name": "Flickering Stars",
+        "notes": ""
+      },
+      {
+        "name": "Life Should Be Cast to Flames",
+        "notes": ""
+      },
+      {
+        "name": "Into the Unreachable Veil",
+        "notes": ""
+      },
+      {
+        "name": "Eternal Calculus",
+        "notes": ""
+      },
+      {
+        "name": "Today Is Another Peaceful Day",
+        "notes": ""
+      },
+      {
+        "name": "Make the World Clamor",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "City of Converging Stars",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Tengoku@Livestream",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate"
+      ],
+      "feet": [
+        "Speed",
+        "ATK%"
+      ],
+      "sphere": [
+        "Quantum DMG"
+      ],
+      "rope": [
+        "Energy Regen Rate",
+        "ATK%"
+      ],
+      "subStats": [
+        "SPD until desired goal > CRIT Rate / CRIT DMG > ATK%"
+      ]
+    }
+  },
+  "himekonova": {
+    "characterId": "himekonova",
+    "lightCones": [
+      {
+        "name": "A Star That Lights the Night",
+        "notes": ""
+      },
+      {
+        "name": "Into the Unreachable Veil",
+        "notes": ""
+      },
+      {
+        "name": "Night on the Milky Way",
+        "notes": ""
+      },
+      {
+        "name": "Today Is Another Peaceful Day",
+        "notes": ""
+      },
+      {
+        "name": "The Day The Cosmos Fell",
+        "notes": ""
+      },
+      {
+        "name": "The Seriousness of Breakfast",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "As Navigator Isee Sees It",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Wavestrider Captain",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Fallen Star Anchorage",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "CRIT DMG"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "ATK%",
+        "Fire DMG"
+      ],
+      "rope": [
+        "ATK%"
+      ],
+      "subStats": [
+        "CRIT Rate = CRIT DMG > ATK% > SPD"
+      ]
+    }
+  },
+  "mortenax": {
+    "characterId": "mortenax",
+    "lightCones": [
+      {
+        "name": "Reforged in Hellfire",
+        "notes": ""
+      },
+      {
+        "name": "Lies Dance on the Breeze",
+        "notes": ""
+      },
+      {
+        "name": "Before the Tutorial Mission Starts",
+        "notes": ""
+      },
+      {
+        "name": "Resolution Shines As Pearls of Sweat",
+        "notes": ""
+      },
+      {
+        "name": "Holiday Thermae Escapade",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Divine-Querying Master Smith",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Longevous Disciple",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Bone Collection's Serene Demesne",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "Effect HIT Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "Fire DMG"
+      ],
+      "rope": [
+        "Energy Regen Rate",
+        "HP%"
+      ],
+      "subStats": [
+        "CRIT Rate = CRIT DMG > SPD > HP%"
+      ]
+    }
+  },
+  "silverwolf999": {
+    "characterId": "silverwolf999",
+    "lightCones": [
+      {
+        "name": "Welcome to the Cosmic City",
+        "notes": ""
+      },
+      {
+        "name": "Today's Good Luck",
+        "notes": ""
+      },
+      {
+        "name": "Mushy Shroomy's Adventures",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Ever-Glorious Magical Girl",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Diviner of Distant Reach",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Punklorde Stage Zero",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "Anything"
+      ],
+      "rope": [
+        "Anything"
+      ],
+      "subStats": [
+        "SPD > CRIT Rate = CRIT DMG"
+      ]
+    }
+  },
+  "trail_elation": {
+    "characterId": "trail_elation",
+    "lightCones": [
+      {
+        "name": "When She Decided to See",
+        "notes": ""
+      },
+      {
+        "name": "Elation Brimming With Blessings",
+        "notes": ""
+      },
+      {
+        "name": "Mushy Shroomy's Adventures",
+        "notes": ""
+      },
+      {
+        "name": "Tomorrow, Together",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Diviner of Distant Reach",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "City of Converging Stars",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate",
+        "HP%",
+        "DEF%"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%",
+        "ATK%"
+      ],
+      "rope": [
+        "Energy Regen Rate"
+      ],
+      "subStats": [
+        "SPD > CRIT Rate = CRIT DMG = HP%"
+      ]
+    }
   }
 }

@@ -1,6 +1,6 @@
 ================================================================================
 BUILD DATA MERGE REPORT
-Generated: 2026-03-31T20:09:43.554Z
+Generated: 2026-08-18T18:39:02.217Z
 ================================================================================
 
 ✅ argenti → argenti
@@ -15,6 +15,7 @@ Generated: 2026-03-31T20:09:43.554Z
 ✅ robin → robin
 ✅ sushang → sushang
 ✅ trail_physical → trail_physical
+✅ yaoguang → yaoguang
 ✅ yunli → yunli
 ✅ asta → asta
 ✅ firefly → firefly
@@ -25,6 +26,8 @@ Generated: 2026-03-31T20:09:43.554Z
 ✅ hook → hook
 ✅ jiaoqiu → jiaoqiu
 ✅ lingsha → lingsha
+✅ sparxie → sparxie
+✅ thedahlia → thedahlia
 ✅ topaz_numby → topaz_numby
 ✅ trail_fire → trail_fire
 ✅ elysia → elysia
@@ -41,6 +44,7 @@ Generated: 2026-03-31T20:09:43.554Z
 ✅ yanqing → yanqing
 ✅ aglaea → aglaea
 ✅ arlan → arlan
+✅ ashveil → ashveil
 ✅ bailu → bailu
 ✅ jingyuan → jingyuan
 ✅ kafka → kafka
@@ -82,14 +86,17 @@ Generated: 2026-03-31T20:09:43.554Z
 ✅ trail_imag → trail_imag
 ✅ welt → welt
 ✅ yukong → yukong
-✅ ashveil → ashveil
-✅ sparxie → sparxie
-✅ thedahlia → thedahlia
-✅ yaoguang → yaoguang
+✅ evanescia → evanescia
+✅ gilgamesh → gilgamesh
+✅ rin → rin
+✅ himekonova → himekonova
+✅ mortenax → mortenax
+✅ silverwolf999 → silverwolf999
+✅ trail_elation → trail_elation
 
 ================================================================================
 SUMMARY
 ================================================================================
-✅ Matched: 83
+✅ Matched: 90
 ⏳ Unreleased: 0
 ❌ Skipped: 0

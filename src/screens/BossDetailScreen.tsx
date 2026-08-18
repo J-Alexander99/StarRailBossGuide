@@ -109,6 +109,15 @@ type RecommendedTeam = {
   members: any[];
   teamPower: number;
   score: number;
+  scoreBreakdown?: {
+    power: number;
+    missingPenalty: number;
+    element: number;
+    range: number;
+    meta: number;
+    composition: number;
+    total: number;
+  };
   isAvailable: boolean;
 };
 
@@ -171,15 +180,6 @@ function getRecommendationTier(
   return "FAIR";
 }
 
-function keysByScore(
-  map: Record<string, EffectivenessScore> | undefined,
-  predicate: (value: EffectivenessScore) => boolean,
-) {
-  return Object.entries(map || {})
-    .filter(([, value]) => predicate(value))
-    .map(([key]) => key);
-}
-
 export function BossDetailScreen({ route }: any) {
   const { bossId } = route.params;
   const boss: Boss | undefined = BOSSES.find((b) => b.id === bossId);
@@ -236,22 +236,6 @@ export function BossDetailScreen({ route }: any) {
   }
 
   const affinities = useMemo(() => getBossAffinities(boss), [boss]);
-  const weaknesses = useMemo(
-    () => keysByScore(affinities.elements, (value) => value > 0),
-    [affinities.elements],
-  );
-  const resistances = useMemo(
-    () => keysByScore(affinities.elements, (value) => value < 0),
-    [affinities.elements],
-  );
-  const metaWeaknesses = useMemo(
-    () => keysByScore(affinities.meta, (value) => value > 0),
-    [affinities.meta],
-  );
-  const metaResistances = useMemo(
-    () => keysByScore(affinities.meta, (value) => value < 0),
-    [affinities.meta],
-  );
 
   const { filteredTeams, excludedTeamsCount, totalTeamsCount } = useMemo(() => {
     if (!isTeamDataReady) {
@@ -263,10 +247,7 @@ export function BossDetailScreen({ route }: any) {
     }
 
     const recommendedTeams = getRecommendedTeamsSorted(
-      weaknesses,
-      resistances,
-      metaWeaknesses,
-      metaResistances,
+      affinities,
       false,
       isCharacterOwned,
     ) as RecommendedTeam[];
@@ -368,10 +349,7 @@ export function BossDetailScreen({ route }: any) {
       totalTeamsCount: total,
     };
   }, [
-    weaknesses,
-    resistances,
-    metaWeaknesses,
-    metaResistances,
+    affinities,
     isCharacterOwned,
     teamFilters,
     isTeamDataReady,
@@ -705,8 +683,29 @@ export function BossDetailScreen({ route }: any) {
           })()}
         {filteredTeams.length ? (
           filteredTeams.map(
-            ({ team, members, teamPower, score }: RecommendedTeam) => {
+            ({
+              team,
+              members,
+              teamPower,
+              score,
+              scoreBreakdown,
+            }: RecommendedTeam) => {
               const tier = getRecommendationTier(score, scoreThresholds);
+              const breakdownParts: Array<[string, number]> = scoreBreakdown
+                ? [
+                    ["Elem", scoreBreakdown.element],
+                    ["Range", scoreBreakdown.range],
+                    ["Meta", scoreBreakdown.meta],
+                    ["Comp", scoreBreakdown.composition],
+                  ]
+                : [];
+              const breakdownText = breakdownParts
+                .filter(([, value]) => Math.round(value) !== 0)
+                .map(
+                  ([label, value]) =>
+                    `${label} ${value > 0 ? "+" : ""}${Math.round(value)}`,
+                )
+                .join("  ·  ");
 
               return (
                 <View
@@ -732,6 +731,11 @@ export function BossDetailScreen({ route }: any) {
                           Power: {teamPower}/120
                         </Text>
                       </View>
+                      {breakdownText ? (
+                        <Text style={styles.teamScoreBreakdownText}>
+                          {breakdownText}
+                        </Text>
+                      ) : null}
                     </View>
 
                     <View style={styles.recommendationSection}>
@@ -1855,6 +1859,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "rgba(255, 255, 255, 0.8)",
     marginRight: 4,
+  },
+  teamScoreBreakdownText: {
+    fontSize: 11,
+    color: palette.textMuted,
+    marginTop: 2,
   },
   scoreDisplay: {
     alignItems: "center",

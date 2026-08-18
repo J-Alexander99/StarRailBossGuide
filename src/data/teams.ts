@@ -1,4 +1,10 @@
-import { CHARACTERS, getCharacterMetaTypes, type Character } from './characters';
+import { CHARACTERS, getCharacterMetaTypes, type Character, type Role } from './characters';
+import type {
+  ElementalAffinities,
+  RangeAffinities,
+  MetaAffinities,
+  EffectivenessScore,
+} from './bosses';
 
 export type Team = {
   id: string;
@@ -3990,22 +3996,123 @@ export function teamsMatchingWeakness(weakness?: string | string[]) {
   );
 }
 
+// --- Team recommendation scoring -------------------------------------------
+//
+// The score is a weighted sum of independent dimensions. Every affinity-based
+// dimension (element, range, meta) scales with the boss's actual -2..2
+// affinity magnitude rather than collapsing it to a binary weak/resist flag,
+// so a boss that's only mildly weak (+1) to something rewards it less than
+// one that's catastrophically weak (+2). Each dimension is clamped
+// symmetrically so a handful of bad matchups can't silently drag a team's
+// score down further than a great matchup could ever push it up.
+//
+// calculateTeamRecommendationScore() returns a breakdown alongside the total
+// so it's possible to see exactly why a team ranked where it did, rather than
+// just a single opaque number.
+
+export type BossAffinities = {
+  elements?: ElementalAffinities;
+  ranges?: RangeAffinities;
+  meta?: MetaAffinities;
+};
+
+export type TeamScoreBreakdown = {
+  power: number;
+  missingPenalty: number;
+  element: number;
+  range: number;
+  meta: number;
+  composition: number;
+  total: number;
+};
+
+export type TeamScoreResult = {
+  score: number;
+  breakdown: TeamScoreBreakdown;
+};
+
+const POWER_WEIGHT = 130; // Team power is the dominant base factor.
+const MISSING_MEMBER_PENALTY = 40;
+
+type RoleAffinityScale = { pos: number; neg: number };
+
+// Elemental typing: how hard the boss's element weaknesses/resistances hit,
+// keyed by role since a DPS exploiting a weakness matters far more than a
+// support who happens to share the element.
+const ELEMENT_ROLE_SCALE: Record<Role, RoleAffinityScale> = {
+  DPS: { pos: 45, neg: 32 },
+  'Sub-DPS': { pos: 20, neg: 14 },
+  Support: { pos: 4, neg: 6 },
+  Sustain: { pos: 4, neg: 6 },
+};
+const ELEMENT_CAP = 70;
+
+// Targeting profile (Single/Blast/AoE/Team): rewards units whose hit pattern
+// exploits boss mechanics captured in `boss.ranges` (e.g. AoE against a boss
+// that summons adds). Previously tracked in boss data but never scored.
+const RANGE_ROLE_SCALE: Record<Role, RoleAffinityScale> = {
+  DPS: { pos: 22, neg: 16 },
+  'Sub-DPS': { pos: 10, neg: 7 },
+  Support: { pos: 2, neg: 3 },
+  Sustain: { pos: 2, neg: 3 },
+};
+const RANGE_CAP = 35;
+
+// Playstyle archetype (DOT/Break/Crit/Follow-Up/Summon/etc.).
+const META_DPS_SCALE: RoleAffinityScale = { pos: 14, neg: 10 };
+const META_OTHER_SCALE: RoleAffinityScale = { pos: 9, neg: 7 };
+const META_CAP = 60;
+
+function clampSigned(value: number, cap: number): number {
+  return Math.max(-cap, Math.min(cap, value));
+}
+
+// Scales a -2..2 boss affinity value into a role-weighted contribution.
+// Positive and negative magnitudes use separate scales so a resistance can
+// hurt a different amount than an equivalent weakness helps.
+function scaledAffinityContribution(
+  value: number | undefined,
+  scale: RoleAffinityScale
+): number {
+  if (!value) return 0;
+  const ratio = value / 2; // normalize -2..2 to -1..1
+  return ratio * (value >= 0 ? scale.pos : scale.neg);
+}
+
+function roleAffinityScale(
+  role: Role | undefined,
+  table: Record<Role, RoleAffinityScale>
+): RoleAffinityScale {
+  return table[role ?? 'Support'] ?? table.Support;
+}
+
 // Enhanced team recommendation scoring algorithm
 export function calculateTeamRecommendationScore(
   team: Team,
-  bossWeaknesses: string[] = [],
-  bossResistances: string[] = [],
-  bossMetaWeaknesses: string[] = [],
-  bossMetaResistances: string[] = [],
+  bossAffinities: BossAffinities = {},
   membersOverride?: Character[]
-): number {
+): TeamScoreResult {
   const members = membersOverride ?? resolveTeamMembers(team);
   const expectedMemberCount = team.members.length;
   const missingMembers = Math.max(0, expectedMemberCount - members.length);
 
+  const emptyBreakdown: TeamScoreBreakdown = {
+    power: 0,
+    missingPenalty: 0,
+    element: 0,
+    range: 0,
+    meta: 0,
+    composition: 0,
+    total: 0,
+  };
+
   if (members.length === 0) {
-    return 0;
+    return { score: 0, breakdown: emptyBreakdown };
   }
+
+  const bossElements = bossAffinities.elements ?? {};
+  const bossRanges = bossAffinities.ranges ?? {};
+  const bossMeta = bossAffinities.meta ?? {};
 
   const maxCharacterRating = Math.max(
     ...CHARACTERS.map((character) => character.rating || 0),
@@ -4013,83 +4120,57 @@ export function calculateTeamRecommendationScore(
   );
 
   const teamPower = getTeamPower(team, members);
-  let score = 0;
 
   // Team power is the strongest base factor. Keep it dominant before matchup terms.
   const powerCap = expectedMemberCount * maxCharacterRating;
-  score += (teamPower / powerCap) * 130;
+  const powerContribution = (teamPower / powerCap) * POWER_WEIGHT;
 
   // Hard penalty for teams with missing/invalid members.
-  score -= missingMembers * 40;
+  const missingPenalty = -missingMembers * MISSING_MEMBER_PENALTY;
 
-  // Element matching bonuses/penalties
-  const elementScores = members.map((member) => {
-    let elementScore = 0;
+  // Element matching, scaled by the boss's actual affinity magnitude.
+  // Character elements can be "All" (no single affinity applies), so index
+  // via a loosely-typed lookup rather than the strict ElementalAffinities keys.
+  const elementAffinityLookup = bossElements as Record<
+    string,
+    EffectivenessScore | undefined
+  >;
+  const totalElementScore = members.reduce((sum, member) => {
+    const value = elementAffinityLookup[member.element];
+    const scale = roleAffinityScale(member.role, ELEMENT_ROLE_SCALE);
+    return sum + scaledAffinityContribution(value, scale);
+  }, 0);
+  const elementContribution = clampSigned(totalElementScore, ELEMENT_CAP);
 
-    // Major bonus for DPS characters hitting weakness
-    if (member.role === 'DPS' && bossWeaknesses.includes(member.element)) {
-      elementScore += 45;
-    }
-    // Medium bonus for Sub-DPS hitting weakness
-    else if (
-      member.role === 'Sub-DPS' &&
-      bossWeaknesses.includes(member.element)
-    ) {
-      elementScore += 20;
-    }
-    // Very small bonus for non-DPS units; their elements matter less.
-    else if (bossWeaknesses.includes(member.element)) {
-      elementScore += 4;
-    }
+  // Targeting profile matching (Single/Blast/AoE/Team vs boss.ranges).
+  const totalRangeScore = members.reduce((sum, member) => {
+    if (!member.target) return sum;
+    const value = bossRanges[member.target];
+    const scale = roleAffinityScale(member.role, RANGE_ROLE_SCALE);
+    return sum + scaledAffinityContribution(value, scale);
+  }, 0);
+  const rangeContribution = clampSigned(totalRangeScore, RANGE_CAP);
 
-    // Penalty for characters hitting resistance
-    if (bossResistances.includes(member.element)) {
-      if (member.role === 'DPS') {
-        elementScore -= 30;
-      } else if (member.role === 'Sub-DPS') {
-        elementScore -= 14;
-      } else {
-        elementScore -= 6;
-      }
-    }
-
-    return elementScore;
-  });
-
-  // Sum contribution from all members with a slight cap so element does not eclipse power.
-  const totalElementScore = elementScores.reduce((sum, value) => sum + value, 0);
-  score += Math.min(70, totalElementScore);
-
-  const dpsMembers = members.filter((member) => member.role === 'DPS');
-  const hasDpsWeaknessMatch = dpsMembers.some((member) =>
-    bossWeaknesses.includes(member.element)
-  );
-  if (bossWeaknesses.length > 0 && dpsMembers.length > 0 && !hasDpsWeaknessMatch) {
-    score -= 12;
-  }
-
-  // Meta archetype matching
-  const metaScores = members.map((member) => {
-    let metaScore = 0;
-
-    const metas = getCharacterMetaTypes(member);
-    const hasMetaWeakness = metas.some((meta) => bossMetaWeaknesses.includes(meta));
-    const hasMetaResistance = metas.some((meta) =>
-      bossMetaResistances.includes(meta)
+  // Meta archetype matching. A character can have multiple metas (primary +
+  // sub); take the strongest matched weakness and the worst matched
+  // resistance independently, since a character can plausibly hit both.
+  const totalMetaScore = members.reduce((sum, member) => {
+    const metaValues = getCharacterMetaTypes(member).map(
+      (meta) => bossMeta[meta] ?? 0
     );
+    if (!metaValues.length) return sum;
 
-    if (hasMetaWeakness) {
-      metaScore += member.role === 'DPS' ? 14 : 9;
-    }
+    const bestPositive = Math.max(0, ...metaValues);
+    const worstNegative = Math.min(0, ...metaValues);
+    const scale = member.role === 'DPS' ? META_DPS_SCALE : META_OTHER_SCALE;
 
-    if (hasMetaResistance) {
-      metaScore -= member.role === 'DPS' ? 10 : 7;
-    }
-
-    return metaScore;
-  });
-
-  score += metaScores.reduce((sum, value) => sum + value, 0);
+    return (
+      sum +
+      scaledAffinityContribution(bestPositive, scale) +
+      scaledAffinityContribution(worstNegative, scale)
+    );
+  }, 0);
+  const metaContribution = clampSigned(totalMetaScore, META_CAP);
 
   // Team composition bonuses
   const roles = members.map((member) => member.role).filter(Boolean);
@@ -4098,60 +4179,80 @@ export function calculateTeamRecommendationScore(
   const hasDPS = roles.includes('DPS');
   const hasSubDPS = roles.includes('Sub-DPS');
 
-  // Balanced team composition bonus
-  if (hasDPS && hasSustain) score += 10;
-  if (hasSupport) score += 5;
-  if (hasDPS && hasSubDPS) score += 5;
+  let compositionContribution = 0;
+  if (hasDPS && hasSustain) compositionContribution += 10;
+  if (hasSupport) compositionContribution += 5;
+  if (hasDPS && hasSubDPS) compositionContribution += 5;
 
   // Element diversity bonus (different elements can break different weaknesses)
   const uniqueElements = new Set(members.map((member) => member.element)).size;
-  if (uniqueElements >= 3) score += 5;
+  if (uniqueElements >= 3) compositionContribution += 5;
 
-  return Math.max(0, score); // Ensure non-negative score
+  const total = Math.max(
+    0,
+    powerContribution +
+      missingPenalty +
+      elementContribution +
+      rangeContribution +
+      metaContribution +
+      compositionContribution
+  );
+
+  return {
+    score: total,
+    breakdown: {
+      power: powerContribution,
+      missingPenalty,
+      element: elementContribution,
+      range: rangeContribution,
+      meta: metaContribution,
+      composition: compositionContribution,
+      total,
+    },
+  };
 }
 
 // Get recommended teams sorted by effectiveness
 export function getRecommendedTeamsSorted(
-  bossWeaknesses: string[] = [],
-  bossResistances: string[] = [],
-  bossMetaWeaknesses: string[] = [],
-  bossMetaResistances: string[] = [],
+  bossAffinities: BossAffinities = {},
   onlyAvailable: boolean = true,
   isCharacterOwned?: (id: string) => boolean
 ) {
-  const hasBossWeaknesses = bossWeaknesses.length > 0;
-  const baseTeams = hasBossWeaknesses ? teamsMatchingWeakness(bossWeaknesses) : TEAMS;
-  
+  const weaknessElements = Object.entries(bossAffinities.elements ?? {})
+    .filter(([, value]) => (value ?? 0) > 0)
+    .map(([element]) => element);
+  const baseTeams = weaknessElements.length
+    ? teamsMatchingWeakness(weaknessElements)
+    : TEAMS;
+
   const enrichedTeams = baseTeams.map((team) => {
     const members = resolveTeamMembers(team);
     const teamPower = getTeamPower(team, members);
-    const score = calculateTeamRecommendationScore(
+    const { score, breakdown } = calculateTeamRecommendationScore(
       team,
-      bossWeaknesses,
-      bossResistances,
-      bossMetaWeaknesses,
-      bossMetaResistances,
+      bossAffinities,
       members
     );
-    
+
     const isAvailable = isCharacterOwned
       ? members.length === team.members.length &&
         members.every((member) => isCharacterOwned(member.id))
       : members.length === team.members.length;
-    
+
     return {
       team,
       members,
       teamPower,
       score,
+      scoreBreakdown: breakdown,
       isAvailable
     };
   });
-  
+
   // Filter by availability if requested
-  const filteredTeams = onlyAvailable && isCharacterOwned ? 
+  const filteredTeams = onlyAvailable && isCharacterOwned ?
     enrichedTeams.filter(t => t.isAvailable) : enrichedTeams;
-  
+
   // Sort by score (highest first)
   return filteredTeams.sort((a, b) => {
     if (b.score !== a.score) return b.score - a.score;

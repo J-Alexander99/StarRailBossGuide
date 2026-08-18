@@ -29,6 +29,12 @@ const NAME_ALIASES = {
   "Trailblazer (Ice)": "trail_ice",
   "Trailblazer (Physical)": "trail_physical",
   "Trailblazer (Destruction)": "trail_physical",
+  // Prydwen's site rebuild renamed these to "Trailblazer • <Path>" (bullet,
+  // named by Path rather than by Element like the parenthesis aliases above).
+  "Trailblazer • Remembrance": "trail_ice",
+  "Trailblazer • Harmony": "trail_imag",
+  "Trailblazer • Preservation": "trail_fire",
+  "Trailblazer • Destruction": "trail_physical",
   "March 7th (Evernight)": "evernight",
   "March 7th (Swordmaster)": "march7_imag",
   "March 7th": "march7th",
@@ -140,6 +146,53 @@ function convertTotalRatingTo10Scale(totalRating) {
   return Math.round(normalized);
 }
 
+// Update (or insert) a single `field: value,` line within one character's
+// object-literal block, preserving indentation and every other line as-is.
+function updateOrInsertField(blockText, fieldName, value) {
+  const lineRegex = new RegExp(`^([ \\t]*)${fieldName}:\\s*[^,\\n]+,?[ \\t]*$`, "m");
+  if (lineRegex.test(blockText)) {
+    return blockText.replace(lineRegex, (_, indent) => `${indent}${fieldName}: ${value},`);
+  }
+
+  const lines = blockText.split("\n");
+  let closingIdx = -1;
+  for (let i = lines.length - 1; i >= 0; i--) {
+    if (/^[ \t]*\},?[ \t]*$/.test(lines[i])) {
+      closingIdx = i;
+      break;
+    }
+  }
+  if (closingIdx === -1) return blockText; // shouldn't happen; leave untouched
+
+  const idLine = lines.find((l) => /^[ \t]*id:/.test(l));
+  const indent = idLine ? idLine.match(/^([ \t]*)/)[1] : "    ";
+  lines.splice(closingIdx, 0, `${indent}${fieldName}: ${value},`);
+  return lines.join("\n");
+}
+
+// Patch only the four rating fields for each matched character, leaving the
+// rest of the file (type definitions, other fields, helper functions,
+// formatting, comments) byte-for-byte untouched.
+function patchRatingsInPlace(sourceText, updatedFieldsById) {
+  let result = sourceText;
+
+  for (const [charId, fields] of Object.entries(updatedFieldsById)) {
+    const blockRegex = new RegExp(`\\{[^{}]*\\bid:\\s*"${charId}"[^{}]*\\}`);
+    const match = blockRegex.exec(result);
+    if (!match) continue; // shouldn't happen since charId came from this same file
+
+    let block = match[0];
+    block = updateOrInsertField(block, "rating", fields.rating);
+    block = updateOrInsertField(block, "mocRating", fields.mocRating);
+    block = updateOrInsertField(block, "pfRating", fields.pfRating);
+    block = updateOrInsertField(block, "asRating", fields.asRating);
+
+    result = result.slice(0, match.index) + block + result.slice(match.index + match[0].length);
+  }
+
+  return result;
+}
+
 function mergeTierData() {
   console.log("🔄 Merging tier data from tierUpdate.json...\n");
 
@@ -176,6 +229,7 @@ function mergeTierData() {
   let unmatched = [];
   let updated = 0;
   const report = [];
+  const updatedFields = {}; // charId -> { rating, mocRating, pfRating, asRating }
 
   report.push("=".repeat(80));
   report.push("TIER DATA MERGE REPORT");
@@ -219,6 +273,13 @@ function mergeTierData() {
       char.mocRating = newMocRating;
       char.pfRating = newPfRating;
       char.asRating = newAsRating;
+
+      updatedFields[charId] = {
+        rating: newRating,
+        mocRating: newMocRating,
+        pfRating: newPfRating,
+        asRating: newAsRating,
+      };
     } else {
       unmatched.push(tierChar.name);
       report.push(
@@ -231,109 +292,11 @@ function mergeTierData() {
     }
   });
 
-  // Generate updated TypeScript
-  const TYPE_DEFINITIONS = `export type Element = 'Fire' | 'Ice' | 'Lightning' | 'Physical' | 'Quantum' | 'Wind' | 'Imaginary' | 'All';
-
-export type Path = 'Destruction' | 'Hunt' | 'Erudition' | 'Harmony' | 'Nihility' | 'Preservation' | 'Abundance' | 'Remembrance';
-
-export type Role = 'Sub-DPS' | 'DPS' | 'Support' | 'Sustain';
-
-export type Target = "Single" | "Blast" | "AoE" | "Team";
-
-export type Meta =
-  | "DOT"
-  | "Crit"
-  | "Break"
-  | "Follow-Up"
-  | "Summon"
-  | "General"
-  | "Kevin"
-  | "Raiden"
-  | "Ultimate";
-
-export type Character = {
-  id: string;
-  name: string;
-  element: Element;
-  path?: Path;
-  role?: Role;
-  meta?: Meta;
-  target?: Target;
-  rating?: number; // Total rating (sum of MoC + PF + AS, max 30)
-  mocRating?: number; // Memory of Chaos rating (1-10)
-  pfRating?: number; // Pure Fiction rating (1-10)
-  asRating?: number; // Apocalyptic Shadow rating (1-10)
-};
-
-`;
-
-  // Group by element
-  const byElement = {
-    Physical: [],
-    Fire: [],
-    Ice: [],
-    Lightning: [],
-    Wind: [],
-    Quantum: [],
-    Imaginary: [],
-    All: [],
-  };
-
-  characters.forEach((char) => {
-    if (byElement[char.element]) {
-      byElement[char.element].push(char);
-    }
-  });
-
-  // Sort within each element group by name
-  Object.keys(byElement).forEach((element) => {
-    byElement[element].sort((a, b) => a.name.localeCompare(b.name));
-  });
-
-  // Generate TypeScript content
-  let content = TYPE_DEFINITIONS;
-  content += "export const CHARACTERS: Character[] = [\n";
-
-  const elementOrder = [
-    "Physical",
-    "Fire",
-    "Ice",
-    "Lightning",
-    "Wind",
-    "Quantum",
-    "Imaginary",
-    "All",
-  ];
-
-  elementOrder.forEach((element, index) => {
-    const chars = byElement[element];
-    if (chars.length > 0) {
-      content += `  // ${element}\n`;
-      chars.forEach((char, charIndex) => {
-        content += "  {\n";
-        content += `    id: "${char.id}",\n`;
-        content += `    name: "${char.name}",\n`;
-        content += `    element: "${char.element}",\n`;
-        if (char.path) content += `    path: "${char.path}",\n`;
-        if (char.role) content += `    role: "${char.role}",\n`;
-        if (char.meta) content += `    meta: "${char.meta}",\n`;
-        if (char.target) content += `    target: "${char.target}",\n`;
-        if (char.rating) content += `    rating: ${char.rating},\n`;
-        if (char.mocRating) content += `    mocRating: ${char.mocRating},\n`;
-        if (char.pfRating) content += `    pfRating: ${char.pfRating},\n`;
-        if (char.asRating) content += `    asRating: ${char.asRating},\n`;
-        content += "  }";
-        if (charIndex < chars.length - 1 || index < elementOrder.length - 1) {
-          content += ",\n";
-        }
-      });
-      if (index < elementOrder.length - 1) {
-        content += "\n";
-      }
-    }
-  });
-
-  content += "\n];\n";
+  // Patch ratings in place rather than regenerating the whole file: this
+  // file accumulates hand-added types/fields/helper functions over time
+  // (e.g. the Implant type, subMeta/implant fields, getCharacterMetaTypes)
+  // that a from-scratch template would silently drop.
+  const content = patchRatingsInPlace(charsContent, updatedFields);
 
   // Write updated file
   fs.writeFileSync(CHARS_FILE, content);

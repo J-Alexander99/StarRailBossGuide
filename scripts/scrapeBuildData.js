@@ -108,6 +108,13 @@ const CHARACTER_URL_MAP = {
   "raiden": "acheron",
   "elisia": "cyrene",
   "elysia": "cyrene",
+  "evanescia": "evanescia",
+  "gilgamesh": "gilgamesh",
+  "rin": "rin-tohsaka",
+  "himekonova": "himeko-nova",
+  "mortenax": "blade-mortenax",
+  "silverwolf999": "silver-wolf-lv-999",
+  "trail_elation": "trailblazer-elation",
 };
 
 function sleep(ms) {
