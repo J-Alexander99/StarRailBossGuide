@@ -1,12 +1,14 @@
 const fs = require("fs");
 const path = require("path");
+const puppeteer = require("puppeteer");
 
 const OUTPUT_FILE = path.join(__dirname, "..", "src", "data", "buildUpdate.json");
 const CHARS_FILE = path.join(__dirname, "..", "src", "data", "characters.ts");
 const BASE_URL = "https://www.prydwen.gg/star-rail/characters";
-const DEFAULT_DELAY_MS = 900;
-const JITTER_MS = 700;
+const DEFAULT_DELAY_MS = 500;
+const JITTER_MS = 500;
 const MAX_FETCH_RETRIES = 3;
+const PAGE_TIMEOUT_MS = 45000;
 
 // Some character pages leak low-rarity light cone names into relic slots.
 // Strip those known light-cone-only names from relic set recommendations.
@@ -108,92 +110,43 @@ const CHARACTER_URL_MAP = {
   "elysia": "cyrene",
 };
 
-async function fetchText(url) {
-  const headers = {
-    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    "accept-language": "en-US,en;q=0.9",
-    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "cache-control": "no-cache",
-    "pragma": "no-cache",
-  };
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
+// Prydwen now fronts the site with a Cloudflare JS challenge, so a plain
+// fetch()/curl gets a 403. A real (headless) browser passes it fine.
+async function fetchRenderedHtml(browser, url) {
   let lastError = null;
+
   for (let attempt = 1; attempt <= MAX_FETCH_RETRIES; attempt++) {
+    const page = await browser.newPage();
     try {
-      const res = await fetch(url, { headers, redirect: "follow" });
+      await page.setUserAgent(
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+      );
+      await page.setViewport({ width: 1366, height: 900 });
 
-      if (!res.ok) {
-        throw new Error(`Failed to fetch ${url} (${res.status})`);
+      const resp = await page.goto(url, { waitUntil: "networkidle2", timeout: PAGE_TIMEOUT_MS });
+      if (!resp || !resp.ok()) {
+        throw new Error(`Failed to fetch ${url} (${resp ? resp.status() : "no response"})`);
       }
 
-      const text = await res.text();
-      if (/attention required|checking your browser|cf-browser-verification|cloudflare/i.test(text)) {
-        throw new Error(`Anti-bot challenge detected for ${url}`);
-      }
-
-      return text;
+      // Give hydration a moment to settle before reading the DOM.
+      await sleep(800);
+      return await page.content();
     } catch (err) {
       lastError = err;
       if (attempt < MAX_FETCH_RETRIES) {
         const backoff = attempt * 1200 + Math.floor(Math.random() * 500);
         await sleep(backoff);
       }
+    } finally {
+      await page.close().catch(() => {});
     }
   }
 
   throw lastError || new Error(`Failed to fetch ${url}`);
-}
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-function getDivBlocksByClass(html, className) {
-  const blocks = [];
-  const classRegex = new RegExp(`<div[^>]*class=["'][^"']*\\b${className}\\b[^"']*["'][^>]*>`, "gi");
-  let classMatch;
-
-  while ((classMatch = classRegex.exec(html)) !== null) {
-    const startIndex = classMatch.index;
-    const startTagEnd = classMatch.index + classMatch[0].length;
-
-    const divTagRegex = /<\/?div\b[^>]*>/gi;
-    divTagRegex.lastIndex = startTagEnd;
-
-    let depth = 1;
-    let endTagIndex = -1;
-    let match;
-
-    while ((match = divTagRegex.exec(html)) !== null) {
-      if (match[0][1] === "/") {
-        depth -= 1;
-      } else {
-        depth += 1;
-      }
-
-      if (depth === 0) {
-        endTagIndex = match.index;
-        break;
-      }
-    }
-
-    if (endTagIndex !== -1) {
-      blocks.push(html.slice(startTagEnd, endTagIndex));
-      classRegex.lastIndex = endTagIndex;
-    }
-  }
-
-  return blocks;
-}
-
-function normalizeItemName(name) {
-  return decodeHtmlEntities(
-    String(name || "")
-      .trim()
-      .replace(/<[^>]+>/g, "")
-      .replace(/&nbsp;/g, " ")
-      .replace(/\s+/g, " ")
-  );
 }
 
 function decodeHtmlEntities(text) {
@@ -208,397 +161,178 @@ function decodeHtmlEntities(text) {
     .trim();
 }
 
-function isPercentage(text) {
-  // Match patterns like "115.65%", "100%", etc.
-  return /^\d+(?:\.\d+)?%$/.test(text.trim());
+function normalizeItemName(name) {
+  return decodeHtmlEntities(
+    String(name || "")
+      .trim()
+      .replace(/<!--[\s\S]*?-->/g, "")
+      .replace(/<[^>]+>/g, "")
+      .replace(/&nbsp;/g, " ")
+      .replace(/\s+/g, " ")
+  );
 }
 
-function isLikelyRelicSetName(text) {
-  // Relic set names typically have multiple capitalized words or specific patterns
-  // They contain words like: Scholar, Warrior, Messenger, Thief, Wastelander, etc.
-  const relicKeywords = /scholar|warrior|messenger|thief|wastelander|hunter|champion|bandits|firmament|inert|duran|synth|spire|maid|divine|furnace|talia|penacony|rutilant|arena|lonesome|honourbound|dreamweaver|firesmith|sprightly|vonwacq|broken|keel|fleet|ageless|land of dreams|sealing|glamoth|lushaka|pan-cosmic|revelry|condemn|obsessed|obsession/i;
-  const capitalizedWords = (text.match(/\b[A-Z]/g) || []).length;
-  
-  // If it has multiple capitalized letters and/or matches relic keywords, it's likely a relic name
-  if (capitalizedWords >= 2 || relicKeywords.test(text)) {
-    return true;
-  }
-  
-  return false;
-}
-
-function isLikelyDescription(text) {
-  // Descriptions are typically longer or contain specific patterns
-  const descKeywords = /offers|provides|grants|allows|requires|focuses on|useful|strength|weakness|best option|alternative|note:|be summed|assumes|improves|higher|lower|combo|synerg|condition|increases?|decreases?|reduced|prevents|grants|stacked?|maintained|uptime|activation/i;
-  const hasMultipleSentences = (text.match(/\./g) || []).length > 0;
-  
-  // If text is very long (>100 chars), it's definitely a description
-  if (text.length > 100) return true;
-  
-  // If it's moderately long (40+) and has keywords or multiple sentences, it's a description
-  if (text.length >= 40 && (descKeywords.test(text) || hasMultipleSentences)) {
-    return true;
-  }
-  
-  return false;
-}
-
-function isDefinitelyNotASet(text) {
-  // Patterns that indicate this is explanatory text, not a set name
-  const descriptions = /^(The |A |Max |Only |Flex|For |Mix |Assumes|If |This |Good|Strong|When |Best|Another|Use |Useful|Note:|Gives |Grants |Provides )/i;
-  const explanatoryContent = /good|option|best|only|useful|perform|make|cost|provide|give|grant/i;
-  const longWithPeriods = text.length > 75 && text.includes('.');
-  const veryLong = text.length > 110;
-  const hasMultipleWords = (text.match(/\s/g) || []).length >= 5; // 6+ words
-  
-  return descriptions.test(text) || longWithPeriods || veryLong || (hasMultipleWords && explanatoryContent.test(text));
-}
-
-function extractItemsFromDiv(html, divClass, isLightCones = false) {
-  const blocks = getDivBlocksByClass(html, divClass);
-  if (!blocks.length) {
-    return [];
-  }
-  const items = [];
-
-  for (const divContent of blocks) {
-    const itemPattern = /<(?:a|div|span|p|li)[^>]*>([^<]+)<\/(?:a|div|span|p|li)>/gi;
-    let match;
-
-    while ((match = itemPattern.exec(divContent)) !== null) {
-      const item = normalizeItemName(match[1]);
-      
-      // Skip empty or too-short items
-      if (!item || item.length <= 2) continue;
-      
-      // Skip if already in list
-      if (items.includes(item)) continue;
-      
-      // For light cones, apply stricter filtering
-      if (isLightCones) {
-        // Skip percentages
-        if (isPercentage(item)) continue;
-        
-        // Skip descriptions (long text with description keywords)
-        if (isLikelyDescription(item)) continue;
-        
-        // Skip labels like "Substats:", "Skills priority:", etc.
-        if (/^(body|feet|sphere|rope|sub\s*stats?|skills priority|major traces|crit rate|atk|spd|breakpoint|speed)$/i.test(item)) continue;
-      }
-      
-      items.push(item);
-    }
-  }
-
-  return items;
-}
-
-function extractDivInnerByOpenTag(html, openTagIndex, openTagText) {
-  if (openTagIndex < 0 || !openTagText) {
-    return "";
-  }
-
+// Find the [start,end) span of the div opened by the tag at openTagIndex/openTagText.
+function findDivInnerSpan(html, openTagIndex, openTagText) {
   const startTagEnd = openTagIndex + openTagText.length;
   const divTagRegex = /<\/?div\b[^>]*>/gi;
   divTagRegex.lastIndex = startTagEnd;
 
   let depth = 1;
-  let endTagIndex = -1;
   let match;
-
   while ((match = divTagRegex.exec(html)) !== null) {
-    if (match[0][1] === "/") {
-      depth -= 1;
-    } else {
-      depth += 1;
+    if (match[0][1] === "/") depth -= 1;
+    else depth += 1;
+    if (depth === 0) return [startTagEnd, match.index];
+  }
+  return null;
+}
+
+// Find all <div class="...CLASS..."> blocks (nesting-aware) and return their [start,end) spans.
+function findDivBlockSpansByClass(html, className, fromIndex = 0) {
+  const spans = [];
+  const classRegex = new RegExp(`<div[^>]*class=["'][^"']*\\b${className}\\b[^"']*["'][^>]*>`, "gi");
+  classRegex.lastIndex = fromIndex;
+  let classMatch;
+  while ((classMatch = classRegex.exec(html)) !== null) {
+    const span = findDivInnerSpan(html, classMatch.index, classMatch[0]);
+    if (span) {
+      spans.push({ outerStart: classMatch.index, innerStart: span[0], innerEnd: span[1] });
+      classRegex.lastIndex = span[1];
+    }
+  }
+  return spans;
+}
+
+function findHeadingIndex(html, textPattern, fromIndex = 0) {
+  const re = /<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/gi;
+  re.lastIndex = fromIndex;
+  let m;
+  while ((m = re.exec(html)) !== null) {
+    const text = normalizeItemName(m[1]);
+    if (textPattern.test(text)) {
+      return { index: m.index, end: re.lastIndex, text };
+    }
+  }
+  return null;
+}
+
+// Slice out the HTML between one heading and the next matching heading (or
+// end of document if there's no next section on the page).
+function extractBuildSection(html, headingPattern, stopPattern) {
+  const heading = findHeadingIndex(html, headingPattern);
+  if (!heading) return "";
+  const stop = findHeadingIndex(html, stopPattern, heading.end);
+  const endIndex = stop ? stop.index : html.length;
+  return html.slice(heading.end, endIndex);
+}
+
+// Light cones / relic sets / planar ornaments are each rendered as an <img>
+// (holding the clean item name in its alt attribute) inside a wrapper <div>
+// whose class identifies the item type (hsr-cone-icon, hsr-set-image relic,
+// hsr-set-image planetary). Relic/planar entries also carry a "(N-PC)" piece
+// count in a sibling span shortly after the image.
+function extractSetItems(sectionHtml, wrapperClassPattern, { withPieces = false } = {}) {
+  const items = [];
+  const seen = new Set();
+  const wrapperRegex = new RegExp(
+    `<div[^>]*class=["'][^"']*${wrapperClassPattern.source}[^"']*["'][^>]*>\\s*<img[^>]*\\balt="([^"]*)"`,
+    "gi"
+  );
+  let m;
+  while ((m = wrapperRegex.exec(sectionHtml)) !== null) {
+    const name = normalizeItemName(m[1]);
+    if (!name || seen.has(name)) continue;
+
+    let pieces = "";
+    if (withPieces) {
+      const window = sectionHtml.slice(m.index, m.index + 1500);
+      const pcMatch = normalizeItemName(window).match(/\((\d+)\s*-?PC\)/i);
+      if (pcMatch) pieces = `${pcMatch[1]}pc`;
     }
 
-    if (depth === 0) {
-      endTagIndex = match.index;
+    seen.add(name);
+    items.push(withPieces ? { name, pieces } : name);
+  }
+  return items;
+}
+
+function extractStats(html) {
+  const emptyStats = { body: [], feet: [], sphere: [], rope: [], subStats: [] };
+
+  // The "Best Stats" heading lives inside one of possibly several
+  // build-stats blocks (there's also a "Traces priority" block with the
+  // same class) — pick the one that actually contains the stats heading.
+  const spans = findDivBlockSpansByClass(html, "build-stats");
+  let statsBlock = "";
+  for (const span of spans) {
+    const inner = html.slice(span.innerStart, span.innerEnd);
+    if (/best\s+stats/i.test(inner)) {
+      statsBlock = inner;
       break;
     }
   }
+  if (!statsBlock) return emptyStats;
 
-  if (endTagIndex === -1) {
-    return "";
-  }
-
-  return html.slice(startTagEnd, endTagIndex);
-}
-
-function getDetailedConesSectionByTitle(html, titlePattern) {
-  const headingRegex = /<h6[^>]*>([\s\S]*?)<\/h6>/gi;
-  let headingMatch;
-
-  while ((headingMatch = headingRegex.exec(html)) !== null) {
-    const headingText = normalizeItemName(headingMatch[1]);
-    if (!titlePattern.test(headingText)) {
-      continue;
-    }
-
-    const sectionRegex = /<div[^>]*class=["'][^"']*\bdetailed-cones\b[^"']*["'][^>]*>/gi;
-    sectionRegex.lastIndex = headingMatch.index + headingMatch[0].length;
-    const sectionMatch = sectionRegex.exec(html);
-
-    if (!sectionMatch) {
-      return "";
-    }
-
-    return extractDivInnerByOpenTag(html, sectionMatch.index, sectionMatch[0]);
-  }
-
-  return "";
-}
-
-function extractSetNamesFromDetailedConesSection(sectionHtml) {
-  if (!sectionHtml) {
-    return [];
-  }
-
-  const names = [];
-  const singleConeBlocks = getDivBlocksByClass(sectionHtml, "single-cone");
-  const blocksToScan = singleConeBlocks.length ? singleConeBlocks : [sectionHtml];
-
-  for (const block of blocksToScan) {
-    // Preferred source: set image alt text usually holds exact set names.
-    const imageAltPattern = /<img[^>]*\balt=["']([^"']+)["'][^>]*>/gi;
-    let imageMatch;
-    while ((imageMatch = imageAltPattern.exec(block)) !== null) {
-      const altName = normalizeItemName(imageMatch[1]);
-      if (!altName) continue;
-      if (isDefinitelyNotASet(altName)) continue;
-      if (!isLikelyRelicSetName(altName)) continue;
-      if (!names.includes(altName)) {
-        names.push(altName);
-      }
-    }
-
-    const itemPattern = /<(?:a|div|span|p|li)[^>]*>([^<]+)<\/(?:a|div|span|p|li)>/gi;
-    let match;
-
-    while ((match = itemPattern.exec(block)) !== null) {
-      const token = normalizeItemName(match[1]);
-      if (!token || token.length <= 2) continue;
-      if (isPercentage(token)) continue;
-      if (isDefinitelyNotASet(token)) continue;
-      if (!isLikelyRelicSetName(token)) continue;
-      if (!names.includes(token)) {
-        names.push(token);
-      }
-    }
-  }
-
-  return names;
-}
-
-function isStatSectionHeader(token) {
-  return /^(body|feet|planar sphere|sphere|link rope|rope|sub\s*stats?:?)$/i.test(token.trim());
-}
-
-function isStatNoise(token) {
-  const t = token.trim();
-  return (
-    !t ||
-    /^>=?$/.test(t) ||
-    /^(skills priority:|major traces priority:|if you want to learn more)/i.test(t)
-  );
-}
-
-function isLikelyMainStatValue(token) {
-  const t = String(token || "").trim();
-  if (!t) return false;
-  if (/^[=/><|]+$/.test(t)) return false;
-  if (t.length > 40) return false;
-  if (/[.:]/.test(t)) return false;
-  if (/\b(signature|uses|while|option|recommended|substats?)\b/i.test(t)) return false;
-  if (/^(planar sphere|link rope|sub\s*stats?:?)$/i.test(t)) return false;
-
-  return /^(CRIT Rate|CRIT DMG|ATK%|ATK|HP%|HP|DEF%|DEF|Speed|Outgoing Healing|Effect HIT Rate|Break Effect|Energy Regen Rate|[A-Za-z]+ DMG|Anything)$/i.test(t);
-}
-
-function pushUniqueCaseInsensitive(list, value) {
-  const key = String(value || "").toLowerCase();
-  if (!key) return;
-  if (!list.some((item) => String(item).toLowerCase() === key)) {
-    list.push(value);
-  }
-}
-
-function parseStatsFromTokens(tokens) {
-  const parsed = {
-    body: [],
-    feet: [],
-    sphere: [],
-    rope: [],
-    subStats: [],
+  const result = { ...emptyStats };
+  const slotKeyMap = {
+    body: "body",
+    feet: "feet",
+    "planar sphere": "sphere",
+    "link rope": "rope",
   };
 
-  let section = "";
-  let capturedSubStatsLine = false;
+  for (const span of findDivBlockSpansByClass(statsBlock, "box")) {
+    const boxHtml = statsBlock.slice(span.innerStart, span.innerEnd);
+    const headerMatch = boxHtml.match(/<div[^>]*class=["'][^"']*stats-header[^"']*["'][^>]*><span>([^<]*)<\/span>/i);
+    if (!headerMatch) continue;
 
-  for (const raw of tokens) {
-    const token = decodeHtmlEntities(raw).trim();
-    if (!token) continue;
+    const slot = slotKeyMap[normalizeItemName(headerMatch[1]).toLowerCase()];
+    if (!slot) continue;
 
-    if (/^body$/i.test(token)) {
-      section = "body";
-      continue;
+    const statNames = [];
+    const statRegex = /<div[^>]*class=["'][^"']*hsr-stat[^"']*["'][^>]*>[\s\S]*?<span[^>]*>([^<]*)<\/span>\s*<\/div>/gi;
+    let sm;
+    while ((sm = statRegex.exec(boxHtml)) !== null) {
+      const name = normalizeItemName(sm[1]);
+      if (name) statNames.push(name);
     }
-    if (/^feet$/i.test(token)) {
-      section = "feet";
-      continue;
-    }
-    if (/^(planar sphere|sphere)$/i.test(token)) {
-      section = "sphere";
-      continue;
-    }
-    if (/^(link rope|rope)$/i.test(token)) {
-      section = "rope";
-      continue;
-    }
-    if (/^sub\s*stats?:?$/i.test(token)) {
-      section = "subStats";
-      continue;
-    }
-
-    if (isStatNoise(token)) {
-      continue;
-    }
-
-    if (section === "subStats") {
-      if (/^(skills priority:|major traces priority:)/i.test(token)) {
-        break;
-      }
-
-      // Keep only the text from the Substats box, not the full priority/traces list.
-      if (!capturedSubStatsLine) {
-        parsed.subStats.push(token);
-        capturedSubStatsLine = true;
-      }
-      continue;
-    }
-
-    if (!section) {
-      continue;
-    }
-
-    if (/^(planar sphere|link rope|sub\s*stats?:?)$/i.test(token)) {
-      continue;
-    }
-
-    if (!isLikelyMainStatValue(token)) {
-      continue;
-    }
-
-    pushUniqueCaseInsensitive(parsed[section], token);
+    result[slot] = statNames;
   }
 
-  // Fallback for pages where headers are missing from extracted tokens.
-  if (!parsed.body.length && !parsed.feet.length && !parsed.sphere.length && !parsed.rope.length) {
-    const cleaned = tokens
-      .map((t) => decodeHtmlEntities(t))
-      .map((t) => t.trim())
-      .filter((t) => t && !isStatNoise(t) && !isStatSectionHeader(t) && !/^(planar sphere|link rope)$/i.test(t))
-      .filter((t) => isLikelyMainStatValue(t));
-
-    for (const value of cleaned.slice(0, 2)) pushUniqueCaseInsensitive(parsed.body, value);
-    for (const value of cleaned.slice(2, 4)) pushUniqueCaseInsensitive(parsed.feet, value);
-    if (cleaned.length > 4) pushUniqueCaseInsensitive(parsed.sphere, cleaned[4]);
-    if (cleaned.length > 5) pushUniqueCaseInsensitive(parsed.rope, cleaned[5]);
+  // Substats box: <div class="box sub-stats..."><span>Substats:</span><p>...</p></div>
+  const subStatsMatch = statsBlock.match(
+    /<div[^>]*class=["'][^"']*\bsub-stats\b[^"']*["'][^>]*>\s*<span>Substats:<\/span>\s*<p>([\s\S]*?)<\/p>/i
+  );
+  if (subStatsMatch) {
+    const text = normalizeItemName(subStatsMatch[1]);
+    if (text) result.subStats = [text];
   }
 
-  parsed.body = parsed.body.slice(0, 2);
-  parsed.feet = parsed.feet.slice(0, 2);
-  parsed.sphere = parsed.sphere.slice(0, 2);
-  parsed.rope = parsed.rope.slice(0, 2);
-
-  return parsed;
+  return result;
 }
 
 function extractBuildData(html) {
-  const buildData = {
-    lightCones: [],
-    relicSets: [],
-    planarOrnaments: [],
-    stats: {
-      body: [],
-      feet: [],
-      sphere: [],
-      rope: [],
-      subStats: [],
-    },
-  };
-
   try {
-    // Extract light cones from build-cones div with stricter filtering
-    buildData.lightCones = extractItemsFromDiv(html, "build-cones", true).slice(0, 11);
+    const lightConesSection = extractBuildSection(html, /best\s+light\s+cones/i, /best\s+relic\s+sets/i);
+    const relicSection = extractBuildSection(html, /best\s+relic\s+sets/i, /best\s+planetary\s+sets/i);
+    const planarSection = extractBuildSection(html, /best\s+planetary\s+sets/i, /best\s+stats/i);
 
-    // Prefer heading-aware extraction because relic and planar can share the same class names.
-    const relicSection = getDetailedConesSectionByTitle(html, /best\s+relic\s+sets/i);
-    const planarSection = getDetailedConesSectionByTitle(html, /best\s+plan(?:etary|ar)\s+sets/i);
-
-    if (relicSection) {
-      buildData.relicSets = extractSetNamesFromDetailedConesSection(relicSection).slice(0, 6);
-    }
-
-    if (planarSection) {
-      buildData.planarOrnaments = extractSetNamesFromDetailedConesSection(planarSection).slice(0, 6);
-    }
-
-    // Fallback for legacy pages.
-    if (!buildData.relicSets.length) {
-      const relicItems = extractItemsFromDiv(html, "build-relics", false);
-      buildData.relicSets = relicItems
-        .filter(item => {
-          if (isDefinitelyNotASet(item)) return false;
-          if (isLikelyRelicSetName(item)) return true;
-          if (/^\(\d\)$/.test(item.trim())) return false;
-          return item.length < 120 && !item.includes('.');
-        })
-        .slice(0, 6);
-    }
-
-    if (!buildData.planarOrnaments.length) {
-      const planarBlocks = getDivBlocksByClass(html, "build-planar");
-      for (const content of planarBlocks) {
-        const itemPattern = /<(?:div|span|p|li)[^>]*>([^<]+)<\/(?:div|span|p|li)>/gi;
-        let m;
-        while ((m = itemPattern.exec(content)) !== null) {
-          const item = normalizeItemName(m[1]);
-          if (item && item.length > 2 && !buildData.planarOrnaments.includes(item)) {
-            if (isDefinitelyNotASet(item)) continue;
-            if (isLikelyRelicSetName(item)) {
-              buildData.planarOrnaments.push(item);
-            }
-          }
-        }
-      }
-      buildData.planarOrnaments = buildData.planarOrnaments.slice(0, 6);
-    }
-
-    // Prevent planar names from polluting relic set recommendations.
-    const planarNameSet = new Set(buildData.planarOrnaments.map((name) => name.toLowerCase()));
-    buildData.relicSets = buildData.relicSets.filter((name) => !planarNameSet.has(String(name).toLowerCase()));
-
-    // Extract stats from build-stats sections and map by slot headers.
-    const statTokens = [];
-
-    for (const content of getDivBlocksByClass(html, "build-stats")) {
-      const itemPattern = /<(?:div|span|p|li)[^>]*>([^<]+)<\/(?:div|span|p|li)>/gi;
-      let m;
-      while ((m = itemPattern.exec(content)) !== null) {
-        const stat = normalizeItemName(m[1]);
-        if (stat && stat.length > 0) {
-          statTokens.push(stat);
-        }
-      }
-    }
-    buildData.stats = parseStatsFromTokens(statTokens);
+    return {
+      lightCones: extractSetItems(lightConesSection, /hsr-cone-icon/i).slice(0, 11),
+      relicSets: extractSetItems(relicSection, /hsr-set-image\s+relic/i, { withPieces: true }).slice(0, 6),
+      planarOrnaments: extractSetItems(planarSection, /hsr-set-image\s+planetary/i, { withPieces: true }).slice(0, 6),
+      stats: extractStats(html),
+    };
   } catch (error) {
     console.error(`Error parsing build data: ${error.message}`);
+    return {
+      lightCones: [],
+      relicSets: [],
+      planarOrnaments: [],
+      stats: { body: [], feet: [], sphere: [], rope: [], subStats: [] },
+    };
   }
-
-  return buildData;
 }
 
 function parseCharactersFromTS(content) {
@@ -645,12 +379,22 @@ function parseCharactersFromTS(content) {
 function formatBuild(characterId, buildData) {
   const stats = buildData.stats || {};
 
+  // relicSets/planarOrnaments may be plain name strings (from the merge
+  // fallback path) or {name, pieces} objects (fresh scrape output).
+  const asRelicSet = (entry) =>
+    typeof entry === "string"
+      ? { name: entry, pieces: "4pc", notes: "" }
+      : { name: entry.name, pieces: entry.pieces || "4pc", notes: "" };
+  const asPlanar = (entry) =>
+    typeof entry === "string" ? { name: entry, notes: "" } : { name: entry.name, notes: "" };
+  const asLightCone = (entry) => ({ name: typeof entry === "string" ? entry : entry.name, notes: "" });
+
   return {
     characterId: characterId,
-    lightCones: (buildData.lightCones || []).map(name => ({ name, notes: "" })),
+    lightCones: (buildData.lightCones || []).map(asLightCone),
     relics: {
-      sets: (buildData.relicSets || []).map(name => ({ name, pieces: "4pc", notes: "" })),
-      planar: (buildData.planarOrnaments || []).map(name => ({ name, notes: "" })),
+      sets: (buildData.relicSets || []).map(asRelicSet),
+      planar: (buildData.planarOrnaments || []).map(asPlanar),
     },
     stats: {
       body: Array.isArray(stats.body) && stats.body.length ? stats.body : ["CRIT Rate", "CRIT DMG"],
@@ -795,60 +539,69 @@ async function scrapeBuildData() {
   const emptyAfterScrape = [];
   const processed = [];
 
-  console.log("Fetching character pages from Prydwen...");
+  console.log("Fetching character pages from Prydwen (headless browser)...");
 
-  for (const char of characters) {
-    const charId = char.id;
-    const prydwenCharName = CHARACTER_URL_MAP[charId];
-    const existingBuild = existingBuilds[charId];
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-blink-features=AutomationControlled"],
+  });
 
-    if (!prydwenCharName) {
-      // Keep unmapped characters in output so buildUpdate.json stays complete.
-      builds[charId] = existingBuild || formatBuild(charId, {});
-      unmapped.push(charId);
-      failed++;
-      continue;
-    }
+  try {
+    for (const char of characters) {
+      const charId = char.id;
+      const prydwenCharName = CHARACTER_URL_MAP[charId];
+      const existingBuild = existingBuilds[charId];
 
-    const url = `${BASE_URL}/${prydwenCharName}`;
-    processed.push(charId);
-
-    try {
-      const html = await fetchText(url);
-      const buildData = extractBuildData(html);
-
-      // Check if we got meaningful data
-      const hasData =
-        buildData.lightCones.length > 0 ||
-        buildData.relicSets.length > 0 ||
-        buildData.planarOrnaments.length > 0 ||
-        (Array.isArray(buildData?.stats?.body) && buildData.stats.body.length > 0) ||
-        (Array.isArray(buildData?.stats?.feet) && buildData.stats.feet.length > 0) ||
-        (Array.isArray(buildData?.stats?.sphere) && buildData.stats.sphere.length > 0) ||
-        (Array.isArray(buildData?.stats?.rope) && buildData.stats.rope.length > 0) ||
-        (Array.isArray(buildData?.stats?.subStats) && buildData.stats.subStats.length > 0);
-
-      if (hasData) {
-        builds[charId] = mergeWithExisting(charId, buildData, existingBuild);
-        succeeded++;
-      } else {
+      if (!prydwenCharName) {
+        // Keep unmapped characters in output so buildUpdate.json stays complete.
         builds[charId] = existingBuild || formatBuild(charId, {});
-        emptyAfterScrape.push(charId);
+        unmapped.push(charId);
         failed++;
+        continue;
       }
 
-      process.stdout.write(`\r  ✅ ${processed.length}/${characters.length} (${succeeded} with data, ${failed} empty)`);
-    } catch (error) {
-      errors.push({ charId, error: error.message });
-      builds[charId] = existingBuilds[charId] || formatBuild(charId, {});
-      failed++;
-      process.stdout.write(`\r  ⚠️  ${processed.length}/${characters.length} (${succeeded} with data, ${failed} empty/failed)`);
-    }
+      const url = `${BASE_URL}/${prydwenCharName}`;
+      processed.push(charId);
 
-    // Slow, jittered pacing to reduce the chance of anti-bot throttling.
-    if (!singleCharId || processed.length < characters.length) {
-      await sleep(DEFAULT_DELAY_MS + Math.floor(Math.random() * JITTER_MS));
+      try {
+        const html = await fetchRenderedHtml(browser, url);
+        const buildData = extractBuildData(html);
+
+        // Check if we got meaningful data
+        const hasData =
+          buildData.lightCones.length > 0 ||
+          buildData.relicSets.length > 0 ||
+          buildData.planarOrnaments.length > 0 ||
+          (Array.isArray(buildData?.stats?.body) && buildData.stats.body.length > 0) ||
+          (Array.isArray(buildData?.stats?.feet) && buildData.stats.feet.length > 0) ||
+          (Array.isArray(buildData?.stats?.sphere) && buildData.stats.sphere.length > 0) ||
+          (Array.isArray(buildData?.stats?.rope) && buildData.stats.rope.length > 0) ||
+          (Array.isArray(buildData?.stats?.subStats) && buildData.stats.subStats.length > 0);
+
+        if (hasData) {
+          builds[charId] = mergeWithExisting(charId, buildData, existingBuild);
+          succeeded++;
+        } else {
+          builds[charId] = existingBuild || formatBuild(charId, {});
+          emptyAfterScrape.push(charId);
+          failed++;
+        }
+
+        process.stdout.write(`\r  ✅ ${processed.length}/${characters.length} (${succeeded} with data, ${failed} empty)`);
+      } catch (error) {
+        errors.push({ charId, error: error.message });
+        builds[charId] = existingBuilds[charId] || formatBuild(charId, {});
+        failed++;
+        process.stdout.write(`\r  ⚠️  ${processed.length}/${characters.length} (${succeeded} with data, ${failed} empty/failed)`);
+      }
+
+      // Slow, jittered pacing to reduce the chance of anti-bot throttling.
+      if (!singleCharId || processed.length < characters.length) {
+        await sleep(DEFAULT_DELAY_MS + Math.floor(Math.random() * JITTER_MS));
+      }
     }
+  } finally {
+    await browser.close();
   }
 
   console.log("\n");

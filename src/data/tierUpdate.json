@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-03-31",
-  "total_characters": 83,
+  "generated_at": "2026-08-18",
+  "total_characters": 90,
   "characters": [
     {
       "name": "Castorice",
@@ -17,7 +17,21 @@
       "total_rating": 30
     },
     {
-      "name": "Evernight",
+      "name": "Evanescia",
+      "MoC_rating": 10,
+      "PF_rating": 10,
+      "AS_rating": 10,
+      "total_rating": 30
+    },
+    {
+      "name": "Himeko Nova",
+      "MoC_rating": 10,
+      "PF_rating": 10,
+      "AS_rating": 10,
+      "total_rating": 30
+    },
+    {
+      "name": "Huohuo",
       "MoC_rating": 10,
       "PF_rating": 10,
       "AS_rating": 10,
@@ -31,7 +45,21 @@
       "total_rating": 30
     },
     {
-      "name": "Tribbie",
+      "name": "March 7th • Evernight",
+      "MoC_rating": 10,
+      "PF_rating": 10,
+      "AS_rating": 10,
+      "total_rating": 30
+    },
+    {
+      "name": "Mortenax Blade",
+      "MoC_rating": 10,
+      "PF_rating": 10,
+      "AS_rating": 10,
+      "total_rating": 30
+    },
+    {
+      "name": "Silver Wolf • Lv. 999",
       "MoC_rating": 10,
       "PF_rating": 10,
       "AS_rating": 10,
@@ -41,32 +69,53 @@
       "name": "Sparxie",
       "MoC_rating": 10,
       "PF_rating": 10,
-      "AS_rating": 9,
-      "total_rating": 29
-    },
-    {
-      "name": "Trailblazer - Remembrance",
-      "MoC_rating": 9,
-      "PF_rating": 10,
       "AS_rating": 10,
-      "total_rating": 29
+      "total_rating": 30
     },
     {
       "name": "Yao Guang",
       "MoC_rating": 10,
       "PF_rating": 10,
+      "AS_rating": 10,
+      "total_rating": 30
+    },
+    {
+      "name": "Archer",
+      "MoC_rating": 10,
+      "PF_rating": 9,
+      "AS_rating": 10,
+      "total_rating": 29
+    },
+    {
+      "name": "Dan Heng • Permansor Terrae",
+      "MoC_rating": 10,
+      "PF_rating": 9,
+      "AS_rating": 10,
+      "total_rating": 29
+    },
+    {
+      "name": "Rin Tohsaka",
+      "MoC_rating": 10,
+      "PF_rating": 9,
+      "AS_rating": 10,
+      "total_rating": 29
+    },
+    {
+      "name": "Trailblazer • Elation",
+      "MoC_rating": 10,
+      "PF_rating": 9,
+      "AS_rating": 10,
+      "total_rating": 29
+    },
+    {
+      "name": "Trailblazer • Remembrance",
+      "MoC_rating": 10,
+      "PF_rating": 10,
       "AS_rating": 9,
       "total_rating": 29
     },
     {
-      "name": "Black Swan",
-      "MoC_rating": 10,
-      "PF_rating": 9,
-      "AS_rating": 9,
-      "total_rating": 28
-    },
-    {
-      "name": "Dan Heng • Permansor Terrae",
+      "name": "Ashveil",
       "MoC_rating": 10,
       "PF_rating": 9,
       "AS_rating": 9,
@@ -80,20 +129,6 @@
       "total_rating": 28
     },
     {
-      "name": "Hysilens",
-      "MoC_rating": 10,
-      "PF_rating": 9,
-      "AS_rating": 9,
-      "total_rating": 28
-    },
-    {
-      "name": "Kafka",
-      "MoC_rating": 10,
-      "PF_rating": 9,
-      "AS_rating": 9,
-      "total_rating": 28
-    },
-    {
       "name": "Sparkle",
       "MoC_rating": 10,
       "PF_rating": 9,
@@ -102,43 +137,64 @@
     },
     {
       "name": "The Dahlia",
-      "MoC_rating": 9,
-      "PF_rating": 9,
+      "MoC_rating": 10,
+      "PF_rating": 8,
       "AS_rating": 10,
       "total_rating": 28
     },
     {
+      "name": "Tribbie",
+      "MoC_rating": 9,
+      "PF_rating": 10,
+      "AS_rating": 9,
+      "total_rating": 28
+    },
+    {
+      "name": "Acheron",
+      "MoC_rating": 9,
+      "PF_rating": 9,
+      "AS_rating": 9,
+      "total_rating": 27
+    },
+    {
+      "name": "Black Swan",
+      "MoC_rating": 9,
+      "PF_rating": 9,
+      "AS_rating": 9,
+      "total_rating": 27
+    },
+    {
+      "name": "Gilgamesh",
+      "MoC_rating": 9,
+      "PF_rating": 9,
+      "AS_rating": 9,
+      "total_rating": 27
+    },
+    {
+      "name": "Hysilens",
+      "MoC_rating": 9,
+      "PF_rating": 9,
+      "AS_rating": 9,
+      "total_rating": 27
+    },
+    {
+      "name": "Kafka",
+      "MoC_rating": 9,
+      "PF_rating": 9,
+      "AS_rating": 9,
+      "total_rating": 27
+    },
+    {
+      "name": "Saber",
+      "MoC_rating": 9,
+      "PF_rating": 9,
+      "AS_rating": 9,
+      "total_rating": 27
+    },
+    {
       "name": "Anaxa",
       "MoC_rating": 9,
-      "PF_rating": 9,
-      "AS_rating": 9,
-      "total_rating": 27
-    },
-    {
-      "name": "Ashveil",
-      "MoC_rating": 10,
       "PF_rating": 8,
-      "AS_rating": 9,
-      "total_rating": 27
-    },
-    {
-      "name": "Huohuo",
-      "MoC_rating": 9,
-      "PF_rating": 9,
-      "AS_rating": 9,
-      "total_rating": 27
-    },
-    {
-      "name": "Lingsha",
-      "MoC_rating": 9,
-      "PF_rating": 9,
-      "AS_rating": 9,
-      "total_rating": 27
-    },
-    {
-      "name": "Archer",
-      "MoC_rating": 10,
-      "PF_rating": 7,
       "AS_rating": 9,
       "total_rating": 26
     },
@@ -157,45 +213,31 @@
       "total_rating": 26
     },
     {
-      "name": "Gallagher",
+      "name": "Lingsha",
       "MoC_rating": 9,
       "PF_rating": 8,
       "AS_rating": 9,
       "total_rating": 26
     },
     {
-      "name": "Mydei",
+      "name": "Tingyun • Fugue",
       "MoC_rating": 9,
+      "PF_rating": 8,
+      "AS_rating": 9,
+      "total_rating": 26
+    },
+    {
+      "name": "Trailblazer • Harmony",
+      "MoC_rating": 9,
+      "PF_rating": 8,
+      "AS_rating": 9,
+      "total_rating": 26
+    },
+    {
+      "name": "Fu Xuan",
+      "MoC_rating": 8,
       "PF_rating": 9,
       "AS_rating": 8,
-      "total_rating": 26
-    },
-    {
-      "name": "Phainon",
-      "MoC_rating": 9,
-      "PF_rating": 8,
-      "AS_rating": 9,
-      "total_rating": 26
-    },
-    {
-      "name": "Sunday",
-      "MoC_rating": 9,
-      "PF_rating": 8,
-      "AS_rating": 9,
-      "total_rating": 26
-    },
-    {
-      "name": "Fugue",
-      "MoC_rating": 8,
-      "PF_rating": 8,
-      "AS_rating": 9,
-      "total_rating": 25
-    },
-    {
-      "name": "Rappa",
-      "MoC_rating": 7,
-      "PF_rating": 9,
-      "AS_rating": 9,
       "total_rating": 25
     },
     {
@@ -206,9 +248,9 @@
       "total_rating": 25
     },
     {
-      "name": "The Herta",
-      "MoC_rating": 8,
-      "PF_rating": 9,
+      "name": "Sunday",
+      "MoC_rating": 9,
+      "PF_rating": 8,
       "AS_rating": 8,
       "total_rating": 25
     },
@@ -220,171 +262,150 @@
       "total_rating": 24
     },
     {
-      "name": "Jade",
-      "MoC_rating": 7,
-      "PF_rating": 9,
+      "name": "Gallagher",
+      "MoC_rating": 8,
+      "PF_rating": 7,
+      "AS_rating": 9,
+      "total_rating": 24
+    },
+    {
+      "name": "Phainon",
+      "MoC_rating": 9,
+      "PF_rating": 7,
       "AS_rating": 8,
       "total_rating": 24
+    },
+    {
+      "name": "Welt",
+      "MoC_rating": 8,
+      "PF_rating": 8,
+      "AS_rating": 8,
+      "total_rating": 24
+    },
+    {
+      "name": "Feixiao",
+      "MoC_rating": 8,
+      "PF_rating": 7,
+      "AS_rating": 8,
+      "total_rating": 23
+    },
+    {
+      "name": "Mydei",
+      "MoC_rating": 8,
+      "PF_rating": 8,
+      "AS_rating": 7,
+      "total_rating": 23
     },
     {
       "name": "Luocha",
-      "MoC_rating": 8,
+      "MoC_rating": 7,
       "PF_rating": 8,
-      "AS_rating": 8,
-      "total_rating": 24
-    },
-    {
-      "name": "Robin",
-      "MoC_rating": 8,
-      "PF_rating": 8,
-      "AS_rating": 8,
-      "total_rating": 24
-    },
-    {
-      "name": "Aglaea",
-      "MoC_rating": 8,
-      "PF_rating": 7,
-      "AS_rating": 8,
-      "total_rating": 23
-    },
-    {
-      "name": "Bronya",
-      "MoC_rating": 8,
-      "PF_rating": 7,
-      "AS_rating": 8,
-      "total_rating": 23
-    },
-    {
-      "name": "Silver Wolf",
-      "MoC_rating": 8,
-      "PF_rating": 7,
-      "AS_rating": 8,
-      "total_rating": 23
-    },
-    {
-      "name": "Trailblazer - Harmony",
-      "MoC_rating": 8,
-      "PF_rating": 7,
-      "AS_rating": 8,
-      "total_rating": 23
-    },
-    {
-      "name": "Herta",
-      "MoC_rating": 6,
-      "PF_rating": 9,
       "AS_rating": 7,
       "total_rating": 22
     },
     {
-      "name": "Saber",
+      "name": "Robin",
+      "MoC_rating": 7,
+      "PF_rating": 7,
+      "AS_rating": 8,
+      "total_rating": 22
+    },
+    {
+      "name": "Seele",
+      "MoC_rating": 7,
+      "PF_rating": 8,
+      "AS_rating": 7,
+      "total_rating": 22
+    },
+    {
+      "name": "Silver Wolf",
       "MoC_rating": 8,
       "PF_rating": 6,
       "AS_rating": 8,
       "total_rating": 22
     },
     {
-      "name": "Acheron",
+      "name": "The Herta",
+      "MoC_rating": 7,
+      "PF_rating": 8,
+      "AS_rating": 7,
+      "total_rating": 22
+    },
+    {
+      "name": "Aglaea",
       "MoC_rating": 7,
       "PF_rating": 7,
       "AS_rating": 7,
       "total_rating": 21
     },
     {
-      "name": "Argenti",
+      "name": "Jade",
       "MoC_rating": 6,
       "PF_rating": 8,
       "AS_rating": 7,
       "total_rating": 21
     },
     {
-      "name": "Jiaoqiu",
-      "MoC_rating": 7,
+      "name": "Rappa",
+      "MoC_rating": 6,
       "PF_rating": 7,
-      "AS_rating": 7,
+      "AS_rating": 8,
       "total_rating": 21
     },
     {
-      "name": "Boothill",
-      "MoC_rating": 8,
-      "PF_rating": 3,
-      "AS_rating": 9,
+      "name": "Asta",
+      "MoC_rating": 6,
+      "PF_rating": 7,
+      "AS_rating": 7,
       "total_rating": 20
+    },
+    {
+      "name": "Bronya",
+      "MoC_rating": 6,
+      "PF_rating": 6,
+      "AS_rating": 7,
+      "total_rating": 19
+    },
+    {
+      "name": "Herta",
+      "MoC_rating": 5,
+      "PF_rating": 8,
+      "AS_rating": 6,
+      "total_rating": 19
+    },
+    {
+      "name": "Boothill",
+      "MoC_rating": 7,
+      "PF_rating": 3,
+      "AS_rating": 8,
+      "total_rating": 18
     },
     {
       "name": "Himeko",
       "MoC_rating": 5,
       "PF_rating": 7,
-      "AS_rating": 8,
-      "total_rating": 20
-    },
-    {
-      "name": "Tingyun",
-      "MoC_rating": 7,
-      "PF_rating": 6,
-      "AS_rating": 7,
-      "total_rating": 20
-    },
-    {
-      "name": "Blade",
-      "MoC_rating": 6,
-      "PF_rating": 7,
       "AS_rating": 6,
-      "total_rating": 19
-    },
-    {
-      "name": "Feixiao",
-      "MoC_rating": 8,
-      "PF_rating": 3,
-      "AS_rating": 8,
-      "total_rating": 19
-    },
-    {
-      "name": "Fu Xuan",
-      "MoC_rating": 6,
-      "PF_rating": 7,
-      "AS_rating": 6,
-      "total_rating": 19
-    },
-    {
-      "name": "Pela",
-      "MoC_rating": 5,
-      "PF_rating": 6,
-      "AS_rating": 7,
       "total_rating": 18
     },
     {
-      "name": "Jingliu",
-      "MoC_rating": 6,
-      "PF_rating": 6,
-      "AS_rating": 5,
-      "total_rating": 17
-    },
-    {
-      "name": "March 7th - The Hunt",
-      "MoC_rating": 6,
-      "PF_rating": 3,
-      "AS_rating": 8,
-      "total_rating": 17
-    },
-    {
-      "name": "Serval",
+      "name": "Jiaoqiu",
       "MoC_rating": 5,
+      "PF_rating": 6,
+      "AS_rating": 6,
+      "total_rating": 17
+    },
+    {
+      "name": "Tingyun",
+      "MoC_rating": 5,
+      "PF_rating": 6,
+      "AS_rating": 6,
+      "total_rating": 17
+    },
+    {
+      "name": "Argenti",
+      "MoC_rating": 4,
       "PF_rating": 7,
       "AS_rating": 5,
-      "total_rating": 17
-    },
-    {
-      "name": "Jing Yuan",
-      "MoC_rating": 5,
-      "PF_rating": 6,
-      "AS_rating": 5,
-      "total_rating": 16
-    },
-    {
-      "name": "Topaz & Numby",
-      "MoC_rating": 6,
-      "PF_rating": 3,
-      "AS_rating": 7,
       "total_rating": 16
     },
     {
@@ -402,25 +423,53 @@
       "total_rating": 15
     },
     {
-      "name": "Yunli",
-      "MoC_rating": 6,
-      "PF_rating": 5,
-      "AS_rating": 4,
-      "total_rating": 15
-    },
-    {
-      "name": "Moze",
-      "MoC_rating": 5,
-      "PF_rating": 3,
-      "AS_rating": 5,
-      "total_rating": 13
-    },
-    {
-      "name": "Clara",
+      "name": "Blade",
       "MoC_rating": 5,
       "PF_rating": 4,
-      "AS_rating": 3,
-      "total_rating": 12
+      "AS_rating": 5,
+      "total_rating": 14
+    },
+    {
+      "name": "Jing Yuan",
+      "MoC_rating": 4,
+      "PF_rating": 5,
+      "AS_rating": 5,
+      "total_rating": 14
+    },
+    {
+      "name": "Jingliu",
+      "MoC_rating": 5,
+      "PF_rating": 4,
+      "AS_rating": 5,
+      "total_rating": 14
+    },
+    {
+      "name": "March 7th • The Hunt",
+      "MoC_rating": 5,
+      "PF_rating": 3,
+      "AS_rating": 6,
+      "total_rating": 14
+    },
+    {
+      "name": "Pela",
+      "MoC_rating": 4,
+      "PF_rating": 5,
+      "AS_rating": 5,
+      "total_rating": 14
+    },
+    {
+      "name": "Topaz & Numby",
+      "MoC_rating": 5,
+      "PF_rating": 3,
+      "AS_rating": 6,
+      "total_rating": 14
+    },
+    {
+      "name": "Yunli",
+      "MoC_rating": 5,
+      "PF_rating": 4,
+      "AS_rating": 4,
+      "total_rating": 13
     },
     {
       "name": "Gepard",
@@ -430,39 +479,32 @@
       "total_rating": 12
     },
     {
-      "name": "Guinaifen",
-      "MoC_rating": 3,
+      "name": "Moze",
+      "MoC_rating": 5,
+      "PF_rating": 3,
+      "AS_rating": 4,
+      "total_rating": 12
+    },
+    {
+      "name": "Serval",
+      "MoC_rating": 4,
       "PF_rating": 4,
       "AS_rating": 4,
+      "total_rating": 12
+    },
+    {
+      "name": "Clara",
+      "MoC_rating": 4,
+      "PF_rating": 4,
+      "AS_rating": 3,
       "total_rating": 11
     },
     {
-      "name": "Imbibitor Lunae",
+      "name": "Dan Heng • Imbibitor Lunae",
       "MoC_rating": 4,
       "PF_rating": 3,
       "AS_rating": 4,
       "total_rating": 11
-    },
-    {
-      "name": "Seele",
-      "MoC_rating": 4,
-      "PF_rating": 3,
-      "AS_rating": 4,
-      "total_rating": 11
-    },
-    {
-      "name": "Asta",
-      "MoC_rating": 3,
-      "PF_rating": 3,
-      "AS_rating": 4,
-      "total_rating": 10
-    },
-    {
-      "name": "Hanya",
-      "MoC_rating": 3,
-      "PF_rating": 3,
-      "AS_rating": 4,
-      "total_rating": 10
     },
     {
       "name": "Arlan",
@@ -480,6 +522,20 @@
     },
     {
       "name": "Dr. Ratio",
+      "MoC_rating": 3,
+      "PF_rating": 3,
+      "AS_rating": 3,
+      "total_rating": 9
+    },
+    {
+      "name": "Guinaifen",
+      "MoC_rating": 3,
+      "PF_rating": 3,
+      "AS_rating": 3,
+      "total_rating": 9
+    },
+    {
+      "name": "Hanya",
       "MoC_rating": 3,
       "PF_rating": 3,
       "AS_rating": 3,
@@ -542,21 +598,14 @@
       "total_rating": 9
     },
     {
-      "name": "Trailblazer - Destruction",
+      "name": "Trailblazer • Destruction",
       "MoC_rating": 3,
       "PF_rating": 3,
       "AS_rating": 3,
       "total_rating": 9
     },
     {
-      "name": "Trailblazer - Preservation",
-      "MoC_rating": 3,
-      "PF_rating": 3,
-      "AS_rating": 3,
-      "total_rating": 9
-    },
-    {
-      "name": "Welt",
+      "name": "Trailblazer • Preservation",
       "MoC_rating": 3,
       "PF_rating": 3,
       "AS_rating": 3,

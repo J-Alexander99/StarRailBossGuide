@@ -140,15 +140,13 @@
     },
     "stats": {
       "body": [
-        "Anything",
-        "CRIT Rate"
+        "Anything"
       ],
       "feet": [
         "Speed"
       ],
       "sphere": [
-        "Anything",
-        "Physical DMG"
+        "Anything"
       ],
       "rope": [
         "Break Effect"
@@ -265,6 +263,16 @@
           "name": "Self-Enshrouded Recluse",
           "pieces": "4pc",
           "notes": ""
+        },
+        {
+          "name": "Warrior Goddess of Sun and Thunder",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
         }
       ],
       "planar": [
@@ -340,6 +348,11 @@
           "name": "Sacerdos' Relived Ordeal",
           "pieces": "4pc",
           "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
         }
       ],
       "planar": [
@@ -357,6 +370,10 @@
         },
         {
           "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
           "notes": ""
         }
       ]
@@ -427,7 +444,7 @@
         },
         {
           "name": "Pioneer Diver of Dead Waters",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -495,6 +512,11 @@
     "relics": {
       "sets": [
         {
+          "name": "As Navigator Isee Sees It",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
           "name": "Wavestrider Captain",
           "pieces": "4pc",
           "notes": ""
@@ -506,6 +528,16 @@
         },
         {
           "name": "Champion of Streetwise Boxing",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Poet of Mourning Collapse",
           "pieces": "4pc",
           "notes": ""
         }
@@ -585,7 +617,7 @@
         },
         {
           "name": "Pioneer Diver of Dead Waters",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -737,11 +769,19 @@
         "notes": ""
       },
       {
-        "name": "Meshing Cogs",
+        "name": "If Time Were a Flower",
+        "notes": ""
+      },
+      {
+        "name": "Past Self in Mirror",
         "notes": ""
       },
       {
         "name": "Poised to Bloom",
+        "notes": ""
+      },
+      {
+        "name": "Meshing Cogs",
         "notes": ""
       }
     ],
@@ -749,7 +789,7 @@
       "sets": [
         {
           "name": "Musketeer of Wild Wheat",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -800,10 +840,6 @@
     "lightCones": [
       {
         "name": "Sailing Towards A Second Life",
-        "notes": ""
-      },
-      {
-        "name": "Sushang's best in slot Light Cone.",
         "notes": ""
       },
       {
@@ -899,7 +935,7 @@
         },
         {
           "name": "Pioneer Diver of Dead Waters",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -943,11 +979,79 @@
       ]
     }
   },
+  "yaoguang": {
+    "characterId": "yaoguang",
+    "lightCones": [
+      {
+        "name": "When She Decided to See",
+        "notes": ""
+      },
+      {
+        "name": "Mushy Shroomy's Adventures",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Diviner of Distant Reach",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "2pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Giant Tree of Rapt Brooding",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT DMG",
+        "CRIT Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%"
+      ],
+      "rope": [
+        "Energy Regen Rate"
+      ],
+      "subStats": [
+        "SPD (as much as possible) > CRIT Rate > CRIT DMG"
+      ]
+    }
+  },
   "yunli": {
     "characterId": "yunli",
     "lightCones": [
       {
         "name": "Dance at Sunset",
+        "notes": ""
+      },
+      {
+        "name": "Thus Burns the Dawn",
         "notes": ""
       },
       {
@@ -974,7 +1078,17 @@
     "relics": {
       "sets": [
         {
+          "name": "The Wind-Soaring Valorous",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
           "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Ashblazing Grand Duke",
           "pieces": "4pc",
           "notes": ""
         }
@@ -1035,6 +1149,16 @@
       "sets": [
         {
           "name": "Messenger Traversing Hackerspace",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Watchmaker, Master of Dream Machinations",
           "pieces": "4pc",
           "notes": ""
         }
@@ -1179,6 +1303,11 @@
           "name": "Thief of Shooting Meteor",
           "pieces": "4pc",
           "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
         }
       ],
       "planar": [
@@ -1188,6 +1317,14 @@
         },
         {
           "name": "Talia: Kingdom of Banditry",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
           "notes": ""
         }
       ]
@@ -1257,6 +1394,16 @@
         },
         {
           "name": "Messenger Traversing Hackerspace",
+          "pieces": "2pc",
+          "notes": ""
+        },
+        {
+          "name": "Iron Cavalry Against the Scourge",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Thief of Shooting Meteor",
           "pieces": "4pc",
           "notes": ""
         }
@@ -1268,6 +1415,22 @@
         },
         {
           "name": "Talia: Kingdom of Banditry",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
           "notes": ""
         }
       ]
@@ -1319,6 +1482,16 @@
       "sets": [
         {
           "name": "Messenger Traversing Hackerspace",
+          "pieces": "2pc",
+          "notes": ""
+        },
+        {
+          "name": "Prisoner in Deep Confinement",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Iron Cavalry Against the Scourge",
           "pieces": "4pc",
           "notes": ""
         }
@@ -1338,6 +1511,14 @@
         },
         {
           "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Forge of the Kalpagni Lantern",
           "notes": ""
         }
       ]
@@ -1370,15 +1551,7 @@
         "notes": ""
       },
       {
-        "name": "Best overall option for Himeko.",
-        "notes": ""
-      },
-      {
         "name": "Night on the Milky Way",
-        "notes": ""
-      },
-      {
-        "name": "Pure Fiction only.",
         "notes": ""
       },
       {
@@ -1409,6 +1582,11 @@
     "relics": {
       "sets": [
         {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
           "name": "Firesmith of Lava-Forging",
           "pieces": "4pc",
           "notes": ""
@@ -1435,8 +1613,7 @@
         "CRIT DMG"
       ],
       "feet": [
-        "ATK%",
-        "Speed"
+        "ATK%"
       ],
       "sphere": [
         "Fire DMG",
@@ -1557,6 +1734,11 @@
         },
         {
           "name": "Messenger Traversing Hackerspace",
+          "pieces": "2pc",
+          "notes": ""
+        },
+        {
+          "name": "Prisoner in Deep Confinement",
           "pieces": "4pc",
           "notes": ""
         }
@@ -1580,6 +1762,10 @@
         },
         {
           "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Pan-Cosmic Commercial Enterprise",
           "notes": ""
         }
       ]
@@ -1640,6 +1826,11 @@
         },
         {
           "name": "Thief of Shooting Meteor",
+          "pieces": "2pc",
+          "notes": ""
+        },
+        {
+          "name": "Passerby of Wandering Cloud",
           "pieces": "4pc",
           "notes": ""
         }
@@ -1652,6 +1843,22 @@
         {
           "name": "Talia: Kingdom of Banditry",
           "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Broken Keel",
+          "notes": ""
+        },
+        {
+          "name": "Penacony, Land of the Dreams",
+          "notes": ""
         }
       ]
     },
@@ -1663,8 +1870,7 @@
         "Speed"
       ],
       "sphere": [
-        "ATK%",
-        "HP%"
+        "ATK%"
       ],
       "rope": [
         "Energy Regen Rate",
@@ -1672,6 +1878,155 @@
       ],
       "subStats": [
         "SPD (until the desired breakpoint) > BREAK% >= ATK%"
+      ]
+    }
+  },
+  "sparxie": {
+    "characterId": "sparxie",
+    "lightCones": [
+      {
+        "name": "Dazzled by a Flowery World",
+        "notes": ""
+      },
+      {
+        "name": "Today's Good Luck",
+        "notes": ""
+      },
+      {
+        "name": "Mushy Shroomy's Adventures",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Ever-Glorious Magical Girl",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "2pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Tengoku@Livestream",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate"
+      ],
+      "feet": [
+        "ATK%"
+      ],
+      "sphere": [
+        "ATK%"
+      ],
+      "rope": [
+        "Energy Regen Rate"
+      ],
+      "subStats": [
+        "ATK until 3600 (after team buffs) > CRIT Rate >= CRIT DMG"
+      ]
+    }
+  },
+  "thedahlia": {
+    "characterId": "thedahlia",
+    "lightCones": [
+      {
+        "name": "Never Forget Her Flame",
+        "notes": ""
+      },
+      {
+        "name": "Long Road Leads Home",
+        "notes": ""
+      },
+      {
+        "name": "Lies Dance on the Breeze",
+        "notes": ""
+      },
+      {
+        "name": "Resolution Shines As Pearls of Sweat",
+        "notes": ""
+      },
+      {
+        "name": "Holiday Thermae Escapade",
+        "notes": ""
+      },
+      {
+        "name": "Before the Tutorial Mission Starts",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "Iron Cavalry Against the Scourge",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Thief of Shooting Meteor",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
+          "pieces": "2pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "Forge of the Kalpagni Lantern",
+          "notes": ""
+        },
+        {
+          "name": "Talia: Kingdom of Banditry",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "HP%",
+        "Effect HIT Rate"
+      ],
+      "feet": [
+        "Speed"
+      ],
+      "sphere": [
+        "HP%",
+        "DEF%"
+      ],
+      "rope": [
+        "Energy Regen Rate",
+        "Break Effect"
+      ],
+      "subStats": [
+        "SPD > Break Effect > HP%/DEF% > Effect RES"
       ]
     }
   },
@@ -1702,6 +2057,11 @@
     "relics": {
       "sets": [
         {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
           "name": "Pioneer Diver of Dead Waters",
           "pieces": "4pc",
           "notes": ""
@@ -1710,6 +2070,10 @@
       "planar": [
         {
           "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
           "notes": ""
         },
         {
@@ -1835,7 +2199,7 @@
       "sets": [
         {
           "name": "Messenger Traversing Hackerspace",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         },
         {
@@ -2004,6 +2368,10 @@
         {
           "name": "Lushaka, the Sunken Seas",
           "notes": ""
+        },
+        {
+          "name": "Belobog of the Architects",
+          "notes": ""
         }
       ]
     },
@@ -2037,10 +2405,6 @@
         "notes": ""
       },
       {
-        "name": "For Pure Fiction only.",
-        "notes": ""
-      },
-      {
         "name": "Geniuses' Repose",
         "notes": ""
       },
@@ -2063,6 +2427,11 @@
     ],
     "relics": {
       "sets": [
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
         {
           "name": "Scholar Lost in Erudition",
           "pieces": "4pc",
@@ -2152,6 +2521,11 @@
         },
         {
           "name": "Hunter of Glacial Forest",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
           "pieces": "4pc",
           "notes": ""
         }
@@ -2257,6 +2631,10 @@
         {
           "name": "Belobog of the Architects",
           "notes": ""
+        },
+        {
+          "name": "Space Sealing Station",
+          "notes": ""
         }
       ]
     },
@@ -2338,8 +2716,7 @@
         "ATK%"
       ],
       "rope": [
-        "ATK%",
-        "ATK"
+        "ATK%"
       ],
       "subStats": [
         "SPD (Breakpoint) > CRIT Rate = CRIT DMG > ATK%"
@@ -2371,7 +2748,7 @@
         },
         {
           "name": "Messenger Traversing Hackerspace",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -2390,6 +2767,10 @@
         },
         {
           "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
           "notes": ""
         }
       ]
@@ -2476,6 +2857,10 @@
         {
           "name": "Lushaka, the Sunken Seas",
           "notes": ""
+        },
+        {
+          "name": "Talia: Kingdom of Banditry",
+          "notes": ""
         }
       ]
     },
@@ -2543,6 +2928,11 @@
           "name": "Hunter of Glacial Forest",
           "pieces": "4pc",
           "notes": ""
+        },
+        {
+          "name": "Poet of Mourning Collapse",
+          "pieces": "4pc",
+          "notes": ""
         }
       ],
       "planar": [
@@ -2556,6 +2946,10 @@
         },
         {
           "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Sigonia, the Unclaimed Desolation",
           "notes": ""
         }
       ]
@@ -2619,6 +3013,11 @@
         },
         {
           "name": "Messenger Traversing Hackerspace",
+          "pieces": "2pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
           "pieces": "4pc",
           "notes": ""
         }
@@ -2647,7 +3046,8 @@
       ],
       "sphere": [
         "Ice DMG",
-        "HP%"
+        "HP%",
+        "DEF%"
       ],
       "rope": [
         "Energy Regen Rate"
@@ -2678,10 +3078,6 @@
       },
       {
         "name": "Sleep Like the Dead",
-        "notes": ""
-      },
-      {
-        "name": "Buffs Yanqing's Crit Rate during Ultimate Downtime",
         "notes": ""
       }
     ],
@@ -2762,7 +3158,7 @@
         },
         {
           "name": "Scholar Lost in Erudition",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         },
         {
@@ -2772,6 +3168,10 @@
         }
       ],
       "planar": [
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
         {
           "name": "Rutilant Arena",
           "notes": ""
@@ -2878,6 +3278,87 @@
       ],
       "subStats": [
         "SPD (Breakpoint) > CRIT RATE = CRIT DMG > ATK%"
+      ]
+    }
+  },
+  "ashveil": {
+    "characterId": "ashveil",
+    "lightCones": [
+      {
+        "name": "The Finale of a Lie",
+        "notes": ""
+      },
+      {
+        "name": "Baptism of Pure Thought",
+        "notes": ""
+      },
+      {
+        "name": "Worrisome, Blissful",
+        "notes": ""
+      },
+      {
+        "name": "Cruising in the Stellar Sea",
+        "notes": ""
+      },
+      {
+        "name": "See You at the End",
+        "notes": ""
+      },
+      {
+        "name": "The Hell Where Ideals Burn",
+        "notes": ""
+      }
+    ],
+    "relics": {
+      "sets": [
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        }
+      ],
+      "planar": [
+        {
+          "name": "City of Converging Stars",
+          "notes": ""
+        },
+        {
+          "name": "Duran, Dynasty of Running Wolves",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        }
+      ]
+    },
+    "stats": {
+      "body": [
+        "CRIT Rate"
+      ],
+      "feet": [
+        "ATK%",
+        "Speed"
+      ],
+      "sphere": [
+        "Lightning DMG",
+        "ATK%"
+      ],
+      "rope": [
+        "ATK%",
+        "Energy Regen Rate"
+      ],
+      "subStats": [
+        "CRIT Rate = CRIT DMG > ATK% > SPD"
       ]
     }
   },
@@ -3000,12 +3481,21 @@
     "relics": {
       "sets": [
         {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
           "name": "Band of Sizzling Thunder",
           "pieces": "4pc",
           "notes": ""
         }
       ],
       "planar": [
+        {
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
         {
           "name": "Inert Salsotto",
           "notes": ""
@@ -3074,6 +3564,11 @@
         },
         {
           "name": "Sacerdos' Relived Ordeal",
+          "pieces": "2pc",
+          "notes": ""
+        },
+        {
+          "name": "Prisoner in Deep Confinement",
           "pieces": "4pc",
           "notes": ""
         }
@@ -3081,6 +3576,18 @@
       "planar": [
         {
           "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Revelry by the Sea",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Pan-Cosmic Commercial Enterprise",
           "notes": ""
         }
       ]
@@ -3132,6 +3639,16 @@
           "name": "Pioneer Diver of Dead Waters",
           "pieces": "4pc",
           "notes": ""
+        },
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
         }
       ],
       "planar": [
@@ -3145,6 +3662,10 @@
         },
         {
           "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Lushaka, the Sunken Seas",
           "notes": ""
         }
       ]
@@ -3254,10 +3775,6 @@
         "notes": ""
       },
       {
-        "name": "For Pure Fiction only.",
-        "notes": ""
-      },
-      {
         "name": "Eternal Calculus",
         "notes": ""
       },
@@ -3296,6 +3813,11 @@
         },
         {
           "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
           "pieces": "4pc",
           "notes": ""
         }
@@ -3380,6 +3902,11 @@
           "name": "Musketeer of Wild Wheat",
           "pieces": "4pc",
           "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
         }
       ],
       "planar": [
@@ -3452,12 +3979,12 @@
     "relics": {
       "sets": [
         {
-          "name": "Eagle of Twilight Line",
+          "name": "As Navigator Isee Sees It",
           "pieces": "4pc",
           "notes": ""
         },
         {
-          "name": "Pioneer Diver of Dead Waters",
+          "name": "Wavestrider Captain",
           "pieces": "4pc",
           "notes": ""
         },
@@ -3468,6 +3995,16 @@
         },
         {
           "name": "Scholar Lost in Erudition",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Divine-Querying Master Smith",
           "pieces": "4pc",
           "notes": ""
         }
@@ -3537,7 +4074,7 @@
         },
         {
           "name": "Pioneer Diver of Dead Waters",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -3607,7 +4144,7 @@
         },
         {
           "name": "Scholar Lost in Erudition",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -3676,6 +4213,11 @@
         },
         {
           "name": "Messenger Traversing Hackerspace",
+          "pieces": "2pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
           "pieces": "4pc",
           "notes": ""
         }
@@ -3695,6 +4237,10 @@
         },
         {
           "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
           "notes": ""
         }
       ]
@@ -3746,6 +4292,11 @@
       "sets": [
         {
           "name": "Sacerdos' Relived Ordeal",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
           "pieces": "4pc",
           "notes": ""
         }
@@ -3897,27 +4448,12 @@
     "relics": {
       "sets": [
         {
-          "name": "Pioneer Diver of Dead Waters",
+          "name": "The Wind-Soaring Valorous",
           "pieces": "4pc",
           "notes": ""
         },
         {
-          "name": "Scholar Lost in Erudition",
-          "pieces": "4pc",
-          "notes": ""
-        },
-        {
-          "name": "Musketeer of Wild Wheat",
-          "pieces": "4pc",
-          "notes": ""
-        },
-        {
-          "name": "Prisoner in Deep Confinement",
-          "pieces": "4pc",
-          "notes": ""
-        },
-        {
-          "name": "Eagle of Twilight Line",
+          "name": "The Ashblazing Grand Duke",
           "pieces": "4pc",
           "notes": ""
         }
@@ -3974,15 +4510,11 @@
         "notes": ""
       },
       {
-        "name": "Unto Tomorrow's Morrow",
-        "notes": ""
-      },
-      {
         "name": "Quid Pro Quo",
         "notes": ""
       },
       {
-        "name": "Multiplication",
+        "name": "Unto Tomorrow's Morrow",
         "notes": ""
       }
     ],
@@ -3994,19 +4526,19 @@
           "notes": ""
         },
         {
-          "name": "Passerby of Wandering Cloud",
+          "name": "Messenger Traversing Hackerspace",
           "pieces": "4pc",
           "notes": ""
         },
         {
-          "name": "Messenger Traversing Hackerspace",
+          "name": "Passerby of Wandering Cloud",
           "pieces": "4pc",
           "notes": ""
         }
       ],
       "planar": [
         {
-          "name": "Fleet of the Ageless",
+          "name": "Lushaka, the Sunken Seas",
           "notes": ""
         },
         {
@@ -4014,11 +4546,11 @@
           "notes": ""
         },
         {
-          "name": "Penacony, Land of the Dreams",
+          "name": "Fleet of the Ageless",
           "notes": ""
         },
         {
-          "name": "Lushaka, the Sunken Seas",
+          "name": "Sprightly Vonwacq",
           "notes": ""
         },
         {
@@ -4071,7 +4603,7 @@
         },
         {
           "name": "Messenger Traversing Hackerspace",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -4081,15 +4613,7 @@
           "notes": ""
         },
         {
-          "name": "Lushaka, the Sunken Seas",
-          "notes": ""
-        },
-        {
-          "name": "Penacony, Land of the Dreams",
-          "notes": ""
-        },
-        {
-          "name": "Broken Keel",
+          "name": "Amphoreus, The Eternal Land",
           "notes": ""
         }
       ]
@@ -4121,7 +4645,15 @@
         "notes": ""
       },
       {
+        "name": "I Am As You Behold",
+        "notes": ""
+      },
+      {
         "name": "On the Fall of an Aeon",
+        "notes": ""
+      },
+      {
+        "name": "Thus Burns the Dawn",
         "notes": ""
       },
       {
@@ -4148,19 +4680,15 @@
       ],
       "planar": [
         {
+          "name": "Cosmic Life Sciences Institute",
+          "notes": ""
+        },
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
           "name": "Inert Salsotto",
-          "notes": ""
-        },
-        {
-          "name": "Firmament Frontline: Glamoth",
-          "notes": ""
-        },
-        {
-          "name": "Space Sealing Station",
-          "notes": ""
-        },
-        {
-          "name": "Rutilant Arena",
           "notes": ""
         }
       ]
@@ -4204,10 +4732,6 @@
       {
         "name": "Resolution Shines As Pearls of Sweat",
         "notes": ""
-      },
-      {
-        "name": "Support Sampo",
-        "notes": ""
       }
     ],
     "relics": {
@@ -4219,7 +4743,7 @@
         },
         {
           "name": "Eagle of Twilight Line",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -4248,8 +4772,7 @@
         "ATK%"
       ],
       "feet": [
-        "Speed",
-        "ATK%"
+        "Speed"
       ],
       "sphere": [
         "Wind DMG",
@@ -4266,6 +4789,10 @@
   "archer": {
     "characterId": "archer",
     "lightCones": [
+      {
+        "name": "The Finale of a Lie",
+        "notes": ""
+      },
       {
         "name": "The Hell Where Ideals Burn",
         "notes": ""
@@ -4290,6 +4817,11 @@
     "relics": {
       "sets": [
         {
+          "name": "As Navigator Isee Sees It",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
           "name": "Genius of Brilliant Stars",
           "pieces": "4pc",
           "notes": ""
@@ -4312,11 +4844,11 @@
       ],
       "planar": [
         {
-          "name": "Rutilant Arena",
+          "name": "Tengoku@Livestream",
           "notes": ""
         },
         {
-          "name": "Tengoku@Livestream",
+          "name": "Rutilant Arena",
           "notes": ""
         },
         {
@@ -4385,7 +4917,7 @@
         },
         {
           "name": "Scholar Lost in Erudition",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -4396,6 +4928,10 @@
         },
         {
           "name": "Arcadia of Woven Dreams",
+          "notes": ""
+        },
+        {
+          "name": "The Wondrous BananAmusement Park",
           "notes": ""
         }
       ]
@@ -4436,7 +4972,7 @@
       "sets": [
         {
           "name": "Messenger Traversing Hackerspace",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         },
         {
@@ -4535,7 +5071,7 @@
         },
         {
           "name": "Longevous Disciple",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -4628,8 +5164,18 @@
           "notes": ""
         },
         {
-          "name": "Scholar Lost in Erudition",
+          "name": "The Ashblazing Grand Duke",
           "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "The Wind-Soaring Valorous",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -4713,6 +5259,11 @@
         },
         {
           "name": "Passerby of Wandering Cloud",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Sacerdos' Relived Ordeal",
           "pieces": "4pc",
           "notes": ""
         }
@@ -4805,7 +5356,7 @@
         },
         {
           "name": "Scholar Lost in Erudition",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -4860,20 +5411,17 @@
         "notes": ""
       },
       {
-        "name": "Swordplay",
-        "notes": ""
-      },
-      {
-        "name": "Only Silence Remains",
-        "notes": ""
-      },
-      {
         "name": "Cruising in the Stellar Sea",
         "notes": ""
       }
     ],
     "relics": {
       "sets": [
+        {
+          "name": "As Navigator Isee Sees It",
+          "pieces": "4pc",
+          "notes": ""
+        },
         {
           "name": "Genius of Brilliant Stars",
           "pieces": "4pc",
@@ -4895,7 +5443,7 @@
           "notes": ""
         },
         {
-          "name": "Inert Salsotto",
+          "name": "The Wondrous BananAmusement Park",
           "notes": ""
         }
       ]
@@ -4965,6 +5513,21 @@
         },
         {
           "name": "Messenger Traversing Hackerspace",
+          "pieces": "2pc",
+          "notes": ""
+        },
+        {
+          "name": "Genius of Brilliant Stars",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Scholar Lost in Erudition",
           "pieces": "4pc",
           "notes": ""
         }
@@ -4980,6 +5543,14 @@
         },
         {
           "name": "Sprightly Vonwacq",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
+          "notes": ""
+        },
+        {
+          "name": "Firmament Frontline: Glamoth",
           "notes": ""
         }
       ]
@@ -5038,7 +5609,7 @@
         },
         {
           "name": "Messenger Traversing Hackerspace",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -5110,6 +5681,11 @@
         },
         {
           "name": "Scholar Lost in Erudition",
+          "pieces": "2pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
           "pieces": "4pc",
           "notes": ""
         }
@@ -5133,6 +5709,10 @@
         },
         {
           "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
           "notes": ""
         }
       ]
@@ -5267,6 +5847,11 @@
           "name": "Knight of Purity Palace",
           "pieces": "4pc",
           "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
+          "pieces": "4pc",
+          "notes": ""
         }
       ],
       "planar": [
@@ -5284,6 +5869,10 @@
         },
         {
           "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
           "notes": ""
         }
       ]
@@ -5348,7 +5937,7 @@
         },
         {
           "name": "Scholar Lost in Erudition",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -5427,6 +6016,11 @@
           "name": "Wastelander of Banditry Desert",
           "pieces": "4pc",
           "notes": ""
+        },
+        {
+          "name": "The Ashblazing Grand Duke",
+          "pieces": "2pc",
+          "notes": ""
         }
       ],
       "planar": [
@@ -5462,8 +6056,7 @@
         "ATK%"
       ],
       "rope": [
-        "ATK%",
-        "ATK"
+        "ATK%"
       ],
       "subStats": [
         "SPD (breakpoint) > CRIT RATE = CRIT DMG > ATK%"
@@ -5490,10 +6083,6 @@
         "notes": ""
       },
       {
-        "name": "Provides allies with some DMG boost.",
-        "notes": ""
-      },
-      {
         "name": "Shared Feeling",
         "notes": ""
       },
@@ -5511,7 +6100,7 @@
         },
         {
           "name": "Messenger Traversing Hackerspace",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         },
         {
@@ -5590,15 +6179,7 @@
         "notes": ""
       },
       {
-        "name": "Premium Super Break option",
-        "notes": ""
-      },
-      {
         "name": "Shadowed By Night",
-        "notes": ""
-      },
-      {
-        "name": "Gacha option for Super Break team.",
         "notes": ""
       }
     ],
@@ -5611,6 +6192,11 @@
         },
         {
           "name": "Wastelander of Banditry Desert",
+          "pieces": "4pc",
+          "notes": ""
+        },
+        {
+          "name": "Iron Cavalry Against the Scourge",
           "pieces": "4pc",
           "notes": ""
         }
@@ -5626,6 +6212,10 @@
         },
         {
           "name": "Firmament Frontline: Glamoth",
+          "notes": ""
+        },
+        {
+          "name": "Forge of the Kalpagni Lantern",
           "notes": ""
         }
       ]
@@ -5644,8 +6234,7 @@
         "ATK%"
       ],
       "rope": [
-        "ATK%",
-        "ATK"
+        "ATK%"
       ],
       "subStats": [
         "SPD (Until breakpoint) > CRIT RATE% = CRIT DMG% > ATK%"
@@ -5818,6 +6407,11 @@
         },
         {
           "name": "Messenger Traversing Hackerspace",
+          "pieces": "2pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
           "pieces": "4pc",
           "notes": ""
         }
@@ -5837,6 +6431,10 @@
         },
         {
           "name": "Fleet of the Ageless",
+          "notes": ""
+        },
+        {
+          "name": "Sprightly Vonwacq",
           "notes": ""
         }
       ]
@@ -5893,6 +6491,11 @@
         },
         {
           "name": "Thief of Shooting Meteor",
+          "pieces": "2pc",
+          "notes": ""
+        },
+        {
+          "name": "Eagle of Twilight Line",
           "pieces": "4pc",
           "notes": ""
         }
@@ -5916,6 +6519,10 @@
         },
         {
           "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Forge of the Kalpagni Lantern",
           "notes": ""
         }
       ]
@@ -5949,31 +6556,7 @@
         "notes": ""
       },
       {
-        "name": "Along the Passing Shore",
-        "notes": ""
-      },
-      {
-        "name": "Best DPS option",
-        "notes": ""
-      },
-      {
-        "name": "Incessant Rain",
-        "notes": ""
-      },
-      {
-        "name": "Good Night and Sleep Well",
-        "notes": ""
-      },
-      {
-        "name": "In the Name of the World",
-        "notes": ""
-      },
-      {
         "name": "Holiday Thermae Escapade",
-        "notes": ""
-      },
-      {
-        "name": "Support option (whale)",
         "notes": ""
       },
       {
@@ -5981,34 +6564,55 @@
         "notes": ""
       },
       {
-        "name": "Support option",
+        "name": "Before the Tutorial Mission Starts",
+        "notes": ""
+      },
+      {
+        "name": "Incessant Rain",
+        "notes": ""
+      },
+      {
+        "name": "Along the Passing Shore",
+        "notes": ""
+      },
+      {
+        "name": "Those Many Springs",
+        "notes": ""
+      },
+      {
+        "name": "In the Name of the World",
+        "notes": ""
+      },
+      {
+        "name": "Good Night and Sleep Well",
         "notes": ""
       }
     ],
     "relics": {
       "sets": [
         {
-          "name": "Pioneer Diver of Dead Waters",
+          "name": "Eagle of Twilight Line",
           "pieces": "4pc",
           "notes": ""
         },
         {
-          "name": "Wastelander of Banditry Desert",
+          "name": "Messenger Traversing Hackerspace",
+          "pieces": "2pc",
+          "notes": ""
+        },
+        {
+          "name": "Pioneer Diver of Dead Waters",
           "pieces": "4pc",
           "notes": ""
         }
       ],
       "planar": [
         {
-          "name": "Izumo Gensei and Takama Divine Realm",
+          "name": "Lushaka, the Sunken Seas",
           "notes": ""
         },
         {
-          "name": "Firmament Frontline: Glamoth",
-          "notes": ""
-        },
-        {
-          "name": "Rutilant Arena",
+          "name": "Sprightly Vonwacq",
           "notes": ""
         },
         {
@@ -6016,7 +6620,15 @@
           "notes": ""
         },
         {
-          "name": "Inert Salsotto",
+          "name": "The Wondrous BananAmusement Park",
+          "notes": ""
+        },
+        {
+          "name": "Izumo Gensei and Takama Divine Realm",
+          "notes": ""
+        },
+        {
+          "name": "Rutilant Arena",
           "notes": ""
         }
       ]
@@ -6065,7 +6677,7 @@
       "sets": [
         {
           "name": "Messenger Traversing Hackerspace",
-          "pieces": "4pc",
+          "pieces": "2pc",
           "notes": ""
         }
       ],
@@ -6084,6 +6696,10 @@
         },
         {
           "name": "Lushaka, the Sunken Seas",
+          "notes": ""
+        },
+        {
+          "name": "Inert Salsotto",
           "notes": ""
         }
       ]
@@ -6107,284 +6723,6 @@
       ],
       "subStats": [
         "SPD > HP = DEF > EFF RES% (30% if using Broken Keel)"
-      ]
-    }
-  },
-  "ashveil": {
-    "characterId": "ashveil",
-    "lightCones": [
-      {
-        "name": "The Finale of a Lie",
-        "notes": ""
-      },
-      {
-        "name": "Baptism of Pure Thought",
-        "notes": ""
-      },
-      {
-        "name": "Worrisome, Blissful",
-        "notes": ""
-      },
-      {
-        "name": "Cruising in the Stellar Sea",
-        "notes": ""
-      },
-      {
-        "name": "See You at the End",
-        "notes": ""
-      },
-      {
-        "name": "The Hell Where Ideals Burn",
-        "notes": ""
-      }
-    ],
-    "relics": {
-      "sets": [
-        {
-          "name": "Pioneer Diver of Dead Waters",
-          "pieces": "4pc",
-          "notes": ""
-        }
-      ],
-      "planar": [
-        {
-          "name": "City of Converging Stars",
-          "notes": ""
-        },
-        {
-          "name": "Duran, Dynasty of Running Wolves",
-          "notes": ""
-        },
-        {
-          "name": "Inert Salsotto",
-          "notes": ""
-        }
-      ]
-    },
-    "stats": {
-      "body": [
-        "CRIT Rate"
-      ],
-      "feet": [
-        "ATK%",
-        "Speed"
-      ],
-      "sphere": [
-        "Lightning DMG",
-        "ATK%"
-      ],
-      "rope": [
-        "ATK%",
-        "Energy Regen Rate"
-      ],
-      "subStats": [
-        "CRIT Rate = CRIT DMG > ATK% > SPD"
-      ]
-    }
-  },
-  "sparxie": {
-    "characterId": "sparxie",
-    "lightCones": [
-      {
-        "name": "Dazzled by a Flowery World",
-        "notes": ""
-      },
-      {
-        "name": "Today's Good Luck",
-        "notes": ""
-      },
-      {
-        "name": "Mushy Shroomy's Adventures",
-        "notes": ""
-      }
-    ],
-    "relics": {
-      "sets": [
-        {
-          "name": "Ever-Glorious Magical Girl",
-          "pieces": "4pc",
-          "notes": ""
-        },
-        {
-          "name": "Scholar Lost in Erudition",
-          "pieces": "4pc",
-          "notes": ""
-        }
-      ],
-      "planar": [
-        {
-          "name": "Tengoku@Livestream",
-          "notes": ""
-        },
-        {
-          "name": "Izumo Gensei and Takama Divine Realm",
-          "notes": ""
-        }
-      ]
-    },
-    "stats": {
-      "body": [
-        "CRIT Rate"
-      ],
-      "feet": [
-        "ATK%",
-        "Speed"
-      ],
-      "sphere": [
-        "ATK%"
-      ],
-      "rope": [
-        "Energy Regen Rate",
-        "ATK%"
-      ],
-      "subStats": [
-        "ATK until 3600 (after team buffs) > CRIT Rate >= CRIT DMG"
-      ]
-    }
-  },
-  "thedahlia": {
-    "characterId": "thedahlia",
-    "lightCones": [
-      {
-        "name": "Never Forget Her Flame",
-        "notes": ""
-      },
-      {
-        "name": "Long Road Leads Home",
-        "notes": ""
-      },
-      {
-        "name": "Lies Dance on the Breeze",
-        "notes": ""
-      },
-      {
-        "name": "Resolution Shines As Pearls of Sweat",
-        "notes": ""
-      },
-      {
-        "name": "Holiday Thermae Escapade",
-        "notes": ""
-      },
-      {
-        "name": "Before the Tutorial Mission Starts",
-        "notes": ""
-      }
-    ],
-    "relics": {
-      "sets": [
-        {
-          "name": "Iron Cavalry Against the Scourge",
-          "pieces": "4pc",
-          "notes": ""
-        },
-        {
-          "name": "Thief of Shooting Meteor",
-          "pieces": "4pc",
-          "notes": ""
-        },
-        {
-          "name": "Sacerdos' Relived Ordeal",
-          "pieces": "4pc",
-          "notes": ""
-        }
-      ],
-      "planar": [
-        {
-          "name": "Forge of the Kalpagni Lantern",
-          "notes": ""
-        },
-        {
-          "name": "Talia: Kingdom of Banditry",
-          "notes": ""
-        },
-        {
-          "name": "Lushaka, the Sunken Seas",
-          "notes": ""
-        }
-      ]
-    },
-    "stats": {
-      "body": [
-        "HP%",
-        "Effect HIT Rate"
-      ],
-      "feet": [
-        "Speed"
-      ],
-      "sphere": [
-        "HP%",
-        "DEF%"
-      ],
-      "rope": [
-        "Energy Regen Rate",
-        "Break Effect"
-      ],
-      "subStats": [
-        "SPD > Break Effect > HP%/DEF% > Effect RES"
-      ]
-    }
-  },
-  "yaoguang": {
-    "characterId": "yaoguang",
-    "lightCones": [
-      {
-        "name": "When She Decided to See",
-        "notes": ""
-      },
-      {
-        "name": "Mushy Shroomy's Adventures",
-        "notes": ""
-      }
-    ],
-    "relics": {
-      "sets": [
-        {
-          "name": "Diviner of Distant Reach",
-          "pieces": "4pc",
-          "notes": ""
-        },
-        {
-          "name": "Messenger Traversing Hackerspace",
-          "pieces": "4pc",
-          "notes": ""
-        }
-      ],
-      "planar": [
-        {
-          "name": "Lushaka, the Sunken Seas",
-          "notes": ""
-        },
-        {
-          "name": "Sprightly Vonwacq",
-          "notes": ""
-        },
-        {
-          "name": "Broken Keel",
-          "notes": ""
-        },
-        {
-          "name": "Giant Tree of Rapt Brooding",
-          "notes": ""
-        }
-      ]
-    },
-    "stats": {
-      "body": [
-        "CRIT DMG",
-        "CRIT Rate"
-      ],
-      "feet": [
-        "Speed"
-      ],
-      "sphere": [
-        "HP%",
-        "DEF%"
-      ],
-      "rope": [
-        "Energy Regen Rate"
-      ],
-      "subStats": [
-        "SPD (as much as possible) > CRIT Rate > CRIT DMG"
       ]
     }
   }
