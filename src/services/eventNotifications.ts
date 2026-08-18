@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Notifications from "expo-notifications";
 import { Platform } from "react-native";
 import { getLiveEvents, type LiveEvent } from "../data/liveEvents";
+import { getEventTimeOverrides } from "./eventOverrides";
 
 const ALERT_PREFERENCES_STORAGE_KEY = "bossguide:alertPreferencesV2";
 const DAILY_ENABLED_STORAGE_KEY = "bossguide:dailyNotificationsEnabled";
@@ -178,10 +179,12 @@ export async function rescheduleEventNotifications(
   const normalizedPreferences = sanitizeAlertPreferences(preferences);
   await cancelScheduledEventNotifications();
 
+  const overrides = await getEventTimeOverrides();
   const upcomingOccurrences = buildUpcomingEventOccurrences(
     now,
     SCHEDULE_HORIZON_DAYS,
     normalizedPreferences,
+    overrides,
   ).filter((event) => isEventEnabled(event, normalizedPreferences));
 
   const schedules: NotificationSchedule[] = [];
@@ -330,6 +333,7 @@ function buildUpcomingEventOccurrences(
   now: Date,
   horizonDays: number,
   preferences: AlertPreferences,
+  overrides: Record<string, string> = {},
 ): LiveEventOccurrence[] {
   const endTime = now.getTime() + horizonDays * DAY_MS;
   const seen = new Set<string>();
@@ -340,6 +344,7 @@ function buildUpcomingEventOccurrences(
     const eventsAtProbe = getLiveEvents(probeDate, {
       includeGenshin: preferences.includeGenshinEvents,
       includeZzz: preferences.includeZzzEvents,
+      overrides,
     });
 
     for (const event of eventsAtProbe) {

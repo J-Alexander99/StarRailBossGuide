@@ -9,11 +9,20 @@ export interface LiveEvent {
   game: LiveEventGame;
   kind: LiveEventKind;
   nextReset: Date;
+  /** True when `nextReset` came from a manual override rather than the computed schedule. */
+  isOverridden?: boolean;
 }
 
 export interface LiveEventQueryOptions {
   includeGenshin?: boolean;
   includeZzz?: boolean;
+  /**
+   * Manual per-event corrections (event id -> ISO reset date), used when the
+   * in-game schedule has drifted from the computed one. An override is only
+   * applied while its date is still in the future; once it passes, the
+   * event reverts to its normal computed schedule automatically.
+   */
+  overrides?: Record<string, string>;
 }
 
 export interface LiveEventTheme {
@@ -183,9 +192,9 @@ const FIXED_EVENTS: FixedEventConfig[] = [
   },
 ];
 
-const DAY_MS = 24 * 60 * 60 * 1000;
-const HOUR_MS = 60 * 60 * 1000;
-const MINUTE_MS = 60 * 1000;
+export const DAY_MS = 24 * 60 * 60 * 1000;
+export const HOUR_MS = 60 * 60 * 1000;
+export const MINUTE_MS = 60 * 1000;
 
 const DEFAULT_THEME: LiveEventTheme = {
   accentColor: "#ff6ce0",
@@ -317,24 +326,44 @@ export function getLiveEvents(
 ): LiveEvent[] {
   const includeGenshin = options.includeGenshin ?? false;
   const includeZzz = options.includeZzz ?? false;
+  const overrides = options.overrides ?? {};
 
-  const cyclingEvents: LiveEvent[] = CYCLING_EVENTS.map((event) => ({
-    id: event.id,
-    name: event.name,
-    category: event.category,
-    game: event.game,
-    kind: event.kind,
-    nextReset: getNextCyclingDate(event.anchorUtcIso, event.cycleDays, now),
-  }));
+  const applyOverride = (event: LiveEvent): LiveEvent => {
+    const overrideIso = overrides[event.id];
+    if (!overrideIso) {
+      return event;
+    }
 
-  const fixedEvents: LiveEvent[] = FIXED_EVENTS.map((event) => ({
-    id: event.id,
-    name: event.name,
-    category: event.category,
-    game: event.game,
-    kind: event.kind,
-    nextReset: new Date(event.dateUtcIso),
-  })).filter((event) => event.nextReset.getTime() > now.getTime());
+    const overrideTime = new Date(overrideIso).getTime();
+    if (Number.isNaN(overrideTime) || overrideTime <= now.getTime()) {
+      // Stale or invalid override - fall back to the computed schedule.
+      return event;
+    }
+
+    return { ...event, nextReset: new Date(overrideTime), isOverridden: true };
+  };
+
+  const cyclingEvents: LiveEvent[] = CYCLING_EVENTS.map((event) =>
+    applyOverride({
+      id: event.id,
+      name: event.name,
+      category: event.category,
+      game: event.game,
+      kind: event.kind,
+      nextReset: getNextCyclingDate(event.anchorUtcIso, event.cycleDays, now),
+    }),
+  );
+
+  const fixedEvents: LiveEvent[] = FIXED_EVENTS.map((event) =>
+    applyOverride({
+      id: event.id,
+      name: event.name,
+      category: event.category,
+      game: event.game,
+      kind: event.kind,
+      nextReset: new Date(event.dateUtcIso),
+    }),
+  ).filter((event) => event.nextReset.getTime() > now.getTime());
 
   return [...cyclingEvents, ...fixedEvents]
     .filter((event) => {

@@ -29,6 +29,23 @@ import {
   type DailyLeadTime,
 } from "../services/eventNotifications";
 import {
+  clearEventTimeOverride,
+  DEFAULT_EVENT_TIME_OVERRIDES,
+  getEventTimeOverrides,
+  setEventTimeOverride,
+  setEventTimeOverrides,
+  type EventTimeOverrides,
+} from "../services/eventOverrides";
+import {
+  DAY_MS,
+  formatEventDate,
+  formatTimeRemaining,
+  getLiveEvents,
+  HOUR_MS,
+  MINUTE_MS,
+  type LiveEvent,
+} from "../data/liveEvents";
+import {
   getRosterPresets,
   saveRosterPreset,
   setRosterPresets,
@@ -66,6 +83,7 @@ type BackupPayload = {
     reduceMotion: boolean;
   };
   alertPreferences: AlertPreferences;
+  eventOverrides?: EventTimeOverrides;
   disabledCharacterIds: string[];
   rosterPresets: RosterPresets;
 };
@@ -82,6 +100,10 @@ export function SettingsScreen() {
 
   const [alertPreferences, setAlertPreferencesState] =
     useState<AlertPreferences>(DEFAULT_ALERT_PREFERENCES);
+  const [eventOverrides, setEventOverridesState] = useState<EventTimeOverrides>(
+    DEFAULT_EVENT_TIME_OVERRIDES,
+  );
+  const [now, setNow] = useState(() => new Date());
   const [rosterPresets, setRosterPresetsState] = useState<RosterPresets>({
     A: [],
     B: [],
@@ -151,18 +173,26 @@ export function SettingsScreen() {
     const hydrate = async () => {
       try {
         await initializeEventNotifications();
-        const [storedAlertPreferences, presets] = await Promise.all([
-          getAlertPreferences(),
-          getRosterPresets(),
-        ]);
+        const [storedAlertPreferences, presets, storedEventOverrides] =
+          await Promise.all([
+            getAlertPreferences(),
+            getRosterPresets(),
+            getEventTimeOverrides(),
+          ]);
         setAlertPreferencesState(storedAlertPreferences);
         setRosterPresetsState(presets);
+        setEventOverridesState(storedEventOverrides);
       } finally {
         setIsLoadingNotificationState(false);
       }
     };
 
     hydrate();
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => setNow(new Date()), 30_000);
+    return () => clearInterval(timer);
   }, []);
 
   const applyAlertPreferences = useCallback(
@@ -264,12 +294,70 @@ export function SettingsScreen() {
     [replaceDisabledCharacterList, rosterPresets],
   );
 
+  const overridableEvents = useMemo(
+    () =>
+      getLiveEvents(now, {
+        includeGenshin: alertPreferences.includeGenshinEvents,
+        includeZzz: alertPreferences.includeZzzEvents,
+        overrides: eventOverrides,
+      }),
+    [
+      now,
+      alertPreferences.includeGenshinEvents,
+      alertPreferences.includeZzzEvents,
+      eventOverrides,
+    ],
+  );
+
+  const onApplyEventOverride = useCallback(
+    async (eventId: string, targetDate: Date) => {
+      const next = await setEventTimeOverride(eventId, targetDate);
+      setEventOverridesState(next);
+
+      if (hasAnyAlertsEnabled) {
+        try {
+          await rescheduleEventNotifications(alertPreferences);
+        } catch {
+          // Reminders will resync next time the schedule refreshes.
+        }
+      }
+
+      Alert.alert(
+        "Countdown adjusted",
+        "This event's countdown now matches what's shown in-game until its next scheduled reset.",
+      );
+    },
+    [alertPreferences, hasAnyAlertsEnabled],
+  );
+
+  const onClearEventOverride = useCallback(
+    async (eventId: string) => {
+      const next = await clearEventTimeOverride(eventId);
+      setEventOverridesState(next);
+
+      if (hasAnyAlertsEnabled) {
+        try {
+          await rescheduleEventNotifications(alertPreferences);
+        } catch {
+          // Reminders will resync next time the schedule refreshes.
+        }
+      }
+
+      Alert.alert(
+        "Reset to schedule",
+        "This event will follow its normal computed schedule again.",
+      );
+    },
+    [alertPreferences, hasAnyAlertsEnabled],
+  );
+
   const onExportBackup = useCallback(() => {
     const payload: BackupPayload = {
       version: 1,
       exportedAt: new Date().toISOString(),
       appPreferences: preferences,
       alertPreferences,
+      eventOverrides,
       disabledCharacterIds: disabledCharacterList,
       rosterPresets,
     };
@@ -277,7 +365,13 @@ export function SettingsScreen() {
     const json = JSON.stringify(payload, null, 2);
     setBackupText(json);
     Alert.alert("Backup prepared", "Backup JSON has been generated below.");
-  }, [alertPreferences, disabledCharacterList, preferences, rosterPresets]);
+  }, [
+    alertPreferences,
+    disabledCharacterList,
+    eventOverrides,
+    preferences,
+    rosterPresets,
+  ]);
 
   const onImportBackup = useCallback(async () => {
     if (!backupText.trim()) {
@@ -300,6 +394,13 @@ export function SettingsScreen() {
       if (parsed.rosterPresets) {
         await setRosterPresets(parsed.rosterPresets);
         setRosterPresetsState(parsed.rosterPresets);
+      }
+
+      if (parsed.eventOverrides) {
+        const savedOverrides = await setEventTimeOverrides(
+          parsed.eventOverrides,
+        );
+        setEventOverridesState(savedOverrides);
       }
 
       Alert.alert("Backup restored", "Settings and roster data restored.");
@@ -520,6 +621,25 @@ export function SettingsScreen() {
                   </Text>
                 </Pressable>
               ) : null}
+            </View>
+
+            <View style={styles.sectionCard}>
+              <Text style={styles.sectionTitle}>Event Time Overrides</Text>
+              <Text style={styles.sectionSubtitle}>
+                If a schedule shifts unexpectedly, set the countdown to match
+                what's currently shown in-game. Adjustments apply until that
+                event's next scheduled reset, then revert automatically.
+              </Text>
+              {overridableEvents.map((event) => (
+                <EventOverrideEditor
+                  key={event.id}
+                  event={event}
+                  now={now}
+                  overrideIso={eventOverrides[event.id]}
+                  onApply={onApplyEventOverride}
+                  onClear={onClearEventOverride}
+                />
+              ))}
             </View>
 
             <View style={styles.sectionCard}>
@@ -770,6 +890,97 @@ function Stepper({
   );
 }
 
+function splitDuration(ms: number): {
+  days: number;
+  hours: number;
+  minutes: number;
+} {
+  const clamped = Math.max(0, ms);
+  return {
+    days: Math.floor(clamped / DAY_MS),
+    hours: Math.floor((clamped % DAY_MS) / HOUR_MS),
+    minutes: Math.floor((clamped % HOUR_MS) / MINUTE_MS),
+  };
+}
+
+function EventOverrideEditor({
+  event,
+  now,
+  overrideIso,
+  onApply,
+  onClear,
+}: {
+  event: LiveEvent;
+  now: Date;
+  overrideIso?: string;
+  onApply: (eventId: string, targetDate: Date) => void;
+  onClear: (eventId: string) => void;
+}) {
+  const [initialDuration] = useState(() =>
+    splitDuration(event.nextReset.getTime() - now.getTime()),
+  );
+  const [days, setDays] = useState(initialDuration.days);
+  const [hours, setHours] = useState(initialDuration.hours);
+  const [minutes, setMinutes] = useState(initialDuration.minutes);
+
+  return (
+    <View style={styles.overrideRow}>
+      <View style={styles.overrideRowHeader}>
+        <Text style={styles.settingLabel}>{event.name}</Text>
+        {overrideIso ? (
+          <View style={styles.overrideBadge}>
+            <Text style={styles.overrideBadgeText}>Adjusted</Text>
+          </View>
+        ) : null}
+      </View>
+      <Text style={styles.overrideCurrentText}>
+        Currently showing {formatTimeRemaining(event.nextReset, now)} ·
+        Resets {formatEventDate(event.nextReset)}
+      </Text>
+
+      <Text style={styles.inlineLabel}>Set time left as shown in-game</Text>
+      <View style={styles.stepperRow}>
+        <Stepper label="Days" value={days} min={0} max={90} onChange={setDays} />
+        <Stepper
+          label="Hours"
+          value={hours}
+          min={0}
+          max={23}
+          onChange={setHours}
+        />
+        <Stepper
+          label="Minutes"
+          value={minutes}
+          min={0}
+          max={59}
+          onChange={setMinutes}
+        />
+      </View>
+
+      <View style={styles.presetButtons}>
+        <Pressable
+          style={styles.secondaryButton}
+          onPress={() => {
+            const totalMs =
+              days * DAY_MS + hours * HOUR_MS + minutes * MINUTE_MS;
+            onApply(event.id, new Date(now.getTime() + totalMs));
+          }}
+        >
+          <Text style={styles.secondaryButtonText}>Apply</Text>
+        </Pressable>
+        {overrideIso ? (
+          <Pressable
+            style={styles.secondaryButton}
+            onPress={() => onClear(event.id)}
+          >
+            <Text style={styles.secondaryButtonText}>Reset to Schedule</Text>
+          </Pressable>
+        ) : null}
+      </View>
+    </View>
+  );
+}
+
 function ChipSelector({
   value,
   options,
@@ -1011,6 +1222,36 @@ const styles = StyleSheet.create({
     color: palette.textPrimary,
     fontSize: 15,
     fontWeight: "700",
+  },
+  overrideRow: {
+    marginTop: 12,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: "rgba(255,255,255,0.08)",
+  },
+  overrideRowHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  overrideCurrentText: {
+    marginTop: 4,
+    color: palette.textSecondary,
+    fontSize: 12,
+    lineHeight: 17,
+  },
+  overrideBadge: {
+    backgroundColor: palette.accentSoft,
+    borderRadius: 999,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+  },
+  overrideBadgeText: {
+    color: palette.accent,
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 0.4,
+    textTransform: "uppercase",
   },
   presetRow: {
     marginTop: 10,

@@ -13,6 +13,10 @@ import {
   DEFAULT_ALERT_PREFERENCES,
   getAlertPreferences,
 } from "../services/eventNotifications";
+import {
+  DEFAULT_EVENT_TIME_OVERRIDES,
+  getEventTimeOverrides,
+} from "../services/eventOverrides";
 
 const palette = {
   background: "#130914",
@@ -90,6 +94,11 @@ function EventCard({
       <Text style={[styles.resetLabel, { color: theme.mutedText }]}>
         Resets {formatEventDate(item.nextReset, timezoneMode)}
       </Text>
+      {item.isOverridden ? (
+        <View style={styles.overrideBadge}>
+          <Text style={styles.overrideBadgeText}>Manually adjusted</Text>
+        </View>
+      ) : null}
     </View>
   );
 }
@@ -99,6 +108,9 @@ export function LiveEventsScreen() {
   const { preferences } = useAppPreferences();
   const [alertPreferences, setAlertPreferences] = useState(
     DEFAULT_ALERT_PREFERENCES,
+  );
+  const [eventOverrides, setEventOverrides] = useState(
+    DEFAULT_EVENT_TIME_OVERRIDES,
   );
 
   const scaledTitle = 22 * preferences.textScale;
@@ -118,6 +130,11 @@ export function LiveEventsScreen() {
       .catch(() => {
         // Keep defaults if preferences cannot be loaded.
       });
+    getEventTimeOverrides()
+      .then((value) => setEventOverrides(value))
+      .catch(() => {
+        // Keep defaults if overrides cannot be loaded.
+      });
   }, []);
 
   useFocusEffect(
@@ -127,6 +144,15 @@ export function LiveEventsScreen() {
         .then((value) => {
           if (!cancelled) {
             setAlertPreferences(value);
+          }
+        })
+        .catch(() => {
+          // Ignore and keep current values.
+        });
+      getEventTimeOverrides()
+        .then((value) => {
+          if (!cancelled) {
+            setEventOverrides(value);
           }
         })
         .catch(() => {
@@ -144,11 +170,13 @@ export function LiveEventsScreen() {
       getLiveEvents(now, {
         includeGenshin: alertPreferences.includeGenshinEvents,
         includeZzz: alertPreferences.includeZzzEvents,
+        overrides: eventOverrides,
       }),
     [
       now,
       alertPreferences.includeGenshinEvents,
       alertPreferences.includeZzzEvents,
+      eventOverrides,
     ],
   );
 
@@ -289,5 +317,20 @@ const styles = StyleSheet.create({
     marginTop: 6,
     color: palette.textMuted,
     fontSize: 13,
+  },
+  overrideBadge: {
+    marginTop: 10,
+    alignSelf: "flex-start",
+    backgroundColor: palette.accentSoft,
+    borderRadius: 999,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  overrideBadgeText: {
+    color: palette.accent,
+    fontSize: 11,
+    fontWeight: "700",
+    letterSpacing: 0.4,
+    textTransform: "uppercase",
   },
 });
