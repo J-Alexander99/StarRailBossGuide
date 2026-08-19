@@ -29,6 +29,7 @@ export type MetaAffinities = {
   Raiden?: EffectivenessScore;
   Ultimate?: EffectivenessScore;
   Elation?: EffectivenessScore;
+  Express?: EffectivenessScore;
 };
 
 export type Boss = {

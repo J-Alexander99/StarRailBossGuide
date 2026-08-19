@@ -22,6 +22,8 @@ const RELIC_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   "Sacerdos' Relived Ordeal": require("../../images/relics/Relic_Sacerdos_Relived_Ordeal.webp"),
   "Scholar Lost in Erudition": require("../../images/relics/Relic_Scholar_Lost_in_Erudition.webp"),
   "Self-Enshrouded Recluse": require("../../images/relics/Relic_Self-Enshrouded_Recluse.png"),
+  "The Ashblazing Grand Duke": require("../../images/relics/Relic_The_Ashblazing_Grand_Duke.png"),
+  "The Wind-Soaring Valorous": require("../../images/relics/Relic_The_Wind_Soaring_Valorous.webp"),
   "Thief of Shooting Meteor": require("../../images/relics/Relic_Thief_of_Shooting_Meteor.png"),
   "Warrior Goddess of Sun and Thunder": require("../../images/relics/Relic_Warrior_Goddess_of_Sun_and_Thunder.png"),
   "Wastelander of Banditry Desert": require("../../images/relics/Relic_Wastelander_of_Banditry_Desert.webp"),

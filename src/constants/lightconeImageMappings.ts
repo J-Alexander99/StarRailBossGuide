@@ -8,6 +8,7 @@ const LIGHTCONE_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   "An Instant Before A Gaze": require("../../images/lightcones/Light_Cone_An_Instant_Before_A_Gaze.webp"),
   "A Dream Scented in Wheat": require("../../images/lightcones/Light_Cone_A_Dream_Scented_in_Wheat.webp"),
   "A Grounded Ascent": require("../../images/lightcones/Light_Cone_A_Grounded_Ascent.png"),
+  "A Star That Lights the Night": require("../../images/lightcones/Light_Cone_A_Star_That_Lights_the_Night.webp"),
   "A Thankless Coronation": require("../../images/lightcones/Light_Cone_A_Thankless_Coronation.webp"),
   Adversarial: require("../../images/lightcones/Light_Cone_Adversarial.webp"),
   "After the Charmony Fall": require("../../images/lightcones/Light_Cone_After_the_Charmony_Fall.webp"),
@@ -39,12 +40,14 @@ const LIGHTCONE_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   "Earthly Escapade": require("../../images/lightcones/Light_Cone_Earthly_Escapade.webp"),
   "Echoes of the Coffin": require("../../images/lightcones/Light_Cone_Echoes_of_the_Coffin.webp"),
   "Epoch Etched in Golden Blood": require("../../images/lightcones/Light_Cone_Epoch_Etched_in_Golden_Blood.webp"),
+  "Elation Brimming With Blessings": require("../../images/lightcones/Light_Cone_Elation_Brimming_With_Blessings.webp"),
   "Eternal Calculus": require("../../images/lightcones/Light_Cone_Eternal_Calculus.webp"),
   "Eyes of the Prey": require("../../images/lightcones/Light_Cone_Eyes_of_the_Prey.webp"),
 
   // F
   "Flame of Blood, Blaze My Path": require("../../images/lightcones/Light_Cone_Flame_of_Blood_Blaze_My_Path.webp"),
   "Flames Afar": require("../../images/lightcones/Light_Cone_Flames_Afar.webp"),
+  "Flickering Stars": require("../../images/lightcones/Light_Cone_Flickering_Stars.webp"),
   "Fly Into a Pink Tomorrow": require("../../images/lightcones/Light_Cone_Fly_Into_a_Pink_Tomorrow.webp"),
   "Final Victor": require("../../images/lightcones/Light_Cone_Final_Victor.webp"),
   "Flowing Nightglow": require("../../images/lightcones/Light_Cone_Flowing_Nightglow.webp"),
@@ -59,6 +62,7 @@ const LIGHTCONE_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   "Holiday Thermae Escapade": require("../../images/lightcones/Light_Cone_Holiday_Thermae_Escapade.png"),
 
   // I
+  "I Am As You Behold": require("../../images/lightcones/Light_Cone_I_Am_As_You_Behold.webp"),
   "Incessant Rain": require("../../images/lightcones/Light_Cone_Incessant_Rain.webp"),
   "I Venture Forth to Hunt": require("../../images/lightcones/Light_Cone_I_Venture_Forth_to_Hunt.webp"),
   "Inherently Unjust Destiny": require("../../images/lightcones/Light_Cone_Inherently_Unjust_Destiny.png"),
@@ -89,6 +93,7 @@ const LIGHTCONE_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   "Memories of the Past": require("../../images/lightcones/Light_Cone_Memories_of_the_Past.png"),
   "Memory's Curtain Never Falls": require("../../images/lightcones/Light_Cone_Memorys_Curtain_Never_Falls.webp"),
   "Moment of Victory": require("../../images/lightcones/Light_Cone_Moment_of_Victory.png"),
+  "Mushy Shroomy's Adventures": require("../../images/lightcones/Light_Cone_Mushy_Shroomy's_Adventures.webp"),
   Multiplication: require("../../images/lightcones/Light_Cone_Multiplication.webp"),
 
   // N
@@ -116,6 +121,7 @@ const LIGHTCONE_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   "Quid Pro Quo": require("../../images/lightcones/Light_Cone_Quid_Pro_Quo.png"),
 
   // R
+  "Reforged in Hellfire": require("../../images/lightcones/Light_Cone_Reforged_in_Hellfire.webp"),
   "Reforged Remembrance": require("../../images/lightcones/Light_Cone_Reforged_Remembrance.webp"),
   Reminiscence: require("../../images/lightcones/Light_Cone_Reminiscence.webp"),
   "Resolution Shines As Pearls of Sweat": require("../../images/lightcones/Light_Cone_Resolution_Shines_As_Pearls_of_Sweat.webp"),
@@ -159,9 +165,13 @@ const LIGHTCONE_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   "Thus Burns the Dawn": require("../../images/lightcones/Light_Cone_Thus_Burns_the_Dawn.png"),
   "Time Waits for No One": require("../../images/lightcones/Light_Cone_Time_Waits_for_No_One.png"),
   "Time Woven Into Gold": require("../../images/lightcones/Light_Cone_Time_Woven_Into_Gold.png"),
+  "Today's Good Luck": require("../../images/lightcones/Light_Cone_Today's_Good_Luck.webp"),
   "Today Is Another Peaceful Day": require("../../images/lightcones/Light_Cone_Today_Is_Another_Peaceful_Day.webp"),
   "To Evernight's Stars": require("../../images/lightcones/Light_Cone_To_Evernight's_Stars.png"),
+  "Tomorrow, Together": require("../../images/lightcones/Light_Cone_Tomorrow_Together.webp"),
   "Trend of the Universal Market": require("../../images/lightcones/Light_Cone_Trend_of_the_Universal_Market.png"),
+  "Until the Flowers Bloom Again": require("../../images/lightcones/Light_Cone_Until_the_Flowers_Bloom_Again.webp"),
+  "Welcome to the Cosmic City": require("../../images/lightcones/Light_Cone_Welcome_to_the_Cosmic_City.webp"),
   "What Is Real?": require("../../images/lightcones/Light_Cone_What_Is_Real.webp"),
   "Warmth Shortens Cold Nights": require("../../images/lightcones/Light_Cone_Warmth_Shortens_Cold_Nights.webp"),
   "When She Decided to See": require("../../images/lightcones/Light_Cone_When_She_Decided_to_See.webp"),
@@ -178,6 +188,7 @@ const LIGHTCONE_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   "We Are Wildfire": require("../../images/lightcones/Light_Cone_We_Are_Wildfire.png"),
   "Whereabouts Should Dreams Rest": require("../../images/lightcones/Light_Cone_Whereabouts_Should_Dreams_Rest.png"),
   "Why Does the Ocean Sing": require("../../images/lightcones/Light_Cone_Why_Does_the_Ocean_Sing.png"),
+  "Woof! Walk Time!": require("../../images/lightcones/Light_Cone_Woof.webp"),
   "Worrisome, Blissful": require("../../images/lightcones/Light_Cone_Worrisome_Blissful.png"),
 };
 

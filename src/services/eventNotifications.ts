@@ -219,20 +219,28 @@ export async function rescheduleEventNotifications(
 
   const notificationIds: string[] = [];
 
+  // Schedule each notification independently: if one call throws (e.g. the
+  // OS-level pending-notification cap is hit), we still want to keep track of
+  // every notification that *did* get scheduled before the failure, so they
+  // remain cancelable later instead of leaking as untracked OS notifications.
   for (const schedule of filteredSchedules) {
-    const id = await Notifications.scheduleNotificationAsync({
-      content: {
-        title: schedule.title,
-        body: schedule.body,
-      },
-      trigger: {
-        type: Notifications.SchedulableTriggerInputTypes.DATE,
-        date: schedule.triggerDate,
-        channelId: Platform.OS === "android" ? "event-reminders" : undefined,
-      },
-    });
+    try {
+      const id = await Notifications.scheduleNotificationAsync({
+        content: {
+          title: schedule.title,
+          body: schedule.body,
+        },
+        trigger: {
+          type: Notifications.SchedulableTriggerInputTypes.DATE,
+          date: schedule.triggerDate,
+          channelId: Platform.OS === "android" ? "event-reminders" : undefined,
+        },
+      });
 
-    notificationIds.push(id);
+      notificationIds.push(id);
+    } catch {
+      // Skip this one and continue scheduling the rest of the batch.
+    }
   }
 
   await AsyncStorage.setItem(IDS_STORAGE_KEY, JSON.stringify(notificationIds));

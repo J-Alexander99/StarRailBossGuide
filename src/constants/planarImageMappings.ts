@@ -17,6 +17,7 @@ const PLANAR_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   "Lushaka, the Sunken Seas": require("../../images/planar/PO_Lushaka,_the_Sunken_Seas.png"),
   "Pan-Cosmic Commercial Enterprise": require("../../images/planar/PO_Pan_Cosmic_Commercial_Enterprise.webp"),
   "Penacony, Land of the Dreams": require("../../images/planar/PO_Penacony,_Land_of_the_Dreams.png"),
+  "Punklorde Stage Zero": require("../../images/planar/PO_Punklorde_Stage_Zero.webp"),
   "Revelry by the Sea": require("../../images/planar/PO_Revelry_by_the_Sea.webp"),
   "Rutilant Arena": require("../../images/planar/PO_Rutilant_Arena.png"),
   "Sigonia, the Unclaimed Desolation": require("../../images/planar/PO_Sigonia_C_the_Unclaimed_Desolation.webp"),
@@ -24,6 +25,7 @@ const PLANAR_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   "Sprightly Vonwacq": require("../../images/planar/PO_Sprightly_Vonwacq.png"),
   "Talia: Kingdom of Banditry": require("../../images/planar/PO_Talia_Kingdom_of_Banditry.webp"),
   "Tengoku@Livestream": require("../../images/planar/PO_Tengoku_Livestream.webp"),
+  "The Wondrous BananAmusement Park": require("../../images/planar/PO_The_Wondrous_BananAmusement_Park.png"),
 };
 
 export function getPlanarImageWithFallback(name: string): ImageSourcePropType | null {

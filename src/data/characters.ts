@@ -440,6 +440,7 @@ export const CHARACTERS: Character[] = [
     role: "DPS",
     meta: "Express",
     target: "AoE",
+    rating: 30,
     mocRating: 10,
     pfRating: 10,
     asRating: 10,

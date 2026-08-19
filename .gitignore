@@ -11,3 +11,4 @@ web-build/
 android/
 ios/
 **/*.keystore
+*.backup

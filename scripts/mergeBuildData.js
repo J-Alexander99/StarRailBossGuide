@@ -58,8 +58,8 @@ const NAME_ALIASES = {
   Acheron: "raiden",
   "tingyun-fugue": "fugue",
   "Tingyun (Fugue)": "fugue",
-  cyrene: "elisia",
-  Cyrene: "elisia",
+  cyrene: "elysia",
+  Cyrene: "elysia",
 };
 
 function normalizeNameForMatching(name) {

@@ -608,6 +608,48 @@ const PRECOMPUTED: Record<string, CharacterPalette> = {
     secondary: "#c6a35a", // brass trim
     tertiary: "#121018", // starlit bridge
   },
+  gilgamesh: {
+    accent: "#e8b64c", // golden chains
+    accentSoft: "rgba(232, 182, 76, 0.2)",
+    accentBorder: "rgba(232, 182, 76, 0.55)",
+    secondary: "#c23b3f", // crimson cape
+    tertiary: "#221c3d", // lightning-lit dusk
+  },
+  mortenax: {
+    accent: "#c23b34", // sworn flame
+    accentSoft: "rgba(194, 59, 52, 0.2)",
+    accentBorder: "rgba(194, 59, 52, 0.55)",
+    secondary: "#c9a15a", // gilt filigree
+    tertiary: "#14121c", // ink-black robe
+  },
+  rin: {
+    accent: "#d23c46", // scarlet jacket
+    accentSoft: "rgba(210, 60, 70, 0.2)",
+    accentBorder: "rgba(210, 60, 70, 0.55)",
+    secondary: "#5fc9e0", // prism cyan
+    tertiary: "#171522", // shattered night
+  },
+  himekonova: {
+    accent: "#e0423f", // supernova crimson
+    accentSoft: "rgba(224, 66, 63, 0.2)",
+    accentBorder: "rgba(224, 66, 63, 0.55)",
+    secondary: "#f0c24a", // burst gold
+    tertiary: "#211a3a", // deep nova violet
+  },
+  silverwolf999: {
+    accent: "#4fd8ff", // neon cyan
+    accentSoft: "rgba(79, 216, 255, 0.2)",
+    accentBorder: "rgba(79, 216, 255, 0.55)",
+    secondary: "#ff4fd8", // hot magenta glitch
+    tertiary: "#1a1440", // deep terminal violet
+  },
+  trail_elation: {
+    accent: "#f0c24a", // firework gold
+    accentSoft: "rgba(240, 194, 74, 0.2)",
+    accentBorder: "rgba(240, 194, 74, 0.55)",
+    secondary: "#d162c9", // festival magenta
+    tertiary: "#1c1440", // night rooftop indigo
+  },
 };
 
 export const getCharacterPalette = (id: string): CharacterPalette | undefined => {

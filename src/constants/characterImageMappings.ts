@@ -36,6 +36,7 @@ const CHARACTER_IMAGE_MAP: Record<string, ImageSourcePropType> = {
 
   // E
   elysia: require("../../images/elysia.webp"),
+  evanescia: require("../../images/evanescia.webp"),
   evernight: require("../../images/evernight.webp"),
 
   // F
@@ -47,12 +48,14 @@ const CHARACTER_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   // G
   gallagher: require("../../images/gallagher.webp"),
   gepard: require("../../images/gepard.webp"),
+  gilgamesh: require("../../images/characters/Gilgamesh.webp"),
   guinaifen: require("../../images/guinaifen.webp"),
 
   // H
   hanya: require("../../images/hanya.webp"),
   herta: require("../../images/herta.webp"),
   himeko: require("../../images/himeko.webp"),
+  himekonova: require("../../images/characters/Himeko_Nova.webp"),
   hook: require("../../images/hook.webp"),
   huohuo: require("../../images/huohuo.webp"),
   hyacine: require("../../images/hyacine.webp"),
@@ -78,6 +81,7 @@ const CHARACTER_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   march7th: require("../../images/march7th.webp"),
   march7_imag: require("../../images/march7_imag.webp"),
   misha: require("../../images/misha.webp"),
+  mortenax: require("../../images/characters/Mortenax_Blade.webp"),
   moze: require("../../images/moze.webp"),
   mydei: require("../../images/mydei.webp"),
 
@@ -93,6 +97,7 @@ const CHARACTER_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   // R
   raiden: require("../../images/raiden.webp"),
   rappa: require("../../images/rappa.webp"),
+  rin: require("../../images/characters/Rin_Tohsaka.webp"),
   robin: require("../../images/robin.webp"),
   ruanmei: require("../../images/ruanmei.webp"),
 
@@ -102,6 +107,7 @@ const CHARACTER_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   seele: require("../../images/seele.webp"),
   serval: require("../../images/serval.webp"),
   silverwolf: require("../../images/silverwolf.webp"),
+  silverwolf999: require("../../images/silver_wolf_999.webp"),
   sparxie: require("../../images/sparxie.webp"),
   sparkle: require("../../images/sparkle.webp"),
   sunday: require("../../images/sunday.webp"),
@@ -111,6 +117,7 @@ const CHARACTER_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   the_herta: require("../../images/the_herta.webp"),
   tingyun: require("../../images/tingyun.webp"),
   topaz_numby: require("../../images/topaz_numby.webp"),
+  trail_elation: require("../../images/characters/trail_elat.webp"),
   trail_fire: require("../../images/trail_fire.webp"),
   trail_ice: require("../../images/trail_ice.webp"),
   trail_imag: require("../../images/trail_imag.webp"),
@@ -155,6 +162,7 @@ const CHARACTER_DETAIL_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   danheng_terrae: require("../../images/characters/danheng_terrae.webp"),
   dr_ratio: require("../../images/characters/dr_ratio.webp"),
   elysia: require("../../images/characters/elysia.webp"),
+  evanescia: require("../../images/characters/evanescia.webp"),
   evernight: require("../../images/characters/evernight.webp"),
   feixiao: require("../../images/characters/feixiao.webp"),
   firefly: require("../../images/characters/firefly.webp"),
@@ -162,10 +170,12 @@ const CHARACTER_DETAIL_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   fuxuan: require("../../images/characters/fuxuan.webp"),
   gallagher: require("../../images/characters/gallagher.webp"),
   gepard: require("../../images/characters/gepard.webp"),
+  gilgamesh: require("../../images/characters/Gilgamesh.webp"),
   guinaifen: require("../../images/characters/guinaifen.webp"),
   hanya: require("../../images/characters/hanya.webp"),
   herta: require("../../images/characters/herta.webp"),
   himeko: require("../../images/characters/himiko.webp"),
+  himekonova: require("../../images/characters/Himeko_Nova.webp"),
   hook: require("../../images/characters/hook.webp"),
   huohuo: require("../../images/characters/huohuo.webp"),
   hyacine: require("../../images/characters/hyacine.webp"),
@@ -183,6 +193,7 @@ const CHARACTER_DETAIL_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   march7th: require("../../images/characters/march7th.webp"),
   march7_imag: require("../../images/characters/march7_imag.webp"),
   misha: require("../../images/characters/misha.webp"),
+  mortenax: require("../../images/characters/Mortenax_Blade.webp"),
   moze: require("../../images/characters/moze.webp"),
   mydei: require("../../images/characters/mydei.webp"),
   natasha: require("../../images/characters/natasha.webp"),
@@ -190,6 +201,7 @@ const CHARACTER_DETAIL_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   qingque: require("../../images/characters/qingque.webp"),
   raiden: require("../../images/characters/raiden.webp"),
   rappa: require("../../images/characters/rappa.webp"),
+  rin: require("../../images/characters/Rin_Tohsaka.webp"),
   robin: require("../../images/characters/robin.webp"),
   ruanmei: require("../../images/characters/ruanmei.webp"),
   saber: require("../../images/characters/saber.webp"),
@@ -197,6 +209,7 @@ const CHARACTER_DETAIL_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   seele: require("../../images/characters/seele.webp"),
   serval: require("../../images/characters/serval.webp"),
   silverwolf: require("../../images/characters/silverwolf.webp"),
+  silverwolf999: require("../../images/characters/Silver_Wolf_LV.999.webp"),
   sparxie: require("../../images/characters/sparxie.webp"),
   sparkle: require("../../images/characters/sparkle.webp"),
   sunday: require("../../images/characters/sunday.webp"),
@@ -204,6 +217,7 @@ const CHARACTER_DETAIL_IMAGE_MAP: Record<string, ImageSourcePropType> = {
   the_herta: require("../../images/characters/the_herta.webp"),
   tingyun: require("../../images/characters/tingyun.webp"),
   topaz_numby: require("../../images/characters/topaz_numby.webp"),
+  trail_elation: require("../../images/characters/trail_elat.webp"),
   trail_fire: require("../../images/characters/trail.webp"),
   trail_ice: require("../../images/characters/trail.webp"),
   trail_imag: require("../../images/characters/trail.webp"),

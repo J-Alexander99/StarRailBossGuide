@@ -19,6 +19,7 @@ const PATH_ICON_MAP: Record<string, ImageSourcePropType> = {
   Preservation: require("../../images/icons/Path_Preservation.webp"),
   Abundance: require("../../images/icons/Path_Abundance.webp"),
   Remembrance: require("../../images/icons/Path_Remembrance.webp"),
+  Elation: require("../../images/icons/Path_Elation.webp"),
 };
 
 export const getElementIcon = (element?: string): ImageSourcePropType | undefined => {
