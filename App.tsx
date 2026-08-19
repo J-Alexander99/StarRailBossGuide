@@ -18,13 +18,22 @@ import { SettingsScreen } from "./src/screens/SettingsScreen";
 import { LiveEventsScreen } from "./src/screens/LiveEventsScreen";
 import { CharacterOwnershipProvider } from "./src/context/CharacterOwnershipContext";
 import { AppPreferencesProvider } from "./src/context/AppPreferencesContext";
+import { ErrorBoundary } from "./src/components/ErrorBoundary";
+import type {
+  HomeStackParamList,
+  CharactersStackParamList,
+  BossesStackParamList,
+  RootTabParamList,
+} from "./src/navigation/types";
 import {
   initializeEventNotifications,
   syncEventNotificationsIfEnabled,
 } from "./src/services/eventNotifications";
 
-const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator<RootTabParamList>();
+const HomeStackNav = createStackNavigator<HomeStackParamList>();
+const CharactersStackNav = createStackNavigator<CharactersStackParamList>();
+const BossesStackNav = createStackNavigator<BossesStackParamList>();
 
 // Dark theme for navigation
 const DarkTheme = {
@@ -42,7 +51,7 @@ const DarkTheme = {
 
 function CharactersStack() {
   return (
-    <Stack.Navigator
+    <CharactersStackNav.Navigator
       screenOptions={{
         headerStyle: {
           backgroundColor: "#191222",
@@ -63,28 +72,28 @@ function CharactersStack() {
         headerBackTitleVisible: false,
       }}
     >
-      <Stack.Screen
+      <CharactersStackNav.Screen
         name="CharactersList"
         component={CharactersScreen}
         options={{ title: "Trailblazer Roster" }}
       />
-      <Stack.Screen
+      <CharactersStackNav.Screen
         name="CharacterDetail"
         component={CharacterDetailScreen}
         options={{ title: "Character Details" }}
       />
-      <Stack.Screen
+      <CharactersStackNav.Screen
         name="Teams"
         component={TeamsScreen}
         options={{ title: "Strike Teams" }}
       />
-    </Stack.Navigator>
+    </CharactersStackNav.Navigator>
   );
 }
 
 function HomeStack() {
   return (
-    <Stack.Navigator
+    <HomeStackNav.Navigator
       screenOptions={{
         headerStyle: {
           backgroundColor: "#191222",
@@ -105,23 +114,23 @@ function HomeStack() {
         headerBackTitleVisible: false,
       }}
     >
-      <Stack.Screen
+      <HomeStackNav.Screen
         name="HomeMain"
         component={HomeScreen}
         options={{ title: "Guide Hub" }}
       />
-      <Stack.Screen
+      <HomeStackNav.Screen
         name="LiveEvents"
         component={LiveEventsScreen}
         options={{ title: "Live Events" }}
       />
-    </Stack.Navigator>
+    </HomeStackNav.Navigator>
   );
 }
 
 function BossesStack() {
   return (
-    <Stack.Navigator
+    <BossesStackNav.Navigator
       screenOptions={{
         headerStyle: {
           backgroundColor: "#191222",
@@ -142,17 +151,17 @@ function BossesStack() {
         headerBackTitleVisible: false,
       }}
     >
-      <Stack.Screen
+      <BossesStackNav.Screen
         name="BossList"
         component={BossListScreen}
         options={{ title: "Boss Intel Archive" }}
       />
-      <Stack.Screen
+      <BossesStackNav.Screen
         name="BossDetail"
         component={BossDetailScreen}
         options={{ title: "Boss Dossier" }}
       />
-    </Stack.Navigator>
+    </BossesStackNav.Navigator>
   );
 }
 
@@ -288,9 +297,11 @@ export default function App() {
       <AppPreferencesProvider>
         <CharacterOwnershipProvider>
           <StatusBar barStyle="light-content" backgroundColor="#130914" />
-          <NavigationContainer theme={DarkTheme}>
-            <TabNavigator />
-          </NavigationContainer>
+          <ErrorBoundary>
+            <NavigationContainer theme={DarkTheme}>
+              <TabNavigator />
+            </NavigationContainer>
+          </ErrorBoundary>
         </CharacterOwnershipProvider>
       </AppPreferencesProvider>
     </SafeAreaProvider>

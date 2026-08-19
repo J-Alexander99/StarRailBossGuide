@@ -13,43 +13,19 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { TEAMS, resolveTeamMembers } from "../data/teams";
+import { TEAMS, resolveTeamMembers, type Team } from "../data/teams";
+import type { Character } from "../data/characters";
 import { getCharacterImage } from "../constants/characterImageMappings";
 import { getElementIcon, getPathIcon } from "../constants/iconMappings";
 import { useCharacterOwnership } from "../context/CharacterOwnershipContext";
 import { getCharacterPalette } from "../constants/characterPalettes";
 import { StarRatingRow } from "../components/StarRatingRow";
+import { ELEMENT_COLORS, PATH_COLORS, hexToRgba } from "../theme/colors";
 
-const ELEMENT_COLORS: Record<string, string> = {
-  Physical: "#ec4899",
-  Fire: "#f97316",
-  Ice: "#38bdf8",
-  Lightning: "#a855f7",
-  Wind: "#22d3ee",
-  Quantum: "#8b5cf6",
-  Imaginary: "#facc15",
-  All: "#94a3b8",
-};
-
-const PATH_COLORS: Record<string, string> = {
-  Destruction: "#ef4444",
-  Hunt: "#22c55e",
-  Erudition: "#3b82f6",
-  Harmony: "#f59e0b",
-  Nihility: "#8b5cf6",
-  Preservation: "#0ea5e9",
-  Abundance: "#10b981",
-  Elation: "#14b8a6",
-  Remembrance: "#6366f1",
-};
-
-const hexToRgba = (hex: string, alpha: number) => {
-  const normalized = hex.replace("#", "");
-  if (normalized.length !== 6) return hex;
-  const r = parseInt(normalized.slice(0, 2), 16);
-  const g = parseInt(normalized.slice(2, 4), 16);
-  const b = parseInt(normalized.slice(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+type EnrichedTeam = {
+  team: Team;
+  members: Character[];
+  teamPower: number;
 };
 
 type FilterState = {
@@ -148,13 +124,15 @@ export function TeamsScreen() {
         }
 
         // Check character attribute filters
-        const attributeFilters = [
-          { filters: filters.element, memberAttribute: "element" },
-          { filters: filters.path, memberAttribute: "path" },
-          { filters: filters.role, memberAttribute: "role" },
-          { filters: filters.meta, memberAttribute: "meta" },
-          { filters: filters.target, memberAttribute: "target" },
-        ].filter((f) => f.filters.length > 0);
+        const attributeFilters = (
+          [
+            { filters: filters.element, memberAttribute: "element" },
+            { filters: filters.path, memberAttribute: "path" },
+            { filters: filters.role, memberAttribute: "role" },
+            { filters: filters.meta, memberAttribute: "meta" },
+            { filters: filters.target, memberAttribute: "target" },
+          ] as const
+        ).filter((f) => f.filters.length > 0);
 
         const selectedAttributeFilters = attributeFilters.flatMap(
           ({ filters: selectedValues, memberAttribute }) =>
@@ -166,16 +144,12 @@ export function TeamsScreen() {
         if (filters.containsAll) {
           // Team must have ALL selected attributes
           return selectedAttributeFilters.every(({ filter, memberAttribute }) =>
-            members.some(
-              (member) => (member as any)[memberAttribute] === filter,
-            ),
+            members.some((member) => member[memberAttribute] === filter),
           );
         } else {
           // Team must have ANY of the selected attributes
           return selectedAttributeFilters.some(({ filter, memberAttribute }) =>
-            members.some(
-              (member) => (member as any)[memberAttribute] === filter,
-            ),
+            members.some((member) => member[memberAttribute] === filter),
           );
         }
       });
@@ -235,7 +209,7 @@ export function TeamsScreen() {
       };
     }, [enrichedTeams, isCharacterOwned, filters]);
 
-  const calculateTeamModeRatings = (members: any[]) => {
+  const calculateTeamModeRatings = (members: Character[]) => {
     const mocTotal = members.reduce((sum, m) => sum + (m.mocRating || 0), 0);
     const pfTotal = members.reduce((sum, m) => sum + (m.pfRating || 0), 0);
     const asTotal = members.reduce((sum, m) => sum + (m.asRating || 0), 0);
@@ -269,11 +243,7 @@ export function TeamsScreen() {
     );
   };
 
-  const renderTeamCard = ({
-    item,
-  }: {
-    item: { team: any; members: any[]; teamPower: number };
-  }) => {
+  const renderTeamCard = ({ item }: { item: EnrichedTeam }) => {
     const { team, members, teamPower } = item;
     const isAvailable = members.every((member) => isCharacterOwned(member.id));
 
@@ -363,7 +333,7 @@ export function TeamsScreen() {
             const accent =
               paletteEntry?.accent ||
               ELEMENT_COLORS[member.element] ||
-              PATH_COLORS[member.path] ||
+              PATH_COLORS[member.path || ""] ||
               "#ff6ce0";
             const accentSoft =
               paletteEntry?.accentSoft ||
@@ -468,7 +438,7 @@ export function TeamsScreen() {
                           ? styles.memberChipIconOnly
                           : {
                               backgroundColor:
-                                PATH_COLORS[member.path] ?? "#64748b",
+                                PATH_COLORS[member.path || ""] ?? "#64748b",
                             },
                       ]}
                     >
@@ -500,7 +470,7 @@ export function TeamsScreen() {
   };
 
   const renderMemberHoverCard = (
-    member: any,
+    member: Character,
     colors: { accent: string; accentSoft: string; accentBorder: string },
   ) => {
     return (
@@ -605,6 +575,8 @@ export function TeamsScreen() {
             <TouchableOpacity
               style={styles.filterButton}
               onPress={() => setShowFilterModal(true)}
+              accessibilityRole="button"
+              accessibilityLabel="Filter and sort teams"
             >
               <Text style={styles.filterButtonText}>🔍 Filter & Sort</Text>
             </TouchableOpacity>
@@ -678,31 +650,31 @@ export function TeamsScreen() {
                   <View style={styles.filterSection}>
                     <Text style={styles.filterSectionTitle}>Sort By</Text>
                     <View style={styles.filterRow}>
-                      {["name", "rating", "id", "random"].map((sort) => (
-                        <TouchableOpacity
-                          key={sort}
-                          style={[
-                            styles.filterChip,
-                            filters.sortBy === sort && styles.filterChipActive,
-                          ]}
-                          onPress={() =>
-                            setFilters((prev) => ({
-                              ...prev,
-                              sortBy: sort as any,
-                            }))
-                          }
-                        >
-                          <Text
+                      {(["name", "rating", "id", "random"] as const).map(
+                        (sort) => (
+                          <TouchableOpacity
+                            key={sort}
                             style={[
-                              styles.filterChipText,
+                              styles.filterChip,
                               filters.sortBy === sort &&
-                                styles.filterChipTextActive,
+                                styles.filterChipActive,
                             ]}
+                            onPress={() =>
+                              setFilters((prev) => ({ ...prev, sortBy: sort }))
+                            }
                           >
-                            {sort.charAt(0).toUpperCase() + sort.slice(1)}
-                          </Text>
-                        </TouchableOpacity>
-                      ))}
+                            <Text
+                              style={[
+                                styles.filterChipText,
+                                filters.sortBy === sort &&
+                                  styles.filterChipTextActive,
+                              ]}
+                            >
+                              {sort.charAt(0).toUpperCase() + sort.slice(1)}
+                            </Text>
+                          </TouchableOpacity>
+                        ),
+                      )}
                     </View>
 
                     <View style={styles.filterRow}>
@@ -753,11 +725,13 @@ export function TeamsScreen() {
                   <View style={styles.filterSection}>
                     <Text style={styles.filterSectionTitle}>Availability</Text>
                     <View style={styles.filterRow}>
-                      {[
-                        { key: "all", label: "All Teams" },
-                        { key: "available", label: "Available Only" },
-                        { key: "unavailable", label: "Missing Characters" },
-                      ].map(({ key, label }) => (
+                      {(
+                        [
+                          { key: "all", label: "All Teams" },
+                          { key: "available", label: "Available Only" },
+                          { key: "unavailable", label: "Missing Characters" },
+                        ] as const
+                      ).map(({ key, label }) => (
                         <TouchableOpacity
                           key={key}
                           style={[
@@ -768,7 +742,7 @@ export function TeamsScreen() {
                           onPress={() =>
                             setFilters((prev) => ({
                               ...prev,
-                              availability: key as any,
+                              availability: key,
                             }))
                           }
                         >

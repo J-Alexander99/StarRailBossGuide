@@ -8,7 +8,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "validate:teams": "npx ts-node scripts/validateTeams.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "validate:teams": "ts-node scripts/validateTeams.ts",
     "scrape:prydwen": "node scripts/scrapePrydwen.js",
     "scrape:builds": "node scripts/scrapeBuildData.js",
     "scrape:builds:test": "node scripts/scrapeBuildData.js --character hyacine",
@@ -41,10 +43,21 @@
     "react-native-worklets": "0.5.1"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/react": "~19.1.10",
     "babel-preset-expo": "~54.0.12",
+    "jest": "^29.7.0",
+    "jest-expo": "~54.0.18",
     "puppeteer": "^25.8.0",
     "sharp": "^0.33.5",
+    "ts-node": "^10.9.2",
     "typescript": "~5.9.2"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/scripts/"
+    ]
   }
 }

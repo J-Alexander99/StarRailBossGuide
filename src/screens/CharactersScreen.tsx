@@ -15,50 +15,19 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import { CHARACTERS, Character } from "../data/characters";
 import { getElementIcon, getPathIcon } from "../constants/iconMappings";
 import { getCharacterImage } from "../constants/characterImageMappings";
 import { StarRatingRow } from "../components/StarRatingRow";
 import { getCharacterPalette } from "../constants/characterPalettes";
-
-const ELEMENT_COLORS: Record<string, string> = {
-  Physical: "#ec4899",
-  Fire: "#f97316",
-  Ice: "#38bdf8",
-  Lightning: "#a855f7",
-  Wind: "#22d3ee",
-  Quantum: "#8b5cf6",
-  Imaginary: "#facc15",
-  All: "#94a3b8",
-};
-
-const PATH_COLORS: Record<string, string> = {
-  Destruction: "#ef4444",
-  Hunt: "#22c55e",
-  Erudition: "#3b82f6",
-  Harmony: "#f59e0b",
-  Nihility: "#8b5cf6",
-  Preservation: "#0ea5e9",
-  Abundance: "#10b981",
-  Elation: "#14b8a6",
-  Remembrance: "#6366f1",
-};
-
-const ROLE_COLORS: Record<string, string> = {
-  "Sub-DPS": "#f97316",
-  DPS: "#ef4444",
-  Support: "#22c55e",
-  Sustain: "#14b8a6",
-};
-
-const hexToRgba = (hex: string, alpha: number) => {
-  const normalized = hex.replace("#", "");
-  if (normalized.length !== 6) return hex;
-  const r = parseInt(normalized.slice(0, 2), 16);
-  const g = parseInt(normalized.slice(2, 4), 16);
-  const b = parseInt(normalized.slice(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-};
+import {
+  ELEMENT_COLORS,
+  PATH_COLORS,
+  ROLE_COLORS,
+  hexToRgba,
+} from "../theme/colors";
+import type { CharactersStackParamList } from "../navigation/types";
 
 type FilterState = {
   element: string | null;
@@ -71,7 +40,8 @@ type FilterState = {
 };
 
 export function CharactersScreen() {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<StackNavigationProp<CharactersStackParamList>>();
   const { width } = useWindowDimensions();
   const isCompactMobile = Platform.OS !== "web" && width < 430;
   const [showFilterModal, setShowFilterModal] = useState(false);
@@ -194,13 +164,17 @@ export function CharactersScreen() {
               <TouchableOpacity
                 style={styles.iconButton}
                 onPress={() => setShowFilterModal(true)}
+                accessibilityRole="button"
+                accessibilityLabel="Filter and sort characters"
               >
                 <Text style={styles.iconButtonEmoji}>🔍</Text>
                 <Text style={styles.iconButtonLabel}>Filter</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.iconButton}
-                onPress={() => navigation.navigate("Teams" as never)}
+                onPress={() => navigation.navigate("Teams")}
+                accessibilityRole="button"
+                accessibilityLabel="Browse strike teams"
               >
                 <Image
                   source={require("../../images/icons/Team - Transparent.png")}
@@ -236,11 +210,13 @@ export function CharactersScreen() {
             <TouchableOpacity
               style={[styles.card, { borderColor: accentBorder }]}
               onPress={() => {
-                (navigation as any).navigate("CharacterDetail", {
+                navigation.navigate("CharacterDetail", {
                   characterId: item.id,
                 });
               }}
               activeOpacity={0.7}
+              accessibilityRole="button"
+              accessibilityLabel={`View details for ${item.name}`}
             >
               <View style={styles.cardContent}>
                 <View
@@ -414,34 +390,31 @@ export function CharactersScreen() {
                   <View style={styles.filterSection}>
                     <Text style={styles.filterSectionTitle}>Sort By</Text>
                     <View style={styles.filterRow}>
-                      {["name", "rating", "element", "path", "role"].map(
-                        (sort) => (
-                          <TouchableOpacity
-                            key={sort}
+                      {(
+                        ["name", "rating", "element", "path", "role"] as const
+                      ).map((sort) => (
+                        <TouchableOpacity
+                          key={sort}
+                          style={[
+                            styles.filterChip,
+                            filters.sortBy === sort &&
+                              styles.filterChipActive,
+                          ]}
+                          onPress={() =>
+                            setFilters((prev) => ({ ...prev, sortBy: sort }))
+                          }
+                        >
+                          <Text
                             style={[
-                              styles.filterChip,
+                              styles.filterChipText,
                               filters.sortBy === sort &&
-                                styles.filterChipActive,
+                                styles.filterChipTextActive,
                             ]}
-                            onPress={() =>
-                              setFilters((prev) => ({
-                                ...prev,
-                                sortBy: sort as any,
-                              }))
-                            }
                           >
-                            <Text
-                              style={[
-                                styles.filterChipText,
-                                filters.sortBy === sort &&
-                                  styles.filterChipTextActive,
-                              ]}
-                            >
-                              {sort.charAt(0).toUpperCase() + sort.slice(1)}
-                            </Text>
-                          </TouchableOpacity>
-                        ),
-                      )}
+                            {sort.charAt(0).toUpperCase() + sort.slice(1)}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
                     </View>
 
                     <View style={styles.filterRow}>

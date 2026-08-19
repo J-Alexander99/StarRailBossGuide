@@ -10,8 +10,10 @@ import {
   Platform,
   Pressable,
   InteractionManager,
+  ActivityIndicator,
 } from "react-native";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import type { RouteProp } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import { StarRatingRow } from "../components/StarRatingRow";
@@ -28,6 +30,14 @@ import { useCharacterOwnership } from "../context/CharacterOwnershipContext";
 import { CHARACTERS, Character } from "../data/characters";
 import { getCharacterBuild } from "../data/characterBuilds";
 import { resolveTeamMembers, TEAMS } from "../data/teams";
+import {
+  ELEMENT_COLORS,
+  PATH_COLORS,
+  ROLE_COLORS,
+  META_COLORS,
+  hexToRgba,
+} from "../theme/colors";
+import type { CharactersStackParamList } from "../navigation/types";
 
 const palette = {
   background: "#130914",
@@ -63,15 +73,6 @@ type ThemePalette = {
   accentBorder: string;
 };
 
-const hexToRgba = (hex: string, alpha: number) => {
-  const normalized = hex.replace("#", "");
-  if (normalized.length !== 6) return hex;
-  const r = parseInt(normalized.slice(0, 2), 16);
-  const g = parseInt(normalized.slice(2, 4), 16);
-  const b = parseInt(normalized.slice(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-};
-
 const blendColors = (foreground: string, background: string, ratio: number) => {
   const parse = (hex: string) => {
     const n = hex.replace("#", "");
@@ -92,49 +93,16 @@ const blendColors = (foreground: string, background: string, ratio: number) => {
     .join("")}`;
 };
 
-const ELEMENT_COLORS: Record<string, string> = {
-  Physical: "#ec4899",
-  Fire: "#f97316",
-  Ice: "#38bdf8",
-  Lightning: "#a855f7",
-  Wind: "#22d3ee",
-  Quantum: "#8b5cf6",
-  Imaginary: "#facc15",
-  All: "#94a3b8",
-};
+type CharacterDetailRouteProp = RouteProp<
+  CharactersStackParamList,
+  "CharacterDetail"
+>;
 
-const PATH_COLORS: Record<string, string> = {
-  Destruction: "#ef4444",
-  Hunt: "#22c55e",
-  Erudition: "#3b82f6",
-  Harmony: "#f59e0b",
-  Nihility: "#8b5cf6",
-  Preservation: "#0ea5e9",
-  Abundance: "#10b981",
-  Elation: "#14b8a6",
-  Remembrance: "#6366f1",
-};
-
-const ROLE_COLORS: Record<string, string> = {
-  "Sub-DPS": "#f97316",
-  DPS: "#ef4444",
-  Support: "#22c55e",
-  Sustain: "#14b8a6",
-};
-
-const META_COLORS: Record<string, string> = {
-  DOT: "#f97316",
-  Crit: "#38bdf8",
-  Break: "#a855f7",
-  "Follow-Up": "#22d3ee",
-  Summon: "#8b5cf6",
-  General: "#facc15",
-  Kevin: "#f87171",
-  Raiden: "#60a5fa",
-  Ultimate: "#fb7185",
-};
-
-export function CharacterDetailScreen({ route }: any) {
+export function CharacterDetailScreen({
+  route,
+}: {
+  route: CharacterDetailRouteProp;
+}) {
   const { characterId } = route.params;
   const character = CHARACTERS.find((c) => c.id === characterId);
   const { isCharacterOwned } = useCharacterOwnership();
@@ -1191,7 +1159,10 @@ export function CharacterDetailScreen({ route }: any) {
             {isTeamsWithCharacterReady ? teamsWithCharacter.length : "..."})
           </Text>
           {!isTeamsWithCharacterReady ? (
-            <Text style={styles.emptyText}>Loading team synergies...</Text>
+            <View style={styles.loadingRow}>
+              <ActivityIndicator size="small" color={theme.accent} />
+              <Text style={styles.emptyText}>Loading team synergies...</Text>
+            </View>
           ) : teamsWithCharacter.length > 0 ? (
             teamsWithCharacter.map(
               ({ team, members, teamPower, isAvailable }) => (
@@ -1772,6 +1743,11 @@ const createStyles = (palette: ThemePalette) =>
       fontSize: 14,
       color: palette.textMuted,
       fontStyle: "italic",
+    },
+    loadingRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 8,
     },
     recommendationCard: {
       backgroundColor: palette.highlight,

@@ -250,6 +250,19 @@
     ["Dr Ratio", "Topaz", "Bronya", "Huohuo"],
     ["Dr Ratio", "Topaz", "Silver Wolf", "Aventurine"],
     
+    #Evanescia
+    ["Evanescia", "Trailblazer Lightning", "Yao Guang", "Huohuo"],
+    ["Silver Wolf 999", "Evanescia", "Yao Guang", "Huohuo"],
+    ["Evanescia", "Trailblazer Ice", "Yao Guang", "Huohuo"],
+    ["Evanescia", "Trailblazer Lightning", "Sparkle", "Huohuo"],
+    ["Evanescia", "Trailblazer Lightning", "Yao Guang", "Fu Xuan"],
+    ["Evanescia", "Sparxie", "Yao Guang", "Huohuo"],
+    ["Evanescia", "Trailblazer Lightning", "Yao Guang", "Dan Heng - Permansor Terrae"],
+    ["Evanescia", "Trailblazer Lightning", "Yao Guang", "Aventurine"],
+    ["Evanescia", "Tribbie", "Yao Guang", "Huohuo"],
+    ["Evanescia", "Trailblazer Lightning", "Yao Guang", "Gallagher"],
+    ["Evanescia", "Sparxie", "Yao Guang", "Silver Wolf 999"],
+
     #Feixiao
     ["Feixiao", "Topaz", "Robin", "Aventurine"],
     ["Feixiao", "Moze", "Robin", "Aventurine"],
@@ -322,6 +335,12 @@
     ["Raiden", "Jiaoqiu", "Sparkle", "Gepard"],
     ["Kafka", "Black Swan", "Robin", "Gepard"],
 
+    #Gilgamesh
+    ["Gilgamesh", "Saber", "Trailblazer Ice", "Huohuo"],
+    ["Gilgamesh", "Saber", "Mortenax Blade", "Huohuo"],
+    ["Gilgamesh", "Trailblazer Ice", "Welt", "Huohuo"],
+    ["Gilgamesh", "March 7th", "Yukong", "Lynx"],
+    ["Gilgamesh", "Ashveil", "Mortenax Blade", "Huohuo"],
 
     #Lil Guin
     ["Raiden", "Guinaifen", "Pela", "Aventurine"],
@@ -368,7 +387,16 @@
     ["Rappa", "Himeko", "Fugue", "Lingsha"],
     ["Jade", "Himeko", "Robin", "Aventurine"],
     ["Dan Heng - Imbibitor Lunae", "Himeko", "Ruan Mei", "Aventurine"],
-        
+
+    #Himeko Nova
+    ["Himeko Nova", "Sunday", "Trailblazer Ice", "Permansor Terrae"],    
+    ["Himeko Nova", "Sunday", "Sparkle", "Permansor Terrae"], 
+    ["Himeko Nova", "Sunday", "Tribbie", "Permansor Terrae"], 
+    ["Himeko Nova", "Welt", "Mortenax Blade", "Huohuo"], 
+    ["Himeko Nova", "Trailblazer Ice", "Asta", "Natasha"], 
+    ["Himeko Nova", "Trailblazer Ice", "Welt", "Huohuo"],
+    ["Himeko Nova", "Trailblazer Ice", "Welt", "Mortenax Blade"],
+    
     #Hook
     ["Hook", "Raiden", "Jiaoqiu", "Aventurine"],
     ["Hook", "Robin", "Sparkle", "Lingsha"],
@@ -566,7 +594,19 @@
 
     #Misha
     ["Misha", "Trailblazer Imaginary", "Sparkle", "Lingsha"],
-    
+
+
+    #Mortenax Blade
+    ["Mortenax Blade", "Ashveil", "Tribbie", "Gallagher"],
+    ["Mortenax Blade", "Ashveil", "Tribbie", "Permansor Terrae"],
+    ["Mortenax Blade", "Ashveil", "Robin", "Permansor Terrae"],
+    ["Mortenax Blade", "Archer", "Sparkle", "Permansor Terrae"],
+    ["Mortenax Blade", "Raiden", "Welt", "Permansor Terrae"],
+    ["Mortenax Blade", "Ashveil", "Raiden", "Welt"],
+    ["Mortenax Blade", "March 7th Imaginary", "Asta", "Lynx"],
+
+
+
     #Moze
     ["Feixiao", "Moze", "Robin", "Aventurine"],
     ["Dr Ratio", "Moze", "Robin", "Aventurine"],
@@ -610,6 +650,7 @@
     ["Raiden", "Jiaoqiu", "Pela", "Huohuo"],
     
     #HI KEVIN (What about the second one Onoki)
+    ["Kevin", "Sunday", "Permansor Terrae", "Cerydra"],
     ["Kevin", "Bronya", "Trailblazer Ice", "Ruan Mei"],
     ["Kevin", "Sunday", "Aventurine", "Tribbie"],
     ["Kevin", "Sunday", "Bronya", "Huohuo"],
@@ -643,6 +684,18 @@
     ["Rappa", "Trailblazer Imaginary", "Ruan Mei", "Huohuo"],
     ["Rappa", "Firefly", "Trailblazer Imaginary", "Gallagher"],
     ["Rappa", "Trailblazer Imaginary", "Pela", "Gallagher"],
+    
+    #Rin
+    ["Rin", "Archer", "Sparkle", "Dan Heng - Imbibitor Lunae"],
+    ["Rin", "Archer", "Sparkle", "Fu Xuan"],
+    ["Rin", "Archer", "Sparkle", "Tribbie"],
+    ["Rin", "Archer", "Sparkle", "Mortenax Blade"],
+    ["Rin", "Archer", "Sparkle", "Welt"],
+    ["Rin", "Archer", "Sparkle", "Huohuo"],
+    ["Rin", "Archer", "Sparkle", "Robin"],
+    ["Rin", "Archer", "Sparkle", "Hyacine"],
+    ["Rin", "Archer", "Sparkle", "Aventurine"],
+    ["Rin", "Archer", "Sparkle", "Trailblazer Ice"],    
 
     #Robin
     ["Feixiao", "Topaz", "Robin", "Aventurine"],
@@ -726,6 +779,18 @@
     ["Raiden", "Jiaoqiu", "Silver Wolf", "Fu Xuan"],
     ["Seele", "Silver Wolf", "Sparkle", "Fu Xuan"],
     ["Raiden", "Black Swan", "Silver Wolf", "Fu Xuan"],
+
+    #Silver Wolf 999
+    ["Silver Wolf 999", "Sparxie", "Yao Guang", "Huohuo"],
+    ["Silver Wolf 999", "Sparxie", "Yao Guang", "Dan Heng - Permansor Terrae"],
+    ["Silver Wolf 999", "Sparxie", "Yao Guang", "Fu Xuan"],
+    ["Silver Wolf 999", "Sparxie", "Trailblazer Lightning", "Huohuo"],
+    ["Silver Wolf 999", "Evanescia", "Yao Guang", "Huohuo"],
+    ["Silver Wolf 999", "Trailblazer Lightning", "Yao Guang", "Dan Heng - Permansor Terrae"],
+    ["Silver Wolf 999", "Trailblazer Lightning", "Yao Guang", "Huohuo"],
+    ["Silver Wolf 999", "Sparxie", "Yao Guang", "Aventurine"],
+    ["Silver Wolf 999", "Trailblazer Lightning", "Yao Guang", "Aventurine"],
+    ["Silver Wolf 999", "Sparxie", "Yao Guang", "Hyacine"],
 
     #Sparkle
     ["Raiden", "Jiaoqiu", "Sparkle", "Aventurine"],
@@ -918,5 +983,3 @@
     ["Feixiao", "Yunli", "Tingyun", "Huohuo"],
     ["Yunli", "Robin", "Tingyun", "Aventurine"],
     ["Yunli", "Robin", "Tingyun", "Fu Xuan"],
-
-

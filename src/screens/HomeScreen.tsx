@@ -20,129 +20,36 @@ import {
   getLiveEventTheme,
   getLiveEvents,
 } from "../data/liveEvents";
+import { CHARACTERS } from "../data/characters";
+import { BOSSES } from "../data/bosses";
 import { useFonts } from "expo-font";
 
 const { width: screenWidth } = Dimensions.get("window");
 
-// Complete character and boss data for carousels
-const FEATURED_CHARACTERS = [
-  "aglaea",
-  "anaxa",
-  "archer",
-  "argenti",
-  "arlan",
-  "ashveil",
-  "asta",
-  "aventurine",
-  "bailu",
-  "blackswan",
-  "blade",
-  "boothill",
-  "bronya",
-  "castorice",
-  "cerydra",
-  "cipher",
-  "clara",
-  "danheng",
-  "danheng_imaginary",
-  "danheng_terrae",
-  "dr_ratio",
-  "elysia",
-  "evernight",
-  "feixiao",
-  "firefly",
-  "fugue",
-  "fuxuan",
-  "gallagher",
-  "gepard",
-  "guinaifen",
-  "hanya",
-  "herta",
-  "himeko",
-  "hook",
-  "huohuo",
-  "hyacine",
-  "hysilens",
-  "jade",
-  "jiaoqiu",
-  "jingliu",
-  "jingyuan",
-  "kafka",
-  "kevin",
-  "lingsha",
-  "luka",
-  "luocha",
-  "lynx",
-  "march7th",
-  "march7_imag",
-  "misha",
-  "moze",
-  "mydei",
-  "natasha",
-  "pela",
-  "qingque",
-  "raiden",
-  "rappa",
-  "robin",
-  "ruanmei",
-  "saber",
-  "sampo",
-  "seele",
-  "serval",
-  "silverwolf",
-  "sparxie",
-  "sparkle",
-  "sunday",
-  "sushang",
-  "thedahlia",
-  "the_herta",
-  "tingyun",
-  "topaz_numby",
-  "trail_fire",
-  "trail_ice",
-  "trail_imag",
-  "trail_physical",
-  "tribbie",
-  "welt",
-  "xueyi",
-  "yanqing",
-  "yaoguang",
-  "yukong",
-  "yunli",
-];
+// Derived from the live roster/boss list (sorted for a stable, predictable
+// carousel order) rather than a hand-maintained copy, so new characters and
+// bosses show up here automatically instead of silently missing until
+// someone remembers to update this file too. Carousel items with no
+// resolvable image are skipped by SmoothCarousel's getImage() below.
+const FEATURED_CHARACTERS = [...CHARACTERS]
+  .sort((a, b) => a.name.localeCompare(b.name))
+  .map((character) => character.id);
 
-const FEATURED_BOSSES = [
-  "Big_Enemy_Abundant_Ebon_Deer",
-  "Big_Enemy_Argenti",
-  "Big_Enemy_Aventurine",
-  "Big_Enemy_Banacademic_Office_Staff",
-  "Big_Enemy_Bronya",
-  "Big_Enemy_Cirrus",
-  "Big_Enemy_Cloud_Knight_Yanqing",
-  "Big_Enemy_Cocolia",
-  "Big_Enemy_First_Genius_Zandar",
-  "Big_Enemy_Flame_Reaver",
-  "Big_Enemy_Fulminating_Wolflord",
-  "Big_Enemy_Gepard",
-  "Big_Enemy_Hoolay",
-  "Big_Enemy_Memory_Zone_Meme",
-  "Big_Enemy_Pollux",
-  "Big_Enemy_Savage_Incarnation_Of_Strife",
-  "Big_Enemy_Stellaron_Hunter_Kafka",
-  "Big_Enemy_Stellaron_Hunter_Sam",
-  "Big_Enemy_Svarog",
-  "Big_Enemy_Swarm_True_Sting",
-  "Big_Enemy_The_Lance_of_Fury",
-  "Big_Enemy_The_Past_Present_Show",
-];
+const FEATURED_BOSSES = BOSSES.map((boss) => boss.image).filter(
+  (image): image is string => Boolean(image),
+);
 
+// Hand-picked characters to lead the mobile carousel (e.g. recent/notable
+// additions) — an editorial choice, not something derivable from the data.
+// Filtered against the live roster so a renamed/removed id can't silently
+// try to render a missing character.
 const MOBILE_PRIORITY_CHARACTERS = [
   "march7_imag",
   "ashveil",
   "sparxie",
   "thedahlia",
   "yaoguang",
-];
+].filter((id) => FEATURED_CHARACTERS.includes(id));
 
 const MOBILE_FEATURED_CHARACTERS = [
   ...MOBILE_PRIORITY_CHARACTERS,

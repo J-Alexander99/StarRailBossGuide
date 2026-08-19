@@ -13,21 +13,37 @@ import {
   Modal,
   TouchableWithoutFeedback,
   InteractionManager,
+  ActivityIndicator,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import type { RouteProp } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import {
   BOSSES,
   getBossAffinities,
   type EffectivenessScore,
   type Boss,
 } from "../data/bosses";
-import { CHARACTERS } from "../data/characters";
-import { getRecommendedTeamsSorted } from "../data/teams";
+import { CHARACTERS, type Character } from "../data/characters";
+import { getRecommendedTeamsSorted, type RecommendedTeam } from "../data/teams";
 import { useCharacterOwnership } from "../context/CharacterOwnershipContext";
 import { getElementIcon } from "../constants/iconMappings";
 import { getBossImage } from "../constants/bossImageMappings";
 import { getCharacterImage } from "../constants/characterImageMappings";
 import { getCharacterPalette } from "../constants/characterPalettes";
+import {
+  ELEMENT_COLORS,
+  PATH_COLORS,
+  ROLE_COLORS,
+  META_COLORS,
+  EFFECTIVENESS_COLORS,
+  EFFECTIVENESS_LABELS,
+  hexToRgba,
+} from "../theme/colors";
+import type {
+  BossesStackParamList,
+  CharactersStackParamList,
+} from "../navigation/types";
 
 const palette = {
   background: "#130914",
@@ -44,81 +60,6 @@ const palette = {
   accent: "#ff6ce0",
   accentSoft: "rgba(255, 108, 224, 0.18)",
   accentBorder: "rgba(255, 108, 224, 0.35)",
-};
-
-const ELEMENT_COLORS: Record<string, string> = {
-  Physical: "#ec4899",
-  Fire: "#f97316",
-  Ice: "#38bdf8",
-  Lightning: "#a855f7",
-  Wind: "#22d3ee",
-  Quantum: "#8b5cf6",
-  Imaginary: "#facc15",
-  All: "#94a3b8",
-};
-
-const PATH_COLORS: Record<string, string> = {
-  Destruction: "#ef4444",
-  Hunt: "#22c55e",
-  Erudition: "#3b82f6",
-  Harmony: "#f59e0b",
-  Nihility: "#8b5cf6",
-  Preservation: "#0ea5e9",
-  Abundance: "#10b981",
-  Elation: "#14b8a6",
-  Remembrance: "#6366f1",
-};
-
-const ROLE_COLORS: Record<string, string> = {
-  "Sub-DPS": "#f97316",
-  DPS: "#ef4444",
-  Support: "#22c55e",
-  Sustain: "#14b8a6",
-};
-
-const META_COLORS: Record<string, string> = {
-  DOT: "#f97316",
-  Crit: "#38bdf8",
-  Break: "#a855f7",
-  "Follow-Up": "#22d3ee",
-  Summon: "#8b5cf6",
-  General: "#facc15",
-  Kevin: "#f87171",
-  Raiden: "#60a5fa",
-  Ultimate: "#fb7185",
-};
-
-const SCORE_COLORS: Record<EffectivenessScore, string> = {
-  [-2]: "#ef4444",
-  [-1]: "#f97316",
-  [0]: "#9ca3af",
-  [1]: "#22c55e",
-  [2]: "#10b981",
-};
-
-const SCORE_LABELS: Record<EffectivenessScore, string> = {
-  [-2]: "Terrible",
-  [-1]: "Bad",
-  [0]: "Neutral",
-  [1]: "Good",
-  [2]: "Great",
-};
-
-type RecommendedTeam = {
-  team: any;
-  members: any[];
-  teamPower: number;
-  score: number;
-  scoreBreakdown?: {
-    power: number;
-    missingPenalty: number;
-    element: number;
-    range: number;
-    meta: number;
-    composition: number;
-    total: number;
-  };
-  isAvailable: boolean;
 };
 
 type TeamFilterState = {
@@ -138,15 +79,6 @@ type TeamMultiFilterKey = "element" | "path" | "role" | "meta" | "target";
 type ScoreThresholds = {
   excellentMin: number;
   goodMin: number;
-};
-
-const hexToRgba = (hex: string, alpha: number) => {
-  const normalized = hex.replace("#", "");
-  if (normalized.length !== 6) return hex;
-  const r = parseInt(normalized.slice(0, 2), 16);
-  const g = parseInt(normalized.slice(2, 4), 16);
-  const b = parseInt(normalized.slice(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 };
 
 function quantile(values: number[], q: number) {
@@ -180,10 +112,19 @@ function getRecommendationTier(
   return "FAIR";
 }
 
-export function BossDetailScreen({ route }: any) {
+type BossDetailRouteProp = RouteProp<BossesStackParamList, "BossDetail">;
+
+export function BossDetailScreen({ route }: { route: BossDetailRouteProp }) {
   const { bossId } = route.params;
   const boss: Boss | undefined = BOSSES.find((b) => b.id === bossId);
-  const navigation = useNavigation();
+  // Navigating to CharacterDetail crosses from the Bosses stack into the
+  // Characters stack, which React Navigation doesn't type automatically —
+  // narrow to that stack's own navigation type rather than leaving it `any`.
+  const navigation = useNavigation() as StackNavigationProp<
+    BossesStackParamList,
+    "BossDetail"
+  > &
+    Pick<StackNavigationProp<CharactersStackParamList>, "navigate">;
   const { isCharacterOwned } = useCharacterOwnership();
   const { width } = useWindowDimensions();
   const isWeb = Platform.OS === "web";
@@ -250,7 +191,7 @@ export function BossDetailScreen({ route }: any) {
       affinities,
       false,
       isCharacterOwned,
-    ) as RecommendedTeam[];
+    );
 
     const total = recommendedTeams.length;
     const excludedByOwnership = recommendedTeams.filter(
@@ -264,13 +205,15 @@ export function BossDetailScreen({ route }: any) {
       teamsToFilter = teamsToFilter.filter((team) => !team.isAvailable);
     }
 
-    const attributeGroups = [
-      { selected: teamFilters.element, memberAttribute: "element" },
-      { selected: teamFilters.path, memberAttribute: "path" },
-      { selected: teamFilters.role, memberAttribute: "role" },
-      { selected: teamFilters.meta, memberAttribute: "meta" },
-      { selected: teamFilters.target, memberAttribute: "target" },
-    ].filter((group) => group.selected.length > 0);
+    const attributeGroups = (
+      [
+        { selected: teamFilters.element, memberAttribute: "element" },
+        { selected: teamFilters.path, memberAttribute: "path" },
+        { selected: teamFilters.role, memberAttribute: "role" },
+        { selected: teamFilters.meta, memberAttribute: "meta" },
+        { selected: teamFilters.target, memberAttribute: "target" },
+      ] as const
+    ).filter((group) => group.selected.length > 0);
 
     const selectedAttributeFilters = attributeGroups.flatMap(
       ({ selected, memberAttribute }) =>
@@ -282,12 +225,12 @@ export function BossDetailScreen({ route }: any) {
 
       if (teamFilters.containsAll) {
         return selectedAttributeFilters.every(({ value, memberAttribute }) =>
-          members.some((member) => (member as any)[memberAttribute] === value),
+          members.some((member) => member[memberAttribute] === value),
         );
       }
 
       return selectedAttributeFilters.some(({ value, memberAttribute }) =>
-        members.some((member) => (member as any)[memberAttribute] === value),
+        members.some((member) => member[memberAttribute] === value),
       );
     });
 
@@ -392,8 +335,8 @@ export function BossDetailScreen({ route }: any) {
         <View style={styles.affinityList}>
           {sortedEntries.map(([key, score]) => {
             const icon = iconResolver?.(key);
-            const scoreColor = SCORE_COLORS[score];
-            const scoreLabel = SCORE_LABELS[score];
+            const scoreColor = EFFECTIVENESS_COLORS[score];
+            const scoreLabel = EFFECTIVENESS_LABELS[score];
 
             return (
               <View key={`${title}-${key}`} style={styles.affinityRow}>
@@ -422,7 +365,7 @@ export function BossDetailScreen({ route }: any) {
     );
   };
 
-  const renderMemberHoverCard = (member: any) => {
+  const renderMemberHoverCard = (member: Character) => {
     const paletteEntry = getCharacterPalette(member.id);
     const accent =
       paletteEntry?.accent || ELEMENT_COLORS[member.element] || palette.accent;
@@ -558,13 +501,20 @@ export function BossDetailScreen({ route }: any) {
           <TouchableOpacity
             style={styles.teamFilterButton}
             onPress={() => setShowTeamFilterModal(true)}
+            accessibilityRole="button"
+            accessibilityLabel="Filter and sort recommended strike teams"
           >
             <Text style={styles.teamFilterButtonText}>Filter & Sort</Text>
           </TouchableOpacity>
         </View>
 
         {!isTeamDataReady ? (
-          <Text style={styles.filterHint}>Loading recommendations...</Text>
+          <View style={styles.loadingRow}>
+            <ActivityIndicator size="small" color={palette.accent} />
+            <Text style={[styles.filterHint, styles.loadingRowText]}>
+              Loading recommendations...
+            </Text>
+          </View>
         ) : null}
 
         {isTeamDataReady &&
@@ -792,12 +742,21 @@ export function BossDetailScreen({ route }: any) {
                               styles.memberCardActive,
                           ]}
                           onPress={() => {
-                            (navigation as any).navigate("CharacterDetail", {
+                            navigation.navigate("CharacterDetail", {
                               characterId: member.id,
                             });
                           }}
                           onHoverIn={() => setHoveredMemberKey(instanceKey)}
                           onHoverOut={() =>
+                            setHoveredMemberKey((prev) =>
+                              prev === instanceKey ? null : prev,
+                            )
+                          }
+                          // Touch devices have no hover state, so reveal the
+                          // same detail card on press-and-hold instead —
+                          // mirrors TeamsScreen's member card behavior.
+                          onPressIn={() => setHoveredMemberKey(instanceKey)}
+                          onPressOut={() =>
                             setHoveredMemberKey((prev) =>
                               prev === instanceKey ? null : prev,
                             )
@@ -1370,6 +1329,17 @@ const styles = StyleSheet.create({
     marginTop: -4,
     marginBottom: 4,
   },
+  loadingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginTop: -4,
+    marginBottom: 4,
+  },
+  loadingRowText: {
+    marginTop: 0,
+    marginBottom: 0,
+  },
   modalBackdrop: {
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -1412,14 +1382,6 @@ const styles = StyleSheet.create({
   modalContent: {
     flex: 1,
     padding: 16,
-  },
-  teamFilterPanel: {
-    borderWidth: 1,
-    borderColor: palette.surfaceBorder,
-    borderRadius: 14,
-    padding: 12,
-    gap: 10,
-    backgroundColor: "rgba(255, 255, 255, 0.02)",
   },
   teamFilterSection: {
     gap: 6,
@@ -1478,53 +1440,9 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     textTransform: "uppercase",
   },
-  chipRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 8,
-  },
-  chip: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 999,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  chipIconOnly: {
-    backgroundColor: "transparent",
-    paddingHorizontal: 0,
-    paddingVertical: 0,
-  },
-  chipIcon: {
-    width: 22,
-    height: 22,
-  },
-  chipNeutral: {
-    backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: palette.surfaceBorder,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-  },
-  chipText: {
-    fontSize: 12,
-    fontWeight: "600",
-    color: "#140a1a",
-  },
-  chipNeutralText: {
-    fontSize: 12,
-    fontWeight: "600",
-    color: palette.textPrimary,
-  },
   emptyValue: {
     fontSize: 13,
     color: palette.textMuted,
-  },
-  divider: {
-    height: 1,
-    backgroundColor: palette.divider,
-    marginVertical: 8,
   },
   teamCard: {
     backgroundColor: "rgba(255, 255, 255, 0.02)",
@@ -1546,35 +1464,10 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     paddingRight: 12,
   },
-  teamIdBadge: {
-    backgroundColor: "rgba(255, 255, 255, 0.06)",
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 999,
-  },
   teamIdText: {
     fontSize: 11,
     fontWeight: "600",
     color: palette.textMuted,
-    letterSpacing: 0.5,
-  },
-  teamRightSection: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  teamRatingBadge: {
-    backgroundColor: palette.accentSoft,
-    borderColor: palette.accentBorder,
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-  },
-  teamRatingText: {
-    fontSize: 11,
-    fontWeight: "600",
-    color: palette.accent,
     letterSpacing: 0.5,
   },
   teamNotes: {
@@ -1737,124 +1630,6 @@ const styles = StyleSheet.create({
     color: palette.textSecondary,
     fontWeight: "600",
   },
-  recommendationBadge: {
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    minWidth: 32,
-    alignItems: "center",
-  },
-  recommendationBadgeHigh: {
-    backgroundColor: "rgba(34, 197, 94, 0.15)",
-    borderColor: "rgba(34, 197, 94, 0.4)",
-  },
-  recommendationBadgeMedium: {
-    backgroundColor: "rgba(245, 158, 11, 0.15)",
-    borderColor: "rgba(245, 158, 11, 0.4)",
-  },
-  recommendationBadgeLow: {
-    backgroundColor: "rgba(239, 68, 68, 0.15)",
-    borderColor: "rgba(239, 68, 68, 0.4)",
-  },
-  recommendationText: {
-    fontSize: 10,
-    fontWeight: "700",
-    color: "#ffffff",
-    letterSpacing: 0.5,
-  },
-  recommendationSummary: {
-    backgroundColor: "rgba(30, 41, 59, 0.95)",
-    padding: 16,
-    marginBottom: 12,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "rgba(59, 130, 246, 0.3)",
-  },
-  summaryTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#ffffff",
-    marginBottom: 8,
-    textAlign: "center",
-  },
-  summaryRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 8,
-  },
-  summaryItem: {
-    flexDirection: "column",
-    alignItems: "center",
-    flex: 1,
-  },
-  summaryValue: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#60a5fa",
-    marginBottom: 2,
-  },
-  summaryLabel: {
-    fontSize: 11,
-    color: "rgba(255, 255, 255, 0.7)",
-    textAlign: "center",
-  },
-  summaryDivider: {
-    width: 1,
-    height: 32,
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-    marginHorizontal: 12,
-  },
-  bestMatchContainer: {
-    alignItems: "center",
-    marginTop: 8,
-  },
-  bestMatchLabel: {
-    fontSize: 11,
-    color: "rgba(255, 255, 255, 0.7)",
-    marginBottom: 4,
-  },
-  bestMatchValue: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: "#10b981",
-  },
-  qualityDistribution: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 12,
-    paddingTop: 12,
-    borderTopWidth: 1,
-    borderTopColor: "rgba(255, 255, 255, 0.1)",
-  },
-  qualityGroup: {
-    alignItems: "center",
-    flex: 1,
-  },
-  qualityCount: {
-    fontSize: 16,
-    fontWeight: "700",
-    marginBottom: 2,
-  },
-  qualityGroupLabel: {
-    fontSize: 10,
-    color: "rgba(255, 255, 255, 0.6)",
-    textAlign: "center",
-  },
-  teamCardHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  teamNameContainer: {
-    flex: 1,
-  },
-  teamPowerDisplay: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
   teamPowerText: {
     fontSize: 12,
     color: "rgba(255, 255, 255, 0.8)",
@@ -1864,144 +1639,6 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: palette.textMuted,
     marginTop: 2,
-  },
-  scoreDisplay: {
-    alignItems: "center",
-    backgroundColor: "rgba(59, 130, 246, 0.15)",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "rgba(59, 130, 246, 0.4)",
-  },
-  scoreValue: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#60a5fa",
-    marginBottom: 1,
-  },
-  scoreLabel: {
-    fontSize: 9,
-    color: "rgba(255, 255, 255, 0.6)",
-    textTransform: "uppercase",
-    letterSpacing: 0.5,
-  },
-  matchTitle: {
-    fontSize: 12,
-    fontWeight: "600",
-    color: "rgba(255, 255, 255, 0.9)",
-    marginBottom: 6,
-  },
-  matchDetails: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 6,
-  },
-  matchBadge: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-    borderWidth: 1,
-  },
-  matchBadgeAdvantage: {
-    backgroundColor: "rgba(16, 185, 129, 0.15)",
-    borderColor: "rgba(16, 185, 129, 0.4)",
-  },
-  matchBadgeDisadvantage: {
-    backgroundColor: "rgba(239, 68, 68, 0.15)",
-    borderColor: "rgba(239, 68, 68, 0.4)",
-  },
-  matchBadgeNeutral: {
-    backgroundColor: "rgba(156, 163, 175, 0.15)",
-    borderColor: "rgba(156, 163, 175, 0.4)",
-  },
-  matchIcon: {
-    width: 12,
-    height: 12,
-    marginRight: 4,
-  },
-  matchText: {
-    fontSize: 10,
-    fontWeight: "500",
-  },
-  matchTextAdvantage: {
-    color: "#10b981",
-  },
-  matchTextDisadvantage: {
-    color: "#ef4444",
-  },
-  matchTextNeutral: {
-    color: "#9ca3af",
-  },
-  summaryBadge: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 16,
-    borderWidth: 1,
-  },
-  summaryBadgeHigh: {
-    backgroundColor: "rgba(16, 185, 129, 0.15)",
-    borderColor: "rgba(16, 185, 129, 0.4)",
-  },
-  summaryBadgeMedium: {
-    backgroundColor: "rgba(245, 158, 11, 0.15)",
-    borderColor: "rgba(245, 158, 11, 0.4)",
-  },
-  summaryBadgeLow: {
-    backgroundColor: "rgba(239, 68, 68, 0.15)",
-    borderColor: "rgba(239, 68, 68, 0.4)",
-  },
-  summaryBadgeText: {
-    fontSize: 11,
-    fontWeight: "600",
-    color: "#ffffff",
-    marginLeft: 4,
-  },
-  summaryValueMuted: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "rgba(255, 255, 255, 0.5)",
-    marginBottom: 2,
-  },
-  qualityRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 8,
-  },
-  qualityLabel: {
-    fontSize: 12,
-    fontWeight: "600",
-    color: "rgba(255, 255, 255, 0.9)",
-    marginBottom: 4,
-  },
-  qualityItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginRight: 16,
-  },
-  qualityDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginRight: 6,
-  },
-  qualityDotHigh: {
-    backgroundColor: "#10b981",
-  },
-  qualityDotMedium: {
-    backgroundColor: "#f59e0b",
-  },
-  qualityDotLow: {
-    backgroundColor: "#ef4444",
-  },
-  qualityText: {
-    fontSize: 11,
-    color: "rgba(255, 255, 255, 0.8)",
   },
   teamCardExcellent: {
     borderLeftWidth: 3,

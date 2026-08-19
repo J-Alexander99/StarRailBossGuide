@@ -12,3 +12,12 @@ android/
 ios/
 **/*.keystore
 *.backup
+
+# Local Python env some tooling may create; not part of the JS/Expo stack.
+.venv/
+
+# Generated output from scripts/merge*.js and scripts/scrape*.js — regenerate
+# by re-running the script rather than committing the report/snippet.
+*-merge-report.txt
+scripts/_*.html
+scripts/tmp_sanity/

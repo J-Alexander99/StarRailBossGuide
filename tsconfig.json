@@ -1,4 +1,12 @@
 {
+  "ts-node": {
+    // scripts/*.ts (run directly via `ts-node`, e.g. validate:teams) are
+    // plain Node scripts, not part of the Metro/Expo bundle, so they need
+    // CommonJS output regardless of the app's own ESNext module setting.
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",

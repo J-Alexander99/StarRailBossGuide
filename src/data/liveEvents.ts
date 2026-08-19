@@ -47,14 +47,15 @@ interface CyclingEventConfig {
   cycleDays: number;
 }
 
-interface FixedEventConfig {
-  id: string;
-  name: string;
-  category: LiveEventCategory;
-  game: LiveEventGame;
-  kind: LiveEventKind;
-  dateUtcIso: string;
-}
+// Banners and version updates recur on a regular cadence just like endgame
+// modes do, so they're modeled the same way: an anchor date (any past
+// occurrence works) plus how often the cycle repeats. This keeps the
+// countdown accurate indefinitely instead of needing a one-off date bumped
+// by hand every patch. Real-world patch lengths occasionally vary by a few
+// days (e.g. a 5-week patch instead of the usual 6), so treat the computed
+// date as an estimate and use `eventOverrides`/`LiveEventQueryOptions.overrides`
+// to correct an individual occurrence when it drifts from the announced date.
+type FixedEventConfig = CyclingEventConfig;
 
 // Keep these in UTC so all users get consistent countdowns regardless of locale.
 const CYCLING_EVENTS: CyclingEventConfig[] = [
@@ -143,52 +144,70 @@ const CYCLING_EVENTS: CyclingEventConfig[] = [
 
 const FIXED_EVENTS: FixedEventConfig[] = [
   {
+    // Anchored to Version 4.5's Phase 2 banner (Aventurine Waveflair), Sep 12
+    // 2026; HSR banners change roughly every 3 weeks.
     id: "next-banner",
     name: "Next Banner",
     category: "system",
     game: "hsr",
     kind: "banner",
-    dateUtcIso: "2026-04-08T03:00:00Z",
+    anchorUtcIso: "2026-09-12T11:00:00Z",
+    cycleDays: 21,
   },
   {
+    // Anchored to Version 4.5's launch, Aug 26 2026; HSR version updates
+    // land roughly every 6 weeks (occasionally 5, as 4.5 was).
     id: "next-version-update",
     name: "Next Update",
     category: "system",
     game: "hsr",
     kind: "update",
-    dateUtcIso: "2026-04-21T03:00:00Z",
+    anchorUtcIso: "2026-08-26T11:00:00Z",
+    cycleDays: 42,
   },
   {
+    // Anchored to Version 7.0 Phase 2 (Genshin's Snezhnaya-cycle opener),
+    // Sep 1 2026; Genshin banners change roughly every 3 weeks.
     id: "genshin-next-banner",
     name: "Genshin Next Banner",
     category: "system",
     game: "genshin",
     kind: "banner",
-    dateUtcIso: "2026-04-09T10:00:00Z",
+    anchorUtcIso: "2026-09-01T10:00:00Z",
+    cycleDays: 21,
   },
   {
+    // Anchored to Version 7.0's launch, Aug 12 2026; Genshin version
+    // updates land roughly every 6 weeks.
     id: "genshin-next-version-update",
     name: "Genshin Next Update",
     category: "system",
     game: "genshin",
     kind: "update",
-    dateUtcIso: "2026-04-22T10:00:00Z",
+    anchorUtcIso: "2026-08-12T10:00:00Z",
+    cycleDays: 42,
   },
   {
+    // Anchored to Version 3.1's Phase 2 banner (Sigrid's debut), Aug 19
+    // 2026; ZZZ banners change roughly every 3 weeks.
     id: "zzz-next-banner",
     name: "ZZZ Next Banner",
     category: "system",
     game: "zzz",
     kind: "banner",
-    dateUtcIso: "2026-04-10T04:00:00Z",
+    anchorUtcIso: "2026-08-19T04:00:00Z",
+    cycleDays: 21,
   },
   {
+    // Anchored to Version 3.1's launch, Jul 29 2026; ZZZ version updates
+    // land roughly every 6 weeks.
     id: "zzz-next-version-update",
     name: "ZZZ Next Update",
     category: "system",
     game: "zzz",
     kind: "update",
-    dateUtcIso: "2026-04-24T04:00:00Z",
+    anchorUtcIso: "2026-07-29T04:00:00Z",
+    cycleDays: 42,
   },
 ];
 
@@ -361,9 +380,9 @@ export function getLiveEvents(
       category: event.category,
       game: event.game,
       kind: event.kind,
-      nextReset: new Date(event.dateUtcIso),
+      nextReset: getNextCyclingDate(event.anchorUtcIso, event.cycleDays, now),
     }),
-  ).filter((event) => event.nextReset.getTime() > now.getTime());
+  );
 
   return [...cyclingEvents, ...fixedEvents]
     .filter((event) => {

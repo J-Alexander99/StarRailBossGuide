@@ -8,6 +8,7 @@ import {
   Image,
   ImageSourcePropType,
 } from "react-native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import {
   BOSSES,
   Boss,
@@ -16,6 +17,8 @@ import {
 } from "../data/bosses";
 import { getElementIcon } from "../constants/iconMappings";
 import { getBossImage } from "../constants/bossImageMappings";
+import { EFFECTIVENESS_COLORS } from "../theme/colors";
+import type { BossesStackParamList } from "../navigation/types";
 
 const palette = {
   background: "#130914",
@@ -32,16 +35,16 @@ const palette = {
   accent: "#ff6ce0",
 };
 
-// Score colors for effectiveness display
-const SCORE_COLORS: Record<EffectivenessScore, string> = {
-  2: "#a855f7", // Very Good - Purple
-  1: "#84cc16", // Good - Light Green
-  0: "#64748b", // Neutral - Gray
-  "-1": "#f97316", // Bad - Orange
-  "-2": "#ef4444", // Very Bad - Red
-};
+type BossListNavigationProp = StackNavigationProp<
+  BossesStackParamList,
+  "BossList"
+>;
 
-export function BossListScreen({ navigation }: { navigation: any }) {
+export function BossListScreen({
+  navigation,
+}: {
+  navigation: BossListNavigationProp;
+}) {
   const [expandedDescriptions, setExpandedDescriptions] = useState<Set<string>>(
     new Set(),
   );
@@ -77,7 +80,7 @@ export function BossListScreen({ navigation }: { navigation: any }) {
       <View style={styles.affinityBadgeContainer}>
         {effectiveEntries.map(([key, score]) => {
           const icon = iconResolver?.(key);
-          const scoreColor = SCORE_COLORS[score];
+          const scoreColor = EFFECTIVENESS_COLORS[score];
 
           return (
             <View
@@ -127,6 +130,8 @@ export function BossListScreen({ navigation }: { navigation: any }) {
         style={styles.card}
         activeOpacity={0.85}
         onPress={() => navigation.navigate("BossDetail", { bossId: item.id })}
+        accessibilityRole="button"
+        accessibilityLabel={`View boss dossier for ${item.name}`}
       >
         <View style={styles.cardHeader}>
           {bossImageSource ? (

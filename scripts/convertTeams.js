@@ -8,13 +8,18 @@ const outTeamsFile = path.join(repoRoot, 'src', 'data', 'teams.ts');
 
 const text = fs.readFileSync(teamsFile, 'utf8');
 const charsText = fs.readFileSync(charsFile, 'utf8');
+const currentTeamsTs = fs.readFileSync(outTeamsFile, 'utf8');
 
-// Build character id -> name map and lowercase name map for fuzzy matching
-const idRe = /\{\s*id:\s*'([^']+)'\s*,\s*name:\s*'([^']+)'/g;
+// Build character id -> name map and lowercase name map for fuzzy matching.
+// characters.ts uses double-quoted keys; accept either quote style.
+const idRe = /\{\s*id:\s*["']([^"']+)["']\s*,\s*name:\s*["']([^"']+)["']/g;
 const chars = [];
 let m;
 while ((m = idRe.exec(charsText)) !== null) {
   chars.push({ id: m[1], name: m[2], nameLower: m[2].toLowerCase() });
+}
+if (chars.length === 0) {
+  throw new Error('Failed to parse any characters from characters.ts - check idRe against the file format.');
 }
 
 function findIdForName(raw) {
@@ -35,16 +40,28 @@ function findIdForName(raw) {
     'trailblazer imaginary': 'trail_imag',
     'trailblazer ice': 'trail_ice',
     'trailblazer-fire': 'trail_fire',
+    'trailblazer fire': 'trail_fire',
     'trailblazer physical': 'trail_physical',
+    'trailblazer lightning': 'trail_elation',
+    // "Trailblazer Harmony" isn't a real element - every other occurrence of
+    // this exact team pattern (Firefly/Rappa/Fugue + Ruan Mei) uses the
+    // Imaginary trailblazer, whose kit path happens to be Harmony, so treat
+    // the two as the same unit rather than dropping these teams.
+    'trailblazer harmony': 'trail_imag',
     'trailblazer': 'trail_physical',
     'the herta': 'the_herta',
     'herta': 'herta',
     'dr ratio': 'dr_ratio',
     'silver wolf': 'silverwolf',
+    'silver wolf 999': 'silverwolf999',
     'jiaoqui': 'jiaoqiu',
     'advneturine': 'aventurine',
     'march 7th imag': 'march7_imag',
-    'sampo': 'sampo'
+    'sampo': 'sampo',
+    // characters.ts spells these with a "•" separator; teamslist.txt uses "-"
+    'dan heng - permansor terrae': 'danheng_terrae',
+    'permansor terrae': 'danheng_terrae',
+    'dan heng - imbibitor lunae': 'danheng_imaginary',
   };
 
   if (aliases[name]) return aliases[name];
@@ -64,7 +81,7 @@ function findIdForName(raw) {
   return '';
 }
 
-// parse teamslist: find lines with ["...", "...", ...]
+// parse teamslist: find lines with ["...", "...", "...", "..."]
 const teamRe = /\[\s*"([^"]+)"\s*,\s*"([^"]+)"\s*,\s*"([^"]+)"\s*,\s*"([^"]+)"\s*\]/g;
 let teams = [];
 while ((m = teamRe.exec(text)) !== null) {
@@ -73,7 +90,8 @@ while ((m = teamRe.exec(text)) !== null) {
   teams.push({ raw, ids });
 }
 
-// deduplicate and drop any teams where mapping failed
+// deduplicate (ignoring member order - same 4 characters = same team) and
+// drop any teams where a name failed to resolve
 const good = [];
 const bad = [];
 const seen = new Set();
@@ -83,39 +101,58 @@ for (const t of teams) {
     bad.push({ raw: t.raw, missing });
     continue;
   }
-  const key = t.ids.join('|');
+  const key = [...t.ids].sort().join('|');
   if (seen.has(key)) continue;
   seen.add(key);
   good.push(t.ids);
 }
 
-// generate TypeScript file content
-const header = `import { CHARACTERS, type Character } from './characters';\n\nexport type Team = {\n  id: string;\n  name?: string;\n  members: [string, string, string, string];\n  notes?: string;\n};\n\n`;
+// Splice the regenerated TEAMS array into the existing teams.ts, leaving the
+// surrounding types, calculateTeamRating helper, and every scoring/lookup
+// function below the array untouched.
+const arrayStart = currentTeamsTs.indexOf('export const TEAMS: Team[] = [');
+const arrayEndMarker = '\n];';
+const arrayEnd = currentTeamsTs.indexOf(arrayEndMarker, arrayStart);
+if (arrayStart === -1 || arrayEnd === -1) {
+  throw new Error('Could not locate the TEAMS array bounds in teams.ts - aborting to avoid clobbering the file.');
+}
+const header = currentTeamsTs.slice(0, arrayStart);
+const footer = currentTeamsTs.slice(arrayEnd + arrayEndMarker.length);
 
-const teamsTsParts = [];
-teamsTsParts.push(header);
-teamsTsParts.push('export const TEAMS: Team[] = [');
+const lines = [];
+lines.push('export const TEAMS: Team[] = [');
 
 let idCounter = 101;
 for (const ids of good) {
   const tid = `t-${idCounter}`;
   const name = `${ids[0]} team ${idCounter - 100}`;
-  teamsTsParts.push(`  { id: '${tid}', name: '${name}', members: ['${ids[0]}', '${ids[1]}', '${ids[2]}', '${ids[3]}'], notes: 'Imported from teamslist.txt' },`);
+  const membersLiteral = `[${ids.map(id => `"${id}"`).join(', ')}]`;
+  lines.push(`  {`);
+  lines.push(`    id: "${tid}",`);
+  lines.push(`    name: "${name}",`);
+  lines.push(`    members: ${membersLiteral},`);
+  lines.push(`    notes: "Imported from teamslist.txt",`);
+  lines.push(`    teamRating: calculateTeamRating(${membersLiteral}),`);
+  lines.push(`  },`);
   idCounter++;
 }
 
-teamsTsParts.push('];\n\n');
+lines.push('];');
 
-// add helper functions
-teamsTsParts.push("export function resolveTeamMembers(team: Team) {\n  return team.members.map((id) => CHARACTERS.find((c) => c.id === id)).filter(Boolean) as Character[];\n}\n\n");
-teamsTsParts.push("export function teamsMatchingWeakness(weakness?: string) {\n  if (!weakness) return TEAMS;\n  return TEAMS.filter((team) =>\n    resolveTeamMembers(team).some((m) => m.element === weakness || m.element === 'All')\n  );\n}\n");
-
-const out = teamsTsParts.join('\n');
+const out = header + lines.join('\n') + footer;
 
 fs.writeFileSync(outTeamsFile, out, 'utf8');
 
 console.log(`Wrote ${good.length} teams to ${outTeamsFile}`);
 if (bad.length > 0) {
   console.log(`Skipped ${bad.length} teams due to unresolved names:`);
-  bad.slice(0, 10).forEach(b => console.log(' -', b.raw.join(', '), 'missing ->', b.missing.join(', ')));
+  const uniqueBad = [];
+  const seenBad = new Set();
+  for (const b of bad) {
+    const key = b.raw.join(', ') + ' -> ' + b.missing.join(', ');
+    if (seenBad.has(key)) continue;
+    seenBad.add(key);
+    uniqueBad.push(b);
+  }
+  uniqueBad.forEach(b => console.log(' -', b.raw.join(', '), 'missing ->', b.missing.join(', ')));
 }
